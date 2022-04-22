@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.lgms_footer_width
+field_name: lgms_footer_width
+entity_type: group
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: full-width
+      label: 'Full width'
+    -
+      value: full-width-content-centered
+      label: 'Full width, with content centered'
+    -
+      value: content-centered
+      label: 'Same width as content area'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+id: microsite-anonymous
+label: Anonymous
+weight: -102
+internal: true
+audience: anonymous
+group_type: microsite
+permissions_ui: true
+permissions: {  }

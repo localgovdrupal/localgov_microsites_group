@@ -1,0 +1,13 @@
+{
+  "name": "localgovdrupal/localgov_microsites_group",
+  "description": "Group integration required for LocalGov Microsites.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "drupal/core": "^9",
+    "drupal/field_formatter_class": "^1.5",
+    "drupal/group": "^1.4",
+    "drupal/group_permissions": "^1.0@alpha",
+    "localgovdrupal/localgov_core": "^2.1.0"
+  }
+}

@@ -1,0 +1,248 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.microsite.lgms_copyright
+    - field.field.group.microsite.lgms_footer_background_colour
+    - field.field.group.microsite.lgms_footer_banner
+    - field.field.group.microsite.lgms_footer_link_colour
+    - field.field.group.microsite.lgms_footer_link_hover_colour
+    - field.field.group.microsite.lgms_footer_logos
+    - field.field.group.microsite.lgms_footer_text_block_1
+    - field.field.group.microsite.lgms_footer_text_block_2
+    - field.field.group.microsite.lgms_footer_text_block_3
+    - field.field.group.microsite.lgms_footer_text_block_4
+    - field.field.group.microsite.lgms_footer_text_colour
+    - field.field.group.microsite.lgms_footer_width
+    - field.field.group.microsite.lgms_housekeepting_menu
+    - field.field.group.microsite.lgms_main_logo
+    - field.field.group.microsite.lgms_powered_by
+    - group.type.microsite
+    - image.style.thumbnail
+  module:
+    - field_group
+    - image
+    - link
+    - media_library
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - group_default_items
+        - group_header
+        - group_footer
+      label: Content
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: vertical
+        width_breakpoint: 640
+    group_header:
+      children:
+        - lgms_main_logo
+      label: Header
+      region: content
+      parent_name: group_content
+      weight: 14
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_footer:
+      children:
+        - lgms_footer_banner
+        - lgms_footer_text_block_1
+        - lgms_footer_text_block_2
+        - lgms_footer_text_block_3
+        - lgms_footer_text_block_4
+        - lgms_footer_logos
+        - lgms_housekeepting_menu
+        - lgms_powered_by
+        - lgms_copyright
+        - lgms_footer_width
+        - lgms_footer_background_colour
+        - lgms_footer_text_colour
+        - lgms_footer_link_colour
+        - lgms_footer_link_hover_colour
+      label: Footer
+      region: content
+      parent_name: group_content
+      weight: 15
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_default_items:
+      children:
+        - label
+        - path
+        - status
+      label: 'Default Items'
+      region: content
+      parent_name: group_content
+      weight: 13
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: group.microsite.default
+targetEntityType: group
+bundle: microsite
+mode: default
+content:
+  lgms_copyright:
+    type: boolean_checkbox
+    weight: 24
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  lgms_footer_background_colour:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_banner:
+    type: media_library_widget
+    weight: 16
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  lgms_footer_link_colour:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_link_hover_colour:
+    type: string_textfield
+    weight: 29
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_logos:
+    type: image_image
+    weight: 21
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  lgms_footer_text_block_1:
+    type: text_textarea
+    weight: 17
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_text_block_2:
+    type: text_textarea
+    weight: 18
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_text_block_3:
+    type: text_textarea
+    weight: 19
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_text_block_4:
+    type: text_textarea
+    weight: 20
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_text_colour:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_footer_width:
+    type: options_select
+    weight: 25
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  lgms_housekeepting_menu:
+    type: link_default
+    weight: 22
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  lgms_main_logo:
+    type: media_library_widget
+    weight: 4
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  lgms_powered_by:
+    type: boolean_checkbox
+    weight: 23
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  label:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  uid: true

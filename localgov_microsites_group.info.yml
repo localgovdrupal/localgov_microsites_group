@@ -1,0 +1,13 @@
+name: LocalGov Microsites Group
+type: module
+description: Group integration for Microsites.
+package: LocalGov Drupal
+core_version_requirement: ^9
+dependencies:
+  - group:group
+  - image:image
+  - link:link
+  - media_library:media_library
+  - path:path
+  - field_group:field_group
+  - localgov_core:localgov_media

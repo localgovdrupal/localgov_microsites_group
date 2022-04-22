@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.lgms_footer_logos
+    - group.type.microsite
+  module:
+    - image
+id: group.microsite.lgms_footer_logos
+field_name: lgms_footer_logos
+entity_type: group
+bundle: microsite
+label: 'Footer Logo(s)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_lgms_required: true
+  title_field: false
+  title_lgms_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

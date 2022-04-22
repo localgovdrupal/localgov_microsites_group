@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.lgms_copyright
+    - group.type.microsite
+id: group.microsite.lgms_copyright
+field_name: lgms_copyright
+entity_type: group
+bundle: microsite
+label: 'Add "Copyright Notice"'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

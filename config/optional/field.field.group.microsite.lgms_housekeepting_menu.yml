@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.lgms_housekeepting_menu
+    - group.type.microsite
+  module:
+    - link
+id: group.microsite.lgms_housekeepting_menu
+field_name: lgms_housekeepting_menu
+entity_type: group
+bundle: microsite
+label: 'Housekeepting Menu'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link
