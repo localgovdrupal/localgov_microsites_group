@@ -7,7 +7,6 @@ dependencies:
   module:
     - gnode
     - node
-    - localgov_subsites
 id: group_content_type_4bc8ff4eea7a4
 label: 'Microsite: Group node (Subsite page)'
 description: 'Adds <em class="placeholder">Subsite page</em> content to groups both publicly and privately.'

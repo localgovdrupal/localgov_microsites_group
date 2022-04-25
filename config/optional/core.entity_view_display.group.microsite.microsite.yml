@@ -15,13 +15,27 @@ dependencies:
     - field.field.group.microsite.lgms_footer_text_block_4
     - field.field.group.microsite.lgms_footer_text_colour
     - field.field.group.microsite.lgms_footer_width
+    - field.field.group.microsite.lgms_header_bg_colour
+    - field.field.group.microsite.lgms_header_link_colour
+    - field.field.group.microsite.lgms_header_link_hover_colour
+    - field.field.group.microsite.lgms_header_text_colour
+    - field.field.group.microsite.lgms_header_width
     - field.field.group.microsite.lgms_housekeepting_menu
     - field.field.group.microsite.lgms_main_logo
+    - field.field.group.microsite.lgms_main_menu
     - field.field.group.microsite.lgms_powered_by
+    - field.field.group.microsite.lgms_pre_header_bg_colour
+    - field.field.group.microsite.lgms_pre_header_link_colour
+    - field.field.group.microsite.lgms_pre_header_link_hover
+    - field.field.group.microsite.lgms_pre_header_text_colour
+    - field.field.group.microsite.lgms_pre_header_width
+    - field.field.group.microsite.lgms_site_name
+    - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_utility_menu
     - group.type.microsite
     - image.style.medium
   module:
-    - field_formatter_class
+    - lgms_formatter_class
     - image
     - link
     - options
@@ -149,6 +163,18 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  lgms_main_menu:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 19
+    region: content
   lgms_powered_by:
     type: boolean
     label: hidden
@@ -158,6 +184,34 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 8
+    region: content
+  lgms_site_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  lgms_site_slogan:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  lgms_utility_menu:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 17
     region: content
   label:
     type: string
@@ -170,5 +224,15 @@ content:
 hidden:
   changed: true
   created: true
+  lgms_header_bg_colour: true
+  lgms_header_link_colour: true
+  lgms_header_link_hover_colour: true
+  lgms_header_text_colour: true
+  lgms_header_width: true
+  lgms_pre_header_bg_colour: true
+  lgms_pre_header_link_colour: true
+  lgms_pre_header_link_hover: true
+  lgms_pre_header_text_colour: true
+  lgms_pre_header_width: true
   search_api_excerpt: true
   uid: true

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+  enforced:
+    config:
+      - user.role.localgov_author
+id: microsite-8dc5c9787
+label: Author
+weight: 3
+internal: true
+audience: outsider
+group_type: microsite
+permissions_ui: false
+permissions: {  }
