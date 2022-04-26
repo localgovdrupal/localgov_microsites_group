@@ -8,7 +8,7 @@ label: 'Microsites Placeholder'
 module: views
 description: 'Placeholder view for now, to force rendering of the microsites regions'
 tag: ''
-base_table: group_content_lgms_data
+base_table: group_content_field_data
 base_field: id
 display:
   default:
@@ -21,18 +21,18 @@ display:
       fields:
         label:
           id: label
-          table: group_content_lgms_data
+          table: group_content_field_data
           field: label
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: null
+          entity_type: group_content
           entity_field: label
           plugin_id: field
           label: ''
           exclude: false
           alter:
-            alter_text: false
+            alter_text: true
             text: ''
             make_link: false
             path: ''
@@ -62,7 +62,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -72,7 +72,8 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings: {  }
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -82,7 +83,7 @@ display:
           delta_first_last: false
           multi_type: separator
           separator: ', '
-          lgms_api_classes: false
+          field_api_classes: false
       pager:
         type: some
         options:
@@ -109,7 +110,7 @@ display:
       arguments:
         gid:
           id: gid
-          table: group_content_lgms_data
+          table: group_content_field_data
           field: gid
           relationship: none
           group_type: group
@@ -168,16 +169,14 @@ display:
         - route
         - url
       tags: {  }
-  microsites_placeholder:
-    id: microsites_placeholder
+  placeholder:
+    id: placeholder
     display_title: 'Block: Placeholder'
     display_plugin: block
     position: 1
     display_options:
       display_description: ''
       display_extenders: {  }
-      block_description: 'Microsite: Placeholder'
-      block_category: Microsites
     cache_metadata:
       max-age: -1
       contexts:
