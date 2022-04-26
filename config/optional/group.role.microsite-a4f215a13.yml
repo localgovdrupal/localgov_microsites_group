@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+  enforced:
+    config:
+      - user.role.localgov_contributor
+id: microsite-a4f215a13
+label: Contributor
+weight: 4
+internal: true
+audience: outsider
+group_type: microsite
+permissions_ui: false
+permissions: {  }

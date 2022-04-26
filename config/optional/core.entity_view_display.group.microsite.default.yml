@@ -14,9 +14,23 @@ dependencies:
     - field.field.group.microsite.lgms_footer_text_block_4
     - field.field.group.microsite.lgms_footer_text_colour
     - field.field.group.microsite.lgms_footer_width
+    - field.field.group.microsite.lgms_header_bg_colour
+    - field.field.group.microsite.lgms_header_link_colour
+    - field.field.group.microsite.lgms_header_link_hover_colour
+    - field.field.group.microsite.lgms_header_text_colour
+    - field.field.group.microsite.lgms_header_width
     - field.field.group.microsite.lgms_housekeepting_menu
     - field.field.group.microsite.lgms_main_logo
+    - field.field.group.microsite.lgms_main_menu
     - field.field.group.microsite.lgms_powered_by
+    - field.field.group.microsite.lgms_pre_header_bg_colour
+    - field.field.group.microsite.lgms_pre_header_link_colour
+    - field.field.group.microsite.lgms_pre_header_link_hover
+    - field.field.group.microsite.lgms_pre_header_text_colour
+    - field.field.group.microsite.lgms_pre_header_width
+    - field.field.group.microsite.lgms_site_name
+    - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_utility_menu
     - group.type.microsite
   module:
     - image
@@ -123,6 +137,45 @@ content:
     third_party_settings: {  }
     weight: 8
     region: content
+  lgms_header_bg_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  lgms_header_link_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 23
+    region: content
+  lgms_header_link_hover_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 24
+    region: content
+  lgms_header_text_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 22
+    region: content
+  lgms_header_width:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
   lgms_housekeepting_menu:
     type: link
     label: above
@@ -144,6 +197,18 @@ content:
     third_party_settings: {  }
     weight: -4
     region: content
+  lgms_main_menu:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 25
+    region: content
   lgms_powered_by:
     type: boolean
     label: above
@@ -153,6 +218,73 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 4
+    region: content
+  lgms_pre_header_bg_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  lgms_pre_header_link_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  lgms_pre_header_link_hover:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  lgms_pre_header_text_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  lgms_pre_header_width:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  lgms_site_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  lgms_site_slogan:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  lgms_utility_menu:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 15
     region: content
   label:
     type: string

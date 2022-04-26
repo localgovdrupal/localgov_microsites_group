@@ -5,8 +5,6 @@ dependencies:
     - field.storage.group.lgms_footer_banner
     - group.type.microsite
     - media.type.image
-  module:
-    - localgov_media
 id: group.microsite.lgms_footer_banner
 field_name: lgms_footer_banner
 entity_type: group
