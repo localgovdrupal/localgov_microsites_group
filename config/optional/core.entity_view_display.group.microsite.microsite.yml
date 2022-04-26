@@ -35,7 +35,7 @@ dependencies:
     - group.type.microsite
     - image.style.medium
   module:
-    - lgms_formatter_class
+    - field_formatter_class
     - image
     - link
     - options
