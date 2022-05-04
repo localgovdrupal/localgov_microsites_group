@@ -2,6 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.microsite.lgms_base_font_size
+    - field.field.group.microsite.lgms_base_line_height
+    - field.field.group.microsite.lgms_body_font
     - field.field.group.microsite.lgms_copyright
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
@@ -28,6 +31,7 @@ dependencies:
     - field.field.group.microsite.lgms_pre_header_link_hover
     - field.field.group.microsite.lgms_pre_header_text_colour
     - field.field.group.microsite.lgms_pre_header_width
+    - field.field.group.microsite.lgms_primary_colour
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
     - field.field.group.microsite.lgms_utility_menu
@@ -37,11 +41,47 @@ dependencies:
     - link
     - options
     - text
+_core:
+  default_config_hash: AYpmwivb0tsbYYmsFPuk6pAuMuHG5J1EkxJ09cErs5w
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
 mode: default
 content:
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+  lgms_base_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 30
+    region: content
+  lgms_base_line_height:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 29
+    region: content
+  lgms_body_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 27
+    region: content
   lgms_copyright:
     type: boolean
     label: above
@@ -258,6 +298,14 @@ content:
     third_party_settings: {  }
     weight: 16
     region: content
+  lgms_primary_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 26
+    region: content
   lgms_site_name:
     type: string
     label: above
@@ -285,14 +333,6 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 15
-    region: content
-  label:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: -5
     region: content
 hidden:
   changed: true
