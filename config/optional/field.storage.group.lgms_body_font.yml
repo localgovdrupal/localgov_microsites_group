@@ -11,7 +11,7 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: open-sans
+      value: 'open sans'
       label: 'Open Sans'
     -
       value: roboto
