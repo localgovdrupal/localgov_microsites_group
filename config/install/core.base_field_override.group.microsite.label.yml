@@ -7,7 +7,7 @@ id: group.microsite.label
 field_name: label
 entity_type: group
 bundle: microsite
-label: Title
+label: Name
 description: ''
 required: true
 translatable: true
