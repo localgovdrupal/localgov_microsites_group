@@ -44,8 +44,6 @@ dependencies:
     - link
     - options
     - text
-_core:
-  default_config_hash: AYpmwivb0tsbYYmsFPuk6pAuMuHG5J1EkxJ09cErs5w
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
