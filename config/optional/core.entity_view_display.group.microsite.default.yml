@@ -22,6 +22,9 @@ dependencies:
     - field.field.group.microsite.lgms_header_link_hover_colour
     - field.field.group.microsite.lgms_header_text_colour
     - field.field.group.microsite.lgms_header_width
+    - field.field.group.microsite.lgms_heading_1_font
+    - field.field.group.microsite.lgms_heading_2_font
+    - field.field.group.microsite.lgms_heading_font
     - field.field.group.microsite.lgms_housekeepting_menu
     - field.field.group.microsite.lgms_main_logo
     - field.field.group.microsite.lgms_main_menu
@@ -215,6 +218,27 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 12
+    region: content
+  lgms_heading_1_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 32
+    region: content
+  lgms_heading_2_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 33
+    region: content
+  lgms_heading_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 31
     region: content
   lgms_housekeepting_menu:
     type: link
