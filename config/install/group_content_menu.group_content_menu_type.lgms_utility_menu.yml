@@ -1,0 +1,6 @@
+uuid: de736528-8cda-4410-b9a0-f2a7688b658e
+langcode: en
+status: true
+dependencies: {  }
+id: lgms_utility_menu
+label: 'Utility menu'
