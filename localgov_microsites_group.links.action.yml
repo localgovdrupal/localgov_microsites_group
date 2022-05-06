@@ -1,0 +1,7 @@
+localgov_microsites_group.add_microsite:
+  route_name: 'localgov_microsites_group.new_domain_group_form'
+  title: 'Add microsite'
+  route_parameters:
+    group_type: 'microsite'
+  appears_on:
+    - 'view.localgov_microsites_overview.collection'
