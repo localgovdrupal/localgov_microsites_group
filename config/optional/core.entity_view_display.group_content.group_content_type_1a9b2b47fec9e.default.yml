@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.group_content_type_1a9b2b47fec9e
+id: group_content.group_content_type_1a9b2b47fec9e.default
+targetEntityType: group_content
+bundle: group_content_type_1a9b2b47fec9e
+mode: default
+content: {  }
+hidden:
+  entity_id: true
+  uid: true
