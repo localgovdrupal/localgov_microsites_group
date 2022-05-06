@@ -1,8 +1,11 @@
+uuid: 57a049d0-21f1-4322-b83a-deb47bf26127
 langcode: en
 status: true
 dependencies:
   config:
     - group.type.microsite
+_core:
+  default_config_hash: bMYdgL38JTzQMAUHLvbsXDCxwCRs_1yXt7fLSKqJ8gE
 id: microsite-member
 label: Member
 weight: -100
@@ -10,4 +13,11 @@ internal: true
 audience: member
 group_type: microsite
 permissions_ui: true
-permissions: {  }
+permissions:
+  - 'create group_node:localgov_page entity'
+  - 'update any group_node:localgov_page content'
+  - 'update any group_node:localgov_page entity'
+  - 'update own group_node:localgov_page content'
+  - 'update own group_node:localgov_page entity'
+  - 'view group_node:localgov_page entity'
+  - 'view unpublished group_node:localgov_page entity'

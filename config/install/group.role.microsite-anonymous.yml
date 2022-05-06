@@ -1,8 +1,11 @@
+uuid: 823d5541-f8ce-4eda-9958-06c87a885a49
 langcode: en
 status: true
 dependencies:
   config:
     - group.type.microsite
+_core:
+  default_config_hash: eWd2Zc31PddZo7xPIG2KDQBShIk7LpHzgffjQCDkdRE
 id: microsite-anonymous
 label: Anonymous
 weight: -102
@@ -10,4 +13,5 @@ internal: true
 audience: anonymous
 group_type: microsite
 permissions_ui: true
-permissions: {  }
+permissions:
+  - 'view group_node:localgov_page entity'
