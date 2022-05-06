@@ -104,7 +104,7 @@ class DomainGroupConfigAdd extends FormBase {
 
       $actions['submit'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Save @group and domain', $replace),
+        '#value' => $this->t('Complete: Create @group and domain', $replace),
         '#submit' => ['::complete'],
       ];
 
