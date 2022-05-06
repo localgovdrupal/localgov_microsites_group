@@ -10,6 +10,7 @@ use Drupal\domain_group\Form\DomainGroupSettingsForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\domain_group\Plugin\DomainGroupSettingsManager;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\GroupDefaultContentInterface;
 
 /**
  * Domain Group Settings Form.
@@ -38,12 +39,20 @@ class DomainGroupConfigAdd extends FormBase {
   protected $entityTypeManager;
 
   /**
+   * Default content generator.
+   *
+   * @var \Drupal\localgov_microsites_group\GroupDefaultContentInterface
+   */
+  protected $defaultContent;
+
+  /**
    * Constructs a new DomainGroupSettingsForm object.
    */
-  public function __construct(DomainGroupSettingsManager $plugin_manager_domain_group_settings, PrivateTempStoreFactory $private_temp_store_factory, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(DomainGroupSettingsManager $plugin_manager_domain_group_settings, PrivateTempStoreFactory $private_temp_store_factory, EntityTypeManagerInterface $entity_type_manager, GroupDefaultContentInterface $default_content) {
     $this->pluginManagerDomainGroupSettings = $plugin_manager_domain_group_settings;
     $this->privateTempStoreFactory = $private_temp_store_factory;
     $this->entityTypeManager = $entity_type_manager;
+    $this->defaultContent = $default_content;
   }
 
   /**
@@ -53,7 +62,8 @@ class DomainGroupConfigAdd extends FormBase {
     return new static(
       $container->get('plugin.manager.domain_group_settings'),
       $container->get('tempstore.private'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('localgov_microsites_group.default_content')
     );
   }
 
@@ -74,13 +84,13 @@ class DomainGroupConfigAdd extends FormBase {
       '#type' => 'vertical_tabs',
       '#title' => $this->t('@group_label - Domain Settings', ['@group_label' => $group->label()]),
     ];
-    foreach ($this->pluginManagerDomainGroupSettings->getAll() as $plugin_id => $plugin) {
-      $form[$plugin_id] = [
-        '#type' => 'details',
-        '#title' => $plugin->getLabel(),
-        '#group' => 'tabs',
-      ] + $plugin->buildConfigurationForm([], $form_state, $group);
-    }
+
+    // @todo Make plugin and visible fields configurable.
+    // https://github.com/localgovdrupal/localgov_microsites_group/issues/15
+    $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_site_settings');
+    $form += $plugin->buildConfigurationForm([], $form_state, $group);
+    $form['site_front_page']['#type'] = 'value';
+    $form['error_page']['#open'] = FALSE;
 
     if (!empty($extras['group_wizard'])) {
       $store = $this->privateTempStoreFactory->get($extras['group_wizard_id']);
@@ -165,10 +175,13 @@ class DomainGroupConfigAdd extends FormBase {
       $group->addMember($group->getOwner(), $values);
     }
 
+    $content = $this->defaultContent->generate($group);
+    $front_page = $content['node']['localgov_page'][0];
+    $form_state->setValue('site_front_page', $front_page->toUrl()->toString());
+
     $form_state->set('group', $group);
-    foreach ($this->pluginManagerDomainGroupSettings->getAll() as $plugin) {
-      $plugin->submitConfigurationForm($form, $form_state);
-    }
+    $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_site_settings');
+    $plugin->submitConfigurationForm($form, $form_state);
 
     // We also clear the temp store so we can start fresh next time around.
     $store->delete("$store_id:step");

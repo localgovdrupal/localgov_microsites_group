@@ -1,0 +1,4 @@
+services:
+  localgov_microsites_group.default_content:
+    class: Drupal\localgov_microsites_group\GroupDefaultContent
+    arguments: ['@entity_type.manager']
