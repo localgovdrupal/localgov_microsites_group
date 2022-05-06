@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.lgms_body_font
+    - group.type.microsite
+  module:
+    - options
+id: group.microsite.lgms_body_font
+field_name: lgms_body_font
+entity_type: group
+bundle: microsite
+label: 'Body font'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
