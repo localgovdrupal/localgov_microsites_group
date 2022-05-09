@@ -2,7 +2,7 @@ name: LocalGov Microsites Group
 type: module
 description: Group integration for Microsites.
 package: LocalGov Drupal
-core_version_requirement: ^9
+core_version_requirement: ^9.3
 dependencies:
   - field_group:field_group
   - group:group
