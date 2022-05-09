@@ -1,11 +1,8 @@
-uuid: 0d3f7371-59a6-4513-89e9-6c468cefac69
 langcode: en
 status: true
 dependencies:
   config:
     - group.type.microsite
-_core:
-  default_config_hash: RTZ4h1O-v-wzefc_CQNX7Po-ox0I1NdEUQGDVeHI-yc
 id: microsite-outsider
 label: Outsider
 weight: -101

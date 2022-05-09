@@ -1,11 +1,8 @@
-uuid: 623c93ec-f373-47e7-bcc4-cdce42654efe
 langcode: en
 status: true
 dependencies:
   config:
     - group.type.microsite
-_core:
-  default_config_hash: MjtMfpf7GO35H_lO7yFJVmSc-osYIT0ydHFlvWdVXsI
 id: microsite-admin
 label: Admin
 weight: 100

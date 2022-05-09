@@ -1,11 +1,8 @@
-uuid: 57a049d0-21f1-4322-b83a-deb47bf26127
 langcode: en
 status: true
 dependencies:
   config:
     - group.type.microsite
-_core:
-  default_config_hash: bMYdgL38JTzQMAUHLvbsXDCxwCRs_1yXt7fLSKqJ8gE
 id: microsite-member
 label: Member
 weight: -100
