@@ -7,6 +7,7 @@ dependencies:
   - field_group:field_group
   - group:group
   - group:gnode
+  - group_content_menu:group_content_menu
   - image:image
   - link:link
   - media_library:media_library
