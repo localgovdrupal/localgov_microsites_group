@@ -5,6 +5,6 @@ services:
 
   theme.negotiator.localgov_microsites_group:
     class: Drupal\localgov_microsites_group\Theme\ThemeSwitcherNegotiator
-    arguments: ['@router.admin_context', '@entity_type.manager', '@context.handler', '@context.repository']
+    arguments: ['@config.factory']
     tags:
       - { name: theme_negotiator, priority: 12 }
