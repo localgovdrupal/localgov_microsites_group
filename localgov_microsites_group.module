@@ -19,7 +19,7 @@ function localgov_microsites_group_entity_bundle_info_alter(array &$bundles): vo
 /**
  * Implements hook_entity_type_build().
  */
-function localgov_microsites_entity_type_build(array &$entity_types) {
+function localgov_microsites_group_entity_type_build(array &$entity_types) {
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   $entity_types['group']->setFormClass('new_domain', DomainGroupAdd::class);
   $entity_types['group_content']->setFormClass('new_domain', DomainGroupContentAdd::class);
