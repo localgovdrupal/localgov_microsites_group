@@ -33,8 +33,7 @@ class ThemeSwitcherNegotiator implements ThemeNegotiatorInterface {
    * {@inheritdoc}
    */
   public function applies(RouteMatchInterface $route_match) {
-    return $route_match->getRouteName() == 'entity.group.canonical' &&
-      $route_match->getParameter('group') instanceof MicrositeGroupInterface;
+    return $route_match->getParameter('group') instanceof MicrositeGroupInterface;
   }
 
   /**
