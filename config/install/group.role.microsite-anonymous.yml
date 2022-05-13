@@ -10,4 +10,5 @@ internal: true
 audience: anonymous
 group_type: microsite
 permissions_ui: true
-permissions: {  }
+permissions:
+  - 'view group_node:localgov_page entity'
