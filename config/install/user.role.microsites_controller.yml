@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - domain
+    - group
+    - system
+    - toolbar
+id: microsites_controller
+label: 'Microsites controller'
+weight: 2
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer domains'
+  - 'administer users'
+  - 'bypass group access'
+  - 'cancel account'
+  - 'change own username'
+  - 'create domains'
+  - 'create microsite group'
+  - 'select account cancellation method'
+  - 'view assigned domains'
+  - 'view domain list'
+  - 'view the administration theme'
+  - 'view user email addresses'
