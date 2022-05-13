@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.lgms_heading_4_font
+field_name: lgms_heading_4_font
+entity_type: group
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'open sans'
+      label: 'Open Sans'
+    -
+      value: roboto
+      label: Roboto
+    -
+      value: lobster
+      label: Lobster
+    -
+      value: oswald
+      label: Oswald
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

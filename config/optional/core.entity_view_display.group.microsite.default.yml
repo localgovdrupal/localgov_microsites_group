@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.group.microsite.lgms_base_font_size
     - field.field.group.microsite.lgms_base_line_height
+    - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
     - field.field.group.microsite.lgms_copyright
     - field.field.group.microsite.lgms_footer_background_colour
@@ -23,11 +24,38 @@ dependencies:
     - field.field.group.microsite.lgms_header_text_colour
     - field.field.group.microsite.lgms_header_width
     - field.field.group.microsite.lgms_heading_1_font
+    - field.field.group.microsite.lgms_heading_1_font_colour
+    - field.field.group.microsite.lgms_heading_1_font_size
+    - field.field.group.microsite.lgms_heading_1_font_weight
+    - field.field.group.microsite.lgms_heading_1_line_height
     - field.field.group.microsite.lgms_heading_2_font
+    - field.field.group.microsite.lgms_heading_2_font_colour
+    - field.field.group.microsite.lgms_heading_2_font_size
+    - field.field.group.microsite.lgms_heading_2_font_weight
+    - field.field.group.microsite.lgms_heading_2_line_height
+    - field.field.group.microsite.lgms_heading_3_font
+    - field.field.group.microsite.lgms_heading_3_font_colour
+    - field.field.group.microsite.lgms_heading_3_font_size
+    - field.field.group.microsite.lgms_heading_3_font_weight
+    - field.field.group.microsite.lgms_heading_3_line_height
+    - field.field.group.microsite.lgms_heading_4_font
+    - field.field.group.microsite.lgms_heading_4_font_colour
+    - field.field.group.microsite.lgms_heading_4_font_size
+    - field.field.group.microsite.lgms_heading_4_font_weight
+    - field.field.group.microsite.lgms_heading_4_line_height
+    - field.field.group.microsite.lgms_heading_5_font
+    - field.field.group.microsite.lgms_heading_5_font_colour
+    - field.field.group.microsite.lgms_heading_5_font_size
+    - field.field.group.microsite.lgms_heading_5_font_weight
+    - field.field.group.microsite.lgms_heading_5_line_height
+    - field.field.group.microsite.lgms_heading_6_font
+    - field.field.group.microsite.lgms_heading_6_font_colour
+    - field.field.group.microsite.lgms_heading_6_font_size
+    - field.field.group.microsite.lgms_heading_6_font_weight
+    - field.field.group.microsite.lgms_heading_6_line_height
     - field.field.group.microsite.lgms_heading_font
-    - field.field.group.microsite.lgms_housekeepting_menu
+    - field.field.group.microsite.lgms_heading_font_weight
     - field.field.group.microsite.lgms_main_logo
-    - field.field.group.microsite.lgms_main_menu
     - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_pre_header_bg_colour
     - field.field.group.microsite.lgms_pre_header_link_colour
@@ -35,15 +63,17 @@ dependencies:
     - field.field.group.microsite.lgms_pre_header_text_colour
     - field.field.group.microsite.lgms_pre_header_width
     - field.field.group.microsite.lgms_primary_colour
+    - field.field.group.microsite.lgms_secondary_colour
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
-    - field.field.group.microsite.lgms_utility_menu
+    - field.field.group.microsite.lgms_text_colour_dark
+    - field.field.group.microsite.lgms_text_colour_light
     - group.type.microsite
   module:
-    - image
-    - link
     - options
     - text
+_core:
+  default_config_hash: Z6SSoIXdtyY1UdqMjYcTtUnK1u9jB_A5oLfxaw4JdMI
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
@@ -75,6 +105,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 29
+    region: content
+  lgms_base_spacing:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 39
     region: content
   lgms_body_font:
     type: list_default
@@ -127,13 +165,13 @@ content:
     weight: 10
     region: content
   lgms_footer_logos:
-    type: image
-    label: hidden
+    type: entity_reference_entity_view
+    label: above
     settings:
-      image_link: ''
-      image_style: ''
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    weight: 11
+    weight: 34
     region: content
   lgms_footer_text_block_1:
     type: text_default
@@ -224,12 +262,226 @@ content:
     third_party_settings: {  }
     weight: 32
     region: content
+  lgms_heading_1_font_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 56
+    region: content
+  lgms_heading_1_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 40
+    region: content
+  lgms_heading_1_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 50
+    region: content
+  lgms_heading_1_line_height:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 62
+    region: content
   lgms_heading_2_font:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 33
+    region: content
+  lgms_heading_2_font_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 57
+    region: content
+  lgms_heading_2_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 41
+    region: content
+  lgms_heading_2_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 51
+    region: content
+  lgms_heading_2_line_height:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 63
+    region: content
+  lgms_heading_3_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 46
+    region: content
+  lgms_heading_3_font_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 58
+    region: content
+  lgms_heading_3_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 42
+    region: content
+  lgms_heading_3_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 52
+    region: content
+  lgms_heading_3_line_height:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 64
+    region: content
+  lgms_heading_4_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 47
+    region: content
+  lgms_heading_4_font_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 59
+    region: content
+  lgms_heading_4_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 43
+    region: content
+  lgms_heading_4_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 53
+    region: content
+  lgms_heading_4_line_height:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 65
+    region: content
+  lgms_heading_5_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 48
+    region: content
+  lgms_heading_5_font_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 60
+    region: content
+  lgms_heading_5_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 44
+    region: content
+  lgms_heading_5_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 54
+    region: content
+  lgms_heading_5_line_height:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 68
+    region: content
+  lgms_heading_6_font:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 49
+    region: content
+  lgms_heading_6_font_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 61
+    region: content
+  lgms_heading_6_font_size:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 45
+    region: content
+  lgms_heading_6_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 55
+    region: content
+  lgms_heading_6_line_height:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 67
     region: content
   lgms_heading_font:
     type: list_default
@@ -238,17 +490,12 @@ content:
     third_party_settings: {  }
     weight: 31
     region: content
-  lgms_housekeepting_menu:
-    type: link
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+  lgms_heading_font_weight:
+    type: list_default
+    label: above
+    settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 38
     region: content
   lgms_main_logo:
     type: entity_reference_entity_view
@@ -258,18 +505,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: -4
-    region: content
-  lgms_main_menu:
-    type: link
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 25
     region: content
   lgms_powered_by:
     type: boolean
@@ -328,6 +563,14 @@ content:
     third_party_settings: {  }
     weight: 26
     region: content
+  lgms_secondary_colour:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 35
+    region: content
   lgms_site_name:
     type: string
     label: hidden
@@ -344,17 +587,21 @@ content:
     third_party_settings: {  }
     weight: 14
     region: content
-  lgms_utility_menu:
-    type: link
-    label: hidden
+  lgms_text_colour_dark:
+    type: string
+    label: above
     settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 15
+    weight: 36
+    region: content
+  lgms_text_colour_light:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 37
     region: content
 hidden:
   changed: true
