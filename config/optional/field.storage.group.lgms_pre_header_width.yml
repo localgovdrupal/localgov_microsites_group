@@ -14,8 +14,8 @@ settings:
       value: full-width
       label: 'Full width'
     -
-      value: full-width-content-centered
-      label: 'Full width, with content centered'
+      value: full-width-content-contained
+      label: 'Full width, with content contained'
     -
       value: content-centered
       label: 'Same width as content area'
