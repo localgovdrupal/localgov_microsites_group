@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.lgms_text_colour_dark
+    - group.type.microsite
+id: group.microsite.lgms_text_colour_dark
+field_name: lgms_text_colour_dark
+entity_type: group
+bundle: microsite
+label: 'Text Colour (dark)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

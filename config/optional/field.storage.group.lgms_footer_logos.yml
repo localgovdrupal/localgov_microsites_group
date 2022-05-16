@@ -15,14 +15,14 @@ settings:
   display_default: false
   uri_scheme: public
   default_image:
-    alt: ''
-    title: ''
+    alt: ""
+    title: ""
     width: null
     height: null
 module: image
 locked: false
 cardinality: -1
 translatable: true
-indexes: {  }
+indexes: {}
 persist_with_no_fields: false
 custom_storage: false

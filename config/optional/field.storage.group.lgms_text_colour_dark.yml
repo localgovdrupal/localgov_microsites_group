@@ -3,15 +3,17 @@ status: true
 dependencies:
   module:
     - group
-    - link
-id: group.lgms_utility_menu
-field_name: lgms_utility_menu
+id: group.lgms_text_colour_dark
+field_name: lgms_text_colour_dark
 entity_type: group
-type: link
-settings: {  }
-module: link
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
