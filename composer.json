@@ -10,5 +10,16 @@
     "drupal/group_content_menu": "^1.1",
     "drupal/group_permissions": "^1.0@alpha",
     "localgovdrupal/localgov_core": "^2.1.0"
+  },
+  "extra": {
+    "enable-patching": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "patches": {
+      "drupal/group_content_menu": {
+        "Menu item create permisson #3280653": "https://www.drupal.org/files/issues/2022-05-16/3280653-01-menu-item-add-permission.patch"
+      }
+    }
   }
 }
