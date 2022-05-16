@@ -5,3 +5,11 @@ localgov_microsites_group.add_microsite:
     group_type: 'microsite'
   appears_on:
     - 'view.localgov_microsites_overview.collection'
+localgov_microsites_group.add_member:
+  route_name: 'entity.group_content.add_form'
+  route_parameters:
+    plugin_id: 'group_membership'
+  class: '\Drupal\group\Plugin\Menu\LocalAction\WithDestination'
+  title: 'Add user'
+  appears_on:
+    - 'view.group_members.microsites_page'

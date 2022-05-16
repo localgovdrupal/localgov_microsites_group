@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 
@@ -10,15 +11,32 @@ use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 
 function localgov_microsites_group_entity_bundle_info_alter(array &$bundles): void {
   if (isset($bundles['group'])) {
-    # $bundles['node']['page']['class'] = BasicPage::class;
+    // @todo loop over and check if is a domain group.
+    $bundles['group']['microsite']['class'] = MicrositeGroup::class;
   }
 }
 
 /**
  * Implements hook_entity_type_build().
  */
-function localgov_microsites_entity_type_build(array &$entity_types) {
+function localgov_microsites_group_entity_type_build(array &$entity_types) {
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   $entity_types['group']->setFormClass('new_domain', DomainGroupAdd::class);
   $entity_types['group_content']->setFormClass('new_domain', DomainGroupContentAdd::class);
+}
+
+/**
+ * Implements hook_menu_local_actions_alter().
+ */
+function localgov_microsites_menu_local_actions_alter(array &$local_actions) {
+  if (!empty($local_actions['group_content.group_node_relate_page']) &&
+    !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
+  ) {
+    $local_actions['group_content.group_node_relate_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+  }
+  if (!empty($local_actions['group_content.group_node_add_page']) &&
+    !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_add_page']['appears_on'])
+  ) {
+    $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+  }
 }
