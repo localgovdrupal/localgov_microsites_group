@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\domain_group\DomainGroupHelper;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
@@ -38,5 +41,42 @@ function localgov_microsites_menu_local_actions_alter(array &$local_actions) {
     !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_add_page']['appears_on'])
   ) {
     $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function localgov_microsites_group_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'localgov_microsites_group_user_login_form_submit';
+}
+
+/**
+ * Redirect for user login form.
+ */
+function localgov_microsites_group_user_login_form_submit($form, FormStateInterface $form_state) {
+  // Don't redirect if a different redirect has been set, by something other
+  // than the user.module standard.
+  if ($redirect = $form_state->getRedirect()) {
+    if ($redirect instanceof Url && $redirect->getRouteName() != 'entity.user.canonical') {
+      return;
+    }
+  }
+
+  $domain_negotiator = \Drupal::service('domain.negotiator');
+  $active = $domain_negotiator->getActiveDomain();
+  if (empty($active)) {
+    return;
+  }
+  // If active is default, control, domain. Redirect to admin.
+  if ($active->isDefault()) {
+    $form_state->setRedirect('system.admin');
+  }
+  // Login to a domain group.
+  $group_id = \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(DomainGroupHelper::class)
+    ->getActiveDomainGroup();
+  if ($group_id) {
+    $form_state->setRedirect('entity.group.canonical', ['group' => $group_id]);
   }
 }
