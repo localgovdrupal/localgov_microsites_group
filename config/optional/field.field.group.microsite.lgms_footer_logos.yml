@@ -29,8 +29,9 @@ settings:
   title_field: false
   title_lgms_required: false
   default_image:
-    alt: ""
-    title: ""
+    uuid: null
+    alt: ''
+    title: ''
     width: null
     height: null
 field_type: image
