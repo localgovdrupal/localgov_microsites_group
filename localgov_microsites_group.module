@@ -73,4 +73,17 @@ function localgov_microsites_menu_local_tasks_alter(&$data, $route_name, Refinab
     }
     $cacheability->addCacheableDependency($group);
   }
+
+  // Visually removed local tasks. If the user has permission they will for
+  // example still be in the actions on the group listing view.
+  foreach (['group.delete_form', 'group.content', 'group.version_history', 'group_permissions.link.group_permissions_parent'] as $task) {
+    if (isset($data['tabs'][0][$task])) {
+      if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+        $group instanceof MicrositeGroupInterface
+      ) {
+        $data['tabs'][0][$task]['#access'] = FALSE;
+      }
+      $cacheability->addCacheableDependency($group);
+    }
+  }
 }
