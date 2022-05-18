@@ -13,3 +13,4 @@ dependencies:
   - media_library:media_library
   - path:path
   - localgov_core:localgov_media
+  - tour:tour
