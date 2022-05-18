@@ -1,6 +1,8 @@
 <?php
 
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
+use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 
@@ -38,5 +40,50 @@ function localgov_microsites_menu_local_actions_alter(array &$local_actions) {
     !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_add_page']['appears_on'])
   ) {
     $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+  }
+}
+
+/**
+ * Implements hook_menu_locol_tasks_alter().
+ */
+function localgov_microsites_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  if (isset($data['tabs'][0]['group.view'])) {
+    if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+      $group instanceof MicrositeGroupInterface
+    ) {
+      $data['tabs'][0]['group.view']['#link']['title'] = t('Dashboard');
+    }
+    // Really just needs to be the bundle.
+    // But should alreday be per group for user perms.
+    $cacheability->addCacheableDependency($group);
+  }
+  if (isset($data['tabs'][0]['domain_group.group_domain_settings'])) {
+    if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+      $group instanceof MicrositeGroupInterface
+    ) {
+      $data['tabs'][0]['domain_group.group_domain_settings']['#link']['title'] = t('Site settings');
+    }
+    $cacheability->addCacheableDependency($group);
+  }
+  if (isset($data['tabs'][0]['group.edit_form'])) {
+    if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+      $group instanceof MicrositeGroupInterface
+    ) {
+      $data['tabs'][0]['group.edit_form']['#link']['title'] = t('Site design');
+    }
+    $cacheability->addCacheableDependency($group);
+  }
+
+  // Visually removed local tasks. If the user has permission they will for
+  // example still be in the actions on the group listing view.
+  foreach (['group.delete_form', 'group.content', 'group.version_history', 'group_permissions.link.group_permissions_parent'] as $task) {
+    if (isset($data['tabs'][0][$task])) {
+      if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+        $group instanceof MicrositeGroupInterface
+      ) {
+        $data['tabs'][0][$task]['#access'] = FALSE;
+      }
+      $cacheability->addCacheableDependency($group);
+    }
   }
 }
