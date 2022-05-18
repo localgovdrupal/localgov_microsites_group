@@ -123,7 +123,7 @@ class MicrositeTasksBlock extends BlockBase implements ContainerFactoryPluginInt
         ];
         $access = $this->accessManager
           ->checkNamedRoute($route_name, $route_parameters, $this->currentUser, TRUE);
-        $menu['links'][] = [
+        $menu['#links'][] = [
           'link' => $link,
           '#access' => $access,
           '#weight' => $task->getWeight(),
