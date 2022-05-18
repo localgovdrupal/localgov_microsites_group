@@ -112,17 +112,22 @@ class MicrositeTasksBlock extends BlockBase implements ContainerFactoryPluginInt
         ['group' => $group_id],
       );
       $tasks = $this->localTaskManager->getLocalTasksForRoute('entity.group.canonical');
-      foreach ($tasks[0] as $task) {
+      foreach ($tasks[0] as $task_id => $task) {
         $route_name = $task->getRouteName();
         $route_parameters = $task->getRouteParameters($route);
         $link = [
           '#type' => 'link',
-          '#title' => $task->getTitle(),
+          '#title' => localgov_microsites_group_local_task_title($task_id) ?: $task->getTitle(),
           '#url' => Url::fromRoute($route_name, $route_parameters),
           '#options' => $task->getOptions($route),
         ];
-        $access = $this->accessManager
-          ->checkNamedRoute($route_name, $route_parameters, $this->currentUser, TRUE);
+        if (localgov_microsites_group_local_task_hidden($task_id)) {
+          $access = FALSE;
+        }
+        else {
+          $access = $this->accessManager
+            ->checkNamedRoute($route_name, $route_parameters, $this->currentUser, TRUE);
+        }
         $menu['#links'][] = [
           'link' => $link,
           '#access' => $access,
