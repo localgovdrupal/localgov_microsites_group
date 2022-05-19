@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - localgov_microsites_group
+id: microsite-dashboard
+label: "Microsite dashboard"
+module: localgov_microsites_group
+routes:
+  - route_name: entity.group.canonical
+tips:
+  welcome:
+    id: welcome
+    plugin: text
+    label: Welcome
+    weight: -100
+    position: auto
+    selector: null
+    body: "Welcome to your microsite dashboard!"
