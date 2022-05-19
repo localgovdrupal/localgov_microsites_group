@@ -4,8 +4,7 @@ dependencies:
   config:
     - group_content_menu.group_content_menu_type.lgms_utility_menu
   module:
-    - group
-    - group_content_menu
+    - localgov_microsites_group
   theme:
     - localgov_microsites_base
 id: localgov_microsites_base_utility_menu
@@ -13,22 +12,15 @@ theme: localgov_microsites_base
 region: secondary_menu
 weight: 0
 provider: null
-plugin: 'group_content_menu:lgms_utility_menu'
+plugin: 'microsites_group_content_menu:lgms_utility_menu'
 settings:
-  id: 'group_content_menu:lgms_utility_menu'
+  id: 'microsites_group_content_menu:lgms_utility_menu'
   label: 'Utility menu'
-  label_display: visible
-  provider: group_content_menu
+  label_display: '0'
+  provider: localgov_microsites_group
   context_mapping:
     group: '@group.group_route_context:group'
-  level: 1
-  depth: 0
-  expand_all_items: false
-visibility:
-  group_type:
-    id: group_type
-    group_types:
-      microsite: microsite
-    negate: false
-    context_mapping:
-      group: '@group.group_route_context:group'
+  level: '1'
+  depth: '0'
+  expand_all_items: 0
+visibility: {  }
