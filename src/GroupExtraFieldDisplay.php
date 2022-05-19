@@ -2,27 +2,14 @@
 
 namespace Drupal\localgov_microsites_group;
 
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Security\TrustedCallbackInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\group\Entity\GroupInterface;
-use Drupal\group\Entity\GroupType;
 use Drupal\views\Views;
 
-class GroupExtraFieldDisplay implements ContainerInjectionInterface, TrustedCallbackInterface {
+class GroupExtraFieldDisplay {
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('entity_type.manager'),
-      $container->get('entity.repository'),
-      $container->get('entity_field.manager'),
-      $container->get('plugin.manager.block'),
-      $container->get('form_builder')
-    );
-  }
+  use StringTranslationTrait;
 
   /**
    * Gets the "extra fields" for a bundle.
@@ -32,13 +19,15 @@ class GroupExtraFieldDisplay implements ContainerInjectionInterface, TrustedCall
   public function entityExtraFieldInfo() {
     $fields = [];
 
-    // loop
+    // @toto loop group types for all microsite types.
     $fields['group']['microsite']['display']['microsite_content'] = [
       'label' => $this->t('Microsite latest content'),
       'description' => $this->t("Most recently updated content with link to content tab."),
       'weight' => -20,
       'visible' => TRUE,
     ];
+
+    return $fields;
   } 
 
   /**
@@ -66,7 +55,7 @@ class GroupExtraFieldDisplay implements ContainerInjectionInterface, TrustedCall
       '#display_id' => 'microsite_overview',
       '#arguments' => [$group->id()],
     ];
-    
+
     return $render;
   }
 

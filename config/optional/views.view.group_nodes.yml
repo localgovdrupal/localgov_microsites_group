@@ -929,8 +929,8 @@ display:
         - user.group_permissions
         - 'user.node_grants:view'
       tags: {  }
-  microsites_overview:
-    id: microsites_overview
+  microsite_overview:
+    id: microsite_overview
     display_title: 'Microsites overview'
     display_plugin: embed
     position: 3
