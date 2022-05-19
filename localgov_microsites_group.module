@@ -22,6 +22,19 @@ function localgov_microsites_group_entity_bundle_info_alter(array &$bundles): vo
 }
 
 /**
+ * Implements hook_theme().
+ */
+function localgov_microsites_group_theme($existing, $type, $theme, $path) {
+  return [
+    'microsites_task_block' => [
+      'variables' => [
+        'links' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
  * Implements hook_entity_type_build().
  */
 function localgov_microsites_group_entity_type_build(array &$entity_types) {
@@ -33,7 +46,7 @@ function localgov_microsites_group_entity_type_build(array &$entity_types) {
 /**
  * Implements hook_menu_local_actions_alter().
  */
-function localgov_microsites_menu_local_actions_alter(array &$local_actions) {
+function localgov_microsites_group_menu_local_actions_alter(array &$local_actions) {
   if (!empty($local_actions['group_content.group_node_relate_page']) &&
     !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
   ) {
@@ -86,44 +99,44 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
 /**
  * Implements hook_menu_locol_tasks_alter().
  */
-function localgov_microsites_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
-  if (isset($data['tabs'][0]['group.view'])) {
-    if (($group = \Drupal::routeMatch()->getParameter('group')) &&
-      $group instanceof MicrositeGroupInterface
-    ) {
-      $data['tabs'][0]['group.view']['#link']['title'] = t('Dashboard');
-    }
-    // Really just needs to be the bundle.
-    // But should alreday be per group for user perms.
-    $cacheability->addCacheableDependency($group);
-  }
-  if (isset($data['tabs'][0]['domain_group.group_domain_settings'])) {
-    if (($group = \Drupal::routeMatch()->getParameter('group')) &&
-      $group instanceof MicrositeGroupInterface
-    ) {
-      $data['tabs'][0]['domain_group.group_domain_settings']['#link']['title'] = t('Site settings');
-    }
-    $cacheability->addCacheableDependency($group);
-  }
-  if (isset($data['tabs'][0]['group.edit_form'])) {
-    if (($group = \Drupal::routeMatch()->getParameter('group')) &&
-      $group instanceof MicrositeGroupInterface
-    ) {
-      $data['tabs'][0]['group.edit_form']['#link']['title'] = t('Site design');
-    }
-    $cacheability->addCacheableDependency($group);
-  }
-
-  // Visually removed local tasks. If the user has permission they will for
-  // example still be in the actions on the group listing view.
-  foreach (['group.delete_form', 'group.content', 'group.version_history', 'group_permissions.link.group_permissions_parent'] as $task) {
-    if (isset($data['tabs'][0][$task])) {
-      if (($group = \Drupal::routeMatch()->getParameter('group')) &&
-        $group instanceof MicrositeGroupInterface
-      ) {
-        $data['tabs'][0][$task]['#access'] = FALSE;
+function localgov_microsites_group_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+    $group instanceof MicrositeGroupInterface &&
+    !empty($data['tabs'][0])
+  ) {
+    foreach ($data['tabs'][0] as $task_id => $link) {
+      if ($custom_title = localgov_microsites_group_local_task_title($task_id)) {
+        $data['tabs'][0][$task_id]['#link']['title'] = $custom_title;
+        // Really just needs to be the bundle.
+        // But should alreday be per group for user perms.
+        $cacheability->addCacheableDependency($group);
       }
-      $cacheability->addCacheableDependency($group);
+
+      if (localgov_microsites_group_local_task_hidden($task_id)) {
+        $data['tabs'][0][$task_id]['#access'] = FALSE;
+        $cacheability->addCacheableDependency($group);
+      }
     }
+  }
+}
+
+/**
+ * Group local tasks to hide.
+ */
+function localgov_microsites_group_local_task_hidden($task_id) {
+  return in_array($task_id, ['group.delete_form', 'group.content', 'group.version_history', 'group_permissions.link.group_permissions_parent']);
+}
+
+/**
+ * Group local task titles to change.
+ */
+function localgov_microsites_group_local_task_title($task_id) {
+  switch ($task_id) {
+    case 'group.view':
+      return t('Dashboard');
+    case 'domain_group.group_domain_settings':
+      return t('Site settings');
+    case 'group.edit.form':
+      return t('Site design');
   }
 }
