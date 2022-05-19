@@ -2,28 +2,18 @@ langcode: en
 status: true
 dependencies:
   module:
-    - file
     - group
-    - image
+    - media
 id: group.lgms_footer_logos
 field_name: lgms_footer_logos
 entity_type: group
-type: image
+type: entity_reference
 settings:
-  target_type: file
-  display_field: false
-  display_default: false
-  uri_scheme: public
-  default_image:
-    uuid: null
-    alt: ''
-    title: ''
-    width: null
-    height: null
-module: image
+  target_type: media
+module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
-indexes: {}
+indexes: {  }
 persist_with_no_fields: false
 custom_storage: false
