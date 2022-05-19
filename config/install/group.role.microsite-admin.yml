@@ -35,3 +35,4 @@ permissions:
   - 'view latest group version'
   - 'view own unpublished group'
   - 'view unpublished group_node:localgov_page entity'
+  - 'view the administration theme'
