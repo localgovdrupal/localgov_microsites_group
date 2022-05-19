@@ -2,7 +2,12 @@
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\domain_group\DomainGroupHelper;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
+use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
@@ -20,6 +25,19 @@ function localgov_microsites_group_entity_bundle_info_alter(array &$bundles): vo
 }
 
 /**
+ * Implements hook_theme().
+ */
+function localgov_microsites_group_theme($existing, $type, $theme, $path) {
+  return [
+    'microsites_task_block' => [
+      'variables' => [
+        'links' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
  * Implements hook_entity_type_build().
  */
 function localgov_microsites_group_entity_type_build(array &$entity_types) {
@@ -31,7 +49,7 @@ function localgov_microsites_group_entity_type_build(array &$entity_types) {
 /**
  * Implements hook_menu_local_actions_alter().
  */
-function localgov_microsites_menu_local_actions_alter(array &$local_actions) {
+function localgov_microsites_group_menu_local_actions_alter(array &$local_actions) {
   if (!empty($local_actions['group_content.group_node_relate_page']) &&
     !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
   ) {
@@ -60,4 +78,86 @@ function localgov_microsites_group_view(array &$build, GroupInterface $group, En
   return \Drupal::service('class_resolver')
     ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
     ->groupView($build, $group, $display, $view_mode);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function localgov_microsites_group_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'localgov_microsites_group_user_login_form_submit';
+}
+
+/**
+ * Redirect for user login form.
+ */
+function localgov_microsites_group_user_login_form_submit($form, FormStateInterface $form_state) {
+  // Don't redirect if a different redirect has been set, by something other
+  // than the user.module standard.
+  if ($redirect = $form_state->getRedirect()) {
+    if ($redirect instanceof Url && $redirect->getRouteName() != 'entity.user.canonical') {
+      return;
+    }
+  }
+
+  $domain_negotiator = \Drupal::service('domain.negotiator');
+  $active = $domain_negotiator->getActiveDomain();
+  if (empty($active)) {
+    return;
+  }
+  // If active is default, control, domain. Redirect to admin.
+  if ($active->isDefault()) {
+    $form_state->setRedirect('system.admin');
+  }
+  // Login to a domain group.
+  $group_id = \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(DomainGroupHelper::class)
+    ->getActiveDomainGroup();
+  if ($group_id) {
+    $form_state->setRedirect('entity.group.canonical', ['group' => $group_id]);
+  }
+}
+
+/**
+ * Implements hook_menu_locol_tasks_alter().
+ */
+function localgov_microsites_group_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  if (($group = \Drupal::routeMatch()->getParameter('group')) &&
+    $group instanceof MicrositeGroupInterface &&
+    !empty($data['tabs'][0])
+  ) {
+    foreach ($data['tabs'][0] as $task_id => $link) {
+      if ($custom_title = localgov_microsites_group_local_task_title($task_id)) {
+        $data['tabs'][0][$task_id]['#link']['title'] = $custom_title;
+        // Really just needs to be the bundle.
+        // But should alreday be per group for user perms.
+        $cacheability->addCacheableDependency($group);
+      }
+
+      if (localgov_microsites_group_local_task_hidden($task_id)) {
+        $data['tabs'][0][$task_id]['#access'] = FALSE;
+        $cacheability->addCacheableDependency($group);
+      }
+    }
+  }
+}
+
+/**
+ * Group local tasks to hide.
+ */
+function localgov_microsites_group_local_task_hidden($task_id) {
+  return in_array($task_id, ['group.delete_form', 'group.content', 'group.version_history', 'group_permissions.link.group_permissions_parent']);
+}
+
+/**
+ * Group local task titles to change.
+ */
+function localgov_microsites_group_local_task_title($task_id) {
+  switch ($task_id) {
+    case 'group.view':
+      return t('Dashboard');
+    case 'domain_group.group_domain_settings':
+      return t('Site settings');
+    case 'group.edit.form':
+      return t('Site design');
+  }
 }

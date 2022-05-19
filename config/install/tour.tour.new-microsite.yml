@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - localgov_microsites_group
+id: new-microsite
+label: "New Microsites"
+module: localgov_microsites_group
+routes:
+  - route_name: view.localgov_microsites_overview.collection
+tips:
+  welcome:
+    id: welcome
+    plugin: text
+    label: Welcome
+    weight: -100
+    position: auto
+    selector: null
+    body: "This is the microsites dashboard. You can see all the microsites here."
+  add-a-microsite:
+    id: add-a-microsite
+    plugin: text
+    label: "Add a microsite"
+    weight: -100
+    position: auto
+    selector: .button--primary
+    body: "Then you can add a microsite"
+  add-some-users-at-people:
+    id: add-some-users-at-people
+    plugin: text
+    label: "Add some users at People"
+    weight: -100
+    position: auto
+    selector: ".toolbar-icon-entity-user-collection "
+    body: "Click here to add users, you'll then be able to add them to each individual microsite"
