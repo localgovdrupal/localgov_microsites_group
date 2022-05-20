@@ -2,6 +2,7 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\Block;
 
+use Drupal\Core\DependencyInjection\ClassResolverInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Menu\MenuActiveTrailInterface;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
@@ -15,6 +16,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a menu block for LocalGov Drupal microsites.
  *
+ * @todo Remove or rewrite this class.
+ * The code here is largely copied from the GroupMenuBlock class. As such, this
+ * is liable to break if the code in that class changes substantially.
+ * @see https://github.com/localgovdrupal/localgov_microsites_group/pull/41
+ *
  * @Block(
  *   id = "microsites_group_content_menu",
  *   admin_label = @Translation("Microsites Group Menu"),
@@ -25,6 +31,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class MicrositeGroupMenuBlock extends GroupMenuBlock implements ContainerFactoryPluginInterface {
+
+  /**
+   * The Domain Group Helper.
+   *
+   * @var \Drupal\domain_group\DomainGroupHelper
+   */
+  protected $domainGroupHelper;
 
   /**
    * GroupMenuBlock constructor.
@@ -42,8 +55,9 @@ class MicrositeGroupMenuBlock extends GroupMenuBlock implements ContainerFactory
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, MenuLinkTreeInterface $menu_tree, MenuActiveTrailInterface $menu_active_trail, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, MenuLinkTreeInterface $menu_tree, MenuActiveTrailInterface $menu_active_trail, EntityTypeManagerInterface $entity_type_manager, ClassResolverInterface $class_resolver) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $menu_tree, $menu_active_trail, $entity_type_manager);
+    $this->domainGroupHelper = $class_resolver->getInstanceFromDefinition(DomainGroupHelper::class);
   }
 
   /**
@@ -56,7 +70,8 @@ class MicrositeGroupMenuBlock extends GroupMenuBlock implements ContainerFactory
       $plugin_definition,
       $container->get('menu.link_tree'),
       $container->get('menu.active_trail'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('class_resolver')
     );
   }
 
@@ -101,9 +116,7 @@ class MicrositeGroupMenuBlock extends GroupMenuBlock implements ContainerFactory
     if ($menu_instance instanceof GroupContentMenuInterface) {
       $build['#contextual_links']['group_menu'] = [
         'route_parameters' => [
-          'group' => \Drupal::service('class_resolver')
-            ->getInstanceFromDefinition(DomainGroupHelper::class)
-            ->getActiveDomainGroup(),
+          'group' => $this->domainGroupHelper->getActiveDomainGroup(),
           'group_content_menu' => $menu_instance->id(),
         ],
       ];
@@ -128,9 +141,7 @@ class MicrositeGroupMenuBlock extends GroupMenuBlock implements ContainerFactory
   public function getMenuInstance() {
 
     // Get group.
-    $group_id = \Drupal::service('class_resolver')
-      ->getInstanceFromDefinition(DomainGroupHelper::class)
-      ->getActiveDomainGroup();
+    $group_id = $this->domainGroupHelper->getActiveDomainGroup();
     if (!empty($group_id)) {
       $entity = $this->entityTypeManager->getStorage('group')->load($group_id);
     }
