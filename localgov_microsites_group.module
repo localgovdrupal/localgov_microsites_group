@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\domain_group\DomainGroupHelper;
@@ -8,6 +10,7 @@ use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
+use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 
 /**
  * @file
@@ -57,6 +60,24 @@ function localgov_microsites_group_menu_local_actions_alter(array &$local_action
   ) {
     $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsites_page';
   }
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function localgov_microsites_group_entity_extra_field_info() {
+  return \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
+    ->entityExtraFieldInfo();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function localgov_microsites_group_view(array &$build, GroupInterface $group, EntityViewDisplayInterface $display, $view_mode) {
+  return \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
+    ->groupView($build, $group, $display, $view_mode);
 }
 
 /**
