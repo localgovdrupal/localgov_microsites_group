@@ -1,16 +1,11 @@
-uuid: 109e7ad1-aa4e-40f5-b23d-c2dd0fb12bfb
 langcode: en
 status: true
 dependencies:
   config:
-    - domain.record.localgov_micro_lndo_site
     - group.type.microsite
     - system.menu.admin
   module:
-    - domain
     - group
-_core:
-  default_config_hash: Ap0g2LySVHQfQktUhNR5sbIeLDUNecT1rLgAu2rjb1c
 id: localgov_microsites_overview
 label: Microsites
 module: views
@@ -172,10 +167,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: domain
-        options:
-          domain:
-            localgov_micro_lndo_site: localgov_micro_lndo_site
+        type: none
+        options: {  }
       cache:
         type: tag
         options: {  }
@@ -230,7 +223,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - url.site
       tags: {  }
   collection:
     id: collection
@@ -255,5 +247,4 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - url.site
       tags: {  }
