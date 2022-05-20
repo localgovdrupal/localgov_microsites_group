@@ -10,13 +10,13 @@ routes:
   - route_name: view.localgov_microsites_overview.collection
 tips:
   welcome:
-    id: welcome
+    id: microsite-dashboard
     plugin: text
-    label: Welcome
+    label: Microsite Dashboard
     weight: -100
     position: auto
     selector: null
-    body: "This is the microsites dashboard. You can see all the microsites here."
+    body: "This is the microsites dashboard. Once you've created some microsites you'll be able to see them all here."
   add-a-microsite:
     id: add-a-microsite
     plugin: text
@@ -24,12 +24,12 @@ tips:
     weight: -100
     position: auto
     selector: .button--primary
-    body: "Then you can add a microsite"
+    body: "Add a microsite here - you'll need to set a name, a hostname and an email address. These can be changed later."
   add-some-users-at-people:
     id: add-some-users-at-people
     plugin: text
-    label: "Add some users at People"
+    label: "Add some users"
     weight: -100
     position: auto
     selector: ".toolbar-icon-entity-user-collection "
-    body: "Click here to add users, you'll then be able to add them to each individual microsite"
+    body: "<p>Before you can add users to a microsite you'll need to add accounts on the site.</p> <p>Manage accounts under <a href='/admin/people'>People</a> and you'll then be able to add them to each individual microsite.</p>"
