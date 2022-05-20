@@ -1,12 +1,10 @@
 localgov_microsites_group.new_domain_group_form:
   path: '/admin/microsites/add/{group_type}'
   defaults:
-    _title: 'Create new Domain Group'
+    _title: 'Create new Microsite'
     _controller: '\Drupal\localgov_microsites_group\Controller\DomainGroupAddController::addForm'
   options:
     _admin_route: TRUE
   requirements:
-    _access: 'TRUE'
-#    _group_permission: 'administer group domain settings'
-# @todo create %group_type group
+    _entity_create_access: 'group:{group_type}'
 # @todo restrict to domain group bundles; make dynamic restriction.
