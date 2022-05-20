@@ -6,6 +6,7 @@ dependencies:
     - system.menu.admin
   module:
     - group
+    - user
 id: localgov_microsites_overview
 label: Microsites
 module: views
@@ -167,8 +168,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'bypass group access'
       cache:
         type: tag
         options: {  }
@@ -223,6 +225,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
       tags: {  }
   collection:
     id: collection
@@ -247,4 +250,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
       tags: {  }
