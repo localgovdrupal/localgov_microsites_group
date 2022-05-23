@@ -7,7 +7,7 @@ dependencies:
     - field.field.group.microsite.lgms_base_line_height
     - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
-    - field.field.group.microsite.lgms_copyright
+    - field.field.group.microsite.lgms_footer_copyright_notice
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
     - field.field.group.microsite.lgms_footer_link_colour
@@ -83,13 +83,13 @@ third_party_settings:
         - group_footer
       label: Content
       region: hidden
-      parent_name: ''
+      parent_name: ""
       weight: 4
       format_type: tabs
       format_settings:
-        classes: ''
+        classes: ""
         show_empty_fields: false
-        id: ''
+        id: ""
         direction: vertical
         width_breakpoint: 640
     group_header:
@@ -110,11 +110,11 @@ third_party_settings:
       weight: 6
       format_type: tab
       format_settings:
-        classes: ''
+        classes: ""
         show_empty_fields: false
-        id: ''
+        id: ""
         formatter: closed
-        description: ''
+        description: ""
         required_fields: true
     group_footer:
       children:
@@ -124,9 +124,9 @@ third_party_settings:
         - lgms_footer_text_block_3
         - lgms_footer_text_block_4
         - lgms_footer_logos
-        - lgms_housekeepting_menu
+        - lgms_footer_housekeeping
         - lgms_powered_by
-        - lgms_copyright
+        - lgms_footer_copyright_notice
         - lgms_footer_width
         - lgms_footer_background_colour
         - lgms_footer_text_colour
@@ -138,11 +138,11 @@ third_party_settings:
       weight: 7
       format_type: tab
       format_settings:
-        classes: ''
+        classes: ""
         show_empty_fields: false
-        id: ''
+        id: ""
         formatter: closed
-        description: ''
+        description: ""
         required_fields: true
     group_pre_header:
       children:
@@ -157,11 +157,11 @@ third_party_settings:
       weight: 5
       format_type: tab
       format_settings:
-        classes: ''
+        classes: ""
         show_empty_fields: false
-        id: ''
+        id: ""
         formatter: closed
-        description: ''
+        description: ""
         required_fields: true
 _core:
   default_config_hash: KNyTYCdIcXS8F5wbCONgsF4VV6X4qjlqiLPtcxJpgX4
@@ -176,8 +176,8 @@ content:
     region: content
     settings:
       size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      placeholder: ""
+    third_party_settings: {}
   uid:
     type: entity_reference_autocomplete
     weight: 1
@@ -186,14 +186,14 @@ content:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      placeholder: ""
+    third_party_settings: {}
 hidden:
   lgms_base_font_size: true
   lgms_base_line_height: true
   lgms_base_spacing: true
   lgms_body_font: true
-  lgms_copyright: true
+  lgms_footer_copyright_notice: true
   lgms_footer_background_colour: true
   lgms_footer_banner: true
   lgms_footer_link_colour: true
