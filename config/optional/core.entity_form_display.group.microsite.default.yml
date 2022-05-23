@@ -6,7 +6,7 @@ dependencies:
     - field.field.group.microsite.lgms_base_line_height
     - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
-    - field.field.group.microsite.lgms_copyright
+    - field.field.group.microsite.lgms_footer_copyright_notice
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
     - field.field.group.microsite.lgms_footer_link_colour
@@ -180,7 +180,7 @@ third_party_settings:
         - lgms_footer_text_block_4
         - lgms_footer_housekeeping
         - lgms_powered_by
-        - lgms_copyright
+        - lgms_footer_copyright_notice
         - lgms_footer_logos
       label: "Footer Content"
       region: content
@@ -415,12 +415,13 @@ content:
     region: content
     settings: {}
     third_party_settings: {}
-  lgms_copyright:
-    type: boolean_checkbox
-    weight: 25
+  lgms_footer_copyright_notice:
+    type: text_textarea
+    weight: 32
     region: content
     settings:
-      display_label: true
+      rows: 5
+      placeholder: ""
     third_party_settings: {}
   lgms_footer_background_colour:
     type: string_textfield
