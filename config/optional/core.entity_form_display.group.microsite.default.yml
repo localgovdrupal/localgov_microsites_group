@@ -368,8 +368,6 @@ third_party_settings:
         formatter: closed
         description: ""
         required_fields: true
-_core:
-  default_config_hash: Zb2vo5iedq8-q2_y5V9hzeckbrXhbvMFdw5mB7T-oz4
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
