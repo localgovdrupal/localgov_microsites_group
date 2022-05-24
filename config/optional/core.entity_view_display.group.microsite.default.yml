@@ -6,7 +6,7 @@ dependencies:
     - field.field.group.microsite.lgms_base_line_height
     - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
-    - field.field.group.microsite.lgms_copyright
+    - field.field.group.microsite.lgms_footer_copyright_notice
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
     - field.field.group.microsite.lgms_footer_link_colour
@@ -79,7 +79,7 @@ content:
     label: hidden
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 1
     region: content
   lgms_main_logo:
@@ -87,12 +87,12 @@ content:
     label: hidden
     settings:
       link: true
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 0
     region: content
   microsite_content:
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     weight: 2
     region: content
 hidden:
@@ -102,7 +102,7 @@ hidden:
   lgms_base_line_height: true
   lgms_base_spacing: true
   lgms_body_font: true
-  lgms_copyright: true
+  lgms_footer_copyright_notice: true
   lgms_footer_background_colour: true
   lgms_footer_banner: true
   lgms_footer_link_colour: true

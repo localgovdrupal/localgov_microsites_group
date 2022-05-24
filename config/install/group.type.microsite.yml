@@ -4,7 +4,7 @@ dependencies: {  }
 id: microsite
 label: Microsite
 description: ''
-new_revision: true
+new_revision: false
 creator_membership: true
 creator_wizard: false
 creator_roles:

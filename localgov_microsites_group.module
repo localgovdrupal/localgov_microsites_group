@@ -157,7 +157,7 @@ function localgov_microsites_group_local_task_title($task_id) {
       return t('Dashboard');
     case 'domain_group.group_domain_settings':
       return t('Site settings');
-    case 'group.edit.form':
+    case 'group.edit_form':
       return t('Site design');
   }
 }

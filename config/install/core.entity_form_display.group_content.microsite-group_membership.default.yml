@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.field.group_content.microsite-group_membership.group_roles
     - group.content_type.microsite-group_membership
-  module:
-    - path
 id: group_content.microsite-group_membership.default
 targetEntityType: group_content
 bundle: microsite-group_membership
@@ -13,7 +11,7 @@ mode: default
 content:
   entity_id:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 0
     region: content
     settings:
       match_operator: CONTAINS
@@ -23,15 +21,10 @@ content:
     third_party_settings: {  }
   group_roles:
     type: options_buttons
-    weight: 31
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  path:
-    type: path
-    weight: 30
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  path: true
   uid: true
