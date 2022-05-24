@@ -9,7 +9,7 @@ field_name: lgms_base_line_height
 entity_type: group
 bundle: microsite
 label: "Base line-height"
-description: "In general, we recommend <strong>1.5</strong>. Please <strong>do not</strong> use any units: use 1.3, not 1.3em; use 24, not 24px; etc."
+description: "Line height is used to set the distance between lines of text.<br/>\r\nIn general, we recommend <strong>1.5</strong>. Please <strong>do not</strong> use any units: use 1.3, not 1.3em; use 24, not 24px; etc."
 required: false
 translatable: false
 default_value:
