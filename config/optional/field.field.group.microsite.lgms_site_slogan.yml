@@ -8,11 +8,11 @@ id: group.microsite.lgms_site_slogan
 field_name: lgms_site_slogan
 entity_type: group
 bundle: microsite
-label: 'Site Slogan/Tagline'
-description: ''
+label: "Site Slogan/Tagline"
+description: "Add the site slogan or tagline if you would like to see the site displayed in the header. Leave blank if not required."
 required: false
 translatable: false
-default_value: {  }
-default_value_callback: ''
-settings: {  }
+default_value: {}
+default_value_callback: ""
+settings: {}
 field_type: string
