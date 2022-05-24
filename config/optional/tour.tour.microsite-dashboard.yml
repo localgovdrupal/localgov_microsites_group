@@ -3,6 +3,7 @@ status: true
 dependencies:
   module:
     - localgov_microsites_group
+    - tour
 id: microsite-dashboard
 label: "Microsite dashboard"
 module: localgov_microsites_group

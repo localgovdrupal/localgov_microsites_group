@@ -4,15 +4,18 @@ description: Group integration for Microsites.
 package: LocalGov Drupal
 core_version_requirement: ^9.3
 dependencies:
+  # Drupal
+  - drupal:image
+  - drupal:link
+  - drupal:path
+  - drupal:tour
+  # Contrib
   - admin_toolbar:admin_toolbar
   - field_group:field_group
   - group:group
   - group:gnode
   - group_content_menu:group_content_menu
-  - image:image
-  - link:link
   - media_library:media_library
-  - path:path
+  - replicate:replicate
+  # LocalGov Drupal
   - localgov_core:localgov_media
-  - tour:tour
-  - replicate:replicate 
