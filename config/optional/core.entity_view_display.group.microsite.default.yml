@@ -82,14 +82,6 @@ content:
     third_party_settings: {}
     weight: 1
     region: content
-  lgms_main_logo:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {}
-    weight: 0
-    region: content
   microsite_content:
     settings: {}
     third_party_settings: {}
@@ -151,6 +143,7 @@ hidden:
   lgms_heading_6_line_height: true
   lgms_heading_font: true
   lgms_heading_font_weight: true
+  lgms_main_logo: true
   lgms_powered_by: true
   lgms_pre_header_bg_colour: true
   lgms_pre_header_link_colour: true
