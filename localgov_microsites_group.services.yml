@@ -1,10 +1,16 @@
 services:
   localgov_microsites_group.default_content:
     class: Drupal\localgov_microsites_group\GroupDefaultContent
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@config.factory', '@replicate.replicator']
 
   theme.negotiator.localgov_microsites_group:
     class: Drupal\localgov_microsites_group\Theme\ThemeSwitcherNegotiator
     arguments: ['@config.factory']
     tags:
       - { name: theme_negotiator, priority: 12 }
+
+  replicate.event_subscriber.localgov_microsites_group_content:
+    class: \Drupal\localgov_microsites_group\EventSubscriber\ReplicateGroupContent
+    arguments: ['@replicate.replicator']
+    tags:
+      - { name: event_subscriber }
