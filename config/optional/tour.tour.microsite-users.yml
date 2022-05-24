@@ -3,6 +3,7 @@ status: true
 dependencies:
   module:
     - localgov_microsites_group
+    - tour
 id: microsite-users
 label: "Microsite users"
 module: localgov_microsites_group
