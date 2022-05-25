@@ -492,7 +492,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: 'Edit node'
+          text: 'Edit content'
+          output_url_as_text: false
+          absolute: false
         delete_node:
           id: delete_node
           table: node
@@ -543,7 +545,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: 'Delete node'
+          text: 'Delete content'
+          output_url_as_text: false
+          absolute: false
         dropbutton:
           id: dropbutton
           table: views
@@ -595,15 +599,15 @@ display:
           hide_alter_empty: true
           destination: true
           fields:
-            view_group_content: view_group_content
-            edit_group_content: edit_group_content
-            delete_group_content: delete_group_content
             edit_node: edit_node
             delete_node: delete_node
             title: '0'
             type: '0'
             status: '0'
             changed: '0'
+            view_group_content: '0'
+            edit_group_content: '0'
+            delete_group_content: '0'
       pager:
         type: full
         options:
