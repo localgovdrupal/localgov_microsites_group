@@ -1,11 +1,12 @@
 <?php
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\domain_group\DomainGroupHelper;
-use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
@@ -69,6 +70,15 @@ function localgov_microsites_group_entity_extra_field_info() {
   return \Drupal::service('class_resolver')
     ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
     ->entityExtraFieldInfo();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function localgov_microsites_group_group_presave(GroupInterface $entity) {
+
+  // Clear node cache so site design changes become visible.
+  Cache::invalidateTags(['node_view']);
 }
 
 /**
