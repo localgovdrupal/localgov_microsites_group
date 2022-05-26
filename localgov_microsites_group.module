@@ -75,7 +75,7 @@ function localgov_microsites_group_entity_extra_field_info() {
 /**
  * Implements hook_ENTITY_TYPE_presave().
  */
-function localgov_microsites_group_presave(GroupInterface $entity) {
+function localgov_microsites_group_group_presave(GroupInterface $entity) {
 
   // Clear node cache so site design changes become visible.
   Cache::invalidateTags(['node_view']);
