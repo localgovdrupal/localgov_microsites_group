@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - group
-id: group.lgms_text_colour_light
-field_name: lgms_text_colour_light
+id: group.lgms_page_background_colour
+field_name: lgms_page_background_colour
 entity_type: group
 type: string
 settings:

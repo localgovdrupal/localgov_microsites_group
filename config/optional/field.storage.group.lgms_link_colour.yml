@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - group
-id: group.lgms_text_colour_dark
-field_name: lgms_text_colour_dark
+id: group.lgms_link_colour
+field_name: lgms_link_colour
 entity_type: group
 type: string
 settings:
