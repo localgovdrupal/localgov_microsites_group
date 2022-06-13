@@ -14,3 +14,8 @@ services:
     arguments: ['@replicate.replicator']
     tags:
       - { name: event_subscriber }
+
+  localgov_microsites_group_path_processor:
+    class: Drupal\localgov_microsites_group\PathProcessor\MicrositesGroupPathProcessorIn
+    tags:
+      - { name: path_processor_inbound, priority: 300 }
