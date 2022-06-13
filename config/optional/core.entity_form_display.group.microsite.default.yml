@@ -133,14 +133,14 @@ third_party_settings:
         required_fields: true
     group_header_content:
       children:
-        - lgms_main_logo
-        - lgms_site_name
-        - lgms_site_slogan
         - lgms_header_width
         - lgms_header_bg_colour
         - lgms_header_text_colour
         - lgms_header_link_colour
         - lgms_header_link_hover_colour
+        - lgms_main_logo
+        - lgms_site_name
+        - lgms_site_slogan
       label: Header
       region: content
       parent_name: group_content
@@ -313,16 +313,16 @@ third_party_settings:
         required_fields: true
     group_footer:
       children:
+        - lgms_footer_width
+        - lgms_footer_background_colour
+        - lgms_footer_text_colour
+        - lgms_footer_link_colour
+        - lgms_footer_link_hover_colour
         - lgms_footer_banner
         - group_text_blocks
         - lgms_footer_logos
         - lgms_footer_copyright_notice
         - lgms_powered_by
-        - lgms_footer_background_colour
-        - lgms_footer_text_colour
-        - lgms_footer_width
-        - lgms_footer_link_colour
-        - lgms_footer_link_hover_colour
       label: Footer
       region: content
       parent_name: group_content
@@ -355,8 +355,6 @@ third_party_settings:
         description: ''
         required_fields: true
         effect: none
-_core:
-  default_config_hash: hznTNOipfbQSucgTgMV3mr51OWWYWa60LnKxLl0JLOo
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
@@ -759,7 +757,7 @@ content:
     third_party_settings: {  }
   lgms_main_logo:
     type: media_library_widget
-    weight: 16
+    weight: 24
     region: content
     settings:
       media_types: {  }
@@ -827,7 +825,7 @@ content:
     third_party_settings: {  }
   lgms_site_name:
     type: string_textfield
-    weight: 17
+    weight: 25
     region: content
     settings:
       size: 60
@@ -835,7 +833,7 @@ content:
     third_party_settings: {  }
   lgms_site_slogan:
     type: string_textfield
-    weight: 18
+    weight: 26
     region: content
     settings:
       size: 60
