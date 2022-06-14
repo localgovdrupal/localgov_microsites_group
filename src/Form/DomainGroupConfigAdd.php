@@ -89,8 +89,15 @@ class DomainGroupConfigAdd extends FormBase {
     // https://github.com/localgovdrupal/localgov_microsites_group/issues/15
     $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_site_settings');
     $form += $plugin->buildConfigurationForm([], $form_state, $group);
+
+    // Hide non-necessary configuration options.
+    $form['error_page']['#access'] = FALSE;
     $form['site_front_page']['#type'] = 'value';
-    $form['error_page']['#open'] = FALSE;
+    $form['site_name']['#access'] = FALSE;
+    $form['site_slogan']['#access'] = FALSE;
+
+    // UX improvements.
+    $form['site_mail']['#title'] = $this->t('Site email address');
 
     if (!empty($extras['group_wizard'])) {
       $store = $this->privateTempStoreFactory->get($extras['group_wizard_id']);
