@@ -56,19 +56,22 @@ dependencies:
     - field.field.group.microsite.lgms_heading_6_line_height
     - field.field.group.microsite.lgms_heading_font
     - field.field.group.microsite.lgms_heading_font_weight
+    - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
     - field.field.group.microsite.lgms_powered_by
+    - field.field.group.microsite.lgms_page_background_colour
     - field.field.group.microsite.lgms_pre_header_bg_colour
     - field.field.group.microsite.lgms_pre_header_link_colour
     - field.field.group.microsite.lgms_pre_header_link_hover
     - field.field.group.microsite.lgms_pre_header_text_colour
     - field.field.group.microsite.lgms_pre_header_width
     - field.field.group.microsite.lgms_primary_colour
+    - field.field.group.microsite.lgms_primary_colour_contrast
     - field.field.group.microsite.lgms_secondary_colour
+    - field.field.group.microsite.lgms_secondary_colour_contrast
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
-    - field.field.group.microsite.lgms_text_colour_dark
-    - field.field.group.microsite.lgms_text_colour_light
+    - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
   module:
     - field_group
@@ -242,7 +245,9 @@ hidden:
   lgms_heading_6_line_height: true
   lgms_heading_font: true
   lgms_heading_font_weight: true
+  lgms_link_colour: true
   lgms_main_logo: true
+  lgms_page_background_colour: true
   lgms_powered_by: true
   lgms_pre_header_bg_colour: true
   lgms_pre_header_link_colour: true
@@ -250,10 +255,11 @@ hidden:
   lgms_pre_header_text_colour: true
   lgms_pre_header_width: true
   lgms_primary_colour: true
+  lgms_primary_colour_contrast: true
   lgms_secondary_colour: true
+  lgms_secondary_colour_contrast: true
   lgms_site_name: true
   lgms_site_slogan: true
-  lgms_text_colour_dark: true
-  lgms_text_colour_light: true
+  lgms_text_colour: true
   path: true
   status: true
