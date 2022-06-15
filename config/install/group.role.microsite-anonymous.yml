@@ -11,4 +11,7 @@ audience: anonymous
 group_type: microsite
 permissions_ui: true
 permissions:
+  - 'view group_node:localgov_directories_page entity'
+  - 'view group_node:localgov_directories_venue entity'
+  - 'view group_node:localgov_directory entity'
   - 'view group_node:localgov_page entity'
