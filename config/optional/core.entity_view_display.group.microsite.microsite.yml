@@ -67,8 +67,6 @@ dependencies:
     - field.field.group.microsite.lgms_secondary_colour
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
-    - field.field.group.microsite.lgms_text_colour_dark
-    - field.field.group.microsite.lgms_text_colour_light
     - group.type.microsite
   module:
     - media
@@ -226,7 +224,5 @@ hidden:
   lgms_pre_header_width: true
   lgms_primary_colour: true
   lgms_secondary_colour: true
-  lgms_text_colour_dark: true
-  lgms_text_colour_light: true
   search_api_excerpt: true
   uid: true
