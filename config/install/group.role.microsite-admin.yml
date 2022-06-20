@@ -36,6 +36,7 @@ permissions:
   - 'delete own group_node:localgov_page entity'
   - 'edit group'
   - 'leave group'
+  - 'manage directory facets'
   - 'manage group_content_menu'
   - 'update any group_node:localgov_directories_page content'
   - 'update any group_node:localgov_directories_page entity'

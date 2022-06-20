@@ -142,14 +142,15 @@ class MicrositeGroupMenuBlock extends GroupMenuBlock implements ContainerFactory
 
     // Get group.
     $group_id = $this->domainGroupHelper->getActiveDomainGroup();
-    if (!empty($group_id)) {
-      $entity = $this->entityTypeManager->getStorage('group')->load($group_id);
+    if (is_null($group_id)) {
+      $group_id = \Drupal::request()->attributes->get('group');
     }
-    else {
-      $entity = \Drupal::request()->attributes->get('group');
+    if (is_null($group_id)) {
+      return NULL;
     }
 
     // Don't load menu for group entities that are new/unsaved.
+    $entity = $this->entityTypeManager->getStorage('group')->load($group_id);
     if (!$entity || $entity->isNew()) {
       return NULL;
     }

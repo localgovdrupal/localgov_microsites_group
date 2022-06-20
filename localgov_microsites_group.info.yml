@@ -13,7 +13,6 @@ dependencies:
   - admin_toolbar:admin_toolbar
   - field_group:field_group
   - group:group
-  - group:gnode
   - group_content_menu:group_content_menu
   - media_library:media_library
   - replicate:replicate

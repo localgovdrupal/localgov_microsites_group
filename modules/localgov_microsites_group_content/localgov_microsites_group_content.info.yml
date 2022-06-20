@@ -1,0 +1,13 @@
+name: Localgov Microsites group content
+description: Configuration and functionality for microsite group content.
+type: module
+package: LocalGov Drupal
+core_version_requirement: ^9
+dependencies:
+  - drupal:views
+  - group:gnode
+  - localgov_directories:localgov_directories
+  - localgov_directories:localgov_directories_page
+  #- localgov_directories:localgov_directories_venue
+  - localgov_page:localgov_page
+  - localgov_subsites:localgov_subsites
