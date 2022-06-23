@@ -13,8 +13,11 @@ dependencies:
   - admin_toolbar:admin_toolbar
   - field_group:field_group
   - group:group
+  - group:gnode
   - group_content_menu:group_content_menu
   - media_library:media_library
   - replicate:replicate
   # LocalGov Drupal
   - localgov_core:localgov_media
+  - localgov_page:localgov_page
+  - localgov_subsites:localgov_subsites

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\localgov_microsites_group_content\Plugin\GroupContentEnabler;
+namespace Drupal\localgov_microsites_directories\Plugin\GroupContentEnabler;
 
 use Drupal\group\Plugin\GroupContentEnablerBase;
 

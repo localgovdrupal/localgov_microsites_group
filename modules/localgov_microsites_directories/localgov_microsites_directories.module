@@ -2,18 +2,17 @@
 
 /**
  * @file
- * LocalGov microsites group content module file.
+ * LocalGov Microsites Directories module file.
  */
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\group\Entity\GroupType;
 
 /**
  * Implements hook_entity_insert().
  */
-function localgov_microsites_group_content_entity_insert(EntityInterface $entity) {
+function localgov_microsites_directories_entity_insert(EntityInterface $entity) {
 
   if ($entity->getEntityTypeId() != 'localgov_directories_facets') {
     return;
@@ -34,7 +33,7 @@ function localgov_microsites_group_content_entity_insert(EntityInterface $entity
 /**
  * Implements hook_form_alter().
  */
-function localgov_microsites_group_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function localgov_microsites_directories_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Add submit handler to new directory facet type form.
   if ($form_id == 'localgov_directories_facets_type_add_form') {
@@ -54,7 +53,7 @@ function localgov_microsites_group_content_form_alter(&$form, FormStateInterface
 /**
  * Submit handler for the localgov_directories_facets_type_add_form.
  */
-function localgov_microsites_group_content_submit_new_directory_facet_type($form, FormStateInterface $form_state) {
+function localgov_microsites_directories_submit_new_directory_facet_type($form, FormStateInterface $form_state) {
 
   // Redirect back to the directory facet type listing page.
   $group = \Drupal::routeMatch()->getParameter('group');
@@ -68,7 +67,7 @@ function localgov_microsites_group_content_submit_new_directory_facet_type($form
 /**
  * Submit handler for the localgov_directories_facets_TYPE_add_form.
  */
-function localgov_microsites_group_content_submit_new_directory_facet($form, FormStateInterface $form_state) {
+function localgov_microsites_directories_new_directory_facet($form, FormStateInterface $form_state) {
 
   // Redirect back to the directory facets listing page.
   $group = \Drupal::routeMatch()->getParameter('group');
@@ -76,7 +75,7 @@ function localgov_microsites_group_content_submit_new_directory_facet($form, For
   if (!is_null($group) && !is_null($localgov_directories_facets_type)) {
     $form_state->setRedirect('view.lgms_group_directory_facets.page', [
       'group' => $group->id(),
-      'localgov_directories_facets_type' => $localgov_directories_facets_type
+      'localgov_directories_facets_type' => $localgov_directories_facets_type,
     ]);
   }
 }

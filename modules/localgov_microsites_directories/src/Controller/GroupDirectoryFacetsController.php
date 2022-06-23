@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\localgov_microsites_group_content\Controller;
+namespace Drupal\localgov_microsites_directories\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityFormBuilderInterface;
@@ -44,8 +44,8 @@ class GroupDirectoryFacetsController extends ControllerBase {
    *   The entity type manager.
    * @param \Drupal\Core\Entity\EntityFormBuilderInterface $entity_form_builder
    *   The entity form builder.
-   * @param \Drupal\Core\Render\RendererInterface $renderer
-   *   The renderer.
+   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+   *   The route match.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFormBuilderInterface $entity_form_builder, RouteMatchInterface $route_match) {
     $this->entityTypeManager = $entity_type_manager;
@@ -89,12 +89,14 @@ class GroupDirectoryFacetsController extends ControllerBase {
   /**
    * Title for the add form.
    *
-   * @return string
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   Title for form.
    */
   public function addTitle() {
 
     $directory_facet_type_id = $this->routeMatch->getParameter('localgov_directories_facets_type');
-    $directory_facet_type = LocalgovDirectoriesFacetsType::load($directory_facet_type_id );
+    $directory_facet_type = LocalgovDirectoriesFacetsType::load($directory_facet_type_id);
     return $this->t('Create a %facet_type directory facet', ['%facet_type' => $directory_facet_type->label()]);
   }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\localgov_microsites_group_content\Controller;
+namespace Drupal\localgov_microsites_directories\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityFormBuilderInterface;
@@ -82,10 +82,15 @@ class GroupDirectoryFacetTypeController extends ControllerBase {
       $build['#bundles'][$type_name] = [
         'label' => $label,
         'description' => NULL,
-        'add_link' => Link::createFromRoute($label, 'view.lgms_group_directory_facets.page', ['group' => $group->id(), 'localgov_directories_facets_type' => $type->id()]),
+        'add_link' => Link::createFromRoute($label, 'view.lgms_group_directory_facets.page',
+          [
+            'group' => $group->id(),
+            'localgov_directories_facets_type' => $type->id(),
+          ]),
       ];
     }
 
     return $build;
   }
+
 }
