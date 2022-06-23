@@ -23,7 +23,7 @@
       },
       "drupal/group": {
         "Empty page when trying to create group node localgovdrupal/localgov_microsites_group#45": "https://www.drupal.org/files/issues/2019-01-04/2842630-20.patch",
-	"Fix Deprecated function: uasort() when editing group node view.": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch"
+        "Fix Deprecated function: uasort() when editing group node view. See https://www.drupal.org/node/3210808 ": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch"
       }
     }
   }
