@@ -11,6 +11,8 @@ dependencies:
   - drupal:tour
   # Contrib
   - admin_toolbar:admin_toolbar
+  - domain:domain
+  - domain_group:domain_group
   - field_group:field_group
   - group:group
   - group:gnode
