@@ -8,3 +8,4 @@ dependencies:
   - localgov_directories:localgov_directories
   - localgov_directories:localgov_directories_page
   #- localgov_directories:localgov_directories_venue
+  - localgov_microsites_group:localgov_microsites_group

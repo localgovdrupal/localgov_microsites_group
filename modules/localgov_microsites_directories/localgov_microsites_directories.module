@@ -37,7 +37,7 @@ function localgov_microsites_directories_form_alter(&$form, FormStateInterface $
 
   // Add submit handler to new directory facet type form.
   if ($form_id == 'localgov_directories_facets_type_add_form') {
-    $form['actions']['submit']['#submit'][] = 'localgov_microsites_group_content_submit_new_directory_facet_type';
+    $form['actions']['submit']['#submit'][] = 'localgov_microsites_directories_submit_new_directory_facet_type';
   }
 
   // Add submit handler to new directory facet form.
@@ -46,7 +46,7 @@ function localgov_microsites_directories_form_alter(&$form, FormStateInterface $
     isset($form['#entity_type']) &&
     $form['#entity_type'] == 'localgov_directories_facets'
   ) {
-    $form['actions']['submit']['#submit'][] = 'localgov_microsites_group_content_submit_new_directory_facet';
+    $form['actions']['submit']['#submit'][] = 'localgov_microsites_directories_submit_new_directory_facet';
   }
 }
 
