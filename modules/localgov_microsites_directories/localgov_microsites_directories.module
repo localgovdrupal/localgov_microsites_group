@@ -67,7 +67,7 @@ function localgov_microsites_directories_submit_new_directory_facet_type($form, 
 /**
  * Submit handler for the localgov_directories_facets_TYPE_add_form.
  */
-function localgov_microsites_directories_new_directory_facet($form, FormStateInterface $form_state) {
+function localgov_microsites_directories_submit_new_directory_facet($form, FormStateInterface $form_state) {
 
   // Redirect back to the directory facets listing page.
   $group = \Drupal::routeMatch()->getParameter('group');
