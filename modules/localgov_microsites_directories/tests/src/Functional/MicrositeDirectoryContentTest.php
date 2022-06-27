@@ -15,7 +15,7 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
  *
  * @group localgov_microsites_group
  */
-class DirectoriesGroupContentTest extends BrowserTestBase {
+class MicrositeDirectoryContentTest extends BrowserTestBase {
 
   use GroupCreationTrait;
   use InitializeGroupsTrait;
