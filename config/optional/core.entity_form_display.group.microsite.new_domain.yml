@@ -7,9 +7,9 @@ dependencies:
     - field.field.group.microsite.lgms_base_line_height
     - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
-    - field.field.group.microsite.lgms_footer_copyright_notice
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
+    - field.field.group.microsite.lgms_footer_copyright_notice
     - field.field.group.microsite.lgms_footer_link_colour
     - field.field.group.microsite.lgms_footer_link_hover_colour
     - field.field.group.microsite.lgms_footer_logos
@@ -58,8 +58,8 @@ dependencies:
     - field.field.group.microsite.lgms_heading_font_weight
     - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
-    - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_page_background_colour
+    - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_pre_header_bg_colour
     - field.field.group.microsite.lgms_pre_header_link_colour
     - field.field.group.microsite.lgms_pre_header_link_hover
@@ -71,6 +71,7 @@ dependencies:
     - field.field.group.microsite.lgms_secondary_colour_contrast
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_teaser_image_style
     - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
   module:
@@ -86,13 +87,13 @@ third_party_settings:
         - group_footer
       label: Content
       region: hidden
-      parent_name: ""
+      parent_name: ''
       weight: 4
       format_type: tabs
       format_settings:
-        classes: ""
+        classes: ''
         show_empty_fields: false
-        id: ""
+        id: ''
         direction: vertical
         width_breakpoint: 640
     group_header:
@@ -113,11 +114,11 @@ third_party_settings:
       weight: 6
       format_type: tab
       format_settings:
-        classes: ""
+        classes: ''
         show_empty_fields: false
-        id: ""
+        id: ''
         formatter: closed
-        description: ""
+        description: ''
         required_fields: true
     group_footer:
       children:
@@ -141,11 +142,11 @@ third_party_settings:
       weight: 7
       format_type: tab
       format_settings:
-        classes: ""
+        classes: ''
         show_empty_fields: false
-        id: ""
+        id: ''
         formatter: closed
-        description: ""
+        description: ''
         required_fields: true
     group_pre_header:
       children:
@@ -160,14 +161,12 @@ third_party_settings:
       weight: 5
       format_type: tab
       format_settings:
-        classes: ""
+        classes: ''
         show_empty_fields: false
-        id: ""
+        id: ''
         formatter: closed
-        description: ""
+        description: ''
         required_fields: true
-_core:
-  default_config_hash: KNyTYCdIcXS8F5wbCONgsF4VV6X4qjlqiLPtcxJpgX4
 id: group.microsite.new_domain
 targetEntityType: group
 bundle: microsite
@@ -179,8 +178,8 @@ content:
     region: content
     settings:
       size: 60
-      placeholder: ""
-    third_party_settings: {}
+      placeholder: ''
+    third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 1
@@ -189,16 +188,16 @@ content:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
-      placeholder: ""
-    third_party_settings: {}
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   lgms_base_font_size: true
   lgms_base_line_height: true
   lgms_base_spacing: true
   lgms_body_font: true
-  lgms_footer_copyright_notice: true
   lgms_footer_background_colour: true
   lgms_footer_banner: true
+  lgms_footer_copyright_notice: true
   lgms_footer_link_colour: true
   lgms_footer_link_hover_colour: true
   lgms_footer_logos: true
@@ -260,6 +259,7 @@ hidden:
   lgms_secondary_colour_contrast: true
   lgms_site_name: true
   lgms_site_slogan: true
+  lgms_teaser_image_style: true
   lgms_text_colour: true
   path: true
   status: true
