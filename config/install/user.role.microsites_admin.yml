@@ -7,38 +7,22 @@ dependencies:
     - media.type.image
     - media.type.remote_video
   module:
-    - domain
     - filter
-    - group
     - layout_paragraphs
     - localgov_directories
     - media
     - system
-    - toolbar
-    - tour
-id: microsites_controller
-label: 'Microsites controller'
-weight: 2
+id: microsites_admin
+label: 'Microsites administrator'
+weight: 3
 is_admin: null
 permissions:
-  - 'access administration pages'
-  - 'access directory facets overview'
   - 'access media overview'
-  - 'access toolbar'
-  - 'access tour'
-  - 'access user profiles'
-  - 'administer domains'
   - 'administer media'
-  - 'administer users'
-  - 'bypass group access'
-  - 'cancel account'
-  - 'change own username'
   - 'create directory facets'
   - 'create document media'
-  - 'create domains'
   - 'create image media'
   - 'create media'
-  - 'create microsite group'
   - 'create remote_video media'
   - 'delete directory facets'
   - 'edit any document media'
@@ -49,14 +33,11 @@ permissions:
   - 'edit own document media'
   - 'edit own image media'
   - 'edit own remote_video media'
-  - 'select account cancellation method'
   - 'update any media'
   - 'update media'
   - 'use text format wysiwyg'
   - 'view all media revisions'
-  - 'view assigned domains'
-  - 'view domain list'
+  - 'view directory facets'
   - 'view media'
   - 'view own unpublished media'
   - 'view the administration theme'
-  - 'view user email addresses'

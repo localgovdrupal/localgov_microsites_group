@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.microsites_admin
+  module:
+    - user
+id: user_add_role_action.microsites_admin
+label: 'Add the Microsites administrator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: microsites_admin
