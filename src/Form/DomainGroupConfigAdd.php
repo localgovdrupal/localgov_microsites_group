@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
-use Drupal\domain_group\Form\DomainGroupSettingsForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\domain_group\Plugin\DomainGroupSettingsManager;
 use Drupal\group\Entity\GroupInterface;
@@ -67,7 +66,6 @@ class DomainGroupConfigAdd extends FormBase {
     );
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -100,7 +98,6 @@ class DomainGroupConfigAdd extends FormBase {
     $form['site_mail']['#title'] = $this->t('Site email address');
 
     if (!empty($extras['group_wizard'])) {
-      $store = $this->privateTempStoreFactory->get($extras['group_wizard_id']);
       $store_id = $extras['store_id'];
       $form_state->set('group_wizard_id', $extras['group_wizard_id']);
       $form_state->set('store_id', $store_id);
@@ -214,7 +211,7 @@ class DomainGroupConfigAdd extends FormBase {
     $group_bundle = $this->entityTypeManager
       ->getStorage('group_type')
       ->load($group->bundle());
-    $membership_step =  $group_bundle->creatorMustCompleteMembership();
+    $membership_step = $group_bundle->creatorMustCompleteMembership();
     $store->set("$store_id:step", $membership_step ? 2 : 1);
 
     // Disable any URL-based redirect when going back to the previous step.

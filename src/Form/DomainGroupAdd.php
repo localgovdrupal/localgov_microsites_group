@@ -5,6 +5,9 @@ namespace Drupal\localgov_microsites_group\Form;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\group\Entity\Form\GroupForm;
 
+/**
+ * Add a domain to group form.
+ */
 class DomainGroupAdd extends GroupForm {
 
   /**
@@ -19,9 +22,10 @@ class DomainGroupAdd extends GroupForm {
 
     if ($this->operation == 'new_domain') {
       $actions['submit']['#submit'] = ['::submitForm', '::store'];
-      
-      if ($group_type->creatorMustCompleteMembership())
+
+      if ($group_type->creatorMustCompleteMembership()) {
         $actions['submit']['#value'] = $this->t('Next: complete @group_type membership', $replace);
+      }
       // Update the label if we are not using the wizard, but the group creator
       // still gets a membership upon group creation.
       elseif ($group_type->creatorGetsMembership()) {
