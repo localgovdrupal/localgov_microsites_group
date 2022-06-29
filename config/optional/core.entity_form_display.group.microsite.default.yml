@@ -376,6 +376,8 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+        direction: vertical
+        width_breakpoint: 640
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
