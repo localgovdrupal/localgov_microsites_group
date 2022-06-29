@@ -71,7 +71,6 @@ dependencies:
     - field.field.group.microsite.lgms_secondary_colour_contrast
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
-    - field.field.group.microsite.lgms_teaser_image_style
     - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
   module:
@@ -96,6 +95,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 4
     region: content
@@ -111,8 +112,12 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: ''
-    third_party_settings: {  }
+      image_style: localgov_microsite_200_85
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: ''
     weight: 6
     region: content
   lgms_footer_text_block_1:
@@ -149,6 +154,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
@@ -234,7 +241,6 @@ hidden:
   lgms_primary_colour_contrast: true
   lgms_secondary_colour: true
   lgms_secondary_colour_contrast: true
-  lgms_teaser_image_style: true
   lgms_text_colour: true
   search_api_excerpt: true
   uid: true
