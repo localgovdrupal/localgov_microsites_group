@@ -12,6 +12,7 @@ use Drupal\Core\Routing\RouteMatch;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\domain_group\DomainGroupHelper;
+use Drupal\domain_group\DomainGroupResolverInterface;
 use Drupal\group\Entity\Group;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Route;
@@ -34,11 +35,11 @@ class MicrositeTasksBlock extends BlockBase implements ContainerFactoryPluginInt
   protected $localTaskManager;
 
   /**
-   * The Domain Group Helper.
+   * The Domain Group resolver.
    *
-   * @var \Drupal\domain_group\DomainGroupHelper
+   * @var \Drupal\domain_group\DomainGroupResolverInterface
    */
-  protected $domainGroupHelper;
+  protected $domainGroupResolver;
 
   /**
    * Access manager.
@@ -65,17 +66,17 @@ class MicrositeTasksBlock extends BlockBase implements ContainerFactoryPluginInt
    *   The plugin implementation definition.
    * @param \Drupal\Core\Menu\LocalTaskManagerInterface $local_task_manager
    *   The local task manager.
-   * @param \Drupal\Core\DependencyInjection\ClassResolverInterface $class_resolver
+   * @param \Drupal\domain_group\DomainGroupResolverInterface $domain_group_resolver
    *   The class resolver service.
    * @param \Drupal\Core\Access\AccessManagerInterface $access_manager
    *   The access manager.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LocalTaskManagerInterface $local_task_manager, ClassResolverInterface $class_resolver, AccessManagerInterface $access_manager, AccountInterface $current_user) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LocalTaskManagerInterface $local_task_manager, DomainGroupResolverInterface $domain_group_resolver, AccessManagerInterface $access_manager, AccountInterface $current_user) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->localTaskManager = $local_task_manager;
-    $this->domainGroupHelper = $class_resolver->getInstanceFromDefinition(DomainGroupHelper::class);
+    $this->domainGroupResolver = $domain_group_resolver;
     $this->accessManager = $access_manager;
     $this->currentUser = $current_user;
   }
@@ -89,7 +90,7 @@ class MicrositeTasksBlock extends BlockBase implements ContainerFactoryPluginInt
       $plugin_id,
       $plugin_definition,
       $container->get('plugin.manager.menu.local_task'),
-      $container->get('class_resolver'),
+      $container->get('domain_group_resolver'),
       $container->get('access_manager'),
       $container->get('current_user')
     );
@@ -103,7 +104,7 @@ class MicrositeTasksBlock extends BlockBase implements ContainerFactoryPluginInt
     $cacheability->addCacheableDependency($this->localTaskManager);
 
     $menu = [];
-    if ($group_id = $this->domainGroupHelper->getActiveDomainGroup()) {
+    if ($group_id = $this->domainGroupResolver->getActiveDomainGroupId()) {
       $menu['#theme'] = 'microsites_task_block';
       $route = new RouteMatch(
         'entity.group.canonical',

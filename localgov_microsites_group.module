@@ -122,9 +122,7 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
     $form_state->setRedirect('system.admin');
   }
   // Login to a domain group.
-  $group_id = \Drupal::service('class_resolver')
-    ->getInstanceFromDefinition(DomainGroupHelper::class)
-    ->getActiveDomainGroup();
+  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
   if ($group_id) {
     $form_state->setRedirect('entity.group.canonical', ['group' => $group_id]);
   }
