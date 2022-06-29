@@ -14,9 +14,6 @@ settings:
       value: square
       label: Square
     -
-      value: 4x3
-      label: 'Landscape 4x3'
-    -
       value: 3x2
       label: 'Landscape 3x2'
     -
