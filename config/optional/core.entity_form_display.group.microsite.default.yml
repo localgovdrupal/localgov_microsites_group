@@ -55,7 +55,9 @@ dependencies:
     - field.field.group.microsite.lgms_heading_6_line_height
     - field.field.group.microsite.lgms_heading_font
     - field.field.group.microsite.lgms_heading_font_weight
+    - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
+    - field.field.group.microsite.lgms_page_background_colour
     - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_pre_header_bg_colour
     - field.field.group.microsite.lgms_pre_header_link_colour
@@ -68,6 +70,7 @@ dependencies:
     - field.field.group.microsite.lgms_secondary_colour_contrast
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_teaser_image_style
     - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
   module:
@@ -85,6 +88,7 @@ third_party_settings:
         - group_pre_header
         - group_header_content
         - group_footer
+        - group_advanced
       label: Content
       region: content
       parent_name: ''
@@ -359,45 +363,26 @@ third_party_settings:
         description: ''
         required_fields: true
         effect: none
-_core:
-  default_config_hash: QRAeHMN5tJ-lvgd4YrGls-Qp4VmZXH4i-wpi7u6uHKQ
+    group_advanced:
+      children:
+        - lgms_teaser_image_style
+      label: Advanced
+      region: content
+      parent_name: group_content
+      weight: 19
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
 mode: default
 content:
-  lgms_primary_colour_contrast:
-    type: string_textfield
-    weight: 7
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  lgms_secondary_colour_contrast:
-    type: string_textfield
-    weight: 9
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  lgms_link_colour:
-    type: string_textfield
-    weight: 15
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  lgms_page_background_colour:
-    type: string_textfield
-    weight: 14
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   label:
     type: string_textfield
     weight: 2
@@ -793,12 +778,28 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  lgms_link_colour:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   lgms_main_logo:
     type: media_library_widget
     weight: 24
     region: content
     settings:
       media_types: {  }
+    third_party_settings: {  }
+  lgms_page_background_colour:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   lgms_powered_by:
     type: boolean_checkbox
@@ -853,9 +854,25 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  lgms_primary_colour_contrast:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   lgms_secondary_colour:
     type: string_textfield
     weight: 8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_secondary_colour_contrast:
+    type: string_textfield
+    weight: 9
     region: content
     settings:
       size: 60
@@ -876,6 +893,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  lgms_teaser_image_style:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
     third_party_settings: {  }
   lgms_text_colour:
     type: string_textfield
