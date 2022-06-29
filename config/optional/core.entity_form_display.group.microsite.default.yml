@@ -343,6 +343,8 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+        direction: vertical
+        width_breakpoint: 640
     group_text_blocks:
       children:
         - lgms_footer_text_block_1
@@ -376,8 +378,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-        direction: vertical
-        width_breakpoint: 640
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
