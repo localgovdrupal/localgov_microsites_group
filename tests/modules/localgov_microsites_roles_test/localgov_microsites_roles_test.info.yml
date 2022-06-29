@@ -5,4 +5,4 @@ description: 'Support module for LocalGov Microsites role tests'
 core_version_requirement: ^9
 dependencies:
   - localgov_microsites_group:localgov_microsites_group
-#hidden: true
+hidden: true
