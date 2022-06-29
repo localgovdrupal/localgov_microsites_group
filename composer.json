@@ -12,6 +12,12 @@
     "drupal/replicate": "^1.0",
     "localgovdrupal/localgov_core": "^2.1.0"
   },
+  "require-dev": {
+    "localgovdrupal/localgov_directories": "^2.0"
+  },
+  "suggests": {
+    "localgovdrupal/localgov_directories": "For directories content type in microsites"
+  },
   "extra": {
     "enable-patching": true,
     "patchLevel": {
