@@ -15,7 +15,7 @@ class RolesHelper {
   /**
    * Microsites administrator role machine name.
    */
-  const MICROSITES_ADMIN_ROLE = 'microsites_admin';
+  const MICROSITES_EDITOR_ROLE = 'microsites_trusted_editor';
 
   /**
    * Group admin role machine name.

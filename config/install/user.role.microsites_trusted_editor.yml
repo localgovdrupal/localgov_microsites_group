@@ -8,7 +8,7 @@ dependencies:
   module:
     - media
     - system
-id: microsites_admin
+id: microsites_trusted_editor
 label: 'Microsites administrator'
 weight: 3
 is_admin: null

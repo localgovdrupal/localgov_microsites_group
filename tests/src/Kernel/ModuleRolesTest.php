@@ -14,8 +14,6 @@ use Drupal\user\Entity\Role;
  */
 class ModuleRolesTest extends KernelTestBase {
 
-  protected $strictConfigSchema = FALSE;
-
   /**
    * {@inheritdoc}
    */
@@ -55,12 +53,12 @@ class ModuleRolesTest extends KernelTestBase {
     $this->assertTrue($microsites_controller->hasPermission('edit microsites roles test'));
     $this->assertTrue($microsites_controller->hasPermission('view microsites roles test'));
 
-    $microsites_admin = Role::load(RolesHelper::MICROSITES_ADMIN_ROLE);
-    $this->assertFalse($microsites_admin->hasPermission('administer microsites roles test'));
-    $this->assertTrue($microsites_admin->hasPermission('create microsites roles test'));
-    $this->assertFalse($microsites_admin->hasPermission('delete microsites roles test'));
-    $this->assertTrue($microsites_admin->hasPermission('edit microsites roles test'));
-    $this->assertTrue($microsites_admin->hasPermission('view microsites roles test'));
+    $microsites_trusted_editor = Role::load(RolesHelper::MICROSITES_EDITOR_ROLE);
+    $this->assertFalse($microsites_trusted_editor->hasPermission('administer microsites roles test'));
+    $this->assertTrue($microsites_trusted_editor->hasPermission('create microsites roles test'));
+    $this->assertFalse($microsites_trusted_editor->hasPermission('delete microsites roles test'));
+    $this->assertTrue($microsites_trusted_editor->hasPermission('edit microsites roles test'));
+    $this->assertTrue($microsites_trusted_editor->hasPermission('view microsites roles test'));
 
     // Test microsite group permissions.
     $microsite_admin = GroupRole::load('microsite-' . RolesHelper::GROUP_ADMIN_ROLE);

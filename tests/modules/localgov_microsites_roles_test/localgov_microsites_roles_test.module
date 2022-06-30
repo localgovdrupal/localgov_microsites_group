@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Hooks for localgov_microsites_roles_test
+ * Hooks for localgov_microsites_roles_test.
  */
 
 use Drupal\localgov_microsites_group\RolesHelper;
@@ -19,7 +19,7 @@ function localgov_microsites_roles_test_localgov_microsites_roles_default() {
         'edit microsites roles test',
         'view microsites roles test',
       ],
-      RolesHelper::MICROSITES_ADMIN_ROLE => [
+      RolesHelper::MICROSITES_EDITOR_ROLE => [
         'create microsites roles test',
         'edit microsites roles test',
         'view microsites roles test',
@@ -45,6 +45,6 @@ function localgov_microsites_roles_test_localgov_microsites_roles_default() {
       RolesHelper::GROUP_OUTSIDER_ROLE => [
         'view microsite roles test',
       ],
-     ],
+    ],
   ];
 }
