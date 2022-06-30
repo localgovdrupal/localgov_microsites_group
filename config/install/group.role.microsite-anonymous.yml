@@ -14,4 +14,5 @@ permissions:
   - 'view group_node:localgov_directories_page entity'
   - 'view group_node:localgov_directories_venue entity'
   - 'view group_node:localgov_directory entity'
+  - 'view group_node:localgov_directory_promo_page entity'
   - 'view group_node:localgov_page entity'
