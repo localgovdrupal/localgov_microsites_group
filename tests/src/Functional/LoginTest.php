@@ -9,7 +9,7 @@ use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests logging into microsite and control site. 
+ * Tests logging into microsite and control site.
  *
  * @group localgov_microsites_group
  */
@@ -24,8 +24,8 @@ class LoginTest extends BrowserTestBase {
    * See https://www.drupal.org/project/domain_site_settings/issues/3204455.
    *
    * @var bool
-   *
-   * @see \Drupal\Core\Config\Testing\ConfigSchemaChecker
+   * @see \Drupal\Core\Config\Development\ConfigSchemaChecker
+   * phpcs:disable DrupalPractice.Objects.StrictSchemaDisabled.StrictConfigSchema
    */
   protected $strictConfigSchema = FALSE;
 
@@ -35,14 +35,10 @@ class LoginTest extends BrowserTestBase {
    * @var array
    */
   protected static $modules = [
-    #'node',
-    #'block',
     'group',
-    #'gnode',
     'domain',
     'domain_site_settings',
     'domain_group',
-    #'views',
     'localgov_microsites_group',
   ];
 
@@ -63,7 +59,7 @@ class LoginTest extends BrowserTestBase {
    */
   protected function setUp() {
     parent::setUp();
- 
+
     // Create test user.
     $this->testUser = $this->drupalCreateUser([
       'access group overview',
@@ -95,7 +91,7 @@ class LoginTest extends BrowserTestBase {
     $this->submitForm([
       'name' => $this->testUser->getAccountName(),
       'pass' => $this->testUser->passRaw,
-    ], 'Log in'); 
+    ], 'Log in');
     $this->assertSession()->addressEquals(Url::fromRoute('entity.group.canonical', ['group' => 1]));
   }
 

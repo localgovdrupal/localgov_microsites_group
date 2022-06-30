@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * @file
+ * Primary module hooks for LocalGov Microsites Group module.
+ */
+
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\domain_group\DomainGroupHelper;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
@@ -13,11 +17,6 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
-
-/**
- * @file
- * Primary module hooks for LocalGov Microsites Group module.
- */
 
 /**
  * Implements hook_modules_installed().
@@ -28,7 +27,9 @@ function localgov_microsites_group_modules_installed($modules) {
   }
 }
 
-
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
 function localgov_microsites_group_entity_bundle_info_alter(array &$bundles): void {
   if (isset($bundles['group'])) {
     // @todo loop over and check if is a domain group.
@@ -130,9 +131,7 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
     $form_state->setRedirect('system.admin');
   }
   // Login to a domain group.
-  $group_id = \Drupal::service('class_resolver')
-    ->getInstanceFromDefinition(DomainGroupHelper::class)
-    ->getActiveDomainGroup();
+  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
   if ($group_id) {
     $form_state->setRedirect('entity.group.canonical', ['group' => $group_id]);
   }
@@ -166,7 +165,13 @@ function localgov_microsites_group_menu_local_tasks_alter(&$data, $route_name, R
  * Group local tasks to hide.
  */
 function localgov_microsites_group_local_task_hidden($task_id) {
-  return in_array($task_id, ['group.delete_form', 'group.content', 'group.version_history', 'group_permissions.link.group_permissions_parent']);
+  return in_array($task_id,
+    [
+      'group.delete_form',
+      'group.content', '
+      group.version_history',
+      'group_permissions.link.group_permissions_parent',
+    ]);
 }
 
 /**
@@ -174,12 +179,16 @@ function localgov_microsites_group_local_task_hidden($task_id) {
  */
 function localgov_microsites_group_local_task_title($task_id) {
   switch ($task_id) {
+
     case 'group.view':
       return t('Dashboard');
+
     case 'domain_group.group_domain_settings':
       return t('Site settings');
+
     case 'group.edit_form':
       return t('Site design');
+
   }
 }
 
@@ -195,7 +204,6 @@ function localgov_microsites_group_form_node_form_alter(&$form, FormStateInterfa
 }
 
 /**
- *
  * Implements hook_module_implements_alter().
  */
 function localgov_microsites_group_module_implements_alter(&$implementations, $hook) {

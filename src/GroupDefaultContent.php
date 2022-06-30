@@ -4,14 +4,13 @@ namespace Drupal\localgov_microsites_group;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\group\Entity\GroupContent;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\replicate\Replicator;
 
 /**
- * GroupDefaultContent service.
+ * Generate default group content.
  */
 class GroupDefaultContent implements GroupDefaultContentInterface {
 
@@ -62,7 +61,7 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
     // @todo set config value to the content imported, just guessing 1
     // for now.
     $nid = $this->config->get('localgov_microsites_group.settings')->get('default_group_node') ?: 1;
-    if ($default = Node::load($nid)) {
+    if ($default = $this->entityTypeManager->getStorage('node')->load($nid)) {
       $node = $this->replicator->replicateEntity($default);
     }
     else {
@@ -83,7 +82,7 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
     return [
       'node' => [
         'localgov_page' => [$node],
-      ]
+      ],
     ];
   }
 

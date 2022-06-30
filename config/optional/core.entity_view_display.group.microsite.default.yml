@@ -55,7 +55,9 @@ dependencies:
     - field.field.group.microsite.lgms_heading_6_line_height
     - field.field.group.microsite.lgms_heading_font
     - field.field.group.microsite.lgms_heading_font_weight
+    - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
+    - field.field.group.microsite.lgms_page_background_colour
     - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_pre_header_bg_colour
     - field.field.group.microsite.lgms_pre_header_link_colour
@@ -63,11 +65,12 @@ dependencies:
     - field.field.group.microsite.lgms_pre_header_text_colour
     - field.field.group.microsite.lgms_pre_header_width
     - field.field.group.microsite.lgms_primary_colour
-    - field.field.group.microsite.lgms_primary_contrast_colour
+    - field.field.group.microsite.lgms_primary_colour_contrast
     - field.field.group.microsite.lgms_secondary_colour
-    - field.field.group.microsite.lgms_secondary_contrast_colour
+    - field.field.group.microsite.lgms_secondary_colour_contrast
     - field.field.group.microsite.lgms_site_name
     - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_teaser_image_style
     - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
 id: group.microsite.default
@@ -81,36 +84,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: -5
-    region: content
-  lgms_primary_contrast_colour:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: -4
-    region: content
-  lgms_secondary_contrast_colour:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: -3
-    region: content
-  lgms_text_colour:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: -2
+    weight: 1
     region: content
   microsite_content:
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
 hidden:
   changed: true
@@ -168,7 +147,9 @@ hidden:
   lgms_heading_6_line_height: true
   lgms_heading_font: true
   lgms_heading_font_weight: true
+  lgms_link_colour: true
   lgms_main_logo: true
+  lgms_page_background_colour: true
   lgms_powered_by: true
   lgms_pre_header_bg_colour: true
   lgms_pre_header_link_colour: true
@@ -176,7 +157,11 @@ hidden:
   lgms_pre_header_text_colour: true
   lgms_pre_header_width: true
   lgms_primary_colour: true
+  lgms_primary_colour_contrast: true
   lgms_secondary_colour: true
+  lgms_secondary_colour_contrast: true
   lgms_site_name: true
   lgms_site_slogan: true
+  lgms_teaser_image_style: true
+  lgms_text_colour: true
   uid: true

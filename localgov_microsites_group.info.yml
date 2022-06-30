@@ -11,6 +11,8 @@ dependencies:
   - drupal:tour
   # Contrib
   - admin_toolbar:admin_toolbar
+  - domain:domain
+  - domain_group:domain_group
   - field_group:field_group
   - group:group
   - group:gnode
@@ -19,3 +21,5 @@ dependencies:
   - replicate:replicate
   # LocalGov Drupal
   - localgov_core:localgov_media
+  - localgov_page:localgov_page
+  - localgov_subsites:localgov_subsites
