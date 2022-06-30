@@ -7,6 +7,9 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\views\Views;
 
+/**
+ * Add extra fields to display.
+ */
 class GroupExtraFieldDisplay {
 
   use StringTranslationTrait;
@@ -28,7 +31,7 @@ class GroupExtraFieldDisplay {
     ];
 
     return $fields;
-  } 
+  }
 
   /**
    * Adds view with arguments to view render array if required.

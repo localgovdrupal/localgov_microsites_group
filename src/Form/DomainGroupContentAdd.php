@@ -5,6 +5,9 @@ namespace Drupal\localgov_microsites_group\Form;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\group\Entity\Form\GroupContentForm;
 
+/**
+ * Add content to domain group.
+ */
 class DomainGroupContentAdd extends GroupContentForm {
 
   /**

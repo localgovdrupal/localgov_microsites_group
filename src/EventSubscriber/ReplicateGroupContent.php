@@ -16,7 +16,7 @@ class ReplicateGroupContent implements EventSubscriberInterface {
   /**
    * The entity replicator service.
    *
-   * @var \Drupal\replicate\Replicator $replicator
+   * @var \Drupal\replicate\Replicator
    */
   protected $replicator;
 
@@ -34,9 +34,9 @@ class ReplicateGroupContent implements EventSubscriberInterface {
    * Replicate the entities in any paragraphs when replicating any entity.
    *
    * @todo question should we _only_ do this for our group content entities,
-   * useing a value on the entity to notifiy if it should happen or not? 
+   * useing a value on the entity to notifiy if it should happen or not?
    *
-   * @param ReplicateEntityFieldEvent $event
+   * @param \Drupal\replicate\Events\ReplicateEntityFieldEvent $event
    *   The event we're working on.
    */
   public function onParagraphClone(ReplicateEntityFieldEvent $event) {
