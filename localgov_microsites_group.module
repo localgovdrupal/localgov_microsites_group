@@ -10,6 +10,7 @@ use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\group\Entity\GroupContentInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
@@ -17,6 +18,7 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Implements hook_modules_installed().
@@ -214,4 +216,14 @@ function localgov_microsites_group_module_implements_alter(&$implementations, $h
     unset($implementations['localgov_microsites_group']);
     $implementations['localgov_microsites_group'] = $group;
   }
+}
+
+/**
+ * Controller callback that redirects group content canonical to content.
+ *
+ * @see Drupal\localgov_microsites_group\Routing\RouteSubscriber::alterRoutes
+ */
+function localgov_microsites_group_redirect_group_content(GroupContentInterface $group_content) {
+  $entity = $group_content->getEntity();
+  return new RedirectResponse($entity->toUrl()->toString());
 }

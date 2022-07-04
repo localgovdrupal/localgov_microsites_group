@@ -14,3 +14,8 @@ services:
     arguments: ['@replicate.replicator']
     tags:
       - { name: event_subscriber }
+
+  localgov_microsites_group.route_subscriber:
+    class: Drupal\localgov_microsites_group\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
