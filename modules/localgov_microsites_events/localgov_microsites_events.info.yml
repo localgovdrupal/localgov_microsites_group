@@ -1,0 +1,7 @@
+name: Localgov Microsites Events
+description: LocalGov Events integration with Microsites.
+type: module
+package: LocalGov Drupal
+core_version_requirement: ^9
+dependencies:
+  - localgov_events:localgov_events
