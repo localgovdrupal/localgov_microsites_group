@@ -4,4 +4,6 @@ type: module
 package: LocalGov Drupal
 core_version_requirement: ^9
 dependencies:
+  - group:gnode
   - localgov_events:localgov_events
+  - localgov_microsites_group:localgov_microsites_group

@@ -2,25 +2,12 @@
 
 namespace Drupal\localgov_microsites_events\EventSubscriber;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\Core\PathProcessor\InboundPathProcessorInterface;
-use Drupal\Core\Routing\AdminContext;
 use Drupal\domain_group\DomainGroupResolver;
-use Drupal\path_alias\AliasManagerInterface;
-use Drupal\redirect\RedirectChecker;
-use Drupal\redirect\RedirectRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Routing\RequestContext;
 
 /**
  * Event subscriber to hide events listing view for sites with no events.
@@ -28,17 +15,21 @@ use Symfony\Component\Routing\RequestContext;
 class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
 
   /**
+   * The domain  group resolver.
+   *
    * @var \Drupal\domain_group\DomainGroupResolver
    */
   protected $domainGroupResolver;
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
-   * Constructs a \Drupal\redirect\EventSubscriber\RedirectRequestSubscriber object.
+   * Returns an EventsListingCheckEventSubscriber instance.
    *
    * @param \Drupal\domain_group\DomainGroupResolver $domain_group_resolver
    *   The domain group resolver.
@@ -60,23 +51,23 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Check if the events listing page should be displayed,
+   * Check if the events listing page should be displayed.
    *
    * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   The event to process.
    */
   public function checkEventsListingAccess(RequestEvent $event) {
 
-    // Don't process events with HTTP exceptions.
-    if ($event->getRequest()->get('exception') != NULL) {
-      return;
-    }
-
     // Check we're on an events listing page.
     if (
       !$event->getRequest()->getRequestUri() == '/events' &&
       !$event->getRequest()->getRequestUri() == '/events/search'
     ) {
+      return;
+    }
+
+    // Don't process events with HTTP exceptions.
+    if (!is_null($event->getRequest()->get('exception'))) {
       return;
     }
 
