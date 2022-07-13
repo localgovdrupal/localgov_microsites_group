@@ -69,20 +69,14 @@ class MicrositeEventContentTest extends BrowserTestBase {
       'label' => 'group-a2',
       'type' => 'microsite',
     ]);
-    $this->group3 = $this->createGroup([
-      'label' => 'group-a3',
-      'type' => 'microsite',
-    ]);
     $this->allTestGroups = [
       $this->group1,
       $this->group2,
-      $this->group3,
     ];
     $this->initializeTestGroupsDomains();
     $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
     $this->domain1 = $domain_storage->load('group_' . $this->group1->id());
     $this->domain2 = $domain_storage->load('group_' . $this->group2->id());
-    $this->domain3 = $domain_storage->load('group_' . $this->group3->id());
 
     // Create some content.
     $this->pages1 = $this->createEvents($this->group1, 2);
@@ -144,11 +138,6 @@ class MicrositeEventContentTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains($this->pages2[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[1]->label());
-
-    // Check view with no content returns a 404.
-    $this->drupalGet($this->domain3->getUrl() . '/events');
-    $this->assertSession()->statusCodeEquals(404);
-    $this->assertSession()->pageTextContains('Page not found');
   }
 
   /**
@@ -179,11 +168,6 @@ class MicrositeEventContentTest extends BrowserTestBase {
     $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[1]->label());
-
-    // Check search with no events returns a 404.
-    $this->drupalGet($this->domain3->getUrl() . '/events/search');
-    $this->assertSession()->statusCodeEquals(404);
-    $this->assertSession()->pageTextContains('Page not found');
   }
 
   /**

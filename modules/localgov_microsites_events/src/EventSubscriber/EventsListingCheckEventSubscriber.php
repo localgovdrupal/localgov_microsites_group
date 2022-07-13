@@ -60,8 +60,8 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
 
     // Check we're on an events listing page.
     if (
-      !$event->getRequest()->getRequestUri() == '/events' &&
-      !$event->getRequest()->getRequestUri() == '/events/search'
+      $event->getRequest()->getPathInfo() != '/events' &&
+      $event->getRequest()->getPathInfo() != '/events/search'
     ) {
       return;
     }
