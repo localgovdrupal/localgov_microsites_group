@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\localgov_microsites_events\Functional;
 
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\group\Entity\GroupInterface;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Entity\Index;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
@@ -106,18 +104,19 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
    */
   public function testMicrositeEventsViewAccess() {
 
-    $this->drupalGet($this->domain1->getUrl() .  $this->page1->toUrl()->toString());
+    $this->drupalGet($this->domain1->getUrl() . $this->page1->toUrl()->toString());
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domain1->getUrl() . '/events');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domain1->getUrl() . '/events/search');
     $this->assertSession()->statusCodeEquals(200);
 
-    $this->drupalGet($this->domain2->getUrl() .  $this->page2->toUrl()->toString());
+    $this->drupalGet($this->domain2->getUrl() . $this->page2->toUrl()->toString());
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domain2->getUrl() . '/events');
     $this->assertSession()->statusCodeEquals(404);
     $this->drupalGet($this->domain2->getUrl() . '/events/search');
     $this->assertSession()->statusCodeEquals(404);
   }
+
 }
