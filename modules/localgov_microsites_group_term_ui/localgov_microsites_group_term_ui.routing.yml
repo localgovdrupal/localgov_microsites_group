@@ -1,0 +1,33 @@
+localgov_microsites_group_term_ui.taxononmy.list:
+  path: '/group/{group}/taxononmy'
+  defaults:
+    _controller: '\Drupal\localgov_microsites_group_term_ui\Controller\GroupTermUiController::listTaxonomies'
+    _title: 'Taxonomies'
+  requirements:
+    _group_permission: 'access group_term overview'
+
+localgov_microsites_group_term_ui.taxononmy.add:
+  path: '/group/{group}/taxonomy/{vid}/add'
+  defaults:
+    _controller: '\Drupal\localgov_microsites_group_term_ui\Controller\GroupTermUiController::addTerm'
+    _title_callback: '\Drupal\localgov_microsites_group_term_ui\Controller\GroupTermUiController::addTermTitle'
+  requirements:
+    _custom_access: '\Drupal\localgov_microsites_group_term_ui\Controller\GroupTermUiController::addTermAccess'
+
+
+
+#entity.group_content.group_localgov_directories_facet_type.add:
+#  path: '/group/{group}/directory-facets/type/add'
+#  defaults:
+#    _controller: '\Drupal\localgov_microsites_directories\Controller\GroupDirectoryFacetTypeController::add'
+#    _title: 'Create directory facet type'
+#  requirements:
+#    _group_permission: 'manage directory facets'
+#
+#entity.group_content.group_localgov_directories_facets.add:
+#  path: '/group/{group}/directory-facets/facet/{localgov_directories_facets_type}/add'
+#  defaults:
+#    _controller: '\Drupal\localgov_microsites_directories\Controller\GroupDirectoryFacetsController::add'
+#    _title_callback: '\Drupal\localgov_microsites_directories\Controller\GroupDirectoryFacetsController::addTitle'
+#  requirements:
+#    _group_permission: 'manage directory facets'
