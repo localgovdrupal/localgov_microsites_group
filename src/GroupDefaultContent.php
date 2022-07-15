@@ -54,19 +54,27 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
   /**
    * Generate default content for group.
    *
+   * Configuration:
+   * localgov_microsites_group.settings.default_group_node can contain the node
+   * id to clone to place as default content into the group.
+   *
    * @param \Drupal\group\Entity\GroupInterface $group
    *   The group for which to generate the content.
+   *
+   * @return \Drupal\node\NodeInterface|null
+   *   The new or cloned node added as default content.
    */
-  public function generate(GroupInterface $group) {
-    // @todo set config value to the content imported, just guessing 1
-    // for now.
-    $nid = $this->config->get('localgov_microsites_group.settings')->get('default_group_node') ?: 1;
-    if ($default = $this->entityTypeManager->getStorage('node')->load($nid)) {
-      $node = $this->replicator->replicateEntity($default);
+  public function generate(GroupInterface $group): ?NodeInterface {
+    $node = NULL;
+    $nid = $this->config->get('localgov_microsites_group.settings')->get('default_group_node');
+    if ($nid && $default = $this->entityTypeManager->getStorage('node')->load($nid)) {
+      $plugin_id = 'group_node:' . $default->bundle();
+      if ($group->getGroupType()->hasContentPlugin($plugin_id)) {
+        $node = $this->replicator->replicateEntity($default);
+      }
     }
-    else {
-      // @todo check content type hasn't been uninstalled.
-      // Or just remove this as if they want default content it will be set.
+    elseif ($group->getGroupType()->hasContentPlugin('group_node:localgov_page')) {
+      $plugin_id = 'group_node:localgov_page';
       $node = Node::create([
         'title' => 'Welcome to your new site',
         'status' => NodeInterface::PUBLISHED,
@@ -77,13 +85,12 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
       $node->save();
     }
 
-    $group->addContent($node, 'group_node:localgov_page');
+    if ($node instanceof NodeInterface) {
+      $group->addContent($node, $plugin_id);
+      return $node;
+    }
 
-    return [
-      'node' => [
-        'localgov_page' => [$node],
-      ],
-    ];
+    return NULL;
   }
 
 }

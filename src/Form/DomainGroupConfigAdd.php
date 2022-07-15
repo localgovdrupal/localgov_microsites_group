@@ -179,9 +179,9 @@ class DomainGroupConfigAdd extends FormBase {
       $group->addMember($group->getOwner(), $values);
     }
 
-    $content = $this->defaultContent->generate($group);
-    $front_page = $content['node']['localgov_page'][0];
-    $form_state->setValue('site_front_page', $front_page->toUrl()->toString());
+    if ($front_page = $this->defaultContent->generate($group)) {
+      $form_state->setValue('site_front_page', $front_page->toUrl()->toString());
+    }
 
     $form_state->set('group', $group);
     $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_site_settings');
