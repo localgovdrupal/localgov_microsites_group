@@ -2,19 +2,15 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
-use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\group\Entity\Group;
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\localgov_microsites_group\GroupDefaultContent;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
-use Drupal\replicate\Replicator;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 
 /**
- * @covers \Drupal\localgov_microsites_group\GroupDefaultContent 
+ * @covers \Drupal\localgov_microsites_group\GroupDefaultContent
  *
  * @group localgov_microsites_group
  */
@@ -28,7 +24,6 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'replicate',
     'node',
     'gnode',
-    // schema
     'group_content_menu',
   ];
 
@@ -48,7 +43,6 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
       'name' => 'Example',
     ])->save();
 
-
     $this->installEntitySchema('group_content_menu');
     $this->installSchema('node', 'node_access');
 
@@ -59,7 +53,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
   }
 
   /**
-   * Test generating default content. 
+   * Test generating default content.
    */
   public function testGenerate() {
     $config_factory = $this->container->get('config.factory');
