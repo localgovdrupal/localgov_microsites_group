@@ -10,6 +10,7 @@ dependencies:
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
     - field.field.group.microsite.lgms_footer_copyright_notice
+    - field.field.group.microsite.lgms_footer_items_alignment
     - field.field.group.microsite.lgms_footer_link_colour
     - field.field.group.microsite.lgms_footer_link_hover_colour
     - field.field.group.microsite.lgms_footer_logos
@@ -23,6 +24,7 @@ dependencies:
     - field.field.group.microsite.lgms_header_link_colour
     - field.field.group.microsite.lgms_header_link_hover_colour
     - field.field.group.microsite.lgms_header_text_colour
+    - field.field.group.microsite.lgms_header_vertical_alignment
     - field.field.group.microsite.lgms_header_width
     - field.field.group.microsite.lgms_heading_1_font
     - field.field.group.microsite.lgms_heading_1_font_colour
@@ -58,6 +60,11 @@ dependencies:
     - field.field.group.microsite.lgms_heading_font_weight
     - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
+    - field.field.group.microsite.lgms_main_menu_font_size
+    - field.field.group.microsite.lgms_main_menu_font_weight
+    - field.field.group.microsite.lgms_off_canvas_bg_colour
+    - field.field.group.microsite.lgms_off_canvas_menu_icon
+    - field.field.group.microsite.lgms_off_canvas_text_colour
     - field.field.group.microsite.lgms_page_background_colour
     - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_pre_header_bg_colour
@@ -70,7 +77,13 @@ dependencies:
     - field.field.group.microsite.lgms_secondary_colour
     - field.field.group.microsite.lgms_secondary_colour_contrast
     - field.field.group.microsite.lgms_site_name
+    - field.field.group.microsite.lgms_site_name_font_size
+    - field.field.group.microsite.lgms_site_name_font_weight
     - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_submenu_background_colour
+    - field.field.group.microsite.lgms_submenu_icon
+    - field.field.group.microsite.lgms_submenu_icon_rotation
+    - field.field.group.microsite.lgms_submenu_link_colour
     - field.field.group.microsite.lgms_teaser_image_style
     - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
@@ -198,6 +211,7 @@ hidden:
   lgms_footer_background_colour: true
   lgms_footer_banner: true
   lgms_footer_copyright_notice: true
+  lgms_footer_items_alignment: true
   lgms_footer_link_colour: true
   lgms_footer_link_hover_colour: true
   lgms_footer_logos: true
@@ -211,6 +225,7 @@ hidden:
   lgms_header_link_colour: true
   lgms_header_link_hover_colour: true
   lgms_header_text_colour: true
+  lgms_header_vertical_alignment: true
   lgms_header_width: true
   lgms_heading_1_font: true
   lgms_heading_1_font_colour: true
@@ -246,6 +261,11 @@ hidden:
   lgms_heading_font_weight: true
   lgms_link_colour: true
   lgms_main_logo: true
+  lgms_main_menu_font_size: true
+  lgms_main_menu_font_weight: true
+  lgms_off_canvas_bg_colour: true
+  lgms_off_canvas_menu_icon: true
+  lgms_off_canvas_text_colour: true
   lgms_page_background_colour: true
   lgms_powered_by: true
   lgms_pre_header_bg_colour: true
@@ -258,7 +278,13 @@ hidden:
   lgms_secondary_colour: true
   lgms_secondary_colour_contrast: true
   lgms_site_name: true
+  lgms_site_name_font_size: true
+  lgms_site_name_font_weight: true
   lgms_site_slogan: true
+  lgms_submenu_background_colour: true
+  lgms_submenu_icon: true
+  lgms_submenu_icon_rotation: true
+  lgms_submenu_link_colour: true
   lgms_teaser_image_style: true
   lgms_text_colour: true
   path: true
