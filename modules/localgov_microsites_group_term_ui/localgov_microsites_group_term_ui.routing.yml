@@ -1,5 +1,5 @@
 localgov_microsites_group_term_ui.taxononmy.list:
-  path: '/group/{group}/taxononmy'
+  path: '/group/{group}/taxonomy'
   defaults:
     _controller: '\Drupal\localgov_microsites_group_term_ui\Controller\GroupTermUiController::listTaxonomies'
     _title: 'Taxonomies'
