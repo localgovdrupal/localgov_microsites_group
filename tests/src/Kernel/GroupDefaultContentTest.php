@@ -48,7 +48,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
 
     $this->installConfig([
       'gnode',
-      'localgov_microsites_group'
+      'localgov_microsites_group',
     ]);
   }
 
