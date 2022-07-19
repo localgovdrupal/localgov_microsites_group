@@ -19,7 +19,13 @@ class InvitationTest extends BrowserTestBase {
   use NodeCreationTrait;
 
   /**
-   * {@inheritdoc}
+   * Will be removed when issue #3204455 on Domain Site Settings gets merged.
+   *
+   * See https://www.drupal.org/project/domain_site_settings/issues/3204455.
+   *
+   * @var bool
+   * @see \Drupal\Core\Config\Development\ConfigSchemaChecker
+   * phpcs:disable DrupalPractice.Objects.StrictSchemaDisabled.StrictConfigSchema
    */
   protected $strictConfigSchema = FALSE;
 
