@@ -83,14 +83,14 @@ class DomainGroupConfigAdd extends FormBase {
       '#title' => $this->t('@group_label - Domain Settings', ['@group_label' => $group->label()]),
     ];
 
-    // @todo Make plugin and visible fields configurable.
-    // https://github.com/localgovdrupal/localgov_microsites_group/issues/15
+    $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_domain');
+    $form += $plugin->buildConfigurationForm([], $form_state, $group);
     $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_site_settings');
     $form += $plugin->buildConfigurationForm([], $form_state, $group);
 
     // Hide non-necessary configuration options.
     $form['error_page']['#access'] = FALSE;
-    $form['site_front_page']['#type'] = 'value';
+    $form['site_frontpage']['#type'] = 'value';
     $form['site_name']['#access'] = FALSE;
     $form['site_slogan']['#access'] = FALSE;
 
@@ -184,6 +184,8 @@ class DomainGroupConfigAdd extends FormBase {
     }
 
     $form_state->set('group', $group);
+    $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_domain');
+    $plugin->submitConfigurationForm($form, $form_state);
     $plugin = $this->pluginManagerDomainGroupSettings->createInstance('domain_group_site_settings');
     $plugin->submitConfigurationForm($form, $form_state);
 
