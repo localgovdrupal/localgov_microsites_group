@@ -9,7 +9,7 @@ dependencies:
     - media
     - system
 id: microsites_trusted_editor
-label: 'Microsites administrator'
+label: 'Microsites trusted editor'
 weight: 3
 is_admin: null
 permissions:
