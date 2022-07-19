@@ -11,7 +11,7 @@ use Drupal\Tests\BrowserTestBase;
  *
  * @group domain_group
  */
-class GroupInvitationTest extends BrowserTestBase {
+class GroupInvitationAccessTest extends BrowserTestBase {
 
   use GroupCreationTrait;
   use InitializeGroupsTrait;
@@ -40,7 +40,7 @@ class GroupInvitationTest extends BrowserTestBase {
     'domain',
     'domain_site_settings',
     'domain_group',
-    'views'
+    'views',
   ];
 
   /**
@@ -68,7 +68,7 @@ class GroupInvitationTest extends BrowserTestBase {
   protected function setUp() {
     parent::setUp();
 
- // Create test user.
+    // Create test user.
     $this->testUser = $this->drupalCreateUser([
       'access content',
       'access group overview',
@@ -111,13 +111,12 @@ class GroupInvitationTest extends BrowserTestBase {
   public function testInvitationPermissions() {
     $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
     $ga1_domain = $domain_storage->load('group_' . $this->groupA1->id());
-    $ga2_domain = $domain_storage->load('group_' . $this->groupA2->id());
-
-
+    // $ga2_domain = $domain_storage->load('group_' . $this->groupA2->id());
     $this->drupalLogin($this->groupAdmin);
     $this->drupalGet($ga1_domain->getPath());
     $this->assertSession()->statusCodeEquals(200);
-    $this->drupalGet($ga1_domain->getPath() . '/group/' . $this->groupA1->id()). '/invitations' ;
+    $this->drupalGet($ga1_domain->getPath() . '/group/' . $this->groupA1->id()) . '/invitations';
     $this->assertSession()->statusCodeEquals(200);
   }
+
 }

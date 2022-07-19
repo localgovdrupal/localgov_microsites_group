@@ -2,14 +2,13 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
-use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
 
 /**
- * Tests Invitations
+ * Tests Invitations.
  *
  * @group localgov_microsites_group
  */
@@ -19,6 +18,9 @@ class InvitationTest extends BrowserTestBase {
   use InitializeGroupsTrait;
   use NodeCreationTrait;
 
+  /**
+   * {@inheritdoc}
+   */
   protected $strictConfigSchema = FALSE;
 
   /**
@@ -60,8 +62,8 @@ class InvitationTest extends BrowserTestBase {
       'access group overview',
       'administer group',
     ]);
-    // $this->nodeStorage = $this->container->get('entity_type.manager')->getStorage('node');
-
+    // $this->nodeStorage =
+    // $this->container->get('entity_type.manager')->getStorage('node');
     // Set base hostname.
     $this->setBaseHostname();
 
@@ -84,9 +86,7 @@ class InvitationTest extends BrowserTestBase {
     $this->domain2 = $domain_storage->load('group_' . $this->group2->id());
   }
 
-
-
-    /**
+  /**
    * Verifies Group invite has been installed in the microsite.
    */
   public function testInvites() {
@@ -95,4 +95,5 @@ class InvitationTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains('This form allows you to configure the Group Invitation plugin for the Microsite group type.');
   }
+
 }
