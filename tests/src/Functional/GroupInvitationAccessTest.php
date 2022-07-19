@@ -22,8 +22,8 @@ class GroupInvitationAccessTest extends BrowserTestBase {
    * See https://www.drupal.org/project/domain_site_settings/issues/3204455.
    *
    * @var bool
-   *
-   * @see \Drupal\Core\Config\Testing\ConfigSchemaChecker
+   * @see \Drupal\Core\Config\Development\ConfigSchemaChecker
+   * phpcs:disable DrupalPractice.Objects.StrictSchemaDisabled.StrictConfigSchema
    */
   protected $strictConfigSchema = FALSE;
 
