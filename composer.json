@@ -14,7 +14,7 @@
   },
   "require-dev": {
     "localgovdrupal/localgov_news": "^2.1",
-    "localgovdrupal/localgov_directories": "^2.1",
+    "localgovdrupal/localgov_directories": "^2.2",
     "localgovdrupal/localgov_events": "^2.0"
   },
   "suggests": {
