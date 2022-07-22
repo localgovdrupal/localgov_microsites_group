@@ -1,0 +1,8 @@
+name: Localgov Microsites News 
+description: LocalGov Newsroom integration with Microsites.
+type: module
+package: LocalGov Drupal
+core_version_requirement: ^9
+dependencies:
+  - localgov_news:localgov_news
+  - localgov_microsites_group:localgov_microsites_group

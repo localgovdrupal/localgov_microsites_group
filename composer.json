@@ -14,10 +14,14 @@
     "localgovdrupal/localgov_core": "^2.1.0"
   },
   "require-dev": {
-    "localgovdrupal/localgov_directories": "^2.0"
+    "localgovdrupal/localgov_news": "^2.1",
+    "localgovdrupal/localgov_directories": "^2.2",
+    "localgovdrupal/localgov_events": "^2.0"
   },
   "suggests": {
-    "localgovdrupal/localgov_directories": "For directories content type in microsites"
+    "localgovdrupal/localgov_directories": "For directories content type in microsites",
+    "localgovdrupal/localgov_news": "For news content type in microsites",
+    "localgovdrupal/localgov_events": "For events content type in microsites"
   },
   "extra": {
     "enable-patching": true,
