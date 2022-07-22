@@ -10,7 +10,6 @@ use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\group\Entity\GroupType;
 
-
 /**
  * Implements hook_modules_installed().
  */
