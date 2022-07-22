@@ -107,7 +107,7 @@ class GroupTermUiController extends ControllerBase {
     if ($group->hasPermission('create ' . $plugin_id . ' entity', $account)) {
       return AccessResult::allowed();
     }
-    return AccessResult::forbidden();
+    return AccessResult::neutral();
   }
 
   /**
@@ -166,6 +166,25 @@ class GroupTermUiController extends ControllerBase {
     }
 
     return $build;
+  }
+
+  /**
+   * Access check for the list vocabularies route.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   * @param \Drupal\group\Entity\GroupInterface $group
+   *   Group to add term to.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public function listTaxonomiesAccess(AccountInterface $account, GroupInterface $group) {
+
+    if ($group->hasPermission('access group_term overview', $account)) {
+      return AccessResult::allowed();
+    }
+    return AccessResult::forbidden();
   }
 
 }
