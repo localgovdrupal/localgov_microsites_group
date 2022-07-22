@@ -23,3 +23,4 @@ dependencies:
   - localgov_core:localgov_media
   - localgov_page:localgov_page
   - localgov_subsites:localgov_subsites
+  - localgov_paragraphs:localgov_paragraphs_views
