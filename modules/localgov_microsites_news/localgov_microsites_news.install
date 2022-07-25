@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Microsites News module file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function localgov_microsites_news_install($is_syncing) {
+
+  if ($is_syncing) {
+    return;
+  }
+
+  // Get display settings for news articles.
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.localgov_news_article.default');
+  /** @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface $view_display */
+  $view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.localgov_news_article.default');
+
+  // Set form display options for paragraph content.
+  if (!$form_display->getComponent('localgov_paragraph_content')) {
+    $form_display->setComponent('localgov_paragraph_content', [
+      'type' => 'layout_paragraphs',
+      'region' => 'content',
+      'settings' => [
+        'preview_view_mode' => 'default',
+        'nesting_depth' => 0,
+        'require_layouts' => 1,
+      ],
+      'weight' => 4,
+    ]);
+    $group_story = $form_display->getThirdPartySetting('field_group', 'group_story');
+    $group_story['children'][] = 'localgov_paragraph_content';
+    $form_display->setThirdPartySetting('field_group', 'group_story', $group_story);
+    $form_display->save();
+  }
+
+  // Set view display options for paragraph content.
+  if (!$view_display->getComponent('localgov_paragraph_content')) {
+    $view_display->setComponent('localgov_paragraph_content', [
+      'type' => 'entity_reference_revisions_entity_view',
+      'label' => 'hidden',
+      'region' => 'content',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'weight' => 4,
+    ])->save();
+  }
+}
