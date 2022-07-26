@@ -19,6 +19,7 @@ dependencies:
   - group_content_menu:group_content_menu
   - media_library:media_library
   - replicate:replicate
+  - responsive_preview:responsive_preview
   # LocalGov Drupal
   - localgov_core:localgov_media
   - localgov_page:localgov_page
