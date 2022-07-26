@@ -7,5 +7,6 @@ dependencies:
   - drupal:views
   - localgov_directories:localgov_directories
   - localgov_directories:localgov_directories_page
+  - localgov_directories:localgov_directories_promo_page
   - localgov_directories:localgov_directories_venue
   - localgov_microsites_group:localgov_microsites_group
