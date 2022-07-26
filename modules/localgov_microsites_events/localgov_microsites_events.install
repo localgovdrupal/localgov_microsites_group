@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Microsites Events module file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function localgov_microsites_events_install($is_syncing) {
+
+  if ($is_syncing) {
+    return;
+  }
+
+  // Get display settings for events.
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.localgov_event.default');
+  /** @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface $view_display */
+  $view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.localgov_event.default');
+
+  // Set form display options for paragraph content.
+  if (!$form_display->getComponent('localgov_paragraph_content')) {
+    $form_display->setComponent('localgov_paragraph_content', [
+      'type' => 'layout_paragraphs',
+      'region' => 'content',
+      'settings' => [
+        'preview_view_mode' => 'default',
+        'nesting_depth' => 0,
+        'require_layouts' => 1,
+      ],
+      'weight' => 5,
+    ]);
+    $group_details = $form_display->getThirdPartySetting('field_group', 'group_details');
+    $group_details['children'][] = 'localgov_paragraph_content';
+    $form_display->setThirdPartySetting('field_group', 'group_details', $group_details);
+    $form_display->save();
+  }
+  // Set form display options for banner.
+  if (!$form_display->getComponent('lgms_banner')) {
+    $form_display->setComponent('lgms_banner', [
+      'type' => 'entity_reference_paragraphs',
+      'region' => 'content',
+      'settings' => [
+        'edit_mode' => 'closed',
+        'add_mode' => 'button',
+      ],
+      'weight' => 3,
+    ]);
+    $group_details = $form_display->getThirdPartySetting('field_group', 'group_details');
+    $group_details['children'][] = 'lgms_banner';
+    $form_display->setThirdPartySetting('field_group', 'group_details', $group_details);
+    $form_display->save();
+  }
+
+  // Set view display options for paragraph content.
+  if (!$view_display->getComponent('localgov_paragraph_content')) {
+    $view_display->setComponent('localgov_paragraph_content', [
+      'type' => 'layout_paragraphs',
+      'label' => 'hidden',
+      'region' => 'content',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'weight' => 5,
+    ])->save();
+  }
+// Set view display options for banner.
+  if (!$view_display->getComponent('lgms_banner')) {
+    $view_display->setComponent('lgms_banner', [
+      'type' => 'layout_paragraphs',
+      'label' => 'hidden',
+      'region' => 'content',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'weight' => 0,
+    ])->save();
+  }
+}
