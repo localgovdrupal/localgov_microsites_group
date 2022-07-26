@@ -16,6 +16,7 @@ dependencies:
   - field_group:field_group
   - group:group
   - group:gnode
+  - group_permissions:group_permissions
   - group_content_menu:group_content_menu
   - media_library:media_library
   - replicate:replicate
