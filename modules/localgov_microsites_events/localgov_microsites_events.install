@@ -71,7 +71,7 @@ function localgov_microsites_events_install($is_syncing) {
       'weight' => 5,
     ])->save();
   }
-// Set view display options for banner.
+  // Set view display options for banner.
   if (!$view_display->getComponent('lgms_banner')) {
     $view_display->setComponent('lgms_banner', [
       'type' => 'layout_paragraphs',
