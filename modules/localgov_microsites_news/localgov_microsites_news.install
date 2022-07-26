@@ -45,7 +45,7 @@ function localgov_microsites_news_install($is_syncing) {
   // Set view display options for paragraph content.
   if (!$view_display->getComponent('localgov_paragraph_content')) {
     $view_display->setComponent('localgov_paragraph_content', [
-      'type' => 'entity_reference_revisions_entity_view',
+      'type' => 'layout_paragraphs',
       'label' => 'hidden',
       'region' => 'content',
       'settings' => [
