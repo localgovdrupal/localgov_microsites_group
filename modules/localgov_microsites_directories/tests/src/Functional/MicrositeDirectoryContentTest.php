@@ -36,7 +36,7 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $profile = 'testing';
+  protected $profile = 'minimal';
 
   /**
    * {@inheritdoc}
@@ -47,13 +47,14 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
+    'localgov_directories_db',
     'localgov_microsites_directories',
   ];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Set base hostname.
