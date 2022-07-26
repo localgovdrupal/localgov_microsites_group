@@ -42,6 +42,23 @@ function localgov_microsites_news_install($is_syncing) {
     $form_display->save();
   }
 
+  // Set form display options for banner.
+  if (!$form_display->getComponent('lgms_banner')) {
+    $form_display->setComponent('lgms_banner', [
+      'type' => 'entity_reference_paragraphs',
+      'region' => 'content',
+      'settings' => [
+        'edit_mode' => 'closed',
+        'add_mode' => 'button',
+      ],
+      'weight' => 3,
+    ]);
+    $group_story = $form_display->getThirdPartySetting('field_group', '$group_story');
+    $group_story['children'][] = 'lgms_banner';
+    $form_display->setThirdPartySetting('field_group', '$group_story', $group_story);
+    $form_display->save();
+  }
+
   // Set view display options for paragraph content.
   if (!$view_display->getComponent('localgov_paragraph_content')) {
     $view_display->setComponent('localgov_paragraph_content', [
@@ -53,6 +70,19 @@ function localgov_microsites_news_install($is_syncing) {
         'link' => '',
       ],
       'weight' => 4,
+    ])->save();
+  }
+  // Set view display options for banner.
+  if (!$view_display->getComponent('lgms_banner')) {
+    $view_display->setComponent('lgms_banner', [
+      'type' => 'entity_reference_revisions_entity_view',
+      'label' => 'hidden',
+      'region' => 'content',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'weight' => 0,
     ])->save();
   }
 }
