@@ -37,6 +37,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'group_content_menu',
     'replicate',
     'group_permissions',
+    'entity_reference_revisions',
   ];
 
   /**

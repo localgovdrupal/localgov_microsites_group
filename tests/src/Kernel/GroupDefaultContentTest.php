@@ -25,6 +25,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'node',
     'gnode',
     'group_content_menu',
+    'group_permissions',
   ];
 
   /**
