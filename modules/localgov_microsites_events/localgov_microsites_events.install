@@ -58,6 +58,88 @@ function localgov_microsites_events_install($is_syncing) {
     $form_display->save();
   }
 
+  // Set view display options for event categories.
+  if (!$view_display->getComponent('localgov_event_categories')) {
+    $view_display->setComponent('localgov_event_categories', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+  else {
+    $view_display->setComponent('localgov_event_categories', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+
+  // Set view display options for event locality.
+  if (!$view_display->getComponent('localgov_event_locality')) {
+    $view_display->setComponent('localgov_event_locality', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+  else {
+    $view_display->setComponent('localgov_event_locality', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+
+  // Set view display options for event provider.
+  if (!$view_display->getComponent('localgov_event_provider')) {
+    $view_display->setComponent('localgov_event_provider', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+  else {
+    $view_display->setComponent('localgov_event_provider', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+
+  // Set view display options for event venue.
+  if (!$view_display->getComponent('localgov_event_venue')) {
+    $view_display->setComponent('localgov_event_venue', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+  else {
+    $view_display->setComponent('localgov_event_venue', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+
+  // Set view display options for event price.
+  if (!$view_display->getComponent('localgov_event_price')) {
+    $view_display->setComponent('localgov_event_price', [
+      'type' => 'entity_reference_label',
+      'region' => 'content',
+      'label' => 'hidden',
+      'weight' => 4,
+    ])->save();
+  }
+
   // Set view display options for paragraph content.
   if (!$view_display->getComponent('localgov_paragraph_content')) {
     $view_display->setComponent('localgov_paragraph_content', [
@@ -71,6 +153,7 @@ function localgov_microsites_events_install($is_syncing) {
       'weight' => 5,
     ])->save();
   }
+
   // Set view display options for banner.
   if (!$view_display->getComponent('lgms_banner')) {
     $view_display->setComponent('lgms_banner', [
@@ -84,4 +167,68 @@ function localgov_microsites_events_install($is_syncing) {
       'weight' => 0,
     ])->save();
   }
+
+  // Create field_group for banner section.
+  $group_view_banner = new stdClass();
+  $group_view_banner->group_name = 'group_banner';
+  $group_view_banner->context = 'view';
+  $group_view_banner->entity_type = 'node';
+  $group_view_banner->bundle = 'localgov_event';
+  $group_view_banner->mode = 'default';
+  $group_view_banner->label = 'Banner';
+  $group_view_banner->region = 'content';
+  $group_view_banner->parent_name = '';
+  $group_view_banner->weight = '0';
+  $group_view_banner->children = [
+    'lgms_banner',
+  ];
+  $group_view_banner->format_type = 'html_element';
+  $group_view_banner->format_settings = [
+    'classes' => 'full__banner',
+    'show_empty_fields' => FALSE,
+    'id' => '',
+    'element' => 'div',
+    'show_label' => FALSE,
+    'label_element' => 'h3',
+    'label_element_classes' => '',
+    'attributes' => '',
+    'effect' => 'none',
+    'speed' => 'fast',
+  ];
+  field_group_group_save($group_view_banner);
+
+  // Create field_group for page_top section.
+  $group_view_page_top = new stdClass();
+  $group_view_page_top->group_name = 'group_page_top';
+  $group_view_page_top->context = 'view';
+  $group_view_page_top->entity_type = 'node';
+  $group_view_page_top->bundle = 'localgov_event';
+  $group_view_page_top->mode = 'default';
+  $group_view_page_top->label = 'Page Top';
+  $group_view_page_top->region = 'content';
+  $group_view_page_top->parent_name = '';
+  $group_view_page_top->weight = '0';
+  $group_view_page_top->children = [
+    'localgov_event_categories',
+    'localgov_event_date',
+    'localgov_event_location',
+    'localgov_event_locality',
+    'localgov_event_price',
+    'localgov_event_provider',
+    'localgov_event_venue',
+  ];
+  $group_view_page_top->format_type = 'html_element';
+  $group_view_page_top->format_settings = [
+    'classes' => 'full__page-top',
+    'show_empty_fields' => FALSE,
+    'id' => '',
+    'element' => 'div',
+    'show_label' => FALSE,
+    'label_element' => 'h3',
+    'label_element_classes' => '',
+    'attributes' => '',
+    'effect' => 'none',
+    'speed' => 'fast',
+  ];
+  field_group_group_save($group_view_page_top);
 }
