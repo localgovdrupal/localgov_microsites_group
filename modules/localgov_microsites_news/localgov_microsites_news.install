@@ -80,7 +80,7 @@ function localgov_microsites_news_install($is_syncing) {
       'region' => 'content',
       'settings' => [
         'view_mode' => 'responsive_banner',
-        'link' => 'false',
+        'link' => 'FALSE',
       ],
       'weight' => 0,
     ])->save();
@@ -103,10 +103,10 @@ function localgov_microsites_news_install($is_syncing) {
   $group_view_banner->format_type = 'html_element';
   $group_view_banner->format_settings = [
     'classes' => 'full__banner',
-    'show_empty_fields' => false,
+    'show_empty_fields' => FALSE,
     'id' => '',
     'element' => 'div',
-    'show_label' => false,
+    'show_label' => FALSE,
     'label_element' => 'h3',
     'label_element_classes' => '',
     'attributes' => '',
@@ -133,10 +133,10 @@ function localgov_microsites_news_install($is_syncing) {
   $group_view_page_top->format_type = 'html_element';
   $group_view_page_top->format_settings = [
     'classes' => 'full__page-top',
-    'show_empty_fields' => false,
+    'show_empty_fields' => FALSE,
     'id' => '',
     'element' => 'div',
-    'show_label' => false,
+    'show_label' => FALSE,
     'label_element' => 'h3',
     'label_element_classes' => '',
     'attributes' => '',
