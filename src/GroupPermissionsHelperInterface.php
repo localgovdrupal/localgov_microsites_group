@@ -33,6 +33,20 @@ interface GroupPermissionsHelperInterface {
   const DISABLED = 'disabled';
 
   /**
+   * Get all modules status for a microsite group.
+   *
+   * List of all modules that can have their status changed.
+   *
+   * @param \Drupal\group\Entity\GroupInterface $group
+   *   The group to check.
+   *
+   * @return array
+   *   Array keyed by module name, with class module permissions status as
+   *   returned by moduleStatus().
+   */
+  public function modulesList(GroupInterface $group): array;
+
+  /**
    * Get module status for a microsite group.
    *
    * Checks if all permissions are present, not present, or if permissions no

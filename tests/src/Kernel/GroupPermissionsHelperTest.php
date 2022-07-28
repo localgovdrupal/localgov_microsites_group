@@ -2,16 +2,11 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\group\Entity\Group;
-use Drupal\group\Entity\GroupContentType;
 use Drupal\group_permissions\Entity\GroupPermission;
 use Drupal\group_permissions\Entity\GroupPermissionInterface;
-use Drupal\localgov_microsites_group\GroupDefaultContent;
-use Drupal\localgov_microsites_group\GroupPermissionsHelper;
 use Drupal\localgov_microsites_group\GroupPermissionsHelperInterface;
 use Drupal\localgov_microsites_group\RolesHelper;
-use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\user\Entity\User;
@@ -80,11 +75,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
   public function testGetPermissions() {
     $group = Group::create(['type' => 'microsite']);
     $group->save();
-    // arguments: ['@entity_type.manager', '@config.factory', 'group.permissions', 'group_permission.group_permissions_manager']
-    $entity_type_manager = $this->container->get('entity_type.manager');
-    $group_permissions = $this->container->get('group.permissions');
-    $group_permissions_manager = $this->container->get('group_permission.group_permissions_manager');
-    $permissions_helper = new GroupPermissionsHelper($entity_type_manager, $group_permissions, $group_permissions_manager);
+    $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
     $permission_entity = $permissions_helper->getGroupPermissions($group);
     assert($permission_entity instanceof GroupPermissionInterface);
     $permissions = $permission_entity->getPermissions();
@@ -106,7 +97,6 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
    * Test enable disable module permissions.
    */
   public function testToggleModulePermissions() {
-    #RolesHelper::assignModuleRoles('localgov_microsites_events');
     $group = Group::create(['type' => 'microsite']);
     $group->save();
 
@@ -145,6 +135,16 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     $permission_entity->save();
     $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
     $this->assertEquals(GroupPermissionsHelperInterface::UNKNOWN, $permissions_helper->moduleStatus('localgov_microsites_events', $group));
+  }
+
+  /**
+   * Test list of all available modules.
+   */
+  public function testModulesList() {
+    $group = Group::create(['type' => 'microsite']);
+    $group->save();
+    $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
+    $this->assertEquals(['localgov_microsites_events' => GroupPermissionsHelperInterface::ENABLED], $permissions_helper->modulesList($group));
   }
 
 }
