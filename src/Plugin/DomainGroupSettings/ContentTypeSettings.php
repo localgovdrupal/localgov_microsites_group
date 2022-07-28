@@ -44,7 +44,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
   /**
    * The module extension list service.
    *
-   * @var \Drupal\Core\Extension\ModuleExtensionList;
+   * @var \Drupal\Core\Extension\ModuleExtensionList
    */
   protected $moduleExtensionList;
 
@@ -103,7 +103,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
         '#type' => 'inline_template',
         '#template' => '<div class="module"><span class="title">{{ title }}</span>{% if description %}<div class="description">{{ description }}</div>{% endif %}</div>',
         '#context' => [
-          'title' => $this->t($module['name']), 
+          'title' => $this->t($module['name']),
         ],
       ];
       if (!$hide_descriptions) {
@@ -145,14 +145,14 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
 
     if (!empty($enabled)) {
       array_walk($enabled, function (&$module) {
-        $info =$this->moduleExtensionList->getExtensionInfo($module);
+        $info = $this->moduleExtensionList->getExtensionInfo($module);
         $module = $this->t($info['name']);
       });
       $this->messenger()->addMessage($this->t('Enabled: %list', ['%list' => implode(',', $enabled)]));
     }
     if (!empty($disabled)) {
       array_walk($disabled, function (&$module) {
-        $info =$this->moduleExtensionList->getExtensionInfo($module);
+        $info = $this->moduleExtensionList->getExtensionInfo($module);
         $module = $this->t($info['name']);
       });
       $this->messenger()->addMessage($this->t('Disabled: %list', ['%list' => implode(',', $disabled)]));

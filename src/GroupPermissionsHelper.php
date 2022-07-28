@@ -54,7 +54,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
    *   The group module permissions handler.
    * @param \Drupal\group_permissions\GroupPermissionsManagerInterface $group_permissions_manager
    *   The group permissions module manager.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, GroupPermissionHandlerInterface $permission_handler, GroupPermissionsManagerInterface $group_permissions_manager, ModuleHandlerInterface $module_handler) {
@@ -69,7 +69,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
    */
   public function modulesList(GroupInterface $group): array {
     $modules = [];
-    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$modules, $group)  {
+    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$modules, $group) {
       $modules[$module] = $this->moduleStatus($module, $group);
     });
     return $modules;
@@ -187,9 +187,9 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
    * {@inheritdoc}
    */
   public function getGroupPermissions(GroupInterface $group): GroupPermissionInterface {
-    // GroupPermissionsManager::getGroupRoles also caches like this. Doing so here
-    // too makes it slightly more internally consistent for a call for this class.
-    // But possisibly not for changes made outside it.
+    // GroupPermissionsManager::getGroupRoles also caches like this. Doing so
+    // here too makes it slightly more internally consistent for a call for
+    // this class. But possisibly not for changes made outside it.
     // See also note testAlteredGroupPermissions::testAlteredGroupPermissions().
     if (empty($this->groupPermissions[$group->id()])) {
       $group_permission = $this->groupPermissionsManager->getGroupPermission($group);
