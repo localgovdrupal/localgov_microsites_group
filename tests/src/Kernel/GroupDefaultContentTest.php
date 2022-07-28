@@ -19,7 +19,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
+  public static $modules = [
     'localgov_microsites_group',
     'entity_reference_revisions',
     'field_formatter_class',
