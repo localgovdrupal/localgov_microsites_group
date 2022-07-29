@@ -3,6 +3,10 @@ services:
     class: Drupal\localgov_microsites_group\GroupDefaultContent
     arguments: ['@entity_type.manager', '@config.factory', '@replicate.replicator']
 
+  localgov_microsites_group.permissions_helper:
+    class: Drupal\localgov_microsites_group\GroupPermissionsHelper
+    arguments: ['@entity_type.manager', '@group.permissions', '@group_permission.group_permissions_manager', '@module_handler']
+
   theme.negotiator.localgov_microsites_group:
     class: Drupal\localgov_microsites_group\Theme\ThemeSwitcherNegotiator
     arguments: ['@config.factory']
