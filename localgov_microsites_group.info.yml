@@ -14,6 +14,7 @@ dependencies:
   - domain:domain
   - domain_group:domain_group
   - field_group:field_group
+  - ginvite:ginvite
   - group:group
   - group:gnode
   - group_content_menu:group_content_menu
