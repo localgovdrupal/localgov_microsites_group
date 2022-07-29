@@ -74,7 +74,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
    * {@inheritdoc}
    */
   public function access(GroupInterface $group, AccountInterface $account) {
-    return GroupAccessResult::allowedIfHasGroupPermission($group, $account, 'administer microsite content types');
+    return GroupAccessResult::allowedIfHasGroupPermission($group, $account, 'manage microsite enabled module permissions');
   }
 
   /**
@@ -83,7 +83,18 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
   public function buildConfigurationForm(array $form, FormStateInterface $form_state, GroupInterface $group) {
     $hide_descriptions = system_admin_compact_mode();
     $this->group = $group;
-
+    $module_permissions = $this->groupPermissionsHelper->modulesList($group);
+    if (empty($module_permissions)) {
+      $form['empty'] = [
+        '#type' => 'markup',
+        '#markup' => $this->t('There are no modules with permissions enabled yet.'),
+      ];
+      $form['modules'] = [
+        '#type' => 'value',
+        '#value' => [],
+      ];
+      return $form;
+    }
     $form['modules'] = [
       '#type' => 'table',
       '#header' => [
@@ -97,7 +108,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
       '#attributes' => ['class' => ['modules']],
       '#sticky' => TRUE,
     ];
-    foreach ($this->groupPermissionsHelper->modulesList($group) as $module_name => $status) {
+    foreach ($module_permissions as $module_name => $status) {
       $module = $this->moduleExtensionList->getExtensionInfo($module_name);
       $form['modules'][$module_name]['module'] = [
         '#type' => 'inline_template',
