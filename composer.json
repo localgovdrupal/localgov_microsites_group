@@ -11,7 +11,8 @@
     "drupal/group_permissions": "^1.0@alpha",
     "drupal/replicate": "^1.0",
     "drupal/responsive_preview": "^1.1",
-    "localgovdrupal/localgov_core": "^2.1.0"
+    "localgovdrupal/localgov_core": "^2.1.0",
+    "localgovdrupal/localgov_search": "^1.1"
   },
   "require-dev": {
     "localgovdrupal/localgov_news": "^2.1",

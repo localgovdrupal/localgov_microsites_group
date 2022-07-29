@@ -23,4 +23,6 @@ dependencies:
   # LocalGov Drupal
   - localgov_core:localgov_media
   - localgov_page:localgov_page
+  - localgov_search:localgov_search
+  - localgov_search:localgov_search_db
   - localgov_subsites:localgov_subsites
