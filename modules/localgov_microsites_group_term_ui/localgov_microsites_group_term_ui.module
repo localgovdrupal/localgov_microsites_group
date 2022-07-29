@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * LocalgGov Microsites Group Term UI module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityFormInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\group\Entity\GroupType;
+
+/**
+ * Implements hook_modules_installed().
+ */
+function localgov_microsites_group_term_ui_modules_installed($modules, $is_syncing) {
+
+  // Disable the Term view that comes with the group_term module.
+  if (in_array('localgov_microsites_group_term_ui', $modules) && !$is_syncing) {
+    $view_id = 'group_terms';
+    \Drupal::entityTypeManager()->getStorage('view')
+      ->load($view_id)
+      ->setStatus(FALSE)
+      ->save();
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function localgov_microsites_group_term_ui_entity_insert(EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() != 'taxonomy_term') {
+    return;
+  }
+
+  /** @var \Drupal\group\Entity\Group $group */
+  $group = \Drupal::routeMatch()->getParameter('group');
+  if (empty($group)) {
+    return;
+  }
+
+  // Add term as group content.
+  $group_type = GroupType::load($group->bundle());
+  $plugin_id = 'group_term:' . $entity->bundle();
+  if ($group_type->hasContentPlugin($plugin_id)) {
+    $group->addContent($entity, $plugin_id);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for taxonomy_term_localgov_topic_form.
+ */
+function localgov_microsites_group_term_ui_form_taxonomy_term_localgov_topic_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Filter parent terms so that only group terms are shown.
+  if (isset($form['relations']['parent']['#options'])) {
+
+    // Find group.
+    $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+    if (!is_null($group_id)) {
+      $group = \Drupal::entityTypeManager()->getStorage('group')->load($group_id);
+    }
+    else {
+      /** @var \Drupal\group\Entity\Group $group */
+      $group = \Drupal::routeMatch()->getParameter('group');
+    }
+
+    // Find vocabulary.
+    $vid = \Drupal::routeMatch()->getParameter('vid');
+    if (
+      is_null($vid) &&
+      $form_state->getFormObject() instanceof EntityFormInterface
+    ) {
+      $vid = $form_state->getFormObject()->getEntity()->bundle();
+    }
+
+    // Remove terms that are not part of the groups content.
+    if (!is_null($group) && !is_null($vid)) {
+      foreach ($form['relations']['parent']['#options'] as $tid => $name) {
+        $term = $group->getContentByEntityId('group_term:' . $vid, $tid);
+        if ($name != '<root>' && empty($term)) {
+          unset($form['relations']['parent']['#options'][$tid]);
+        }
+      }
+    }
+  }
+
+  // Add our submit handler.
+  $form['actions']['overview']['#submit'][] = 'localgov_microsites_group_term_ui_submit_taxonomy_term_localgov_topic_form';
+}
+
+/**
+ * Submit handler for taxonomy_term_localgov_topic_form.
+ */
+function localgov_microsites_group_term_ui_submit_taxonomy_term_localgov_topic_form($form, FormStateInterface $form_state) {
+
+  // Redirect back to the vocabulary type listing page.
+  $group = \Drupal::routeMatch()->getParameter('group');
+  $vid = \Drupal::routeMatch()->getParameter('vid');
+  if (!is_null($group) && !is_null($vid)) {
+    $form_state->setRedirect('view.lgms_group_taxonomy_terms.page',
+      [
+        'group' => $group->id(),
+        'vid' => $vid,
+      ]);
+  }
+}

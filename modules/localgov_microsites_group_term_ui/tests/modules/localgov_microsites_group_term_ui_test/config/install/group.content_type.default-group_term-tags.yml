@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.default
+    - taxonomy.vocabulary.tags
+  module:
+    - group_term
+    - taxonomy
+id: default-group_term-tags
+label: 'default: Group term (Tags)'
+description: 'Adds <em class="placeholder">Tags</em> terms to groups.'
+group_type: default
+content_plugin: 'group_term:tags'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false
