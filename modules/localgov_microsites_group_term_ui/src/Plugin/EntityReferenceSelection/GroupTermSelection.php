@@ -81,7 +81,6 @@ class GroupTermSelection extends TermSelection {
     );
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -111,4 +110,5 @@ class GroupTermSelection extends TermSelection {
 
     return $options;
   }
+
 }
