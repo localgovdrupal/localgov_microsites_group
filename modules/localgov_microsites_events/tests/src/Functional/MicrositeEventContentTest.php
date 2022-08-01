@@ -1,7 +1,8 @@
 <?php
 
-namespace Drupal\Tests\localgov_microsites_group\Functional;
+namespace Drupal\Tests\localgov_microsites_events\Functional;
 
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Entity\Index;
@@ -11,11 +12,11 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
- * Tests directory content in a group.
+ * Tests events content in a group.
  *
- * @group localgov_microsites_group
+ * @group localgov_microsites_events
  */
-class MicrositeDirectoryContentTest extends BrowserTestBase {
+class MicrositeEventContentTest extends BrowserTestBase {
 
   use GroupCreationTrait;
   use InitializeGroupsTrait;
@@ -47,8 +48,7 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
-    'localgov_directories_db',
-    'localgov_microsites_directories',
+    'localgov_microsites_events',
   ];
 
   /**
@@ -78,30 +78,62 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
     $this->domain1 = $domain_storage->load('group_' . $this->group1->id());
     $this->domain2 = $domain_storage->load('group_' . $this->group2->id());
 
-    // Create some directory content.
-    $this->channel1 = $this->createDirectoryChannel($this->group1);
-    $this->pages1 = $this->createDirectoryPages($this->channel1, $this->group1, 2);
-    $this->channel2 = $this->createDirectoryChannel($this->group2);
-    $this->pages2 = $this->createDirectoryPages($this->channel2, $this->group2, 2);
+    // Create some content.
+    $this->pages1 = $this->createEvents($this->group1, 2);
+    $this->pages2 = $this->createEvents($this->group2, 2);
 
-    // Index directory content.
-    $index = Index::load('localgov_directories_index_default');
+    // Index events.
+    $index = Index::load('localgov_events');
     $index->indexItems();
   }
 
   /**
    * Test content appears on the correct site.
    */
-  public function testMicrositeDirectoryContent() {
+  public function testMicrositeEventsContent() {
+
+    $this->drupalGet($this->domain1->getUrl() . $this->pages1[0]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains($this->pages1[0]->label());
+    $this->drupalGet($this->domain1->getUrl() . $this->pages1[1]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains($this->pages1[1]->label());
+
+    $this->drupalGet($this->domain1->getUrl() . $this->pages2[0]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->assertSession()->pageTextNotContains($this->pages2[0]->label());
+    $this->drupalGet($this->domain1->getUrl() . $this->pages2[1]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
+
+    $this->drupalGet($this->domain2->getUrl() . $this->pages2[0]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains($this->pages2[0]->label());
+    $this->drupalGet($this->domain2->getUrl() . $this->pages2[1]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains($this->pages2[1]->label());
+
+    $this->drupalGet($this->domain2->getUrl() . $this->pages1[0]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
+    $this->drupalGet($this->domain2->getUrl() . $this->pages1[1]->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->assertSession()->pageTextNotContains($this->pages1[1]->label());
+  }
+
+  /**
+   * Test events view.
+   */
+  public function testMicrositeEventsView() {
 
     // Check content appears on the correct sites.
-    $this->drupalGet($this->domain1->getUrl() . $this->channel1->toUrl()->toString());
+    $this->drupalGet($this->domain1->getUrl() . '/events');
     $this->assertSession()->pageTextContains($this->pages1[0]->label());
     $this->assertSession()->pageTextContains($this->pages1[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
 
-    $this->drupalGet($this->domain2->getUrl() . $this->channel2->toUrl()->toString());
+    $this->drupalGet($this->domain2->getUrl() . '/events');
     $this->assertSession()->pageTextContains($this->pages2[0]->label());
     $this->assertSession()->pageTextContains($this->pages2[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
@@ -109,17 +141,17 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
   }
 
   /**
-   * Test directories search.
+   * Test events search.
    */
-  public function testMicrositeDirectorySearch() {
+  public function testMicrositeEventsSearch() {
 
     // Search site 1.
     $options = [
       'query' => [
-        'search_api_fulltext' => $this->pages1[0]->label(),
+        'search' => $this->pages1[0]->label(),
       ],
     ];
-    $this->drupalGet($this->domain1->getUrl() . $this->channel1->toUrl()->toString(), $options);
+    $this->drupalGet($this->domain1->getUrl() . '/events/search', $options);
     $this->assertSession()->pageTextContains($this->pages1[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[0]->label());
@@ -128,10 +160,10 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
     // Search site 2.
     $options = [
       'query' => [
-        'search_api_fulltext' => $this->pages2[0]->label(),
+        'search' => $this->pages2[0]->label(),
       ],
     ];
-    $this->drupalGet($this->domain2->getUrl() . $this->channel2->toUrl()->toString(), $options);
+    $this->drupalGet($this->domain2->getUrl() . '/events/search', $options);
     $this->assertSession()->pageTextContains($this->pages2[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
@@ -139,58 +171,34 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
   }
 
   /**
-   * Create directory channel in group.
+   * Create count events in group.
    *
-   * @param \Drupal\group\Entity\GroupInterface $group
-   *   Group to create directory in.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   The directory channel.
-   */
-  protected function createDirectoryChannel(GroupInterface $group) {
-
-    $directory = $this->createNode([
-      'type' => 'localgov_directory',
-      'title' => $this->randomMachineName(12),
-      'localgov_directory_channel_types' => [
-        'target_id' => 'localgov_directories_page',
-      ],
-      'localgov_directory_facets_enable' => [],
-      'status' => NodeInterface::PUBLISHED,
-    ]);
-    $directory->save();
-    $group->addContent($directory, 'group_node:localgov_directory');
-
-    return $directory;
-  }
-
-  /**
-   * Create count directory pages in channel and group.
-   *
-   * @param \Drupal\node\NodeInterface $channel
-   *   Directory channel to create pages in.
    * @param \Drupal\group\Entity\GroupInterface $group
    *   Group to create pages in.
    * @param int $count
-   *   Number of directory pages to create.
+   *   Number of events to create.
    *
    * @return array[\Drupal\node\NodeInterface]
-   *   Array of directory pages.
+   *   Array of events.
    */
-  protected function createDirectoryPages(NodeInterface $channel, GroupInterface $group, int $count) {
+  protected function createEvents(GroupInterface $group, int $count) {
     $pages = [];
 
+    $now = time();
     for ($i = 0; $i < $count; $i++) {
       $page = $this->createNode([
-        'type' => 'localgov_directories_page',
+        'type' => 'localgov_event',
         'title' => $this->randomMachineName(12),
-        'localgov_directory_channels' => [
-          'target_id' => $channel->id(),
+        'localgov_event_date' => [
+          'value' => gmdate(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $now + $i * 3600),
+          'end_value' => gmdate(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $now + $i * 7200),
+          'rrule' => NULL,
+          'timezone' => 'Europe/London',
         ],
         'status' => NodeInterface::PUBLISHED,
       ]);
       $page->save();
-      $group->addContent($page, 'group_node:localgov_directories_page');
+      $group->addContent($page, 'group_node:localgov_event');
       $pages[] = $page;
     }
 

@@ -61,6 +61,9 @@ dependencies:
     - field.field.group.microsite.lgms_main_logo
     - field.field.group.microsite.lgms_main_menu_font_size
     - field.field.group.microsite.lgms_main_menu_font_weight
+    - field.field.group.microsite.lgms_off_canvas_bg_colour
+    - field.field.group.microsite.lgms_off_canvas_menu_icon
+    - field.field.group.microsite.lgms_off_canvas_text_colour
     - field.field.group.microsite.lgms_page_background_colour
     - field.field.group.microsite.lgms_powered_by
     - field.field.group.microsite.lgms_pre_header_bg_colour
@@ -76,6 +79,10 @@ dependencies:
     - field.field.group.microsite.lgms_site_name_font_size
     - field.field.group.microsite.lgms_site_name_font_weight
     - field.field.group.microsite.lgms_site_slogan
+    - field.field.group.microsite.lgms_submenu_background_colour
+    - field.field.group.microsite.lgms_submenu_icon
+    - field.field.group.microsite.lgms_submenu_icon_rotation
+    - field.field.group.microsite.lgms_submenu_link_colour
     - field.field.group.microsite.lgms_teaser_image_style
     - field.field.group.microsite.lgms_text_colour
     - group.type.microsite
@@ -154,9 +161,8 @@ third_party_settings:
         - lgms_site_slogan
         - lgms_site_name_font_size
         - lgms_site_name_font_weight
-        - lgms_main_menu_font_size
-        - lgms_main_menu_font_weight
         - lgms_header_vertical_alignment
+        - group_menu
       label: Header
       region: content
       parent_name: group_content
@@ -387,6 +393,29 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_menu:
+      children:
+        - lgms_main_menu_font_size
+        - lgms_main_menu_font_weight
+        - lgms_submenu_background_colour
+        - lgms_submenu_link_colour
+        - lgms_submenu_icon
+        - lgms_submenu_icon_rotation
+        - lgms_off_canvas_menu_icon
+        - lgms_off_canvas_bg_colour
+        - lgms_off_canvas_text_colour
+      label: Menu
+      region: content
+      parent_name: group_header_content
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
@@ -545,7 +574,7 @@ content:
     third_party_settings: {  }
   lgms_header_link_hover_colour:
     type: string_textfield
-    weight: 7
+    weight: 8
     region: content
     settings:
       size: 60
@@ -561,7 +590,7 @@ content:
     third_party_settings: {  }
   lgms_header_vertical_alignment:
     type: options_select
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -809,14 +838,14 @@ content:
     third_party_settings: {  }
   lgms_main_logo:
     type: media_library_widget
-    weight: 8
+    weight: 9
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   lgms_main_menu_font_size:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -824,9 +853,31 @@ content:
     third_party_settings: {  }
   lgms_main_menu_font_weight:
     type: options_select
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
+    third_party_settings: {  }
+  lgms_off_canvas_bg_colour:
+    type: string_textfield
+    weight: 21
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_off_canvas_menu_icon:
+    type: options_select
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  lgms_off_canvas_text_colour:
+    type: string_textfield
+    weight: 22
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   lgms_page_background_colour:
     type: string_textfield
@@ -915,7 +966,7 @@ content:
     third_party_settings: {  }
   lgms_site_name:
     type: string_textfield
-    weight: 9
+    weight: 10
     region: content
     settings:
       size: 60
@@ -923,7 +974,7 @@ content:
     third_party_settings: {  }
   lgms_site_name_font_size:
     type: string_textfield
-    weight: 11
+    weight: 12
     region: content
     settings:
       size: 60
@@ -931,13 +982,41 @@ content:
     third_party_settings: {  }
   lgms_site_name_font_weight:
     type: options_select
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   lgms_site_slogan:
     type: string_textfield
-    weight: 10
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_submenu_background_colour:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  lgms_submenu_icon:
+    type: options_select
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  lgms_submenu_icon_rotation:
+    type: options_select
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  lgms_submenu_link_colour:
+    type: string_textfield
+    weight: 17
     region: content
     settings:
       size: 60
