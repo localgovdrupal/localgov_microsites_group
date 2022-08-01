@@ -21,8 +21,16 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
    */
   public static $modules = [
     'localgov_microsites_group',
-    'replicate',
+    'entity_reference_revisions',
+    'field_formatter_class',
+    'field_group',
+    'image',
+    'media',
+    'media_library',
     'node',
+    'paragraphs',
+    'replicate',
+    'views',
     'gnode',
     'group_content_menu',
   ];
