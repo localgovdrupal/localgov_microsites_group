@@ -96,7 +96,7 @@ class GroupInvitationAccessTest extends BrowserTestBase {
     $this->drupalGet('/group/' . $group->id() . '/content/add/group_invitation');
     $this->assertSession()->statusCodeEquals(403);
 
-    // Check admin can invite. 
+    // Check admin can invite.
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('/group/' . $group->id() . '/content/add/group_invitation');
     $this->submitForm([
