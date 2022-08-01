@@ -114,10 +114,12 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
         '#type' => 'inline_template',
         '#template' => '<div class="module"><span class="title">{{ title }}</span>{% if description %}<div class="description">{{ description }}</div>{% endif %}</div>',
         '#context' => [
+          // @codingStandardsIgnoreLine
           'title' => $this->t($module['name']),
         ],
       ];
       if (!$hide_descriptions) {
+        // @codingStandardsIgnoreLine
         $form['modules'][$module_name]['module']['#context']['description'] = $this->t($module['description']);
       }
       $form['modules'][$module_name]['enabled'] = [
@@ -157,6 +159,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
     if (!empty($enabled)) {
       array_walk($enabled, function (&$module) {
         $info = $this->moduleExtensionList->getExtensionInfo($module);
+        // @codingStandardsIgnoreLine
         $module = $this->t($info['name']);
       });
       $this->messenger()->addMessage($this->t('Enabled: %list', ['%list' => implode(',', $enabled)]));
@@ -164,6 +167,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
     if (!empty($disabled)) {
       array_walk($disabled, function (&$module) {
         $info = $this->moduleExtensionList->getExtensionInfo($module);
+        // @codingStandardsIgnoreLine
         $module = $this->t($info['name']);
       });
       $this->messenger()->addMessage($this->t('Disabled: %list', ['%list' => implode(',', $disabled)]));
