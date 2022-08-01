@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
-use Drupal\group\Entity\Group;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\user\Traits\UserCreationTrait;
