@@ -16,6 +16,7 @@
     "drupal/responsive_preview": "^1.1",
     "localgovdrupal/localgov_core": "^2.1.0",
     "localgovdrupal/localgov_page": "1.x-dev",
+    "localgovdrupal/localgov_paragraphs": "2.x-dev as 2.1.2",
     "localgovdrupal/localgov_search": "^1.1"
   },
   "require-dev": {
