@@ -5,6 +5,7 @@
   "license": "GPL-2.0-or-later",
   "require": {
     "drupal/core": "^9",
+    "drupal/domain_path": "1.x-dev#33fde0b",
     "drupal/field_formatter_class": "^1.5",
     "drupal/ginvite": "^2.0",
     "drupal/group": "^1.4",

@@ -13,6 +13,7 @@ dependencies:
   - admin_toolbar:admin_toolbar
   - domain:domain
   - domain_group:domain_group
+  - domain_path:domain_path
   - field_group:field_group
   - ginvite:ginvite
   - group:group
