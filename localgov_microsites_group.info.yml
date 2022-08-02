@@ -13,7 +13,9 @@ dependencies:
   - admin_toolbar:admin_toolbar
   - domain:domain
   - domain_group:domain_group
+  - domain_path:domain_path
   - field_group:field_group
+  - ginvite:ginvite
   - group:group
   - group:gnode
   - group_content_menu:group_content_menu
@@ -23,3 +25,5 @@ dependencies:
   # LocalGov Drupal
   - localgov_core:localgov_media
   - localgov_page:localgov_page
+  - localgov_search:localgov_search
+  - localgov_search:localgov_search_db
