@@ -231,4 +231,19 @@ function localgov_microsites_events_install($is_syncing) {
     'speed' => 'fast',
   ];
   field_group_group_save($group_view_page_top);
+
+  // Use the group term reference plugin for the term fields.
+  $field_names = [
+    'localgov_event_categories',
+    'localgov_event_locality',
+    'localgov_event_price',
+  ];
+  foreach ($field_names as $field_name) {
+    /** @var \Drupal\field\Entity\FieldConfig $field */
+    $field = Drupal::entityTypeManager()
+      ->getStorage('field_config')
+      ->load('node.localgov_event.' . $field_name);
+    $field->setSetting('handler', 'group:taxonomy_term');
+    $field->save();
+  }
 }

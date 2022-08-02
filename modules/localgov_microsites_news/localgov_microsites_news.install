@@ -55,4 +55,12 @@ function localgov_microsites_news_install($is_syncing) {
       'weight' => 4,
     ])->save();
   }
+
+  // Use the group term reference plugin for the localgov_news_categories field.
+  /** @var \Drupal\field\Entity\FieldConfig $field */
+  $field = Drupal::entityTypeManager()
+    ->getStorage('field_config')
+    ->load('node.localgov_news_article.localgov_news_categories');
+  $field->setSetting('handler', 'group:taxonomy_term');
+  $field->save();
 }
