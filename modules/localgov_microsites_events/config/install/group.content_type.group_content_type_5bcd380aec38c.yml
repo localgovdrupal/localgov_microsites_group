@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+    - taxonomy.vocabulary.localgov_event_price
+  module:
+    - group_term
+    - taxonomy
+id: group_content_type_5bcd380aec38c
+label: 'Microsite: Group term (Event price)'
+description: 'Adds <em class="placeholder">Event price</em> terms to groups.'
+group_type: microsite
+content_plugin: 'group_term:localgov_event_price'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false
