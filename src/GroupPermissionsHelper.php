@@ -80,7 +80,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
    */
   public function moduleStatus($check_module, GroupInterface $group): string {
     $all_module_permissions = [];
-    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_module_permissions, $group) {
+    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_module_permissions) {
       $all_module_permissions[$module] = RolesHelper::getModuleRoles($module);
     });
 
