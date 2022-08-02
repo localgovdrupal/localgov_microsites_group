@@ -105,7 +105,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     $group_permissions = $group_permissions_entity->getPermissions();
     $module_group_permissions = [];
     foreach ($module_permissions['group'] as $role => $permissions) {
-      $module_group_permissions[$group->bundle() . '-' . $role] = array_diff($permissions, $shared_permissions[$role]);
+      $module_group_permissions[$group->bundle() . '-' . $role] = array_diff($permissions, $shared_permissions[$role] ?? []);
     }
     $permissions_comparison = $this->comparePermissionsArray($group_permissions, $module_group_permissions);
     if ($permissions_comparison == 'empty') {
