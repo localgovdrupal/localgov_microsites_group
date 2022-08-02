@@ -5,6 +5,7 @@
   "license": "GPL-2.0-or-later",
   "require": {
     "drupal/core": "^9",
+    "drupal/domain_path": "1.x-dev#33fde0b",
     "drupal/field_formatter_class": "^1.5",
     "drupal/ginvite": "^2.0",
     "drupal/group": "^1.4",
@@ -14,6 +15,7 @@
     "drupal/replicate": "^1.0",
     "drupal/responsive_preview": "^1.1",
     "localgovdrupal/localgov_core": "^2.1.0",
+    "localgovdrupal/localgov_page": "1.x-dev",
     "localgovdrupal/localgov_search": "^1.1"
   },
   "require-dev": {

@@ -14,7 +14,7 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_quote
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
-    - paragraphs.paragraphs_type.page_section
+    - paragraphs.paragraphs_type.localgov_page_section
   module:
     - entity_reference_revisions
 id: node.localgov_event.localgov_paragraph_content
