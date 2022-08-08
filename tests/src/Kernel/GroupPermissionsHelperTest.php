@@ -22,19 +22,23 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
    * {@inheritdoc}
    */
   public static $modules = [
-    'localgov_microsites_group',
     'localgov_microsites_events',
+    'localgov_microsites_group',
+    'localgov_paragraphs_layout',
     'domain',
     'domain_group',
     'entity_reference_revisions',
     'field_formatter_class',
     'field_group',
+    'file',
     'image',
     'media',
     'media_library',
     'gnode',
     'group_content_menu',
     'group_permissions',
+    'layout_discovery',
+    'layout_paragraphs',
     'node',
     'paragraphs',
     'replicate',
@@ -62,13 +66,16 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
       'name' => 'Event',
     ])->save();
 
+    $this->installEntitySchema('file');
     $this->installEntitySchema('group_content_menu');
     $this->installEntitySchema('group_permission');
     $this->installEntitySchema('user');
     $this->installSchema('node', 'node_access');
+    $this->installSchema('file', 'file_usage');
 
     $this->installConfig([
       'gnode',
+      'localgov_paragraphs_layout',
       'localgov_microsites_group',
       'localgov_microsites_events',
     ]);

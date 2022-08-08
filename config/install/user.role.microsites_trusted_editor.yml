@@ -8,6 +8,7 @@ dependencies:
   module:
     - media
     - system
+    - domain_path
 id: microsites_trusted_editor
 label: 'Microsites trusted editor'
 weight: 3
@@ -24,6 +25,7 @@ permissions:
   - 'edit any document media'
   - 'edit any image media'
   - 'edit any remote_video media'
+  - 'edit domain path entity'
   - 'edit own document media'
   - 'edit own image media'
   - 'edit own remote_video media'

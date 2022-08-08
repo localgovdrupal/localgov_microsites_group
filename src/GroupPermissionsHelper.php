@@ -78,19 +78,34 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   /**
    * {@inheritdoc}
    */
-  public function moduleStatus($module, GroupInterface $group): string {
-    $group_permissions_entity = $this->getGroupPermissions($group);
-    $group_permissions = $group_permissions_entity->getPermissions();
-    $module_permissions = RolesHelper::getModuleRoles($module);
+  public function moduleStatus($check_module, GroupInterface $group): string {
+    $all_module_permissions = [];
+    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_module_permissions) {
+      $all_module_permissions[$module] = RolesHelper::getModuleRoles($module);
+    });
+
+    $module_permissions = $all_module_permissions[$check_module];
     if (is_null($module_permissions)) {
       throw new \LogicException('Module does not implement hook_localgov_microsites_roles_default');
     }
     if (empty($module_permissions['group'])) {
       return GroupPermissionsHelperInterface::NOT_APPLICABLE;
     }
+    $shared_permissions = [];
+    foreach ($all_module_permissions as $module => $role_permissions) {
+      if ($module == $check_module) {
+        continue;
+      }
+      foreach ($role_permissions['group'] as $role => $permissions) {
+        $shared_permissions[$role] = $shared_permissions[$role] ?? [] + array_intersect($module_permissions['group'][$role], $permissions);
+      }
+    }
+
+    $group_permissions_entity = $this->getGroupPermissions($group);
+    $group_permissions = $group_permissions_entity->getPermissions();
     $module_group_permissions = [];
     foreach ($module_permissions['group'] as $role => $permissions) {
-      $module_group_permissions[$group->bundle() . '-' . $role] = $permissions;
+      $module_group_permissions[$group->bundle() . '-' . $role] = array_diff($permissions, $shared_permissions[$role] ?? []);
     }
     $permissions_comparison = $this->comparePermissionsArray($group_permissions, $module_group_permissions);
     if ($permissions_comparison == 'empty') {
@@ -142,10 +157,11 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   /**
    * {@inheritdoc}
    */
-  public function moduleEnable($module, GroupInterface $group) {
+  public function moduleEnable($enable_module, GroupInterface $group) {
     $group_permissions_entity = $this->getGroupPermissions($group);
     $group_permissions = $group_permissions_entity->getPermissions();
-    $module_permissions = RolesHelper::getModuleRoles($module);
+
+    $module_permissions = RolesHelper::getModuleRoles($enable_module);
     if (is_null($module_permissions)) {
       throw new \LogicException('Module does not implement hook_localgov_microsites_roles_default');
     }
@@ -153,7 +169,22 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     if (empty($module_group_permissions)) {
       throw new \LogicException('Module does not implement group permissions');
     }
-    foreach ($module_group_permissions as $role => $permissions) {
+
+    $enable_permissions = [];
+    $modules = $this->modulesList($group);
+    $modules[$enable_module] = GroupPermissionsHelperInterface::ENABLED;
+    foreach ($modules as $module => $status) {
+      if ($status == GroupPermissionsHelperInterface::ENABLED) {
+        $module_permissions = RolesHelper::getModuleRoles($module);
+        if (!empty($module_permissions['group'])) {
+          foreach ($module_permissions['group'] as $role => $permissions) {
+            $enable_permissions[$role] = $enable_permissions[$role] ?? [] + $permissions;
+          }
+        }
+      }
+    }
+
+    foreach ($enable_permissions as $role => $permissions) {
       $group_permissions[$group->bundle() . '-' . $role] = array_merge($group_permissions[$group->bundle() . '-' . $role], $permissions);
     }
     $group_permissions_entity->setPermissions($group_permissions);
@@ -164,10 +195,11 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   /**
    * {@inheritdoc}
    */
-  public function moduleDisable($module, GroupInterface $group) {
+  public function moduleDisable($disable_module, GroupInterface $group) {
     $group_permissions_entity = $this->getGroupPermissions($group);
     $group_permissions = $group_permissions_entity->getPermissions();
-    $module_permissions = RolesHelper::getModuleRoles($module);
+
+    $module_permissions = RolesHelper::getModuleRoles($disable_module);
     if (is_null($module_permissions)) {
       throw new \LogicException('Module does not implement hook_localgov_microsites_roles_default');
     }
@@ -175,7 +207,38 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     if (empty($module_group_permissions)) {
       throw new \LogicException('Module does not implement group permissions');
     }
-    foreach ($module_group_permissions as $role => $permissions) {
+
+    $permissions_with = [];
+    $modules = $this->modulesList($group);
+    foreach ($modules as $module => $status) {
+      if ($status == GroupPermissionsHelperInterface::ENABLED) {
+        $module_permissions = RolesHelper::getModuleRoles($module);
+        if (!empty($module_permissions['group'])) {
+          foreach ($module_permissions['group'] as $role => $permissions) {
+            $permissions_with[$role] = $permissions_with[$role] ?? [] + $permissions;
+          }
+        }
+      }
+    }
+    $permissions_without = [];
+    $modules = $this->modulesList($group);
+    $modules[$disable_module] = GroupPermissionsHelperInterface::DISABLED;
+    foreach ($modules as $module => $status) {
+      if ($status == GroupPermissionsHelperInterface::ENABLED) {
+        $module_permissions = RolesHelper::getModuleRoles($module);
+        if (!empty($module_permissions['group'])) {
+          foreach ($module_permissions['group'] as $role => $permissions) {
+            $permissions_without[$role] = $permissions_without[$role] ?? [] + $permissions;
+          }
+        }
+      }
+    }
+    $disable_permissions = [];
+    foreach ($permissions_with as $role => $permissions) {
+      $disable_permissions[$role] = array_diff($permissions_with[$role], $permissions_without[$role] ?? []);
+    }
+
+    foreach ($disable_permissions as $role => $permissions) {
       $group_permissions[$group->bundle() . '-' . $role] = array_diff($group_permissions[$group->bundle() . '-' . $role], $permissions);
     }
     $group_permissions_entity->setPermissions($group_permissions);

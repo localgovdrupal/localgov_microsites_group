@@ -180,7 +180,7 @@ class DomainGroupConfigAdd extends FormBase {
     }
 
     if ($front_page = $this->defaultContent->generate($group)) {
-      $form_state->setValue('site_front_page', $front_page->toUrl()->toString());
+      $form_state->setValue('site_frontpage', $front_page->toUrl()->toString());
     }
 
     $form_state->set('group', $group);
