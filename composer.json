@@ -11,6 +11,7 @@
     "drupal/group": "^1.4",
     "drupal/group_content_menu": "^1.1",
     "drupal/group_permissions": "^1.0@alpha",
+    "drupal/group_term": "^2.0@alpha",
     "drupal/replicate": "^1.0",
     "drupal/responsive_preview": "^1.1",
     "localgovdrupal/localgov_core": "^2.1.0",
