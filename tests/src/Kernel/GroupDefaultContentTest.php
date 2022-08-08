@@ -27,12 +27,13 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'image',
     'media',
     'media_library',
+    'gnode',
+    'group_content_menu',
+    'group_permissions',
     'node',
     'paragraphs',
     'replicate',
     'views',
-    'gnode',
-    'group_content_menu',
   ];
 
   /**

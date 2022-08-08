@@ -32,6 +32,7 @@ permissions:
   - 'invite users to group'
   - 'leave group'
   - 'manage group_content_menu'
+  - 'manage microsite enabled module permissions'
   - 'update any group_node:localgov_page content'
   - 'update any group_node:localgov_page entity'
   - 'update own group_membership content'

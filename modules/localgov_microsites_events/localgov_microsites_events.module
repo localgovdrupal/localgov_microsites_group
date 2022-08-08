@@ -86,7 +86,6 @@ function localgov_microsites_events_localgov_microsites_roles_default() {
         'delete any group_term:localgov_event_price entity',
         'update any group_node:localgov_event content',
         'update any group_node:localgov_event entity',
-        'update any group_node:localgov_directory entity',
         'update own group_node:localgov_event content',
         'update own group_node:localgov_event entity',
         'update any group_term:localgov_event_category entity',
