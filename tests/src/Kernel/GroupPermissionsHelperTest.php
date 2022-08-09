@@ -8,6 +8,7 @@ use Drupal\group_permissions\Entity\GroupPermissionInterface;
 use Drupal\localgov_microsites_group\GroupPermissionsHelperInterface;
 use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\node\Entity\NodeType;
+use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\user\Entity\User;
 
@@ -17,14 +18,10 @@ use Drupal\user\Entity\User;
  * @group localgov_microsites_group
  */
 class GroupPermissionsHelperTest extends GroupKernelTestBase {
-
   /**
    * {@inheritdoc}
    */
   public static $modules = [
-    'localgov_microsites_events',
-    'localgov_microsites_group',
-    'localgov_paragraphs_layout',
     'domain',
     'domain_group',
     'entity_reference_revisions',
@@ -35,15 +32,21 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'media',
     'media_library',
     'gnode',
+    'group',
     'group_content_menu',
     'group_permissions',
+    'group_term',
     'layout_discovery',
     'layout_paragraphs',
     'node',
     'paragraphs',
     'replicate',
+    'taxonomy',
     'user',
     'views',
+    'localgov_microsites_events',
+    'localgov_microsites_group',
+    'localgov_paragraphs_layout',
   ];
 
   /**
@@ -52,7 +55,8 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    // You really don't want to install localgov_page in a Kernel test!
+    // You really don't want to install localgov_page or localgov_events in a
+    // Kernel test!
     NodeType::create([
       'type' => 'localgov_page',
       'name' => 'Page',
@@ -64,6 +68,18 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     NodeType::create([
       'type' => 'localgov_event',
       'name' => 'Event',
+    ])->save();
+    Vocabulary::create([
+      'name' => 'Event categories',
+      'vid' => 'localgov_event_category',
+    ])->save();
+    Vocabulary::create([
+      'name' => 'Event locality',
+      'vid' => 'localgov_event_locality',
+    ])->save();
+    Vocabulary::create([
+      'name' => 'Event price',
+      'vid' => 'localgov_event_price',
     ])->save();
 
     $this->installEntitySchema('file');
