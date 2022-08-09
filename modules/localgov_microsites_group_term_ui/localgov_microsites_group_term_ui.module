@@ -49,9 +49,19 @@ function localgov_microsites_group_term_ui_entity_insert(EntityInterface $entity
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for taxonomy_term_localgov_topic_form.
+ * Implements hook_form_alter().
  */
-function localgov_microsites_group_term_ui_form_taxonomy_term_localgov_topic_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function localgov_microsites_group_term_ui_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Only alter LocalGov taxonomy forms.
+  if (!in_array($form_id, [
+    'taxonomy_term_localgov_event_category_form',
+    'taxonomy_term_localgov_event_locality_form',
+    'taxonomy_term_localgov_event_price_form',
+    'taxonomy_term_localgov_topic_form',
+  ])) {
+    return;
+  }
 
   // Filter parent terms so that only group terms are shown.
   if (isset($form['relations']['parent']['#options'])) {
