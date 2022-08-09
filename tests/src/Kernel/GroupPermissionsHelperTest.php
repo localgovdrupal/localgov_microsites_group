@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
-use Drupal\Core\Language\LanguageInterface;
 use Drupal\group\Entity\Group;
 use Drupal\group_permissions\Entity\GroupPermission;
 use Drupal\group_permissions\Entity\GroupPermissionInterface;
