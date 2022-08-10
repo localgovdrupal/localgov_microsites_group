@@ -126,7 +126,9 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
           '#type' => 'submit',
           '#value' => $status == GroupPermissionsHelperInterface::ENABLED ? $this->t('Disable') : $this->t('Enable'),
           '#name' => $module_name,
-          '#submit' => $status == GroupPermissionsHelperInterface::ENABLED ? [[$this, 'disableModule']] : [[$this, 'enableModule']],
+          '#submit' => $status == GroupPermissionsHelperInterface::ENABLED ?
+            [[$this, 'disableModule']] :
+            [[$this, 'enableModule']],
         ];
       }
     }
@@ -146,18 +148,26 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
   }
 
+  /**
+   * Form submission handler: Enable module.
+   */
   public function enableModule(array &$form, FormStateInterface $form_state) {
     $module = $form_state->getTriggeringElement()['#name'];
     $this->groupPermissionsHelper->moduleEnable($module, $this->group);
     $info = $this->moduleExtensionList->getExtensionInfo($module);
+    // @codingStandardsIgnoreLine
     $name = $this->t($info['name']);
     $this->messenger()->addMessage($this->t('Enabled: %name', ['%name' => $name]));
   }
 
+  /**
+   * Form submission handler: Disable module.
+   */
   public function disableModule(array &$form, FormStateInterface $form_state) {
     $module = $form_state->getTriggeringElement()['#name'];
     $this->groupPermissionsHelper->moduleDisable($module, $this->group);
     $info = $this->moduleExtensionList->getExtensionInfo($module);
+    // @codingStandardsIgnoreLine
     $name = $this->t($info['name']);
     $this->messenger()->addMessage($this->t('Disabled: %name', ['%name' => $name]));
   }
