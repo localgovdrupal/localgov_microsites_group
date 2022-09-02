@@ -11,13 +11,13 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: normal
+      value: 400
       label: Normal
     -
-      value: semi-bold
+      value: 600
       label: Semi-bold
     -
-      value: bold
+      value: 700
       label: Bold
   allowed_values_function: ''
 module: options
