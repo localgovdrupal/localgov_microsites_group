@@ -9,7 +9,7 @@ dependencies:
     - node
     - user
 id: lgms_embed_view_news
-label: 'Latest News'
+label: 'Latest news'
 module: views
 description: ''
 tag: ''
