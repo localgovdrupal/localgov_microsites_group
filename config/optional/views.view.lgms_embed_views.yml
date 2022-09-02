@@ -8,7 +8,7 @@ dependencies:
     - node
     - user
 id: lgms_embed_views
-label: 'Embedable views'
+label: 'Recent content'
 module: views
 description: ''
 tag: ''
@@ -21,7 +21,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Embedable views'
+      title: 'Recent Content'
       fields:
         title:
           id: title
