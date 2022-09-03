@@ -101,7 +101,6 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
         $this->t('Modules'),
         [
           'data' => $this->t('Enabled'),
-          'class' => ['checkbox'],
         ],
       ],
       '#id' => 'modules',
@@ -122,12 +121,16 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
         // @codingStandardsIgnoreLine
         $form['modules'][$module_name]['module']['#context']['description'] = $this->t($module['description']);
       }
-      $form['modules'][$module_name]['enabled'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Enabled'),
-        '#default_value' => $status == GroupPermissionsHelperInterface::ENABLED,
-        '#disabled' => $status == GroupPermissionsHelperInterface::UNKNOWN,
-      ];
+      if ($status != GroupPermissionsHelperInterface::UNKNOWN) {
+        $form['modules'][$module_name]['enabled'] = [
+          '#type' => 'submit',
+          '#value' => $status == GroupPermissionsHelperInterface::ENABLED ? $this->t('Disable') : $this->t('Enable'),
+          '#name' => $module_name,
+          '#submit' => $status == GroupPermissionsHelperInterface::ENABLED ?
+            [[$this, 'disableModule']] :
+            [[$this, 'enableModule']],
+        ];
+      }
     }
 
     return $form;
@@ -143,36 +146,30 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    $disabled = [];
-    $enabled = [];
-    foreach ($form_state->getValue('modules') as $module => $status) {
-      if ($status['enabled'] && $this->groupPermissionsHelper->moduleStatus($module, $this->group) == GroupPermissionsHelperInterface::DISABLED) {
-        $this->groupPermissionsHelper->moduleEnable($module, $this->group);
-        $enabled[] = $module;
-      }
-      elseif (!$status['enabled'] && $this->groupPermissionsHelper->moduleStatus($module, $this->group) == GroupPermissionsHelperInterface::ENABLED) {
-        $this->groupPermissionsHelper->moduleDisable($module, $this->group);
-        $disabled[] = $module;
-      }
-    }
+  }
 
-    if (!empty($enabled)) {
-      array_walk($enabled, function (&$module) {
-        $info = $this->moduleExtensionList->getExtensionInfo($module);
-        // @codingStandardsIgnoreLine
-        $module = $this->t($info['name']);
-      });
-      $this->messenger()->addMessage($this->t('Enabled: %list', ['%list' => implode(',', $enabled)]));
-    }
-    if (!empty($disabled)) {
-      array_walk($disabled, function (&$module) {
-        $info = $this->moduleExtensionList->getExtensionInfo($module);
-        // @codingStandardsIgnoreLine
-        $module = $this->t($info['name']);
-      });
-      $this->messenger()->addMessage($this->t('Disabled: %list', ['%list' => implode(',', $disabled)]));
-    }
+  /**
+   * Form submission handler: Enable module.
+   */
+  public function enableModule(array &$form, FormStateInterface $form_state) {
+    $module = $form_state->getTriggeringElement()['#name'];
+    $this->groupPermissionsHelper->moduleEnable($module, $this->group);
+    $info = $this->moduleExtensionList->getExtensionInfo($module);
+    // @codingStandardsIgnoreLine
+    $name = $this->t($info['name']);
+    $this->messenger()->addMessage($this->t('Enabled: %name', ['%name' => $name]));
+  }
 
+  /**
+   * Form submission handler: Disable module.
+   */
+  public function disableModule(array &$form, FormStateInterface $form_state) {
+    $module = $form_state->getTriggeringElement()['#name'];
+    $this->groupPermissionsHelper->moduleDisable($module, $this->group);
+    $info = $this->moduleExtensionList->getExtensionInfo($module);
+    // @codingStandardsIgnoreLine
+    $name = $this->t($info['name']);
+    $this->messenger()->addMessage($this->t('Disabled: %name', ['%name' => $name]));
   }
 
 }

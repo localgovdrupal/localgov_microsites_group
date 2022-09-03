@@ -84,18 +84,22 @@ class ModuleSettingsFormTest extends BrowserTestBase {
     $this->drupalGet('group/' . $group->id() . '/domain-settings');
     $this->assertSession()->pageTextContains($group->label() . ' - Domain Settings');
     $page = $this->getSession()->getPage();
-    $page->hasCheckedField('modules[localgov_microsites_events][enabled]');
-    $page->hasCheckedField('modules[localgov_microsites_directories][enabled]');
-    $page->uncheckField('modules[localgov_microsites_directories][enabled]');
-    $page->pressButton('Submit');
+    $directories = $page->findButton('localgov_microsites_directories');
+    $this->assertEquals('Disable', $directories->getValue());
+    $events = $page->findButton('localgov_microsites_events');
+    $this->assertEquals('Disable', $events->getValue());
+    $directories->press();
 
-    $page->hasCheckedField('modules[localgov_microsites_events][enabled]');
-    $page->hasUncheckedField('modules[localgov_microsites_directories][enabled]');
-    $page->checkField('modules[localgov_microsites_directories][enabled]');
-    $page->pressButton('Submit');
+    $directories = $page->findButton('localgov_microsites_directories');
+    $this->assertEquals('Enable', $directories->getValue());
+    $events = $page->findButton('localgov_microsites_events');
+    $this->assertEquals('Disable', $events->getValue());
+    $directories->press();
 
-    $page->hasCheckedField('modules[localgov_microsites_events][enabled]');
-    $page->hasCheckedField('modules[localgov_microsites_directories][enabled]');
+    $directories = $page->findButton('localgov_microsites_directories');
+    $this->assertEquals('Disable', $directories->getValue());
+    $events = $page->findButton('localgov_microsites_events');
+    $this->assertEquals('Disable', $events->getValue());
 
     $this->drupalLogin($this->memberUser);
     $this->drupalGet('group/' . $group->id() . '/domain-settings');
