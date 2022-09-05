@@ -27,6 +27,8 @@ permissions:
   - 'administer domains'
   - 'administer media'
   - 'administer users'
+  - 'assign microsites_controller role'
+  - 'assign microsites_trusted_editor role'
   - 'bypass domain group permissions'
   - 'bypass group access'
   - 'cancel account'
