@@ -6,15 +6,16 @@ dependencies:
     - node.type.localgov_news_article
     - paragraphs.paragraphs_type.localgov_accordion
     - paragraphs.paragraphs_type.localgov_call_out_box
+    - paragraphs.paragraphs_type.localgov_embed_views
     - paragraphs.paragraphs_type.localgov_featured_teasers
     - paragraphs.paragraphs_type.localgov_ia_block
     - paragraphs.paragraphs_type.localgov_image
     - paragraphs.paragraphs_type.localgov_link
     - paragraphs.paragraphs_type.localgov_media_with_text
+    - paragraphs.paragraphs_type.localgov_page_section
     - paragraphs.paragraphs_type.localgov_quote
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
-    - paragraphs.paragraphs_type.localgov_page_section
   module:
     - entity_reference_revisions
 id: node.localgov_news_article.localgov_paragraph_content
@@ -33,6 +34,7 @@ settings:
     target_bundles:
       localgov_accordion: localgov_accordion
       localgov_call_out_box: localgov_call_out_box
+      localgov_embed_views: localgov_embed_views
       localgov_featured_teasers: localgov_featured_teasers
       localgov_ia_block: localgov_ia_block
       localgov_image: localgov_image
@@ -77,6 +79,9 @@ settings:
       localgov_documents:
         weight: 47
         enabled: false
+      localgov_embed_views:
+        weight: 48
+        enabled: true
       localgov_fact_box:
         weight: 48
         enabled: false
@@ -125,9 +130,9 @@ settings:
       localgov_newsroom_teaser:
         weight: 63
         enabled: false
-      page_section:
-        weight: 64
-        enabled: false
+      localgov_page_section:
+        weight: 72
+        enabled: true
       localgov_quote:
         weight: 65
         enabled: true
@@ -148,8 +153,5 @@ settings:
         enabled: true
       localgov_video:
         weight: 71
-        enabled: true
-      localgov_page_section:
-        weight: 72
         enabled: true
 field_type: entity_reference_revisions

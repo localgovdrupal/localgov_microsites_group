@@ -97,7 +97,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
         continue;
       }
       foreach ($role_permissions['group'] as $role => $permissions) {
-        $shared_permissions[$role] = $shared_permissions[$role] ?? [] + array_intersect($module_permissions['group'][$role], $permissions);
+        $shared_permissions[$role] = array_merge($shared_permissions[$role] ?? [], array_intersect($module_permissions['group'][$role], $permissions));
       }
     }
 
@@ -178,7 +178,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
         $module_permissions = RolesHelper::getModuleRoles($module);
         if (!empty($module_permissions['group'])) {
           foreach ($module_permissions['group'] as $role => $permissions) {
-            $enable_permissions[$role] = $enable_permissions[$role] ?? [] + $permissions;
+            $enable_permissions[$role] = array_merge($enable_permissions[$role] ?? [], $permissions);
           }
         }
       }
@@ -215,7 +215,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
         $module_permissions = RolesHelper::getModuleRoles($module);
         if (!empty($module_permissions['group'])) {
           foreach ($module_permissions['group'] as $role => $permissions) {
-            $permissions_with[$role] = $permissions_with[$role] ?? [] + $permissions;
+            $permissions_with[$role] = array_merge($permissions_with[$role] ?? [], $permissions);
           }
         }
       }
