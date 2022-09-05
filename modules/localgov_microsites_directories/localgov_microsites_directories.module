@@ -171,6 +171,7 @@ function localgov_microsites_directories_localgov_microsites_roles_default() {
         'create group_node:localgov_directory_promo_page entity',
         'create group_node:localgov_directories_venue entity',
         'create group_node:localgov_directory entity',
+        'manage directory facets',
         'update any group_node:localgov_directories_page content',
         'update any group_node:localgov_directories_page entity',
         'update any group_node:localgov_directory_promo_page content',
