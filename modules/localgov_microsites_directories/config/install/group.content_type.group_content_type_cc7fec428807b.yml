@@ -8,8 +8,8 @@ dependencies:
     - gnode
     - node
 id: group_content_type_cc7fec428807b
-label: 'Microsite: Group node (Directory page)'
-description: 'Adds <em class="placeholder">Directory page</em> content to groups both publicly and privately.'
+label: 'Directory page'
+description: 'A simple directory entry.'
 group_type: microsite
 content_plugin: 'group_node:localgov_directories_page'
 plugin_config:

@@ -8,8 +8,8 @@ dependencies:
     - gnode
     - node
 id: group_content_type_492185611eee1
-label: 'Microsite: Group node (Directory venue)'
-description: 'Adds <em class="placeholder">Directory venue</em> content to groups both publicly and privately.'
+label: 'Directory venue'
+description: 'A venue entry with location.'
 group_type: microsite
 content_plugin: 'group_node:localgov_directories_venue'
 plugin_config:

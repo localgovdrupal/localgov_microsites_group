@@ -8,8 +8,8 @@ dependencies:
     - gnode
     - node
 id: group_content_type_1a9b2b47fec9e
-label: 'Microsite: Group node (Page)'
-description: 'Adds <em class="placeholder">Page</em> content to groups both publicly and privately.'
+label: 'Page'
+description: 'Page content that allows the building of rich content using Paragraphs.'
 group_type: microsite
 content_plugin: 'group_node:localgov_page'
 plugin_config:
