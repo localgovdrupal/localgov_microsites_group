@@ -192,6 +192,11 @@ function localgov_microsites_group_local_task_title($task_id) {
     case 'group.edit_form':
       return t('Site design');
 
+    case 'views_view:view.group_nodes.page_1':
+      return t('Content');
+
+    case 'entity.group_content_menu.collection':
+      return t('Menus');
   }
 }
 
