@@ -93,8 +93,16 @@ function localgov_microsites_group_entity_extra_field_info() {
  */
 function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
 
-  // Clear group cache so menu links are visible.
+  // Find active group.
   $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  if (is_null($group_id)) {
+    $group = \Drupal::request()->attributes->get('group');
+    if ($group) {
+      $group_id = $group->id();
+    }
+  }
+
+  // Clear group cache so menu links are visible.
   if ($group_id) {
     Cache::invalidateTags(['group:' . $group_id]);
   }
