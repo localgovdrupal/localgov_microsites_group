@@ -2,9 +2,6 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
-use Drupal\group\Entity\GroupInterface;
-use Drupal\node\NodeInterface;
-use Drupal\search_api\Entity\Index;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\BrowserTestBase;
@@ -69,7 +66,7 @@ class MicrositeCachingTest extends BrowserTestBase {
       'name' => $this->group->label(),
       'hostname' => $this->group->label() . '.' . $this->baseHostname,
       'third_party_settings' => [
-        'domain_group' => ['group' =>  $this->group->id()],
+        'domain_group' => ['group' => $this->group->id()],
       ],
     ]);
     $this->domain->save();
@@ -92,7 +89,7 @@ class MicrositeCachingTest extends BrowserTestBase {
     $this->drupalGet($this->domain->getUrl());
     $this->assertSession()->pageTextContains($footer_text);
 
-    // Check menu changes appear
+    // Check menu changes appear.
     $link_title = $this->randomString();
     $this->drupalGet('group/' . $this->group->id() . '/menu/2/add-link');
     $this->submitForm([
@@ -102,4 +99,5 @@ class MicrositeCachingTest extends BrowserTestBase {
     $this->drupalGet($this->domain->getUrl());
     $this->assertSession()->pageTextContains($link_title);
   }
+
 }
