@@ -8,8 +8,8 @@ dependencies:
     - gnode
     - node
 id: group_content_type_5a3c371773542
-label: 'Microsite: Group node (Event)'
-description: 'Adds <em class="placeholder">Event</em> content to groups both publicly and privately.'
+label: 'Event'
+description: 'An event to appear in the events listing and optionally integrate into a directory.'
 group_type: microsite
 content_plugin: 'group_node:localgov_event'
 plugin_config:
