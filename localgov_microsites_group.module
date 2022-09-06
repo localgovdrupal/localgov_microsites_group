@@ -106,6 +106,41 @@ function localgov_microsites_group_view(array &$build, GroupInterface $group, En
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_insert() for group_content entities.
+ */
+function localgov_microsites_group_group_content_insert(GroupContentInterface $entity) {
+
+  // Add the Trusted Editor Role to group members.
+  $type = $entity->get('type')->getValue();
+  if (isset($type[0]['target_id']) && $type[0]['target_id'] == 'microsite-group_membership') {
+
+    /** @var \Drupal\user\Entity\User $member */
+    $member = $entity->getEntity();
+    $member->addRole('microsites_trusted_editor');
+    $member->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for group_content entities.
+ */
+function localgov_microsites_group_group_content_delete(GroupContentInterface $entity) {
+
+  // Remove the Trusted Editor Role when a user is no longer a member of groups.
+  $type = $entity->get('type')->getValue();
+  if (isset($type[0]['target_id']) && $type[0]['target_id'] == 'microsite-group_membership') {
+
+    /** @var \Drupal\user\Entity\User $member */
+    $member = $entity->getEntity();
+    $groups = \Drupal::service('group.membership_loader')->loadByUser($member);
+    if (empty($groups)) {
+      $member->removeRole('microsites_trusted_editor');
+      $member->save();
+    }
+  }
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function localgov_microsites_group_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
