@@ -96,7 +96,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
       'localgov_microsites_events',
     ]);
 
-    localgov_microsites_group_modules_installed(['localgov_microsites_events']);
+    localgov_microsites_group_modules_installed(['localgov_microsites_events'], FALSE);
   }
 
   /**
