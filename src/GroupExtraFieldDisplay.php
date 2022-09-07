@@ -46,10 +46,24 @@ class GroupExtraFieldDisplay {
    */
   public function groupView(array &$build, GroupInterface $group, EntityViewDisplayInterface $display, $view_mode) {
     if ($display->getComponent('microsite_content')) {
-      $build['microsite_content'] = $this->getContentViewEmbed($group);
+      $build['microsite_content'] = [
+        'title' => [
+          '#type' => 'html_tag',
+          '#tag' => 'h2',
+          '#value' => \t('Content'),
+        ],
+        'view' => $this->getContentViewEmbed($group),
+      ];
     }
     if ($display->getComponent('microsite_members')) {
-      $build['microsite_members'] = $this->getMemberViewEmbed($group);
+      $build['microsite_members'] = [
+        'title' => [
+          '#type' => 'html_tag',
+          '#tag' => 'h2',
+          '#value' => \t('Users'),
+        ],
+        'view' => $this->getMemberViewEmbed($group),
+      ];
     }
   }
 
