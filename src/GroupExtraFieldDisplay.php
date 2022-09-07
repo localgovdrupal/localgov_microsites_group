@@ -50,7 +50,7 @@ class GroupExtraFieldDisplay {
         'title' => [
           '#type' => 'html_tag',
           '#tag' => 'h2',
-          '#value' => \t('Content'),
+          '#value' => $this->t('Content'),
         ],
         'view' => $this->getContentViewEmbed($group),
       ];
@@ -60,7 +60,7 @@ class GroupExtraFieldDisplay {
         'title' => [
           '#type' => 'html_tag',
           '#tag' => 'h2',
-          '#value' => \t('Users'),
+          '#value' => $this->t('Users'),
         ],
         'view' => $this->getMemberViewEmbed($group),
       ];
