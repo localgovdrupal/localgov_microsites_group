@@ -29,6 +29,12 @@ class GroupExtraFieldDisplay {
       'weight' => -20,
       'visible' => TRUE,
     ];
+    $fields['group']['microsite']['display']['microsite_members'] = [
+      'label' => $this->t('Microsite members'),
+      'description' => $this->t("Members list with link to adminster tab."),
+      'weight' => -20,
+      'visible' => TRUE,
+    ];
 
     return $fields;
   }
@@ -40,22 +46,43 @@ class GroupExtraFieldDisplay {
    */
   public function groupView(array &$build, GroupInterface $group, EntityViewDisplayInterface $display, $view_mode) {
     if ($display->getComponent('microsite_content')) {
-      $build['microsite_content'] = $this->getViewEmbed($group);
+      $build['microsite_content'] = $this->getContentViewEmbed($group);
+    }
+    if ($display->getComponent('microsite_members')) {
+      $build['microsite_members'] = $this->getMemberViewEmbed($group);
     }
   }
 
   /**
    * Retrieves view, and sets render array.
    */
-  protected function getViewEmbed(GroupInterface $group) {
+  protected function getContentViewEmbed(GroupInterface $group) {
     $view = Views::getView('group_nodes');
-    if (!$view || !$view->access('microsite_overview')) {
+    if (!$view || !$view->access('microsite_dashboard_embed')) {
       return;
     }
     $render = [
       '#type' => 'view',
       '#name' => 'group_nodes',
-      '#display_id' => 'microsite_overview',
+      '#display_id' => 'microsite_dashboard_embed',
+      '#arguments' => [$group->id()],
+    ];
+
+    return $render;
+  }
+
+  /**
+   * Retrieves view, and sets render array.
+   */
+  protected function getMemberViewEmbed(GroupInterface $group) {
+    $view = Views::getView('group_nodes');
+    if (!$view || !$view->access('microsite_dashboard_embed')) {
+      return;
+    }
+    $render = [
+      '#type' => 'view',
+      '#name' => 'group_members',
+      '#display_id' => 'microsite_dashboard_embed',
       '#arguments' => [$group->id()],
     ];
 

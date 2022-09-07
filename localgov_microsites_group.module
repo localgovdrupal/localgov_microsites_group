@@ -5,6 +5,7 @@
  * Primary module hooks for LocalGov Microsites Group module.
  */
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
@@ -18,14 +19,39 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
+use Drupal\views\Entity\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Implements hook_modules_installed().
  */
-function localgov_microsites_group_modules_installed($modules) {
+function localgov_microsites_group_modules_installed($modules, $is_syncing) {
+  // Assume configuration is correct if the site is being config sync'd.
+  if ($is_syncing) {
+    return;
+  }
+
   foreach ($modules as $module) {
     RolesHelper::assignModuleRoles($module);
+  }
+  // Add our overrides to the group default views.
+  if (in_array('group', $modules) || in_array('localgov_microsites_group', $modules)) {
+    $module_path = \Drupal::service('extension.list.module')->getPath('localgov_microsites_group');
+    if ($view = View::load('group_nodes')) {
+      $group_node_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_nodes.yml'));
+      $displays = $view->get('display');
+      $displays['microsite_page'] = $group_node_view['display']['microsite_page'];
+      $displays['microsite_dashboard_embed'] = $group_node_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
+    if ($view = View::load('group_members')) {
+      $group_member_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_members.yml'));
+      $displays = $view->get('display');
+      $displays['microsite_dashboard_embed'] = $group_member_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
   }
 }
 
