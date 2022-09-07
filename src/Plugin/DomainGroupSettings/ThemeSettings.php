@@ -17,7 +17,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\domain\DomainInterface;
-use Drupal\group\Access\GroupAccessResult;
 
 /**
  * Provides options for group domain.
