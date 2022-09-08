@@ -145,7 +145,7 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
       '#type' => 'select',
       '#title' => $this->t('Default theme'),
       '#default_value' => $default,
-      '#description' => $this->t("Override theme used for user pages."),
+      '#description' => $this->t("Override the theme used on this microsite."),
       '#options' => $default_options,
     ];
     $admin = $config_override ? $config_override->get('admin') : '';
