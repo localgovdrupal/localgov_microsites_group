@@ -117,8 +117,7 @@ function localgov_microsites_group_entity_extra_field_info() {
 /**
  * Implements hook_ENTITY_TYPE_presave() for menu_link_content entities.
  */
-function localgov_microsites_group_menu_link_content_presave(
-Interface $entity) {
+function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
 
   // Find active group.
   $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
