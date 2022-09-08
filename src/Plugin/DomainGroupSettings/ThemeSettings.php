@@ -135,6 +135,11 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
       }
     }
 
+    $form['description'] = [
+      '#type' => 'markup',
+      '#markup' => '<p>The default theme is LocalGov Microsites Base, which can be customised extensively through the UI on the Site design tab of the microsite. If you need further customisation we recommend making a child theme of LocalGov Microsites Base.</p>',
+    ];
+
     $default = $config_override ? $config_override->get('default') : '';
     $form['default'] = [
       '#type' => 'select',
