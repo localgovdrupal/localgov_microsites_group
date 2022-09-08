@@ -3,12 +3,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - group.content_type.group_content_type_b095718650441
   module:
     - group
     - node
     - user
-id: lgms_embed_views
-label: 'Recent content'
+id: lgms_embed_view_news
+label: 'Latest news'
 module: views
 description: ''
 tag: ''
@@ -21,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Recent Content'
+      title: 'Latest news'
       fields:
         title:
           id: title
@@ -161,6 +162,48 @@ display:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
+        type:
+          id: type
+          table: group_content_field_data
+          field: type
+          relationship: group_content
+          group_type: group
+          admin_label: ''
+          entity_type: group_content
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            group_content_type_b095718650441: group_content_type_b095718650441
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: default
       row:
@@ -206,9 +249,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_1:
-    id: block_1
-    display_title: 'Recent content'
+  latest_news:
+    id: latest_news
+    display_title: 'Latest news'
     display_plugin: block
     position: 1
     display_options:

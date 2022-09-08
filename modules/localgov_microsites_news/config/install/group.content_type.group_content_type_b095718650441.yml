@@ -9,8 +9,8 @@ dependencies:
     - gnode
     - node
 id: group_content_type_b095718650441
-label: 'Microsite: Group node (News article)'
-description: 'Adds <em class="placeholder">News article</em> content to groups both publicly and privately.'
+label: 'News article'
+description: 'A stand-alone news article that may also appear in a news listing page.'
 group_type: microsite
 content_plugin: 'group_node:localgov_news_article'
 plugin_config:

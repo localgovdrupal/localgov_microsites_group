@@ -10,17 +10,20 @@ entity_type: group
 type: list_string
 settings:
   allowed_values:
-    - value: full-width
-      label: "Background and content full width"
-    - value: full-width-content-contained
-      label: "Background full width, content constrained"
-    - value: content-centered
-      label: "Background and content constrained"
-  allowed_values_function: ""
+    -
+      value: full-width
+      label: 'Full width content and background'
+    -
+      value: full-width-content-contained
+      label: 'Constrained content and full width background'
+    -
+      value: content-centered
+      label: 'Constrained content and background'
+  allowed_values_function: ''
 module: options
 locked: false
 cardinality: 1
 translatable: true
-indexes: {}
+indexes: {  }
 persist_with_no_fields: false
 custom_storage: false

@@ -100,10 +100,43 @@ class ModuleSettingsFormTest extends BrowserTestBase {
     $this->assertEquals('Disable', $directories->getValue());
     $events = $page->findButton('localgov_microsites_events');
     $this->assertEquals('Disable', $events->getValue());
+  }
 
+  /**
+   * Test access to group management pages.
+   */
+  public function testGroupManagementAccess() {
+    $group = $this->groups[0];
+
+    // Test admin access.
+    $this->drupalLogin($this->adminUser);
+    $this->drupalGet('group/' . $group->id());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('group/' . $group->id() . '/domain-settings');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('group/' . $group->id() . '/edit');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('group/' . $group->id() . '/menus');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('group/' . $group->id() . '/members');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('group/' . $group->id() . '/nodes');
+    $this->assertSession()->statusCodeEquals(200);
+
+    // Test member access.
     $this->drupalLogin($this->memberUser);
+    $this->drupalGet('group/' . $group->id());
+    $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet('group/' . $group->id() . '/domain-settings');
     $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet('group/' . $group->id() . '/edit');
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet('group/' . $group->id() . '/menus');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('group/' . $group->id() . '/members');
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet('group/' . $group->id() . '/nodes');
+    $this->assertSession()->statusCodeEquals(200);
   }
 
 }

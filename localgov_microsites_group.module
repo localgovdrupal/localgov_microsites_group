@@ -20,6 +20,7 @@ use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\views\Entity\View;
+use Drupal\menu_link_content\MenuLinkContentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -114,12 +115,24 @@ function localgov_microsites_group_entity_extra_field_info() {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_ENTITY_TYPE_presave() for menu_link_content entities.
  */
-function localgov_microsites_group_group_presave(GroupInterface $entity) {
+function localgov_microsites_group_menu_link_content_presave(
+Interface $entity) {
 
-  // Clear node cache so site design changes become visible.
-  Cache::invalidateTags(['node_view']);
+  // Find active group.
+  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  if (is_null($group_id)) {
+    $group = \Drupal::request()->attributes->get('group');
+    if ($group) {
+      $group_id = $group->id();
+    }
+  }
+
+  // Clear group cache so menu links are visible.
+  if ($group_id) {
+    Cache::invalidateTags(['group:' . $group_id]);
+  }
 }
 
 /**
@@ -129,6 +142,41 @@ function localgov_microsites_group_view(array &$build, GroupInterface $group, En
   return \Drupal::service('class_resolver')
     ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
     ->groupView($build, $group, $display, $view_mode);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for group_content entities.
+ */
+function localgov_microsites_group_group_content_insert(GroupContentInterface $entity) {
+
+  // Add the Trusted Editor Role to group members.
+  $type = $entity->get('type')->getValue();
+  if (isset($type[0]['target_id']) && $type[0]['target_id'] == 'microsite-group_membership') {
+
+    /** @var \Drupal\user\Entity\User $member */
+    $member = $entity->getEntity();
+    $member->addRole('microsites_trusted_editor');
+    $member->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for group_content entities.
+ */
+function localgov_microsites_group_group_content_delete(GroupContentInterface $entity) {
+
+  // Remove the Trusted Editor Role when a user is no longer a member of groups.
+  $type = $entity->get('type')->getValue();
+  if (isset($type[0]['target_id']) && $type[0]['target_id'] == 'microsite-group_membership') {
+
+    /** @var \Drupal\user\Entity\User $member */
+    $member = $entity->getEntity();
+    $groups = \Drupal::service('group.membership_loader')->loadByUser($member);
+    if (empty($groups)) {
+      $member->removeRole('microsites_trusted_editor');
+      $member->save();
+    }
+  }
 }
 
 /**
@@ -218,6 +266,11 @@ function localgov_microsites_group_local_task_title($task_id) {
     case 'group.edit_form':
       return t('Site design');
 
+    case 'views_view:view.group_nodes.page_1':
+      return t('Content');
+
+    case 'entity.group_content_menu.collection':
+      return t('Menus');
   }
 }
 

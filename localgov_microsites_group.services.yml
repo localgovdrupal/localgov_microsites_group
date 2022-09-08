@@ -23,3 +23,9 @@ services:
     class: Drupal\localgov_microsites_group\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
+
+  localgov_microsites_group.alter_create_group_content:
+    class: \Drupal\localgov_microsites_group\EventSubscriber\AlterCreateGroupContentSubscriber
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: event_subscriber }

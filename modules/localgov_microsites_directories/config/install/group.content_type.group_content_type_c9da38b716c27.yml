@@ -8,8 +8,8 @@ dependencies:
     - gnode
     - node
 id: group_content_type_c9da38b716c27
-label: 'Microsite: Group node (Directory channel)'
-description: 'Adds <em class="placeholder">Directory channel</em> content to groups both publicly and privately.'
+label: 'Directory channel'
+description: 'Main directory landing page.'
 group_type: microsite
 content_plugin: 'group_node:localgov_directory'
 plugin_config:
