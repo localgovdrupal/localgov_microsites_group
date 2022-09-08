@@ -18,6 +18,7 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
+use Drupal\menu_link_content\MenuLinkContentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -88,12 +89,23 @@ function localgov_microsites_group_entity_extra_field_info() {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_ENTITY_TYPE_presave() for menu_link_content entities.
  */
-function localgov_microsites_group_group_presave(GroupInterface $entity) {
+function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
 
-  // Clear node cache so site design changes become visible.
-  Cache::invalidateTags(['node_view']);
+  // Find active group.
+  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  if (is_null($group_id)) {
+    $group = \Drupal::request()->attributes->get('group');
+    if ($group) {
+      $group_id = $group->id();
+    }
+  }
+
+  // Clear group cache so menu links are visible.
+  if ($group_id) {
+    Cache::invalidateTags(['group:' . $group_id]);
+  }
 }
 
 /**
