@@ -107,10 +107,18 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
     $site_default = $site_config->get('default');
     $site_admin = $site_config->get('admin');
 
-    $admin_options = ['' => ''];
-    $default_options = ['' => ''];
     // Get all available themes.
     $themes = $this->themeHandler->rebuildThemeData();
+    $admin_options = [
+      '' => $this->t('No override (:site_admin)',
+        [':site_admin' => $themes[$site_admin]->info['name']]
+      ),
+    ];
+    $default_options = [
+      '' => $this->t('No override (:site_default)',
+        [':site_default' => $themes[$site_default]->info['name']]
+      ),
+    ];
     // Remove obsolete themes.
     $themes = array_filter($themes, function ($theme) {
       return !$theme->isObsolete();
@@ -127,14 +135,6 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
       }
     }
 
-    $admin = $config_override ? $config_override->get('admin') : '';
-    $form['admin'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Admin theme'),
-      '#default_value' => $admin,
-      '#description' => $this->t("Override theme used for administration pages."),
-      '#options' => $admin_options,
-    ];
     $default = $config_override ? $config_override->get('default') : '';
     $form['default'] = [
       '#type' => 'select',
@@ -142,6 +142,14 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
       '#default_value' => $default,
       '#description' => $this->t("Override theme used for user pages."),
       '#options' => $default_options,
+    ];
+    $admin = $config_override ? $config_override->get('admin') : '';
+    $form['admin'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Admin theme'),
+      '#default_value' => $admin,
+      '#description' => $this->t("Override theme used for administration pages."),
+      '#options' => $admin_options,
     ];
 
     return $form;
