@@ -26,7 +26,6 @@ function localgov_microsites_directories_modules_installed($modules) {
     in_array('localgov_microsites_directories', $modules)
   ) {
     foreach ([
-      'pathauto.pattern.localgov_directory_channel',
       'pathauto.pattern.localgov_directories_page',
       'pathauto.pattern.localgov_directories_venue',
     ] as $config_name) {
@@ -34,6 +33,12 @@ function localgov_microsites_directories_modules_installed($modules) {
         $config->delete();
       }
     }
+  }
+  // Directory channel pattern is imported every time optional configuration is
+  // refereshed if the item is deleted, so we are just removing it on all module
+  // installs.
+  if ($config = $config_factory->getEditable('pathauto.pattern.localgov_directory_channel')) {
+    $config->delete();
   }
 }
 

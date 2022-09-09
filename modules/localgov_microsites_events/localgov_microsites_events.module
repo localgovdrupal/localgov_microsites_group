@@ -16,11 +16,13 @@ function localgov_microsites_events_modules_installed($modules) {
   // There doesn't seem to be a way to alter configuration when being installed,
   // when it's being saved it's hard to tell where it came from (sync, create,
   // or import). So just removing it after installation.
+  //
+  // Events pathauto pattern is imported every time optional configuration is
+  // refereshed if the item is deleted, so we are just removing it on all module
+  // installs.
   $config_factory = \Drupal::configFactory();
-  if (in_array('localgov_events', $modules) || in_array('localgov_microsites_events', $modules)) {
-    if ($config = $config_factory->getEditable('pathauto.pattern.localgov_event')) {
-      $config->delete();
-    }
+  if ($config = $config_factory->getEditable('pathauto.pattern.localgov_event')) {
+    $config->delete();
   }
 }
 
