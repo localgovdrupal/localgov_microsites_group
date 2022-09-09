@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContentInterface;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\DomainSettingsHelper;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
@@ -115,6 +116,24 @@ function localgov_microsites_group_view(array &$build, GroupInterface $group, En
   return \Drupal::service('class_resolver')
     ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
     ->groupView($build, $group, $display, $view_mode);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for group entities.
+ */
+function localgov_microsites_group_group_insert(GroupInterface $group) {
+  if ($group->hasField('lgms_favicon')) {
+    \Drupal::classResolver(DomainSettingsHelper::class)->faviconField($group, $group->lgms_favicon);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for group entities.
+ */
+function localgov_microsites_group_group_update(GroupInterface $group) {
+  if ($group->hasField('lgms_favicon')) {
+    \Drupal::classResolver(DomainSettingsHelper::class)->faviconField($group, $group->lgms_favicon);
+  }
 }
 
 /**
