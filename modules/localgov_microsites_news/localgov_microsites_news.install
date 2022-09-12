@@ -5,6 +5,8 @@
  * LocalGov Microsites News module file.
  */
 
+use Drupal\search_api\Entity\Index;
+
 /**
  * Implements hook_install().
  */
@@ -153,4 +155,12 @@ function localgov_microsites_news_install($is_syncing) {
     ->load('node.localgov_news_article.localgov_news_categories');
   $field->setSetting('handler', 'group:taxonomy_term');
   $field->save();
+
+  // Add domain access to exclude other sites results.
+  $index = Index::load('localgov_news');
+  $processor = \Drupal::getContainer()
+    ->get('search_api.plugin_helper')
+    ->createProcessorPlugin($index, 'domain_group_entity_access');
+  $index->addProcessor($processor);
+  $index->save();
 }
