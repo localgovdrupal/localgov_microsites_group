@@ -11,6 +11,38 @@ use Drupal\group\Entity\GroupType;
 use Drupal\localgov_microsites_group\RolesHelper;
 
 /**
+ * Implements hook_modules_installed().
+ */
+function localgov_microsites_directories_modules_installed($modules) {
+  // Don't use global site pathauto settings.
+  //
+  // There doesn't seem to be a way to alter configuration when being installed,
+  // when it's being saved it's hard to tell where it came from (sync, create,
+  // or import). So just removing it after installation.
+  $config_factory = \Drupal::configFactory();
+  if (in_array('localgov_directories', $modules) ||
+    in_array('localgov_directories_page', $modules) ||
+    in_array('localgov_directories_venue', $modules) ||
+    in_array('localgov_microsites_directories', $modules)
+  ) {
+    foreach ([
+      'pathauto.pattern.localgov_directories_page',
+      'pathauto.pattern.localgov_directories_venue',
+    ] as $config_name) {
+      if ($config = $config_factory->getEditable($config_name)) {
+        $config->delete();
+      }
+    }
+  }
+  // Directory channel pattern is imported every time optional configuration is
+  // refereshed if the item is deleted, so we are just removing it on all module
+  // installs.
+  if ($config = $config_factory->getEditable('pathauto.pattern.localgov_directory_channel')) {
+    $config->delete();
+  }
+}
+
+/**
  * Implements hook_entity_insert().
  */
 function localgov_microsites_directories_entity_insert(EntityInterface $entity) {
