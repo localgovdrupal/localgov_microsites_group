@@ -3,12 +3,8 @@
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Url;
-use Drupal\group\Entity\Group;
-use Drupal\group\Entity\GroupType;
-use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
  * Tests the creation of microsites.
@@ -91,4 +87,5 @@ class MicrositeCreationTest extends BrowserTestBase {
     $this->drupalGet($site1_hostname);
     $this->assertSession()->pageTextContains($site1_name);
   }
+
 }
