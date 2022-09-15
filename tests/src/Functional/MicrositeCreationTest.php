@@ -66,26 +66,27 @@ class MicrositeCreationTest extends BrowserTestBase {
     $this->drupalLogin($user);
 
     // Create a site.
-    $site1_hostname = 'group-a1.' . $this->baseHostname;
-    $site1_name = $this->randomString();
+    $site_hostname = 'group-a1.' . $this->baseHostname;
+    $site_name = $this->randomString();
     $this->drupalGet(Url::fromRoute('localgov_microsites_group.new_domain_group_form', [
       'group_type' => 'microsite',
     ]));
     $this->submitForm([
-      'label[0][value]' => $site1_name,
+      'label[0][value]' => $site_name,
     ], 'edit-submit');
     $this->submitForm([
-      'hostname' => $site1_hostname,
+      'hostname' => $site_hostname,
     ], 'edit-submit');
-    $this->assertNotNull(\Drupal::entityTypeManager()->getStorage('domain')->loadByHostname($site1_hostname));
+    $domain = \Drupal::entityTypeManager()->getStorage('domain')->loadByHostname($site_hostname);
+    $this->assertNotNull($domain);
     $group_ids = \Drupal::entityQuery('group')
-      ->condition('label', $site1_name, '=')
+      ->condition('label', $site_name, '=')
       ->execute();
     $this->assertNotEmpty($group_ids);
     $group = \Drupal::entityTypeManager()->getStorage('group')->load(reset($group_ids));
-    $this->assertSame($site1_name, $group->label());
-    $this->drupalGet($site1_hostname);
-    $this->assertSession()->pageTextContains($site1_name);
+    $this->assertSame($site_name, $group->label());
+    $this->drupalGet($domain->getUrl());
+    $this->assertSession()->pageTextContains($site_name);
   }
 
 }
