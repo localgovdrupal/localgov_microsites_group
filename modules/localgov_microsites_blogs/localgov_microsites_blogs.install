@@ -5,7 +5,6 @@
  * LocalGov Microsites Blogs module file.
  */
 
-
 /**
  * Implements hook_install().
  */
