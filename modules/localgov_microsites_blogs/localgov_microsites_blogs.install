@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Microsites Blogs module file.
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function localgov_microsites_blogs_install($is_syncing) {
+
+  if ($is_syncing) {
+    return;
+  }
+
+  // Get display settings for A blog post page that appears in a blog channel..
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.localgov_blog_post.default');
+  /** @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface $view_display */
+  $view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.localgov_blog_post.default');
+
+  // Set form display options for paragraph content.
+  if (!$form_display->getComponent('localgov_paragraph_content')) {
+    $form_display->setComponent('localgov_paragraph_content', [
+      'type' => 'layout_paragraphs',
+      'region' => 'content',
+      'settings' => [
+        'preview_view_mode' => 'default',
+        'nesting_depth' => 0,
+        'require_layouts' => 1,
+      ],
+      'weight' => 4,
+    ]);
+    $group_content = $form_display->getThirdPartySetting('field_group', 'group_content');
+    $group_content['children'][] = 'localgov_paragraph_content';
+    $form_display->setThirdPartySetting('field_group', 'group_content', $group_content);
+    $form_display->save();
+  }
+
+  // Set form display options for banner.
+  if (!$form_display->getComponent('lgms_banner')) {
+    $form_display->setComponent('lgms_banner', [
+      'type' => 'entity_reference_paragraphs',
+      'region' => 'content',
+      'settings' => [
+        'edit_mode' => 'closed',
+        'add_mode' => 'button',
+      ],
+      'weight' => 3,
+    ]);
+    $group_content = $form_display->getThirdPartySetting('field_group', 'group_content');
+    $group_content['children'][] = 'lgms_banner';
+    $form_display->setThirdPartySetting('field_group', 'group_content', $group_content);
+    $form_display->save();
+  }
+
+  // Set view display options for paragraph content.
+  if (!$view_display->getComponent('localgov_paragraph_content')) {
+    $view_display->setComponent('localgov_paragraph_content', [
+      'type' => 'layout_paragraphs',
+      'label' => 'hidden',
+      'region' => 'content',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'weight' => 4,
+    ])->save();
+  }
+
+  // Set view display options for banner.
+  if (!$view_display->getComponent('lgms_banner')) {
+    $view_display->setComponent('lgms_banner', [
+      'type' => 'entity_reference_entity_view',
+      'label' => 'hidden',
+      'region' => 'content',
+      'settings' => [
+        'view_mode' => 'responsive_banner',
+        'link' => 'FALSE',
+      ],
+      'weight' => 0,
+    ])->save();
+  }
+
+  // Use the group term reference plugin for the localgov_blog_categories field.
+  /** @var \Drupal\field\Entity\FieldConfig $field */
+  $field = Drupal::entityTypeManager()
+    ->getStorage('field_config')
+    ->load('node.localgov_blog_post.localgov_blog_categories');
+  $field->setSetting('handler', 'group:taxonomy_term');
+  $field->save();
+}
