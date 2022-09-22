@@ -130,7 +130,7 @@ function localgov_microsites_blogs_install($is_syncing) {
  $group_view_page_top->weight = '-5';
  $group_view_page_top->children = [
    'localgov_blog_categories',
-  // 'localgov_blog_date',
+   'localgov_blog_date',
  ];
  $group_view_page_top->format_type = 'html_element';
  $group_view_page_top->format_settings = [
