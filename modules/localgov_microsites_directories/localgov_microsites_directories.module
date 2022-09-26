@@ -74,11 +74,7 @@ function localgov_microsites_directories_form_alter(&$form, FormStateInterface $
   }
 
   // Add submit handler to new directory facet form.
-  elseif (
-    preg_match('/^localgov_directories_facets_[a-zA-Z0-9_]*_add_form$/', $form_id) === 1 &&
-    isset($form['#entity_type']) &&
-    $form['#entity_type'] == 'localgov_directories_facets'
-  ) {
+  elseif (preg_match('/^localgov_directories_facets_[a-zA-Z0-9_]*_add_form$/', $form_id) === 1) {
     $form['actions']['submit']['#submit'][] = 'localgov_microsites_directories_submit_new_directory_facet';
   }
 }
