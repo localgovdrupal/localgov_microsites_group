@@ -10,6 +10,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContentInterface;
 use Drupal\group\Entity\GroupInterface;
@@ -305,4 +306,22 @@ function localgov_microsites_group_module_implements_alter(&$implementations, $h
 function localgov_microsites_group_redirect_group_content(GroupContentInterface $group_content) {
   $entity = $group_content->getEntity();
   return new RedirectResponse($entity->toUrl()->toString());
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function localgov_microsites_group_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+
+  // Hide 'all entities` breadcrumb link when adding group content.
+  if (!empty($breadcrumb) && $route_match->getRouteName() == 'entity.group_content.create_form') {
+    $links = $breadcrumb->getLinks();
+    for ($i = 0; $i < count($links); $i++) {
+      $link = $links[$i]->getText();
+      if ($link instanceof TranslatableMarkup && $link->getUntranslatedString() == 'All entities for @group') {
+        unset($links[$i]);
+      }
+    }
+    $breadcrumb->setLinks($links);
+  }
 }
