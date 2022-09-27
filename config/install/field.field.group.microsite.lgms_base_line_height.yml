@@ -12,8 +12,7 @@ label: "Base line-height"
 description: "Line height is used to set the distance between lines of text.<br/>\r\nIn general, we recommend <strong>1.5</strong>. Please <strong>do not</strong> use any units: use 1.3, not 1.3em; use 24, not 24px; etc."
 required: false
 translatable: false
-default_value:
-  - value: 1.5
+default_value: {  }
 default_value_callback: ""
 settings:
   min: !!float 1
