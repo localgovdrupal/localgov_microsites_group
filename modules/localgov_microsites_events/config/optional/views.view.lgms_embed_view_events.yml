@@ -323,8 +323,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  latest_events:
-    id: latest_events
+  upcoming_events:
+    id: upcoming_events
     display_title: 'Upcoming events'
     display_plugin: block
     position: 1
