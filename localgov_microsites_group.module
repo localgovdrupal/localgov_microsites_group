@@ -10,6 +10,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContentInterface;
 use Drupal\group\Entity\GroupInterface;
@@ -244,8 +245,8 @@ function localgov_microsites_group_local_task_hidden($task_id) {
   return in_array($task_id,
     [
       'group.delete_form',
-      'group.content', '
-      group.version_history',
+      'group.content',
+      'group.version_history',
       'group_permissions.link.group_permissions_parent',
     ]);
 }
@@ -274,26 +275,13 @@ function localgov_microsites_group_local_task_title($task_id) {
 }
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter().
+ * Implements hook_preprocess_page_title().
  */
-function localgov_microsites_group_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function localgov_microsites_group_preprocess_page_title(&$variables) {
 
-  // Hide menu from node edit forms while user testing is happening as the
-  // menu widget doesn't currently work for group menu.
-  // See https://github.com/localgovdrupal/localgov_microsites/issues/108
-  $form['menu']['#access'] = FALSE;
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function localgov_microsites_group_module_implements_alter(&$implementations, $hook) {
-
-  // Ensure our form alter hook is run after menu_ui.
-  if ($hook == 'form_alter' && isset($implementations['localgov_microsites_group'])) {
-    $group = $implementations['localgov_microsites_group'];
-    unset($implementations['localgov_microsites_group']);
-    $implementations['localgov_microsites_group'] = $group;
+  // Change page title.
+  if ($variables['title'] instanceof TranslatableMarkup && $variables['title']->__toString() == 'Group content menus') {
+    $variables['title'] = t('Menus');
   }
 }
 
