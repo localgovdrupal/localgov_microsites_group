@@ -9,7 +9,7 @@ field_name: group_roles
 entity_type: group_content
 bundle: microsite-group_invitation
 label: Roles
-description: ''
+description: 'All microsite members have editorial permissions. Check the Admin field if the person should have more enhanced permissions.'
 required: false
 translatable: true
 default_value: {  }
