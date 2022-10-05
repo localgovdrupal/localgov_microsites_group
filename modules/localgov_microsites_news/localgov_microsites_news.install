@@ -164,14 +164,13 @@ function localgov_microsites_news_install($is_syncing) {
   $index->addProcessor($processor);
   $index->save();
 
-
-  // Update the localgov_embed_views to allow the lgms_embed_view_news view
-
+  // Update the localgov_embed_views to allow the lgms_embed_view_news view.
   /** @var \Drupal\field\Entity\FieldConfig $field */
   $field = Drupal::entityTypeManager()
     ->getStorage('field_config')
     ->load('paragraph.localgov_embed_views.localgov_embed_block_view');
-  $field->setSetting('preselect_views', ['lgms_embed_view_news' => 'lgms_embed_view_news']);
+  $preselect_views = $field->getSetting('preselect_views');
+  $preselect_views['lgms_embed_view_news'] = 'lgms_embed_view_news';
+  $field->setSetting('preselect_views', $preselect_views);
   $field->save();
-
 }
