@@ -10,7 +10,7 @@ dependencies:
     - node
     - user
 id: lgms_embed_view_events
-label: 'Upcoming events'
+label: 'Events'
 module: views
 description: ''
 tag: ''
@@ -311,6 +311,7 @@ display:
           entity_type: node
           plugin_id: standard
           required: false
+      css_class: 'view--teasers lgd-teaser-list'
       header: {  }
       footer: {  }
       display_extenders: {  }
