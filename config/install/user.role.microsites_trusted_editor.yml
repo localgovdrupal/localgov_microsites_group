@@ -9,6 +9,7 @@ dependencies:
     - media
     - system
     - domain_path
+    - localgov_sa11y
 id: microsites_trusted_editor
 label: 'Microsites trusted editor'
 weight: 3
@@ -32,6 +33,7 @@ permissions:
   - 'edit own remote_video media'
   - 'update any media'
   - 'update media'
+  - 'use_localgov_sa11y'
   - 'view all media revisions'
   - 'view media'
   - 'view own unpublished media'
