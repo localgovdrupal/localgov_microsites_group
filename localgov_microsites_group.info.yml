@@ -29,3 +29,4 @@ dependencies:
   - localgov_page:localgov_page
   - localgov_search:localgov_search
   - localgov_search:localgov_search_db
+  - localgov_sa11y:localgov_sa11y
