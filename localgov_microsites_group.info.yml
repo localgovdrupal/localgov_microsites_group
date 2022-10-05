@@ -23,8 +23,10 @@ dependencies:
   - media_library:media_library
   - replicate:replicate
   - responsive_preview:responsive_preview
+  - role_delegation:role_delegation
   # LocalGov Drupal
   - localgov_core:localgov_media
   - localgov_page:localgov_page
   - localgov_search:localgov_search
   - localgov_search:localgov_search_db
+  - localgov_sa11y:localgov_sa11y

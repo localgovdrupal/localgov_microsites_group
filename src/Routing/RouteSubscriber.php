@@ -20,6 +20,12 @@ class RouteSubscriber extends RouteSubscriberBase {
       $defaults['_controller'] = 'localgov_microsites_group_redirect_group_content';
       $route->setDefaults($defaults);
     }
+    if ($route = $collection->get('view.group_nodes.page_1')) {
+      $route->setDefault('_controller', GroupViewPageController::class . '::handle');
+    }
+    if ($route = $collection->get('view.group_nodes.microsite_page')) {
+      $route->setDefault('_controller', GroupViewPageController::class . '::handle');
+    }
   }
 
 }

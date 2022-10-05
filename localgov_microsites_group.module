@@ -5,6 +5,7 @@
  * Primary module hooks for LocalGov Microsites Group module.
  */
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
@@ -18,14 +19,40 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
+use Drupal\views\Entity\View;
+use Drupal\menu_link_content\MenuLinkContentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Implements hook_modules_installed().
  */
-function localgov_microsites_group_modules_installed($modules) {
+function localgov_microsites_group_modules_installed($modules, $is_syncing) {
+  // Assume configuration is correct if the site is being config sync'd.
+  if ($is_syncing) {
+    return;
+  }
+
   foreach ($modules as $module) {
     RolesHelper::assignModuleRoles($module);
+  }
+  // Add our overrides to the group default views.
+  if (in_array('group', $modules) || in_array('localgov_microsites_group', $modules)) {
+    $module_path = \Drupal::service('extension.list.module')->getPath('localgov_microsites_group');
+    if ($view = View::load('group_nodes')) {
+      $group_node_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_nodes.yml'));
+      $displays = $view->get('display');
+      $displays['microsite_page'] = $group_node_view['display']['microsite_page'];
+      $displays['microsite_dashboard_embed'] = $group_node_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
+    if ($view = View::load('group_members')) {
+      $group_member_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_members.yml'));
+      $displays = $view->get('display');
+      $displays['microsite_dashboard_embed'] = $group_member_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
   }
 }
 
@@ -67,14 +94,14 @@ function localgov_microsites_group_entity_type_build(array &$entity_types) {
  */
 function localgov_microsites_group_menu_local_actions_alter(array &$local_actions) {
   if (!empty($local_actions['group_content.group_node_relate_page']) &&
-    !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
+    !in_array('view.group_nodes.microsite_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
   ) {
-    $local_actions['group_content.group_node_relate_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+    $local_actions['group_content.group_node_relate_page']['appears_on'][] = 'view.group_nodes.microsite_page';
   }
   if (!empty($local_actions['group_content.group_node_add_page']) &&
-    !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_add_page']['appears_on'])
+    !in_array('view.group_nodes.microsite_page', $local_actions['group_content.group_node_add_page']['appears_on'])
   ) {
-    $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+    $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsite_page';
   }
 }
 
@@ -88,12 +115,23 @@ function localgov_microsites_group_entity_extra_field_info() {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_ENTITY_TYPE_presave() for menu_link_content entities.
  */
-function localgov_microsites_group_group_presave(GroupInterface $entity) {
+function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
 
-  // Clear node cache so site design changes become visible.
-  Cache::invalidateTags(['node_view']);
+  // Find active group.
+  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  if (is_null($group_id)) {
+    $group = \Drupal::request()->attributes->get('group');
+    if ($group) {
+      $group_id = $group->id();
+    }
+  }
+
+  // Clear group cache so menu links are visible.
+  if ($group_id) {
+    Cache::invalidateTags(['group:' . $group_id]);
+  }
 }
 
 /**
@@ -103,6 +141,41 @@ function localgov_microsites_group_view(array &$build, GroupInterface $group, En
   return \Drupal::service('class_resolver')
     ->getInstanceFromDefinition(GroupExtraFieldDisplay::class)
     ->groupView($build, $group, $display, $view_mode);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for group_content entities.
+ */
+function localgov_microsites_group_group_content_insert(GroupContentInterface $entity) {
+
+  // Add the Trusted Editor Role to group members.
+  $type = $entity->get('type')->getValue();
+  if (isset($type[0]['target_id']) && $type[0]['target_id'] == 'microsite-group_membership') {
+
+    /** @var \Drupal\user\Entity\User $member */
+    $member = $entity->getEntity();
+    $member->addRole('microsites_trusted_editor');
+    $member->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for group_content entities.
+ */
+function localgov_microsites_group_group_content_delete(GroupContentInterface $entity) {
+
+  // Remove the Trusted Editor Role when a user is no longer a member of groups.
+  $type = $entity->get('type')->getValue();
+  if (isset($type[0]['target_id']) && $type[0]['target_id'] == 'microsite-group_membership') {
+
+    /** @var \Drupal\user\Entity\User $member */
+    $member = $entity->getEntity();
+    $groups = \Drupal::service('group.membership_loader')->loadByUser($member);
+    if (empty($groups)) {
+      $member->removeRole('microsites_trusted_editor');
+      $member->save();
+    }
+  }
 }
 
 /**
@@ -192,6 +265,11 @@ function localgov_microsites_group_local_task_title($task_id) {
     case 'group.edit_form':
       return t('Site design');
 
+    case 'views_view:view.group_nodes.page_1':
+      return t('Content');
+
+    case 'entity.group_content_menu.collection':
+      return t('Menus');
   }
 }
 

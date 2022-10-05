@@ -1,0 +1,3 @@
+set localgov microsite theme override:
+  title: 'Override base themes for domain groups'
+  description: 'The LocalGov Microsites theme can be configured. This is to change the theme completely.'

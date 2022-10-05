@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.localgov_paragraph_content
     - node.type.localgov_event
     - paragraphs.paragraphs_type.localgov_accordion
+    - paragraphs.paragraphs_type.localgov_embed_views
     - paragraphs.paragraphs_type.localgov_featured_teasers
     - paragraphs.paragraphs_type.localgov_ia_block
     - paragraphs.paragraphs_type.localgov_image
@@ -14,7 +15,6 @@ dependencies:
     - paragraphs.paragraphs_type.localgov_quote
     - paragraphs.paragraphs_type.localgov_text
     - paragraphs.paragraphs_type.localgov_video
-    - paragraphs.paragraphs_type.localgov_page_section
   module:
     - entity_reference_revisions
 id: node.localgov_event.localgov_paragraph_content
@@ -32,6 +32,7 @@ settings:
   handler_settings:
     target_bundles:
       localgov_accordion: localgov_accordion
+      localgov_embed_views: localgov_embed_views
       localgov_featured_teasers: localgov_featured_teasers
       localgov_ia_block: localgov_ia_block
       localgov_image: localgov_image
@@ -76,6 +77,9 @@ settings:
       localgov_documents:
         weight: 47
         enabled: false
+      localgov_embed_views:
+        weight: 48
+        enabled: true
       localgov_fact_box:
         weight: 48
         enabled: false
@@ -148,7 +152,4 @@ settings:
       localgov_video:
         weight: 71
         enabled: true
-      page_section:
-        weight: 72
-        enabled: false
 field_type: entity_reference_revisions

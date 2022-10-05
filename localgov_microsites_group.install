@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Microsites Group install file.
+ */
+
+use Drupal\search_api\Entity\Index;
+
+/**
+ * Implements hook_install().
+ */
+function localgov_microsites_group_install($is_syncing) {
+
+  if ($is_syncing) {
+    return;
+  }
+
+  // Add domain access to exclude other sites results.
+  $index = Index::load('localgov_sitewide_search');
+  $processor = \Drupal::getContainer()
+    ->get('search_api.plugin_helper')
+    ->createProcessorPlugin($index, 'domain_group_entity_access');
+  $index->addProcessor($processor);
+  $index->save();
+}
