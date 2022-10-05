@@ -6,11 +6,8 @@ dependencies:
 id: group.lgms_site_slogan
 field_name: lgms_site_slogan
 entity_type: group
-type: string
-settings:
-  max_length: 255
-  case_sensitive: false
-  is_ascii: false
+type: boolean
+settings: {  }
 module: core
 locked: false
 cardinality: 1

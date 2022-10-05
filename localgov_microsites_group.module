@@ -274,30 +274,6 @@ function localgov_microsites_group_local_task_title($task_id) {
 }
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter().
- */
-function localgov_microsites_group_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
-  // Hide menu from node edit forms while user testing is happening as the
-  // menu widget doesn't currently work for group menu.
-  // See https://github.com/localgovdrupal/localgov_microsites/issues/108
-  $form['menu']['#access'] = FALSE;
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function localgov_microsites_group_module_implements_alter(&$implementations, $hook) {
-
-  // Ensure our form alter hook is run after menu_ui.
-  if ($hook == 'form_alter' && isset($implementations['localgov_microsites_group'])) {
-    $group = $implementations['localgov_microsites_group'];
-    unset($implementations['localgov_microsites_group']);
-    $implementations['localgov_microsites_group'] = $group;
-  }
-}
-
-/**
  * Controller callback that redirects group content canonical to content.
  *
  * @see Drupal\localgov_microsites_group\Routing\RouteSubscriber::alterRoutes
