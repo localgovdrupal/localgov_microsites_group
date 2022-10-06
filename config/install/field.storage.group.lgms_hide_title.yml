@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - group
-id: group.lgms_site_name
-field_name: lgms_site_name
+id: group.lgms_hide_title
+field_name: lgms_hide_title
 entity_type: group
 type: boolean
 settings: {  }
