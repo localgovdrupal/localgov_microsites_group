@@ -294,3 +294,19 @@ function localgov_microsites_group_redirect_group_content(GroupContentInterface 
   $entity = $group_content->getEntity();
   return new RedirectResponse($entity->toUrl()->toString());
 }
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function localgov_microsites_group_preprocess_menu(&$variables) {
+
+  // Hide Microsite administration link if Drupal user 1.
+  if (
+    \Drupal::currentUser()->id() == 1 &&
+    isset($variables['menu_name']) &&
+    $variables['menu_name'] == 'admin' &&
+    isset($variables['items']['localgov_microsites_group.microsite_admin'])
+  ) {
+    unset($variables['items']['localgov_microsites_group.microsite_admin']);
+  }
+}
