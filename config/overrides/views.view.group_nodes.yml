@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.type.other
+    - group.type.microsite
   module:
     - gnode
     - group
@@ -633,16 +633,11 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: true
+          specify_validation: false
           validate:
-            type: 'entity:group'
+            type: none
             fail: 'not found'
-          validate_options:
-            bundles:
-              other: other
-            access: false
-            operation: view
-            multiple: 0
+          validate_options: {  }
           break_phrase: false
           not: false
       filters:
@@ -1644,11 +1639,16 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: false
+          specify_validation: true
           validate:
-            type: none
+            type: 'entity:group'
             fail: 'not found'
-          validate_options: {  }
+          validate_options:
+            bundles:
+              microsite: microsite
+            access: false
+            operation: view
+            multiple: 0
           break_phrase: false
           not: false
       defaults:
@@ -1659,7 +1659,7 @@ display:
       display_extenders: {  }
       path: group/%group/nodes
       menu:
-        type: none
+        type: tab
         title: Content
         description: ''
         weight: 25
@@ -1687,11 +1687,10 @@ display:
       display_extenders: {  }
       path: group/%group/nodes
       menu:
-        type: tab
+        type: none
         title: Nodes
         description: ''
         weight: 25
-        enabled: true
         expanded: false
         menu_name: main
         parent: ''
