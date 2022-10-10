@@ -119,6 +119,7 @@ third_party_settings:
     group_default_items:
       children:
         - label
+        - lgms_favicon
         - path
         - status
       label: 'Default Items'
@@ -464,7 +465,7 @@ content:
     third_party_settings: {  }
   lgms_favicon:
     type: file_generic
-    weight: 33
+    weight: 3
     region: content
     settings:
       progress_indicator: throbber
@@ -1054,13 +1055,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true

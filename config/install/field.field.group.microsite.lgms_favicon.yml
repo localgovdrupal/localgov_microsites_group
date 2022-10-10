@@ -10,7 +10,7 @@ id: group.microsite.lgms_favicon
 field_name: lgms_favicon
 entity_type: group
 bundle: microsite
-label: Icon
+label: Favicon
 description: 'An image here will be used to override the default favicon for the site.'
 required: false
 translatable: false
