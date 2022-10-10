@@ -24,7 +24,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Blogs
+      title: ''
       fields:
         title:
           id: title
@@ -95,7 +95,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'There are no blog posts at the moment.'
+            format: wysiwyg
+          tokenize: false
       sorts:
         localgov_blog_date_value:
           id: localgov_blog_date_value
@@ -249,6 +262,20 @@ display:
     display_plugin: block
     position: 2
     display_options:
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'There are no blog channels at the moment.'
+            format: wysiwyg
+          tokenize: false
       sorts:
         created:
           id: created
@@ -327,6 +354,7 @@ display:
         groups:
           1: AND
       defaults:
+        empty: false
         sorts: false
         filters: false
         filter_groups: false
