@@ -46,6 +46,11 @@ function localgov_microsites_group_modules_installed($modules, $is_syncing) {
       $displays['microsite_dashboard_embed'] = $group_node_view['display']['microsite_dashboard_embed'];
       $view->set('display', $displays);
       $view->save();
+      // This might only be needed for tests? These are getting the
+      // views.view_route_names from state in
+      // ViewsLocalTask::getDerivativeDefinitions() and it doesn't yet have the
+      // new routes for the added microsite page.
+      \Drupal::service('router.builder')->rebuild();
     }
     if ($view = View::load('group_members')) {
       $group_member_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_members.yml'));
@@ -248,6 +253,7 @@ function localgov_microsites_group_local_task_hidden($task_id) {
       'group.content',
       'group.version_history',
       'group_permissions.link.group_permissions_parent',
+      'views_view:view.group_nodes.page_1',
     ]);
 }
 
@@ -265,9 +271,6 @@ function localgov_microsites_group_local_task_title($task_id) {
 
     case 'group.edit_form':
       return t('Site design');
-
-    case 'views_view:view.group_nodes.page_1':
-      return t('Content');
 
     case 'entity.group_content_menu.collection':
       return t('Menus');
