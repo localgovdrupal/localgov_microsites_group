@@ -14,7 +14,7 @@ services:
       - { name: theme_negotiator, priority: 12 }
 
   replicate.event_subscriber.localgov_microsites_group_content:
-    class: \Drupal\localgov_microsites_group\EventSubscriber\ReplicateGroupContent
+    class: Drupal\localgov_microsites_group\EventSubscriber\ReplicateGroupContent
     arguments: ['@replicate.replicator']
     tags:
       - { name: event_subscriber }
@@ -25,7 +25,12 @@ services:
       - { name: event_subscriber }
 
   localgov_microsites_group.alter_create_group_content:
-    class: \Drupal\localgov_microsites_group\EventSubscriber\AlterCreateGroupContentSubscriber
+    class: Drupal\localgov_microsites_group\EventSubscriber\AlterCreateGroupContentSubscriber
     arguments: ['@entity_type.manager']
+    tags:
+      - { name: event_subscriber }
+
+  localgov_microsites_group.redirect_subscriver:
+    class: Drupal\localgov_microsites_group\EventSubscriber\GroupContentRedirectSubscriber
     tags:
       - { name: event_subscriber }

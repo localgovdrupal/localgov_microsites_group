@@ -9,7 +9,7 @@ dependencies:
     - node
     - user
 id: lgms_embed_view_news
-label: 'Latest news'
+label: 'News'
 module: views
 description: ''
 tag: ''
@@ -237,6 +237,7 @@ display:
             'group_node:localgov_page': '0'
             'group_node:localgov_subsites_overview': '0'
             'group_node:localgov_subsites_page': '0'
+      css_class: 'view--teasers lgd-teaser-list'
       header: {  }
       footer: {  }
       display_extenders: {  }
