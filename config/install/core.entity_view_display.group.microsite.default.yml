@@ -6,6 +6,7 @@ dependencies:
     - field.field.group.microsite.lgms_base_line_height
     - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
+    - field.field.group.microsite.lgms_favicon
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
     - field.field.group.microsite.lgms_footer_copyright_notice
@@ -117,6 +118,7 @@ hidden:
   lgms_base_line_height: true
   lgms_base_spacing: true
   lgms_body_font: true
+  lgms_favicon: true
   lgms_footer_background_colour: true
   lgms_footer_banner: true
   lgms_footer_copyright_notice: true
