@@ -2,14 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.lgms_site_slogan
+    - field.storage.group.lgms_hide_title
     - group.type.microsite
-id: group.microsite.lgms_site_slogan
-field_name: lgms_site_slogan
+id: group.microsite.lgms_hide_title
+field_name: lgms_hide_title
 entity_type: group
 bundle: microsite
-label: 'Display site slogan'
-description: 'If checked, the site slogan will appear in the header. The site slogan can be updated in the site settings tab.'
+label: 'Hide page title on home page'
+description: ''
 required: false
 translatable: false
 default_value:

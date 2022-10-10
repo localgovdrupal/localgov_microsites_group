@@ -58,6 +58,7 @@ dependencies:
     - field.field.group.microsite.lgms_heading_6_line_height
     - field.field.group.microsite.lgms_heading_font
     - field.field.group.microsite.lgms_heading_font_weight
+    - field.field.group.microsite.lgms_hide_title
     - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
     - field.field.group.microsite.lgms_main_menu_font_size
@@ -98,12 +99,17 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   microsite_content:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 2
+    region: content
+  microsite_members:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   changed: true
@@ -164,6 +170,7 @@ hidden:
   lgms_heading_6_line_height: true
   lgms_heading_font: true
   lgms_heading_font_weight: true
+  lgms_hide_title: true
   lgms_link_colour: true
   lgms_main_logo: true
   lgms_main_menu_font_size: true

@@ -12,9 +12,7 @@ label: 'Base font size'
 description: 'Add a font size and unit here, for example: 18px, 1rem, 1.3em, etc. Font sizes for headings and other site elements will be created based on a ratio of this.'
 required: false
 translatable: false
-default_value:
-  -
-    value: 1rem
+default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string

@@ -5,10 +5,12 @@
  * Primary module hooks for LocalGov Microsites Group module.
  */
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContentInterface;
 use Drupal\group\Entity\GroupInterface;
@@ -19,15 +21,40 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
+use Drupal\views\Entity\View;
 use Drupal\menu_link_content\MenuLinkContentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Implements hook_modules_installed().
  */
-function localgov_microsites_group_modules_installed($modules) {
+function localgov_microsites_group_modules_installed($modules, $is_syncing) {
+  // Assume configuration is correct if the site is being config sync'd.
+  if ($is_syncing) {
+    return;
+  }
+
   foreach ($modules as $module) {
     RolesHelper::assignModuleRoles($module);
+  }
+  // Add our overrides to the group default views.
+  if (in_array('group', $modules) || in_array('localgov_microsites_group', $modules)) {
+    $module_path = \Drupal::service('extension.list.module')->getPath('localgov_microsites_group');
+    if ($view = View::load('group_nodes')) {
+      $group_node_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_nodes.yml'));
+      $displays = $view->get('display');
+      $displays['microsite_page'] = $group_node_view['display']['microsite_page'];
+      $displays['microsite_dashboard_embed'] = $group_node_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
+    if ($view = View::load('group_members')) {
+      $group_member_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_members.yml'));
+      $displays = $view->get('display');
+      $displays['microsite_dashboard_embed'] = $group_member_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
   }
 }
 
@@ -69,14 +96,14 @@ function localgov_microsites_group_entity_type_build(array &$entity_types) {
  */
 function localgov_microsites_group_menu_local_actions_alter(array &$local_actions) {
   if (!empty($local_actions['group_content.group_node_relate_page']) &&
-    !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
+    !in_array('view.group_nodes.microsite_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
   ) {
-    $local_actions['group_content.group_node_relate_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+    $local_actions['group_content.group_node_relate_page']['appears_on'][] = 'view.group_nodes.microsite_page';
   }
   if (!empty($local_actions['group_content.group_node_add_page']) &&
-    !in_array('view.group_nodes.microsites_page', $local_actions['group_content.group_node_add_page']['appears_on'])
+    !in_array('view.group_nodes.microsite_page', $local_actions['group_content.group_node_add_page']['appears_on'])
   ) {
-    $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsites_page';
+    $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsite_page';
   }
 }
 
@@ -237,8 +264,8 @@ function localgov_microsites_group_local_task_hidden($task_id) {
   return in_array($task_id,
     [
       'group.delete_form',
-      'group.content', '
-      group.version_history',
+      'group.content',
+      'group.version_history',
       'group_permissions.link.group_permissions_parent',
     ]);
 }
@@ -267,26 +294,13 @@ function localgov_microsites_group_local_task_title($task_id) {
 }
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter().
+ * Implements hook_preprocess_page_title().
  */
-function localgov_microsites_group_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function localgov_microsites_group_preprocess_page_title(&$variables) {
 
-  // Hide menu from node edit forms while user testing is happening as the
-  // menu widget doesn't currently work for group menu.
-  // See https://github.com/localgovdrupal/localgov_microsites/issues/108
-  $form['menu']['#access'] = FALSE;
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function localgov_microsites_group_module_implements_alter(&$implementations, $hook) {
-
-  // Ensure our form alter hook is run after menu_ui.
-  if ($hook == 'form_alter' && isset($implementations['localgov_microsites_group'])) {
-    $group = $implementations['localgov_microsites_group'];
-    unset($implementations['localgov_microsites_group']);
-    $implementations['localgov_microsites_group'] = $group;
+  // Change page title.
+  if ($variables['title'] instanceof TranslatableMarkup && $variables['title']->__toString() == 'Group content menus') {
+    $variables['title'] = t('Menus');
   }
 }
 
@@ -298,4 +312,20 @@ function localgov_microsites_group_module_implements_alter(&$implementations, $h
 function localgov_microsites_group_redirect_group_content(GroupContentInterface $group_content) {
   $entity = $group_content->getEntity();
   return new RedirectResponse($entity->toUrl()->toString());
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function localgov_microsites_group_preprocess_menu(&$variables) {
+
+  // Hide Microsite administration link if Drupal user 1.
+  if (
+    \Drupal::currentUser()->id() == 1 &&
+    isset($variables['menu_name']) &&
+    $variables['menu_name'] == 'admin' &&
+    isset($variables['items']['localgov_microsites_group.microsite_admin'])
+  ) {
+    unset($variables['items']['localgov_microsites_group.microsite_admin']);
+  }
 }
