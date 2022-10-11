@@ -9,7 +9,7 @@ dependencies:
     - node
     - user
 id: lgms_embed_view_news
-label: 'News'
+label: News
 module: views
 description: ''
 tag: ''
@@ -22,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Latest news'
+      title: ''
       fields:
         title:
           id: title
@@ -93,7 +93,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: "There are no news articles at the moment."
+            format: wysiwyg
+          tokenize: false
       sorts:
         created:
           id: created
