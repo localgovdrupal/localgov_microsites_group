@@ -104,7 +104,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: "There are no news articles at the moment.\r\n"
+            value: "There are no news articles at the moment."
             format: wysiwyg
           tokenize: false
       sorts:
