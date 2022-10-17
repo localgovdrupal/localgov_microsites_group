@@ -39,7 +39,7 @@ display:
           entity_field: title
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -165,7 +165,7 @@ display:
           admin_label: ''
           plugin_id: date_recur_date
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -219,8 +219,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "<h3 class=\"event-title\">{{title}}</h3>\r\n<div class=\"event-date\">{{ localgov_event_date_value }} </div>\r\n<div>{{ body }} </div>"
             make_link: false
             path: ''
             absolute: false
