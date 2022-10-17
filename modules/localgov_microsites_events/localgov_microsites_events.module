@@ -8,25 +8,6 @@
 use Drupal\localgov_microsites_group\RolesHelper;
 
 /**
- * Implements hook_modules_installed().
- */
-function localgov_microsites_events_modules_installed($modules) {
-  // Don't use global site pathauto settings.
-  //
-  // There doesn't seem to be a way to alter configuration when being installed,
-  // when it's being saved it's hard to tell where it came from (sync, create,
-  // or import). So just removing it after installation.
-  //
-  // Events pathauto pattern is imported every time optional configuration is
-  // refereshed if the item is deleted, so we are just removing it on all module
-  // installs.
-  $config_factory = \Drupal::configFactory();
-  if ($config = $config_factory->getEditable('pathauto.pattern.localgov_event')) {
-    $config->delete();
-  }
-}
-
-/**
  * Implements hook_localgov_microsites_roles_default().
  */
 function localgov_microsites_events_localgov_microsites_roles_default() {
