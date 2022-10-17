@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
