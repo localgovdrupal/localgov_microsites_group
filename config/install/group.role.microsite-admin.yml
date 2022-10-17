@@ -33,6 +33,7 @@ permissions:
   - 'leave group'
   - 'manage group_content_menu'
   - 'manage microsite enabled module permissions'
+  - 'set localgov microsite theme override'
   - 'update any group_node:localgov_page content'
   - 'update any group_node:localgov_page entity'
   - 'update own group_membership content'

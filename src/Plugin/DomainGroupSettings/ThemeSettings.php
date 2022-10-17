@@ -17,6 +17,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\domain\DomainInterface;
+use Drupal\group\Access\GroupAccessResult;
 
 /**
  * Provides options for group domain.
@@ -88,7 +89,7 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
    * {@inheritdoc}
    */
   public function access(GroupInterface $group, AccountInterface $account) {
-    return AccessResult::allowedIfHasPermission($account, 'set localgov microsite theme override');
+    return GroupAccessResult::allowedIfHasGroupPermission($group, $account, 'set localgov microsite theme override');
   }
 
   /**
