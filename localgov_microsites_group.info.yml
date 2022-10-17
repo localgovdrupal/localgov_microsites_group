@@ -21,6 +21,7 @@ dependencies:
   - group_permissions:group_permissions
   - group_content_menu:group_content_menu
   - media_library:media_library
+  - override_node_options:override_node_options
   - replicate:replicate
   - responsive_preview:responsive_preview
   - role_delegation:role_delegation
