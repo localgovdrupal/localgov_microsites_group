@@ -6,6 +6,7 @@ dependencies:
     - node.type.localgov_blog_post
     - paragraphs.paragraphs_type.localgov_accordion
     - paragraphs.paragraphs_type.localgov_call_out_box
+    - paragraphs.paragraphs_type.localgov_documents
     - paragraphs.paragraphs_type.localgov_embed_views
     - paragraphs.paragraphs_type.localgov_featured_teasers
     - paragraphs.paragraphs_type.localgov_ia_block
@@ -34,6 +35,7 @@ settings:
     target_bundles:
       localgov_accordion: localgov_accordion
       localgov_call_out_box: localgov_call_out_box
+      localgov_documents: localgov_documents
       localgov_embed_views: localgov_embed_views
       localgov_featured_teasers: localgov_featured_teasers
       localgov_ia_block: localgov_ia_block
@@ -78,7 +80,7 @@ settings:
         enabled: false
       localgov_documents:
         weight: 47
-        enabled: false
+        enabled: true
       localgov_embed_views:
         weight: 48
         enabled: true
