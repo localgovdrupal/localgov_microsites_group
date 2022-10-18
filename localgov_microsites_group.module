@@ -297,6 +297,18 @@ function localgov_microsites_group_local_task_title($task_id) {
 }
 
 /**
+ * Group local task titles to change.
+ */
+function localgov_microsites_group_local_tasks_alter(&$local_tasks) {
+  $local_tasks['group.view']['weight'] = -3;
+  $local_tasks['views_view:view.group_nodes.page_1']['weight'] = 0;
+  $local_tasks['views_view:view.group_invitations.page_1']['weight'] = 80;
+  $local_tasks['views_view:view.group_members.page_1']['weight'] = 75;
+  $local_tasks['group.edit_form']['weight'] = 170;
+  $local_tasks['domain_group.group_domain_settings']['weight'] = 150;
+}
+
+/**
  * Implements hook_preprocess_page_title().
  */
 function localgov_microsites_group_preprocess_page_title(&$variables) {
