@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\localgov_microsites_events\Functional;
 
-use Drupal\node\NodeInterface;
-use Drupal\search_api\Entity\Index;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\BrowserTestBase;

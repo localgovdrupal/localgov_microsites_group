@@ -43,6 +43,8 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
    *   The domain group resolver.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\localgov_microsites_group\GroupPermissionsHelperInterface $permissions_helper
+   *   The group permissions helper.
    */
   public function __construct(DomainGroupResolver $domain_group_resolver, EntityTypeManagerInterface $entity_type_manager, GroupPermissionsHelperInterface $permissions_helper) {
     $this->domainGroupResolver = $domain_group_resolver;
