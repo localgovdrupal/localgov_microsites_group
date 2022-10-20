@@ -4,13 +4,14 @@ namespace Drupal\localgov_microsites_events\EventSubscriber;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\domain_group\DomainGroupResolver;
+use Drupal\localgov_microsites_group\GroupPermissionsHelperInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Event subscriber to hide events listing view for sites with no events.
+ * Event subscriber to hide events listing view if events aren't enabled.
  */
 class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
 
@@ -29,6 +30,13 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
   protected $entityTypeManager;
 
   /**
+   * The group permissions helper.
+   *
+   * @var \Drupal\localgov_microsites_group\GroupPermissionsHelperInterface
+   */
+  protected $groupPermissionsHelper;
+
+  /**
    * Returns an EventsListingCheckEventSubscriber instance.
    *
    * @param \Drupal\domain_group\DomainGroupResolver $domain_group_resolver
@@ -36,9 +44,10 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(DomainGroupResolver $domain_group_resolver, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(DomainGroupResolver $domain_group_resolver, EntityTypeManagerInterface $entity_type_manager, GroupPermissionsHelperInterface $permissions_helper) {
     $this->domainGroupResolver = $domain_group_resolver;
     $this->entityTypeManager = $entity_type_manager;
+    $this->groupPermissionsHelper = $permissions_helper;
   }
 
   /**
@@ -81,9 +90,8 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
       return;
     }
 
-    // If no events throw a 404.
-    $events = $group->getContent('group_node:localgov_event');
-    if (empty($events)) {
+    // If events aren't enabled return a 404.
+    if ($this->groupPermissionsHelper->moduleStatus('localgov_microsites_events', $group) != $this->groupPermissionsHelper::ENABLED) {
       throw new NotFoundHttpException();
     }
   }
