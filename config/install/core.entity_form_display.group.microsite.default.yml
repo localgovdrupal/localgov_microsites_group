@@ -6,6 +6,7 @@ dependencies:
     - field.field.group.microsite.lgms_base_line_height
     - field.field.group.microsite.lgms_base_spacing
     - field.field.group.microsite.lgms_body_font
+    - field.field.group.microsite.lgms_display_sitewide_search
     - field.field.group.microsite.lgms_favicon
     - field.field.group.microsite.lgms_footer_background_colour
     - field.field.group.microsite.lgms_footer_banner
@@ -141,6 +142,7 @@ third_party_settings:
         - lgms_pre_header_text_colour
         - lgms_pre_header_link_colour
         - lgms_pre_header_link_hover
+        - lgms_display_sitewide_search
       label: Pre-header
       region: content
       parent_name: group_content
@@ -421,6 +423,8 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+_core:
+  default_config_hash: '-OGX1JBGoavgaAM-QSQQr7krnVu8F3aDCkDMW6LSwqI'
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
@@ -462,6 +466,13 @@ content:
     weight: 11
     region: content
     settings: {  }
+    third_party_settings: {  }
+  lgms_display_sitewide_search:
+    type: boolean_checkbox
+    weight: 32
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   lgms_favicon:
     type: file_generic
