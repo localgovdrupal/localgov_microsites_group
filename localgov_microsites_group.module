@@ -146,7 +146,7 @@ function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInte
 
   // Clear group cache so menu links are visible.
   if ($group_id) {
-    Cache::invalidateTags(['group:' . $group_id]);
+    Cache::invalidateTags(['node_list']);
   }
 }
 
