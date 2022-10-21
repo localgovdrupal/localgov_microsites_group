@@ -211,7 +211,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     $permissions_with = [];
     $modules = $this->modulesList($group);
     foreach ($modules as $module => $status) {
-      if ($status == GroupPermissionsHelperInterface::ENABLED) {
+      if ($module != $disable_module && $status == GroupPermissionsHelperInterface::ENABLED) {
         $module_permissions = RolesHelper::getModuleRoles($module);
         if (!empty($module_permissions['group'])) {
           foreach ($module_permissions['group'] as $role => $permissions) {
@@ -220,27 +220,16 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
         }
       }
     }
-    $permissions_without = [];
-    $modules = $this->modulesList($group);
-    $modules[$disable_module] = GroupPermissionsHelperInterface::DISABLED;
-    foreach ($modules as $module => $status) {
-      if ($status == GroupPermissionsHelperInterface::ENABLED) {
-        $module_permissions = RolesHelper::getModuleRoles($module);
-        if (!empty($module_permissions['group'])) {
-          foreach ($module_permissions['group'] as $role => $permissions) {
-            $permissions_without[$role] = $permissions_without[$role] ?? [] + $permissions;
-          }
-        }
-      }
-    }
+
+    $module_permissions = RolesHelper::getModuleRoles($disable_module);
     $disable_permissions = [];
     foreach ($permissions_with as $role => $permissions) {
-      $disable_permissions[$role] = array_diff($permissions_with[$role], $permissions_without[$role] ?? []);
+      $disable_permissions[$role] = array_diff($module_permissions['group'][$role], $permissions_with[$role] ?? []);
     }
-
     foreach ($disable_permissions as $role => $permissions) {
       $group_permissions[$group->bundle() . '-' . $role] = array_diff($group_permissions[$group->bundle() . '-' . $role], $permissions);
     }
+
     $group_permissions_entity->setPermissions($group_permissions);
     $group_permissions_entity->validate();
     $group_permissions_entity->save();
