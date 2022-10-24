@@ -46,7 +46,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   protected $moduleHandler;
 
   /**
-   * Constructs a GroupPermissionsHelper oindex:.
+   * Constructs a GroupPermissionsHelper instance.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
@@ -100,6 +100,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
         $shared_permissions[$role] = array_merge($shared_permissions[$role] ?? [], array_intersect($module_permissions['group'][$role], $permissions));
       }
     }
+
 
     $group_permissions_entity = $this->getGroupPermissions($group);
     $group_permissions = $group_permissions_entity->getPermissions();
@@ -241,7 +242,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   public function getGroupPermissions(GroupInterface $group): GroupPermissionInterface {
     // GroupPermissionsManager::getGroupRoles also caches like this. Doing so
     // here too makes it slightly more internally consistent for a call for
-    // this class. But possisibly not for changes made outside it.
+    // this class. But possibly not for changes made outside it.
     // See also note testAlteredGroupPermissions::testAlteredGroupPermissions().
     if (empty($this->groupPermissions[$group->id()])) {
       $group_permission = $this->groupPermissionsManager->getGroupPermission($group);

@@ -144,7 +144,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
   /**
    * Test altered permissions.
    *
-   * This is in a seperate test to testToggleModulePermissions because of the
+   * This is in a separate test to testToggleModulePermissions because of the
    * way the group permissions entity is cached in GroupPermissionsManager, and
    * hence GroupPermissionsHelper. Better might be investigating a patch for
    * GroupPermissionsManager that, if the cache is really needed, moves it into
