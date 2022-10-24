@@ -122,15 +122,6 @@ function localgov_microsites_group_entity_extra_field_info() {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave() for group entities.
- */
-function localgov_microsites_group_group_presave(GroupInterface $entity) {
-
-  // Clear node cache so block changes are visible,.
-  Cache::invalidateTags(['node_view']);
-}
-
-/**
  * Implements hook_ENTITY_TYPE_presave() for menu_link_content entities.
  */
 function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
