@@ -126,8 +126,8 @@ function localgov_microsites_group_entity_extra_field_info() {
  */
 function localgov_microsites_group_group_presave(GroupInterface $entity) {
 
-  // Clear group cache so menu links are visible.
-  Cache::invalidateTags(['node_list']);
+  // Clear node cache so block changes are visible,.
+  Cache::invalidateTags(['node_view']);
 }
 
 /**
