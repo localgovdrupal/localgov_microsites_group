@@ -214,7 +214,7 @@ function localgov_microsites_group_form_user_login_form_alter(&$form, FormStateI
 /**
  * Implements hook_form_alter().
  */
-function localgov_microsites_group_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function localgov_microsites_group_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Set domain path pathauto as on by default.
   if (isset($form['domain_path'])) {
