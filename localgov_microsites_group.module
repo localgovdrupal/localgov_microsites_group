@@ -10,6 +10,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContentInterface;
@@ -208,6 +209,23 @@ function localgov_microsites_group_group_content_delete(GroupContentInterface $e
  */
 function localgov_microsites_group_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['#submit'][] = 'localgov_microsites_group_user_login_form_submit';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function localgov_microsites_group_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  // Set domain path pathauto as on by default.
+  if (isset($form['domain_path'])) {
+    $domain_ids = Element::children($form['domain_path']);
+    unset($domain_ids['domain_path_delete']);
+    foreach ($domain_ids as $id) {
+      if (isset($form['domain_path'][$id]['pathauto'])) {
+        $form['domain_path'][$id]['pathauto']['#default_value'] = TRUE;
+      }
+    }
+  }
 }
 
 /**
