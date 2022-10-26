@@ -17,7 +17,7 @@
     "drupal/responsive_preview": "^1.1",
     "drupal/role_delegation": "^1.2",
     "localgovdrupal/localgov_core": "^2.1.0",
-    "localgovdrupal/localgov_page": "1.0@beta",
+    "localgovdrupal/localgov_page": "^1.0@beta",
     "localgovdrupal/localgov_search": "^1.1"
   },
   "require-dev": {
