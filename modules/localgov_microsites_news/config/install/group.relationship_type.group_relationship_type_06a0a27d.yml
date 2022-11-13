@@ -1,0 +1,19 @@
+uuid: 21f6e3c9-c7ca-451d-8918-55f6d9bf40d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+    - node.type.localgov_newsroom
+  module:
+    - gnode
+    - node
+id: group_relationship_type_06a0a27d
+label: 'Newsroom'
+description: 'A page for listing and featuring news articles.'
+group_type: microsite
+content_plugin: 'group_node:localgov_newsroom'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

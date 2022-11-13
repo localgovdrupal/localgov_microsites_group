@@ -37,7 +37,7 @@ class UserRoleTest extends GroupKernelTestBase {
     parent::setUp();
 
     $this->installEntitySchema('group');
-    $this->installEntitySchema('group_content');
+    $this->installEntitySchema('group_relationship');
     $this->installEntitySchema('user');
     $this->installConfig([
       'group',

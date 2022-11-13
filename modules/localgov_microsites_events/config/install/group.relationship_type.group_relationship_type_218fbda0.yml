@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+    - taxonomy.vocabulary.localgov_event_category
+  module:
+    - group_term
+    - taxonomy
+id: group_relationship_type_218fbda0
+label: 'Microsite: Group term (Event category)'
+description: 'Adds <em class="placeholder">Event category</em> terms to groups.'
+group_type: microsite
+content_plugin: 'group_term:localgov_event_category'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

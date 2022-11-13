@@ -36,9 +36,9 @@ function localgov_microsites_blogs_install($is_syncing) {
       ],
       'weight' => 30,
     ]);
-    $group_content = $form_display->getThirdPartySetting('field_group', 'group_content');
-    $group_content['children'][] = 'localgov_paragraph_content';
-    $form_display->setThirdPartySetting('field_group', 'group_content', $group_content);
+    $group_relationship = $form_display->getThirdPartySetting('field_group', 'group_relationship');
+    $group_relationship['children'][] = 'localgov_paragraph_content';
+    $form_display->setThirdPartySetting('field_group', 'group_relationship', $group_relationship);
     $form_display->save();
   }
 
@@ -54,9 +54,9 @@ function localgov_microsites_blogs_install($is_syncing) {
       ],
       'weight' => 28,
     ]);
-    $group_content = $form_display->getThirdPartySetting('field_group', 'group_content');
-    $group_content['children'][] = 'lgms_banner';
-    $form_display->setThirdPartySetting('field_group', 'group_content', $group_content);
+    $group_relationship = $form_display->getThirdPartySetting('field_group', 'group_relationship');
+    $group_relationship['children'][] = 'lgms_banner';
+    $form_display->setThirdPartySetting('field_group', 'group_relationship', $group_relationship);
     $form_display->save();
   }
 

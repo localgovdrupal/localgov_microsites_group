@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.microsite
+    - node.type.localgov_directory_promo_page
+  module:
+    - gnode
+    - node
+id: group_relationship_type_3b38885e
+label: 'Directory promotional page'
+description: 'A directory page allowing unstructured content areas.'
+group_type: microsite
+content_plugin: 'group_node:localgov_directory_promo_page'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

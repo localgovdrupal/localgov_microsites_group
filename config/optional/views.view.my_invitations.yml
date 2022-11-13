@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group_content.group_roles
+    - field.storage.group_relationship.group_roles
     - user.role.authenticated
   module:
     - group
@@ -12,7 +12,7 @@ label: 'My invitations'
 module: group
 description: ''
 tag: ''
-base_table: group_content_field_data
+base_table: group_relationship_field_data
 base_field: id
 display:
   default:
@@ -84,9 +84,9 @@ display:
             group_roles: group_roles
             changed: changed
             created: created
-            view_group_content: view_group_content
-            edit_group_content: edit_group_content
-            delete_group_content: delete_group_content
+            view_group_relationship: view_group_relationship
+            edit_group_relationship: edit_group_relationship
+            delete_group_relationship: delete_group_relationship
             dropbutton: dropbutton
           info:
             name:
@@ -115,21 +115,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            view_group_content:
+            view_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            edit_group_content:
+            edit_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            delete_group_content:
+            delete_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -155,7 +155,7 @@ display:
       fields:
         gid:
           id: gid
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: gid
           relationship: none
           group_type: group
@@ -215,12 +215,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: field
         group_roles:
           id: group_roles
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles
           relationship: none
           group_type: group
@@ -283,7 +283,7 @@ display:
           plugin_id: field
         uid:
           id: uid
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: uid
           relationship: none
           group_type: group
@@ -343,12 +343,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: uid
           plugin_id: field
         created:
           id: created
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: created
           relationship: none
           group_type: group
@@ -410,12 +410,12 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: created
           plugin_id: field
         id:
           id: id
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: id
           relationship: none
           group_type: group
@@ -474,7 +474,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: id
           plugin_id: field
         nothing:
@@ -636,7 +636,7 @@ display:
       filters:
         invitation_status_value:
           id: invitation_status_value
-          table: group_content__invitation_status
+          table: group_relationship__invitation_status
           field: invitation_status_value
           relationship: none
           group_type: group
@@ -696,21 +696,21 @@ display:
       relationships:
         gc__user:
           id: gc__user
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: gc__user
           relationship: none
           group_type: group
           admin_label: 'Member account'
           required: true
-          group_content_plugins:
+          group_relationship_plugins:
             group_invitation: group_invitation
             group_membership: '0'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
       arguments:
         entity_id:
           id: entity_id
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: entity_id
           relationship: none
           group_type: group
@@ -742,7 +742,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: entity_id
           plugin_id: numeric
       display_extenders: {  }
@@ -756,7 +756,7 @@ display:
         - url.query_args
         - user.roles
       tags:
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'
   page_1:
     display_plugin: page
     id: page_1
@@ -783,4 +783,4 @@ display:
         - url.query_args
         - user.roles
       tags:
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'

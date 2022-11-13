@@ -97,7 +97,7 @@ dependencies:
     - text
 third_party_settings:
   field_group:
-    group_content:
+    group_relationship:
       children:
         - group_default_items
         - group_global_styles
@@ -125,7 +125,7 @@ third_party_settings:
         - status
       label: 'Default Items'
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 13
       format_type: tab
       format_settings:
@@ -145,7 +145,7 @@ third_party_settings:
         - lgms_display_sitewide_search
       label: Pre-header
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 16
       format_type: tab
       format_settings:
@@ -171,7 +171,7 @@ third_party_settings:
         - group_menu
       label: Header
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 17
       format_type: tab
       format_settings:
@@ -198,7 +198,7 @@ third_party_settings:
         - lgms_heading_font_weight
       label: 'Global Styles'
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 14
       format_type: tab
       format_settings:
@@ -218,7 +218,7 @@ third_party_settings:
         - group_heading_6
       label: 'Heading Overrides'
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 15
       format_type: tab
       format_settings:
@@ -356,7 +356,7 @@ third_party_settings:
         - lgms_powered_by
       label: Footer
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 18
       format_type: tab
       format_settings:
@@ -390,7 +390,7 @@ third_party_settings:
         - lgms_hide_title
       label: Advanced
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 19
       format_type: tab
       format_settings:
