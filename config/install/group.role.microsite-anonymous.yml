@@ -6,9 +6,9 @@ dependencies:
 id: microsite-anonymous
 label: Anonymous
 weight: -102
-internal: true
-audience: anonymous
+admin: false
+scope: outsider
+gloabl_role: anonymous
 group_type: microsite
-permissions_ui: true
 permissions:
   - 'view group_node:localgov_page entity'

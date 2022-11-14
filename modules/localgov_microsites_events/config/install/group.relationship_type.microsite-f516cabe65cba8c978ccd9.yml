@@ -7,9 +7,7 @@ dependencies:
   module:
     - group_term
     - taxonomy
-id: group_relationship_type_3035ad25
-label: 'Microsite: Group term (Event neighbourhood)'
-description: 'Adds <em class="placeholder">Event neighbourhood</em> terms to groups.'
+id: microsite-f516cabe65cba8c978ccd9
 group_type: microsite
 content_plugin: 'group_term:localgov_event_locality'
 plugin_config:

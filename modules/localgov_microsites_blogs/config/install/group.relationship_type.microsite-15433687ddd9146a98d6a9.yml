@@ -3,15 +3,13 @@ status: true
 dependencies:
   config:
     - group.type.microsite
-    - node.type.localgov_directories_venue
+    - node.type.localgov_blog_post
   module:
     - gnode
     - node
-id: group_relationship_type_49218561
-label: 'Directory venue'
-description: 'A venue entry with location.'
+id: microsite-15433687ddd9146a98d6a9
 group_type: microsite
-content_plugin: 'group_node:localgov_directories_venue'
+content_plugin: 'group_node:localgov_blog_post'
 plugin_config:
   group_cardinality: 0
   entity_cardinality: 1

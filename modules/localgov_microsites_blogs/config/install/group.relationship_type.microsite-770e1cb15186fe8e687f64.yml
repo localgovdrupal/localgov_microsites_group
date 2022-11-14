@@ -7,9 +7,7 @@ dependencies:
   module:
     - group_term
     - taxonomy
-id: group_relationship_type_d222f573
-label: 'Microsite: Group term (Blog author)'
-description: 'Adds <em class="placeholder">Blog author</em> terms to groups.'
+id: microsite-770e1cb15186fe8e687f64
 group_type: microsite
 content_plugin: 'group_term:localgov_blog_author'
 plugin_config:

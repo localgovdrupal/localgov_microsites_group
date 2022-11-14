@@ -6,9 +6,7 @@ dependencies:
   module:
     - localgov_directories
     - localgov_microsites_directories
-id: group_relationship_type_4c34de63
-label: 'Microsite: Directory Facets'
-description: 'Adds directory facets to groups.'
+id: microsite-972e8dbb4b20d1b691c351
 group_type: microsite
 content_plugin: group_localgov_directories_facets
 plugin_config:

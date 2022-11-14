@@ -6,9 +6,9 @@ dependencies:
 id: microsite-outsider
 label: Outsider
 weight: -101
-internal: true
-audience: outsider
+admin: false
+scope: outsider
+global_role: authenticated
 group_type: microsite
-permissions_ui: true
 permissions:
   - 'view group_node:localgov_page entity'

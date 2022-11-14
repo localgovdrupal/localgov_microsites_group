@@ -7,9 +7,7 @@ dependencies:
   module:
     - group_term
     - taxonomy
-id: group_relationship_type_218fbda0
-label: 'Microsite: Group term (Event category)'
-description: 'Adds <em class="placeholder">Event category</em> terms to groups.'
+id: microsite-1819e7f9e1d7798d28e46c
 group_type: microsite
 content_plugin: 'group_term:localgov_event_category'
 plugin_config:

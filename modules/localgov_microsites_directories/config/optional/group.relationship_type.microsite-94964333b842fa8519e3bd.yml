@@ -7,9 +7,7 @@ dependencies:
   module:
     - gnode
     - node
-id: group_relationship_type_3b38885e
-label: 'Directory promotional page'
-description: 'A directory page allowing unstructured content areas.'
+id: microsite-94964333b842fa8519e3bd
 group_type: microsite
 content_plugin: 'group_node:localgov_directory_promo_page'
 plugin_config:

@@ -1,4 +1,3 @@
-uuid: 21f6e3c9-c7ca-451d-8918-55f6d9bf40d0
 langcode: en
 status: true
 dependencies:
@@ -8,9 +7,7 @@ dependencies:
   module:
     - gnode
     - node
-id: group_relationship_type_06a0a27d
-label: 'Newsroom'
-description: 'A page for listing and featuring news articles.'
+id: microsite-715f755092f274a1341d9b
 group_type: microsite
 content_plugin: 'group_node:localgov_newsroom'
 plugin_config:

@@ -1,4 +1,3 @@
-uuid: bead5f97-c974-494f-a881-b3337d9b8490
 langcode: en
 status: true
 dependencies:
@@ -8,9 +7,7 @@ dependencies:
   module:
     - gnode
     - node
-id: group_relationship_type_b0957186
-label: 'News article'
-description: 'A stand-alone news article that may also appear in a news listing page.'
+id: microsite-de7e118ad8390b2302dfca
 group_type: microsite
 content_plugin: 'group_node:localgov_news_article'
 plugin_config:

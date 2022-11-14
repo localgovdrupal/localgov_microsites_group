@@ -7,9 +7,7 @@ dependencies:
   module:
     - group_term
     - taxonomy
-id: group_relationship_type_5bcd380a
-label: 'Microsite: Group term (Event price)'
-description: 'Adds <em class="placeholder">Event price</em> terms to groups.'
+id: microsite-02d656307fb45812a5c561
 group_type: microsite
 content_plugin: 'group_term:localgov_event_price'
 plugin_config:

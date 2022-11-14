@@ -6,10 +6,10 @@ dependencies:
 id: microsite-member
 label: Member
 weight: -100
-internal: true
-audience: member
+admin: false
+scope: insider
+global_role: authenticated
 group_type: microsite
-permissions_ui: true
 permissions:
   - 'access group content menu overview'
   - 'access group_node overview'

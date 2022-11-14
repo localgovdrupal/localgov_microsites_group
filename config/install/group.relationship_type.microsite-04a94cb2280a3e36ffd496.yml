@@ -6,15 +6,13 @@ dependencies:
     - group_content_menu.group_content_menu_type.lgms_main_menu
   module:
     - group_content_menu
-id: group_relationship_type_c5efb248
-label: 'Microsite: Group menu (Main menu)'
-description: 'Adds <em class="placeholder">Main menu</em> menu items to groups.'
+id: microsite-04a94cb2280a3e36ffd496
 group_type: microsite
 content_plugin: 'group_content_menu:lgms_main_menu'
 plugin_config:
   group_cardinality: 1
   entity_cardinality: 1
-  use_creation_wizard: true
+  use_creation_wizard: false
   auto_create_group_menu: true
   auto_create_home_link: false
   auto_create_home_link_title: Home

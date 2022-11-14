@@ -7,9 +7,7 @@ dependencies:
   module:
     - group_term
     - taxonomy
-id: group_relationship_type_eee5f338
-label: 'Microsite: Group term (Topic)'
-description: 'Adds <em class="placeholder">Topic</em> terms to groups.'
+id: microsite-cdd17d4c676d26a72122c1
 group_type: microsite
 content_plugin: 'group_term:localgov_topic'
 plugin_config:
