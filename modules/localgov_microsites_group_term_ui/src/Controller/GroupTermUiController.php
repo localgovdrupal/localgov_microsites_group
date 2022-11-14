@@ -35,7 +35,7 @@ class GroupTermUiController extends ControllerBase {
   /**
    * The group content plugin manager.
    *
-   * @var \Drupal\group\Plugin\GroupContentEnablerManagerInterface
+   * @var \Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface
    */
   protected $pluginManager;
 
@@ -46,7 +46,7 @@ class GroupTermUiController extends ControllerBase {
    *   The entity form builder.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
-   * @param \Drupal\group\Plugin\GroupContentEnablerManagerInterface $plugin_manager
+   * @param \Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface $plugin_manager
    *   The group content plugin manager.
    */
   public function __construct(EntityFormBuilderInterface $entity_form_builder, EntityTypeManagerInterface $entity_type_manager, GroupRelationTypeManagerInterface $plugin_manager) {
@@ -62,7 +62,7 @@ class GroupTermUiController extends ControllerBase {
     return new static(
       $container->get('entity.form_builder'),
       $container->get('entity_type.manager'),
-      $container->get('plugin.manager.group_relationship_enabler')
+      $container->get('group_relation_type.manager')
     );
   }
 
