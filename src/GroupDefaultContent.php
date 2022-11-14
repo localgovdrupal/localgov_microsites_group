@@ -69,11 +69,11 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
     $nid = $this->config->get('localgov_microsites_group.settings')->get('default_group_node');
     if ($nid && $default = $this->entityTypeManager->getStorage('node')->load($nid)) {
       $plugin_id = 'group_node:' . $default->bundle();
-      if ($group->getGroupType()->hasContentPlugin($plugin_id)) {
+      if ($group->getGroupType()->hasPlugin($plugin_id)) {
         $node = $this->replicator->replicateEntity($default);
       }
     }
-    elseif ($group->getGroupType()->hasContentPlugin('group_node:localgov_page')) {
+    elseif ($group->getGroupType()->hasPlugin('group_node:localgov_page')) {
       $plugin_id = 'group_node:localgov_page';
       $node = Node::create([
         'title' => 'Welcome to your new site',
@@ -86,7 +86,7 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
     }
 
     if ($node instanceof NodeInterface) {
-      $group->addContent($node, $plugin_id);
+      $group->addRelationship($node, $plugin_id);
       return $node;
     }
 
