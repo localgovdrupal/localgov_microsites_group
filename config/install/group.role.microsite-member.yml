@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - group.type.microsite
+    - user.role.authenticated
 id: microsite-member
 label: Member
 weight: -100

@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - group.type.microsite
+    - user.role.authenticated
 id: microsite-outsider
 label: Outsider
 weight: -101

@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - group.type.microsite
 id: microsite-admin
 label: Admin
 weight: -99
