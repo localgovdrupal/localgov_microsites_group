@@ -6,8 +6,26 @@ dependencies:
 id: microsite-admin
 label: Admin
 weight: -99
-admin: true
+admin: false
 scope: individual
 global_role: null
 group_type: microsite
-permissions: {  }
+permissions:
+  - 'access group content menu overview'
+  - 'access group_node overview'
+  - 'create group_node:localgov_page entity'
+  - 'manage group_content_menu'
+  - 'update any group_node:localgov_page content'
+  - 'update any group_node:localgov_page entity'
+  - 'update own group_node:localgov_page content'
+  - 'update own group_node:localgov_page entity'
+  - 'view any unpublished group'
+  - 'view group'
+  - 'view group_node:localgov_page entity'
+  - 'view latest group version'
+  - 'view own unpublished group'
+  - 'view unpublished group_node:localgov_page entity'
+  - 'delete any group_node:localgov_page content'
+  - 'delete any group_node:localgov_page entity'
+  - 'delete own group_node:localgov_page content'
+  - 'delete own group_node:localgov_page entity'
