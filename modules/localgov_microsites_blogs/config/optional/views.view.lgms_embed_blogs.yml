@@ -174,17 +174,17 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: node_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Content group content'
           entity_type: node
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_content_plugins:
+          group_relationship_plugins:
             'group_node:localgov_blog_channel': '0'
             'group_node:localgov_blog_post': '0'
             'group_node:localgov_directories_page': '0'
@@ -453,17 +453,17 @@ display:
         filters: false
         filter_groups: false
       relationships:
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: node_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Content group content'
           entity_type: node
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_content_plugins:
+          group_relationship_plugins:
             'group_node:localgov_blog_channel': '0'
             'group_node:localgov_blog_post': '0'
             'group_node:localgov_directories_page': '0'

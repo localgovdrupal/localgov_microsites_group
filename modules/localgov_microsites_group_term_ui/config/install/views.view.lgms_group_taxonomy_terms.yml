@@ -9,7 +9,7 @@ label: 'Group taxonomy terms'
 module: group
 description: ''
 tag: ''
-base_table: group_content_field_data
+base_table: group_relationship_field_data
 base_field: id
 display:
   default:
@@ -462,12 +462,12 @@ display:
       arguments:
         gid:
           id: gid
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: gid
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: numeric
           default_action: 'access denied'
@@ -546,9 +546,9 @@ display:
             group_roles: group_roles
             changed: changed
             created: created
-            view_group_content: view_group_content
-            edit_group_content: edit_group_content
-            delete_group_content: delete_group_content
+            view_group_relationship: view_group_relationship
+            edit_group_relationship: edit_group_relationship
+            delete_group_relationship: delete_group_relationship
             dropbutton: dropbutton
           default: '-1'
           info:
@@ -578,21 +578,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            view_group_content:
+            view_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            edit_group_content:
+            edit_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            delete_group_content:
+            delete_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -630,15 +630,15 @@ display:
       relationships:
         gc__taxonomy_term:
           id: gc__taxonomy_term
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: gc__taxonomy_term
           relationship: none
           group_type: group
           admin_label: 'Group content Taxonomy term'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: true
-          group_content_plugins:
+          group_relationship_plugins:
             'group_term:gtdx_vocab': '0'
             'group_term:store_tags': '0'
             'group_term:tags': '0'

@@ -5,11 +5,11 @@ dependencies:
     - group.type.microsite
 id: microsite-admin
 label: Admin
-weight: 100
-internal: false
-audience: member
+weight: -99
+admin: false
+scope: individual
+global_role: null
 group_type: microsite
-permissions_ui: true
 permissions:
   - 'access group content menu overview'
   - 'access group_node overview'
@@ -18,31 +18,19 @@ permissions:
   - 'create group_node:localgov_page entity'
   - 'delete any group_node:localgov_page content'
   - 'delete any group_node:localgov_page entity'
-  - 'delete any invitation'
-  - 'delete own group_node:localgov_directories_page content'
-  - 'delete own group_node:localgov_directories_page entity'
-  - 'delete own group_node:localgov_directories_venue content'
-  - 'delete own group_node:localgov_directories_venue entity'
-  - 'delete own group_node:localgov_directory content'
-  - 'delete own group_node:localgov_directory entity'
   - 'delete own group_node:localgov_page content'
   - 'delete own group_node:localgov_page entity'
-  - 'delete own invitations'
   - 'edit group'
   - 'invite users to group'
-  - 'leave group'
   - 'manage group_content_menu'
   - 'manage microsite enabled module permissions'
   - 'update any group_node:localgov_page content'
   - 'update any group_node:localgov_page entity'
-  - 'update own group_membership content'
   - 'update own group_node:localgov_page content'
   - 'update own group_node:localgov_page entity'
   - 'view any unpublished group'
   - 'view group'
   - 'view group invitations'
-  - 'view group_membership content'
-  - 'view group_node:localgov_page content'
   - 'view group_node:localgov_page entity'
   - 'view latest group version'
   - 'view own unpublished group'

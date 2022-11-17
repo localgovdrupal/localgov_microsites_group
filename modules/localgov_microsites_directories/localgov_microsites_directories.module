@@ -55,7 +55,7 @@ function localgov_microsites_directories_submit_new_directory_facet_type($form, 
   // Redirect back to the directory facet type listing page.
   $group = \Drupal::routeMatch()->getParameter('group');
   if (!is_null($group)) {
-    $form_state->setRedirect('entity.group_content.group_localgov_directories_facet_type.list', [
+    $form_state->setRedirect('entity.group_relationship.group_localgov_directories_facet_type.list', [
       'group' => $group->id(),
     ]);
   }

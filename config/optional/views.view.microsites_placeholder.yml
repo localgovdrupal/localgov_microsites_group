@@ -8,7 +8,7 @@ label: 'Microsites Placeholder'
 module: views
 description: 'Placeholder view for now, to force rendering of the microsites regions'
 tag: ''
-base_table: group_content_lgms_data
+base_table: group_relationship_lgms_data
 base_field: id
 display:
   default:
@@ -21,7 +21,7 @@ display:
       fields:
         label:
           id: label
-          table: group_content_lgms_data
+          table: group_relationship_lgms_data
           field: label
           relationship: none
           group_type: group
@@ -109,12 +109,12 @@ display:
       arguments:
         gid:
           id: gid
-          table: group_content_lgms_data
+          table: group_relationship_lgms_data
           field: gid
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: group_id
           default_action: default

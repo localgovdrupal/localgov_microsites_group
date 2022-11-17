@@ -14,10 +14,10 @@ class RouteSubscriber extends RouteSubscriberBase {
    * {@inheritdoc}
    */
   protected function alterRoutes(RouteCollection $collection) {
-    if ($route = $collection->get('entity.group_content.canonical')) {
+    if ($route = $collection->get('entity.group_relationship.canonical')) {
       $defaults = $route->getDefaults();
       unset($defaults['_entity_view']);
-      $defaults['_controller'] = 'localgov_microsites_group_redirect_group_content';
+      $defaults['_controller'] = 'localgov_microsites_group_redirect_group_relationship';
       $route->setDefaults($defaults);
     }
     if ($route = $collection->get('view.group_nodes.page_1')) {
