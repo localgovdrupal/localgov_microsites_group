@@ -26,7 +26,7 @@ function localgov_microsites_directories_entity_insert(EntityInterface $entity) 
 
   $group_type = GroupType::load($group->bundle());
   $plugin_id = 'group_' . $entity->getEntityTypeId();
-  if ($group_type->hasContentPlugin($plugin_id)) {
+  if ($group_type->hasPlugin($plugin_id)) {
     $group->addContent($entity, $plugin_id);
   }
 }
