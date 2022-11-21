@@ -58,7 +58,7 @@ class GroupTermEntityReferenceTest extends GroupKernelTestBase {
       'vid' => 'tags',
     ]);
     $term1->save();
-    $group->addContent($term1, 'group_term:tags');
+    $group->addRelationship($term1, 'group_term:tags');
     $term2 = Term::create([
       'name' => 'term2',
       'vid' => 'tags',

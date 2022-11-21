@@ -132,7 +132,7 @@ class MicrositeSitewideSearchTest extends BrowserTestBase {
       'status' => NodeInterface::PUBLISHED,
     ]);
     $page->save();
-    $group->addContent($page, 'group_node:localgov_page');
+    $group->addRelationship($page, 'group_node:localgov_page');
 
     return $page;
   }

@@ -92,7 +92,7 @@ class UserRoleTest extends GroupKernelTestBase {
     $this->assertSame($roles_outsider, $user->getRoles());
 
     // Ensure user gets Trusted Editor role.
-    $group1->addContent($user, 'group_membership');
+    $group1->addRelationship($user, 'group_membership');
     $user = User::load($user->id());
     $this->assertSame($roles_member, $user->getRoles());
     $group2->addMember($user);
