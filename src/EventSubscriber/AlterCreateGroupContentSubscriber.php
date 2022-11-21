@@ -40,13 +40,13 @@ class AlterCreateGroupContentSubscriber implements EventSubscriberInterface {
     if ($route == 'entity.group_relationship.group_node_add_page') {
       $build = $event->getControllerResult();
       if (isset($build['#bundles'])) {
-        $storage = $this->entityTypeManager->getStorage('group_relationship_type');
+        // $storage = $this->entityTypeManager->getStorage('group_relationship_type');
 
         // Change the link label and description.
         foreach ($build['#bundles'] as $id => $bundle) {
           // $group_relationship_type = $storage->load($id);
           // $build['#bundles'][$id]['description'] =
-          //   $group_relationship_type->getDescription();
+          // $group_relationship_type->getDescription();
           $build['#bundles'][$id]['add_link']->setText($bundle['label']);
         }
 
