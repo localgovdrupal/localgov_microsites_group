@@ -42,7 +42,7 @@
           "Warning: Undefined array key 'pathauto' #3315752": "https://www.drupal.org/files/issues/2022-10-17/undefined-array-key-pathauto-3265497-2.patch"
       },
       "drupal/group": {
-          "Duplicate nodes listed in groups / microsites": "https://www.drupal.org/files/issues/2022-10-28/group_module_member_3315779_9.patch"
+          "Duplicate nodes listed in groups / microsites #3315779": "https://www.drupal.org/files/issues/2022-11-21/group-3315779-29-3.patch"
       }
     }
   }
