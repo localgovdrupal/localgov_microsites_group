@@ -44,9 +44,10 @@ class AlterCreateGroupContentSubscriber implements EventSubscriberInterface {
 
         // Change the link label and description.
         foreach ($build['#bundles'] as $id => $bundle) {
-          $group_relationship_type = $storage->load($id);
+          // $group_relationship_type = $storage->load($id);
+          // $build['#bundles'][$id]['description'] =
+          //   $group_relationship_type->getDescription();
           $build['#bundles'][$id]['add_link']->setText($bundle['label']);
-#          $build['#bundles'][$id]['description'] = $group_relationship_type->getDescription();
         }
 
         // Sort bundles alphabetically.
