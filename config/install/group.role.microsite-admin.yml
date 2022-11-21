@@ -23,6 +23,7 @@ permissions:
   - 'edit group'
   - 'invite users to group'
   - 'manage group_content_menu'
+  - 'manage group_content_menu menu items'
   - 'manage microsite enabled module permissions'
   - 'update any group_node:localgov_page content'
   - 'update any group_node:localgov_page entity'
