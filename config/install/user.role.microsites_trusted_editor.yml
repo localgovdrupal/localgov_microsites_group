@@ -17,7 +17,6 @@ weight: 3
 is_admin: null
 permissions:
   - 'access media overview'
-  - 'access responsive preview'
   - 'access toolbar'
   - 'administer media'
   - 'create document media'
