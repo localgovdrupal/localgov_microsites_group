@@ -105,7 +105,7 @@ class ManageGroupTermsTest extends BrowserTestBase {
       'vid' => 'tags',
     ]);
     $term->save();
-    $this->group->addContent($term, 'group_term:tags');
+    $this->group->addRelationship($term, 'group_term:tags');
 
     // Login as a group admin.
     /** @var \Drupal\group\Entity\GroupType $group */

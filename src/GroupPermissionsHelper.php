@@ -253,7 +253,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
       }
       $permissions = $group_permission->getPermissions();
       if (empty($permissions)) {
-        $group_roles = $this->groupPermissionsManager->getGroupRoles($group);
+        $group_roles = $this->groupPermissionsManager->getNonAdminRoles($group);
         foreach ($group_roles as $role_name => $role) {
           $permissions[$role_name] = $role->getPermissions();
         }

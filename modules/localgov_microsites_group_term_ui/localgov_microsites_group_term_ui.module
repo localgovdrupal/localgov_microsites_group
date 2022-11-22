@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\group\Entity\GroupType;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_modules_installed().
@@ -43,8 +44,8 @@ function localgov_microsites_group_term_ui_entity_insert(EntityInterface $entity
   // Add term as group content.
   $group_type = GroupType::load($group->bundle());
   $plugin_id = 'group_term:' . $entity->bundle();
-  if ($group_type->hasContentPlugin($plugin_id)) {
-    $group->addContent($entity, $plugin_id);
+  if ($group_type->hasPlugin($plugin_id)) {
+    $group->addRelationship($entity, $plugin_id);
   }
 }
 
@@ -88,8 +89,8 @@ function localgov_microsites_group_term_ui_form_alter(&$form, FormStateInterface
     // Remove terms that are not part of the groups content.
     if (!is_null($group) && !is_null($vid)) {
       foreach ($form['relations']['parent']['#options'] as $tid => $name) {
-        $term = $group->getContentByEntityId('group_term:' . $vid, $tid);
-        if ($name != '<root>' && empty($term)) {
+        $terms = $tid ? $group->getRelationshipsByEntity(Term::load($tid)) : [];
+        if ($name != '<root>' && empty($terms)) {
           unset($form['relations']['parent']['#options'][$tid]);
         }
       }

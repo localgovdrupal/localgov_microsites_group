@@ -14,6 +14,7 @@ dependencies:
   - domain:domain
   - domain_group:domain_group
   - domain_path:domain_path
+  - domain_path:domain_path_pathauto
   - field_group:field_group
   - ginvite:ginvite
   - group:group
@@ -23,7 +24,6 @@ dependencies:
   - media_library:media_library
   - override_node_options:override_node_options
   - replicate:replicate
-  - responsive_preview:responsive_preview
   - role_delegation:role_delegation
   # LocalGov Drupal
   - localgov_core:localgov_media

@@ -154,7 +154,7 @@ class MicrositeNewsContentTest extends BrowserTestBase {
       'status' => NodeInterface::PUBLISHED,
     ]);
     $directory->save();
-    $group->addContent($directory, 'group_node:localgov_newsroom');
+    $group->addRelationship($directory, 'group_node:localgov_newsroom');
 
     return $directory;
   }
@@ -185,7 +185,7 @@ class MicrositeNewsContentTest extends BrowserTestBase {
         'status' => NodeInterface::PUBLISHED,
       ]);
       $article->save();
-      $group->addContent($article, 'group_node:localgov_news_article');
+      $group->addRelationship($article, 'group_node:localgov_news_article');
       $articles[] = $article;
     }
 

@@ -11,38 +11,6 @@ use Drupal\group\Entity\GroupType;
 use Drupal\localgov_microsites_group\RolesHelper;
 
 /**
- * Implements hook_modules_installed().
- */
-function localgov_microsites_directories_modules_installed($modules) {
-  // Don't use global site pathauto settings.
-  //
-  // There doesn't seem to be a way to alter configuration when being installed,
-  // when it's being saved it's hard to tell where it came from (sync, create,
-  // or import). So just removing it after installation.
-  $config_factory = \Drupal::configFactory();
-  if (in_array('localgov_directories', $modules) ||
-    in_array('localgov_directories_page', $modules) ||
-    in_array('localgov_directories_venue', $modules) ||
-    in_array('localgov_microsites_directories', $modules)
-  ) {
-    foreach ([
-      'pathauto.pattern.localgov_directories_page',
-      'pathauto.pattern.localgov_directories_venue',
-    ] as $config_name) {
-      if ($config = $config_factory->getEditable($config_name)) {
-        $config->delete();
-      }
-    }
-  }
-  // Directory channel pattern is imported every time optional configuration is
-  // refereshed if the item is deleted, so we are just removing it on all module
-  // installs.
-  if ($config = $config_factory->getEditable('pathauto.pattern.localgov_directory_channel')) {
-    $config->delete();
-  }
-}
-
-/**
  * Implements hook_entity_insert().
  */
 function localgov_microsites_directories_entity_insert(EntityInterface $entity) {
@@ -58,8 +26,8 @@ function localgov_microsites_directories_entity_insert(EntityInterface $entity) 
 
   $group_type = GroupType::load($group->bundle());
   $plugin_id = 'group_' . $entity->getEntityTypeId();
-  if ($group_type->hasContentPlugin($plugin_id)) {
-    $group->addContent($entity, $plugin_id);
+  if ($group_type->hasPlugin($plugin_id)) {
+    $group->addRelationship($entity, $plugin_id);
   }
 }
 
@@ -87,7 +55,7 @@ function localgov_microsites_directories_submit_new_directory_facet_type($form, 
   // Redirect back to the directory facet type listing page.
   $group = \Drupal::routeMatch()->getParameter('group');
   if (!is_null($group)) {
-    $form_state->setRedirect('entity.group_content.group_localgov_directories_facet_type.list', [
+    $form_state->setRedirect('entity.group_relationship.group_localgov_directories_facet_type.list', [
       'group' => $group->id(),
     ]);
   }

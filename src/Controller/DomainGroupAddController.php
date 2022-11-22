@@ -123,7 +123,7 @@ class DomainGroupAddController extends ControllerBase {
           'type' => $group_type->getContentPlugin('group_membership')->getContentTypeConfigId(),
           'entity_id' => $this->currentUser()->id(),
         ];
-        $entity = $this->entityTypeManager()->getStorage('group_content')->create($values);
+        $entity = $this->entityTypeManager()->getStorage('group_relationship')->create($values);
       }
       $form = $this->entityFormBuilder()->getForm($entity, 'new_domain', $extra);
     }

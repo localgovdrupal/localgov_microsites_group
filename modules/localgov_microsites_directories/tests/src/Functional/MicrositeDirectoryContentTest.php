@@ -159,7 +159,7 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
       'status' => NodeInterface::PUBLISHED,
     ]);
     $directory->save();
-    $group->addContent($directory, 'group_node:localgov_directory');
+    $group->addRelationship($directory, 'group_node:localgov_directory');
 
     return $directory;
   }
@@ -190,7 +190,7 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
         'status' => NodeInterface::PUBLISHED,
       ]);
       $page->save();
-      $group->addContent($page, 'group_node:localgov_directories_page');
+      $group->addRelationship($page, 'group_node:localgov_directories_page');
       $pages[] = $page;
     }
 
