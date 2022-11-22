@@ -40,3 +40,6 @@ permissions:
   - 'view media'
   - 'view own unpublished media'
   - 'view the administration theme'
+  - 'delete all revisions'
+  - 'revert all revisions'
+  - 'view all revisions'

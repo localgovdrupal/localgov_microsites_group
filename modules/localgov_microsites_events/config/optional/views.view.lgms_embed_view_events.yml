@@ -4,7 +4,6 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.localgov_event_image
-    - group.relationship_type.group_relationship_type_5a3c3717
   module:
     - date_recur
     - datetime
@@ -389,48 +388,6 @@ display:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-        type:
-          id: type
-          table: group_relationship_field_data
-          field: type
-          relationship: group_relationship
-          group_type: group
-          admin_label: ''
-          entity_type: group_relationship
-          entity_field: type
-          plugin_id: bundle
-          operator: in
-          value:
-            group_relationship_type_5a3c3717: group_relationship_type_5a3c3717
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         localgov_event_date_end_value_1:
           id: localgov_event_date_end_value_1
           table: date_recur__node__localgov_event_date
@@ -507,7 +464,18 @@ display:
           admin_label: 'Content group content'
           entity_type: node
           plugin_id: group_relationship_to_entity_reverse
-          required: false
+          required: true
+          group_relation_plugins:
+            'group_node:localgov_event': 'group_node:localgov_event'
+            'group_node:localgov_blog_channel': '0'
+            'group_node:localgov_blog_post': '0'
+            'group_node:localgov_directories_page': '0'
+            'group_node:localgov_directories_venue': '0'
+            'group_node:localgov_directory': '0'
+            'group_node:localgov_directory_promo_page': '0'
+            'group_node:localgov_newsroom': '0'
+            'group_node:localgov_news_article': '0'
+            'group_node:localgov_page': '0'
           group_relationship_plugins:
             'group_node:localgov_directories_page': '0'
             'group_node:localgov_directory': '0'
