@@ -40,9 +40,6 @@
           "Error manually adding an alias when Domain Path Pathauto is enabled #3315360": "https://www.drupal.org/files/issues/2022-10-14/error-manually-adding-alias-with-domain-path-pathauto-enabled-3315360-2.patch",
           "domain_path_pathauto creates duplicate aliases #3285213": "https://www.drupal.org/files/issues/2022-06-11/domain_path_pathauto-obey-current-domain_id-querying-for-reserved-aliases-3285213.patch",
           "Warning: Undefined array key 'pathauto' #3315752": "https://www.drupal.org/files/issues/2022-10-17/undefined-array-key-pathauto-3265497-2.patch"
-      },
-      "drupal/group": {
-          "Duplicate nodes listed in groups / microsites #3315779": "https://www.drupal.org/files/issues/2022-11-21/group-3315779-29-3.patch"
       }
     }
   }
