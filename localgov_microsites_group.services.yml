@@ -34,3 +34,9 @@ services:
     class: Drupal\localgov_microsites_group\EventSubscriber\GroupContentRedirectSubscriber
     tags:
       - { name: event_subscriber }
+
+  localgov_microsites_group.relation_handler.ui_text_provider:
+    decorates: group.relation_handler.ui_text_provider
+    class: Drupal\localgov_microsites_group\Plugin\Group\RelationHandlerDefault\UiTextProvider
+    arguments: ['@localgov_microsites_group.relation_handler.ui_text_provider.inner', '@entity_type.manager', '@string_translation']
+    shared: false
