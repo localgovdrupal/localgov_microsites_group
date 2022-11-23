@@ -1,0 +1,12 @@
+name: LocalGov Microsites Group Webform
+type: module
+description: Webform integration for Microsites.
+package: LocalGov Drupal
+core_version_requirement: ^9.3
+dependencies:
+  # Drupal
+  # Contrib
+  - group:group
+  - group:gnode
+  - webform:webform
+  # LocalGov Drupal
