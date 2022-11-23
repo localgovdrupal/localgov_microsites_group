@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\Core\Cache\Cache;
+
+/**
+ * Implements hook_install().
+ */
+function localgov_microsites_group_webform_install() {
+
+  // Add the default contact webform to the group content relationship.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('group.relationship_type.microsite-group_webform-contact');
+  $config->set('langcode', 'en');
+  $config->set('status', 'true');
+  $dependencies = [
+    'config' => [
+      'group.type.microsite',
+      'webform.type.contact'
+    ],
+    'module' => [
+      'group_webform',
+      'webform'
+    ],
+  ];
+  $config->set('dependencies', $dependencies);
+  $config->set('id', 'microsite-group_webform-contact');
+  $config->set('group_type', 'microsite');
+  $config->set('content_plugin', 'group_webform:contact');
+  $plugin_config = [
+    'group_cardinality' => 0,
+    'entity_cardinality' => 1,
+    'use_creation_wizard' => false,
+  ];
+  $config->set('plugin_config', $plugin_config);
+  $config->save();
+  // Need to clear the cache
+  // This does not work:
+  //Cache::invalidateTags()
+
+}
