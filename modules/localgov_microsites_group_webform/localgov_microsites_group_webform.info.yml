@@ -9,4 +9,7 @@ dependencies:
   - group:group
   - group:gnode
   - webform:webform
-  # LocalGov Drupal
+  - webform_node:webform_node
+  - webform_ui:webform_ui
+    # LocalGov Drupal
+  - group_webform:group_webform
