@@ -9,7 +9,7 @@ function localgov_microsites_group_webform_install() {
 
   // Add the default contact webform to the group content relationship.
   $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('group.relationship_type.microsite-group_webform-contact');
+  $config = $config_factory->getEditable('group.relationship_type.microsite-group_localgov-webform');
   $config->set('langcode', 'en');
   $config->set('status', 'true');
   $dependencies = [
@@ -18,14 +18,15 @@ function localgov_microsites_group_webform_install() {
       'webform.type.contact'
     ],
     'module' => [
+      'gnode',
       'group_webform',
       'webform'
     ],
   ];
   $config->set('dependencies', $dependencies);
-  $config->set('id', 'microsite-group_webform-contact');
+  $config->set('id', 'microsite-group_localgov-webform');
   $config->set('group_type', 'microsite');
-  $config->set('content_plugin', 'group_webform:contact');
+  $config->set('content_plugin', 'group_webform:localgov_webform');
   $plugin_config = [
     'group_cardinality' => 0,
     'entity_cardinality' => 1,
