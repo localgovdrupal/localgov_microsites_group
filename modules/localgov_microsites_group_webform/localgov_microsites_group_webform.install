@@ -7,35 +7,34 @@ use Drupal\Core\Cache\Cache;
  */
 function localgov_microsites_group_webform_install() {
 
-  // Add the default contact webform to the group content relationship.
+  // group.role.microsite-admin
   $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('group.relationship_type.microsite-group_localgov-webform');
-  $config->set('langcode', 'en');
-  $config->set('status', 'true');
-  $dependencies = [
-    'config' => [
-      'group.type.microsite',
-      'webform.type.contact'
-    ],
-    'module' => [
-      'gnode',
-      'group_webform',
-      'webform'
-    ],
-  ];
-  $config->set('dependencies', $dependencies);
-  $config->set('id', 'microsite-group_localgov-webform');
-  $config->set('group_type', 'microsite');
-  $config->set('content_plugin', 'group_webform:localgov_webform');
-  $plugin_config = [
-    'group_cardinality' => 0,
-    'entity_cardinality' => 1,
-    'use_creation_wizard' => false,
-  ];
-  $config->set('plugin_config', $plugin_config);
-  $config->save();
-  // Need to clear the cache
-  // This does not work:
-  //Cache::invalidateTags()
+  $microsite_admin = $config_factory->getEditable('group.role.microsite-admin');
+  $permissions = $microsite_admin->get('permissions');
 
+  $permissions[] = 'create group_node:localgov_webform entity';
+  $permissions[] = 'delete any group_node:localgov_webform entity';
+  $permissions[] = 'delete own group_node:localgov_webform entity';
+  $permissions[] = 'update any group_node:localgov_webform entity';
+  $permissions[] = 'update own group_node:localgov_webform entity';
+  $permissions[] = 'view group_node:localgov_webform entity';
+
+  $permissions[] = 'create group_webform:microsite_contact entity';
+  $permissions[] = 'delete any group_webform:microsite_contact entity';
+  $permissions[] = 'delete any group_webform:microsite_contact entity';
+  $permissions[] = 'update any group_webform:microsite_contact entity';
+  $permissions[] = 'update own group_webform:microsite_contact entity';
+  $permissions[] = 'view group_webform:microsite_contact entity';
+
+  $microsite_admin->set('permissions', $permissions);
+  $microsite_admin->save();
+
+  // group.role.microsite-anonymous
+  $microsite_anon = $config_factory->getEditable('group.role.microsite-anonymous');
+  $permissions = $microsite_anon->get('permissions');
+  $permissions[] = 'view group_node:localgov_webform entity';
+  $permissions[] = 'create group_webform:microsite_contact entity';
+
+  $microsite_anon->set('permissions', $permissions);
+  $microsite_anon->save();
 }
