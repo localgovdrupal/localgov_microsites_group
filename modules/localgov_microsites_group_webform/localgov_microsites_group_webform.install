@@ -7,7 +7,8 @@ use Drupal\Core\Cache\Cache;
  */
 function localgov_microsites_group_webform_install() {
 
-  // group.role.microsite-admin
+  // Add permissions for the group.role.microsite-admin to manage the
+  // localgov_webform content type and the microsite_contact submissions.
   $config_factory = \Drupal::configFactory();
   $microsite_admin = $config_factory->getEditable('group.role.microsite-admin');
   $permissions = $microsite_admin->get('permissions');
@@ -29,12 +30,32 @@ function localgov_microsites_group_webform_install() {
   $microsite_admin->set('permissions', $permissions);
   $microsite_admin->save();
 
-  // group.role.microsite-anonymous
+  // Delete the default contact webform to avoid confusion.
+  $config_factory->getEditable('webform.webform.contact')->delete();
+
+  // Add permissions for the group.role.microsite-anonymous to see the webform
+  // content type and to make submissions.
   $microsite_anon = $config_factory->getEditable('group.role.microsite-anonymous');
   $permissions = $microsite_anon->get('permissions');
   $permissions[] = 'view group_node:localgov_webform entity';
   $permissions[] = 'create group_webform:microsite_contact entity';
-
   $microsite_anon->set('permissions', $permissions);
   $microsite_anon->save();
+
+  // Add permission for user.role.microsites_controller to see own webform
+  // submissions.
+  $microsites_controller = $config_factory->getEditable('user.role.microsites_controller');
+  $permissions = $microsites_controller->get('permissions');
+  $permissions[] = 'view webform submissions own node';
+  $microsites_controller->set('permissions', $permissions);
+  $microsites_controller->save();
+
+  // Add permission for user.role.microsites_controller to see own webform
+  // submissions.
+  $microsites_trusted_editor = $config_factory->getEditable('user.role.microsites_trusted_editor');
+  $permissions = $microsites_trusted_editor->get('permissions');
+  $permissions[] = 'view webform submissions own node';
+  $microsites_trusted_editor->set('permissions', $permissions);
+  $microsites_trusted_editor->save();
+
 }
