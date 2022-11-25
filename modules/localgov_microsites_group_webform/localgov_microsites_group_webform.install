@@ -21,7 +21,7 @@ function localgov_microsites_group_webform_install() {
 
   $permissions[] = 'create group_webform:microsite_contact entity';
   $permissions[] = 'delete any group_webform:microsite_contact entity';
-  $permissions[] = 'delete any group_webform:microsite_contact entity';
+  $permissions[] = 'delete own group_webform:microsite_contact entity';
   $permissions[] = 'update any group_webform:microsite_contact entity';
   $permissions[] = 'update own group_webform:microsite_contact entity';
   $permissions[] = 'view group_webform:microsite_contact entity';
