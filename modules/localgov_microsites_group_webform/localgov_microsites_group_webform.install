@@ -1,6 +1,9 @@
 <?php
 
-use Drupal\Core\Cache\Cache;
+/**
+ * @file
+ * LocalGov Microsites Group Webfor module install file.
+ */
 
 /**
  * Implements hook_install().

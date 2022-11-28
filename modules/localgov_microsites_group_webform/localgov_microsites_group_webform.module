@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @file
+ * LocalGov Microsites Group Webform module file.
+ */
+
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\Storage\GroupRelationshipTypeStorageInterface;
 
@@ -28,7 +34,7 @@ function localgov_microsites_group_webform_entity_insert($entity) {
     $plugin_id = 'group_webform:' . $webform_id;
 
     // Now we get the group_type config entity, which we need to pass to
-    // the GroupRelationshipTypeStorageInterface -> createFromPlugin
+    // the GroupRelationshipTypeStorageInterface -> createFromPlugin.
     $group_type_storage = \Drupal::entityTypeManager()->getStorage('group_type');
     $group_type = $group_type_storage->load('microsite');
 
@@ -36,7 +42,7 @@ function localgov_microsites_group_webform_entity_insert($entity) {
     // https://git.drupalcode.org/project/group/-/blob/3.0.x/src/Entity/Form/GroupRelationshipTypeForm.php#L145-147
     $storage = \Drupal::entityTypeManager()->getStorage('group_relationship_type');
     assert($storage instanceof GroupRelationshipTypeStorageInterface);
-    $storage->createFromPlugin($group_type, $plugin_id )->save();
+    $storage->createFromPlugin($group_type, $plugin_id)->save();
 
   }
 
@@ -48,7 +54,7 @@ function localgov_microsites_group_webform_entity_insert($entity) {
     $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
 
     // If we can't find it with the domain_group_resolver, try with the url.
-    // @TODO - check if this is actually necessary.
+    // @todo check if this is actually necessary.
     if (is_null($group_id)) {
       $group = \Drupal::request()->attributes->get('group');
       if ($group) {
@@ -66,11 +72,12 @@ function localgov_microsites_group_webform_entity_insert($entity) {
       $webform = $entity->getWebform();
       $webform_id = $webform->id();
 
-      // The plugin is in the form 'group_webform:contact' for 'contact' webform.
+      // The plugin is in the form 'group_webform:contact' for the 'contact'
+      // webform.
       $plugin_id = "group_webform:" . $webform_id;
 
       // Add the webform submission to the group.
-      $relationship = $group->addRelationship($entity, $plugin_id);
+      $group->addRelationship($entity, $plugin_id);
 
     }
   }
