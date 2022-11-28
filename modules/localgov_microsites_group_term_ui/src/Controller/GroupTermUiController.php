@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\group\Entity\GroupInterface;
-use Drupal\group\Plugin\GroupContentEnablerManagerInterface;
+use Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface;
 use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -35,7 +35,7 @@ class GroupTermUiController extends ControllerBase {
   /**
    * The group content plugin manager.
    *
-   * @var \Drupal\group\Plugin\GroupContentEnablerManagerInterface
+   * @var \Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface
    */
   protected $pluginManager;
 
@@ -46,10 +46,10 @@ class GroupTermUiController extends ControllerBase {
    *   The entity form builder.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
-   * @param \Drupal\group\Plugin\GroupContentEnablerManagerInterface $plugin_manager
+   * @param \Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface $plugin_manager
    *   The group content plugin manager.
    */
-  public function __construct(EntityFormBuilderInterface $entity_form_builder, EntityTypeManagerInterface $entity_type_manager, GroupContentEnablerManagerInterface $plugin_manager) {
+  public function __construct(EntityFormBuilderInterface $entity_form_builder, EntityTypeManagerInterface $entity_type_manager, GroupRelationTypeManagerInterface $plugin_manager) {
     $this->entityFormBuilder = $entity_form_builder;
     $this->entityTypeManager = $entity_type_manager;
     $this->pluginManager = $plugin_manager;
@@ -62,7 +62,7 @@ class GroupTermUiController extends ControllerBase {
     return new static(
       $container->get('entity.form_builder'),
       $container->get('entity_type.manager'),
-      $container->get('plugin.manager.group_content_enabler')
+      $container->get('group_relation_type.manager')
     );
   }
 
@@ -147,8 +147,8 @@ class GroupTermUiController extends ControllerBase {
       if (strpos($plugin_id, 'group_term:') !== 0) {
         continue;
       }
-      $plugin = $group->getGroupType()->getContentPlugin($plugin_id);
-      $vocabulary = $storage->load($plugin->getEntityBundle());
+      $plugin = $group->getGroupType()->getPlugin($plugin_id);
+      $vocabulary = $storage->load($plugin->getRelationType()->getEntityBundle());
 
       // Check current user has a permission to view this taxonomy.
       if (!$group->hasPermission('view ' . $plugin_id . ' entity', $this->currentUser())) {

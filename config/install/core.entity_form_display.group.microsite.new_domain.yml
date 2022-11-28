@@ -93,7 +93,7 @@ dependencies:
     - field_group
 third_party_settings:
   field_group:
-    group_content:
+    group_relationship:
       children:
         - status
         - path
@@ -125,7 +125,7 @@ third_party_settings:
         - lgms_header_link_hover_colour
       label: Header
       region: hidden
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 6
       format_type: tab
       format_settings:
@@ -153,7 +153,7 @@ third_party_settings:
         - lgms_footer_link_hover_colour
       label: Footer
       region: hidden
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 7
       format_type: tab
       format_settings:
@@ -172,7 +172,7 @@ third_party_settings:
         - lgms_pre_header_link_hover
       label: Pre-header
       region: hidden
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 5
       format_type: tab
       format_settings:

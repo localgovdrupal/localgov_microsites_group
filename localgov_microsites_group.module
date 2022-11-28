@@ -10,10 +10,11 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
-use Drupal\group\Entity\GroupContentInterface;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\group\Entity\GroupRelationshipInterface;
 use Drupal\localgov_microsites_group\DomainSettingsHelper;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
@@ -93,22 +94,22 @@ function localgov_microsites_group_theme($existing, $type, $theme, $path) {
 function localgov_microsites_group_entity_type_build(array &$entity_types) {
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   $entity_types['group']->setFormClass('new_domain', DomainGroupAdd::class);
-  $entity_types['group_content']->setFormClass('new_domain', DomainGroupContentAdd::class);
+  $entity_types['group_relationship']->setFormClass('new_domain', DomainGroupContentAdd::class);
 }
 
 /**
  * Implements hook_menu_local_actions_alter().
  */
 function localgov_microsites_group_menu_local_actions_alter(array &$local_actions) {
-  if (!empty($local_actions['group_content.group_node_relate_page']) &&
-    !in_array('view.group_nodes.microsite_page', $local_actions['group_content.group_node_relate_page']['appears_on'])
+  if (!empty($local_actions['group_relationship.group_node_create_page']) &&
+    !in_array('view.group_nodes.microsite_page', $local_actions['group_relationship.group_node_create_page']['appears_on'])
   ) {
-    $local_actions['group_content.group_node_relate_page']['appears_on'][] = 'view.group_nodes.microsite_page';
+    $local_actions['group_relationship.group_node_create_page']['appears_on'][] = 'view.group_nodes.microsite_page';
   }
-  if (!empty($local_actions['group_content.group_node_add_page']) &&
-    !in_array('view.group_nodes.microsite_page', $local_actions['group_content.group_node_add_page']['appears_on'])
+  if (!empty($local_actions['group_relationship.group_node_add_page']) &&
+    !in_array('view.group_nodes.microsite_page', $local_actions['group_relationship.group_node_add_page']['appears_on'])
   ) {
-    $local_actions['group_content.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsite_page';
+    $local_actions['group_relationship.group_node_add_page']['appears_on'][] = 'view.group_nodes.microsite_page';
   }
 }
 
@@ -169,9 +170,9 @@ function localgov_microsites_group_group_update(GroupInterface $group) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_insert() for group_content entities.
+ * Implements hook_ENTITY_TYPE_insert() for group_relationship entities.
  */
-function localgov_microsites_group_group_content_insert(GroupContentInterface $entity) {
+function localgov_microsites_group_group_relationship_insert(GroupRelationshipInterface $entity) {
 
   // Add the Trusted Editor Role to group members.
   $type = $entity->get('type')->getValue();
@@ -185,9 +186,9 @@ function localgov_microsites_group_group_content_insert(GroupContentInterface $e
 }
 
 /**
- * Implements hook_ENTITY_TYPE_delete() for group_content entities.
+ * Implements hook_ENTITY_TYPE_delete() for group_relationship entities.
  */
-function localgov_microsites_group_group_content_delete(GroupContentInterface $entity) {
+function localgov_microsites_group_group_relationship_delete(GroupRelationshipInterface $entity) {
 
   // Remove the Trusted Editor Role when a user is no longer a member of groups.
   $type = $entity->get('type')->getValue();
@@ -208,6 +209,23 @@ function localgov_microsites_group_group_content_delete(GroupContentInterface $e
  */
 function localgov_microsites_group_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['#submit'][] = 'localgov_microsites_group_user_login_form_submit';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function localgov_microsites_group_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Set domain path pathauto as on by default.
+  if (isset($form['domain_path'])) {
+    $domain_ids = Element::children($form['domain_path']);
+    unset($domain_ids['domain_path_delete']);
+    foreach ($domain_ids as $id) {
+      if (isset($form['domain_path'][$id]['pathauto'])) {
+        $form['domain_path'][$id]['pathauto']['#default_value'] = TRUE;
+      }
+    }
+  }
 }
 
 /**
@@ -297,6 +315,18 @@ function localgov_microsites_group_local_task_title($task_id) {
 }
 
 /**
+ * Group local task titles to change.
+ */
+function localgov_microsites_group_local_tasks_alter(&$local_tasks) {
+  $local_tasks['group.view']['weight'] = -3;
+  $local_tasks['views_view:view.group_nodes.page_1']['weight'] = 0;
+  $local_tasks['views_view:view.group_invitations.page_1']['weight'] = 80;
+  $local_tasks['views_view:view.group_members.page_1']['weight'] = 75;
+  $local_tasks['group.edit_form']['weight'] = 170;
+  $local_tasks['domain_group.group_domain_settings']['weight'] = 150;
+}
+
+/**
  * Implements hook_preprocess_page_title().
  */
 function localgov_microsites_group_preprocess_page_title(&$variables) {
@@ -312,8 +342,8 @@ function localgov_microsites_group_preprocess_page_title(&$variables) {
  *
  * @see Drupal\localgov_microsites_group\Routing\RouteSubscriber::alterRoutes
  */
-function localgov_microsites_group_redirect_group_content(GroupContentInterface $group_content) {
-  $entity = $group_content->getEntity();
+function localgov_microsites_group_redirect_group_relationship(GroupRelationshipInterface $group_relationship) {
+  $entity = $group_relationship->getEntity();
   return new RedirectResponse($entity->toUrl()->toString());
 }
 
