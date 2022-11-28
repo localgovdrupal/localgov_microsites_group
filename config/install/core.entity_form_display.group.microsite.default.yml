@@ -469,7 +469,7 @@ content:
     weight: 16
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_base_line_height:
@@ -484,7 +484,7 @@ content:
     weight: 18
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_body_font:
@@ -668,7 +668,7 @@ content:
     weight: 6
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_1_font_weight:
@@ -682,7 +682,7 @@ content:
     weight: 9
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_2_font:
@@ -704,7 +704,7 @@ content:
     weight: 17
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_2_font_weight:
@@ -718,7 +718,7 @@ content:
     weight: 20
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_3_font:
@@ -740,7 +740,7 @@ content:
     weight: 9
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_3_font_weight:
@@ -754,7 +754,7 @@ content:
     weight: 12
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_4_font:
@@ -776,7 +776,7 @@ content:
     weight: 10
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_4_font_weight:
@@ -790,7 +790,7 @@ content:
     weight: 13
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_5_font:
@@ -812,7 +812,7 @@ content:
     weight: 11
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_5_font_weight:
@@ -826,7 +826,7 @@ content:
     weight: 14
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_6_font:
@@ -848,7 +848,7 @@ content:
     weight: 12
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_6_font_weight:
@@ -862,7 +862,7 @@ content:
     weight: 15
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_heading_font:
@@ -904,7 +904,7 @@ content:
     weight: 14
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_main_menu_font_weight:
@@ -1032,7 +1032,7 @@ content:
     weight: 12
     region: content
     settings:
-      size: 60
+      size: 20
       placeholder: ''
     third_party_settings: {  }
   lgms_site_name_font_weight:

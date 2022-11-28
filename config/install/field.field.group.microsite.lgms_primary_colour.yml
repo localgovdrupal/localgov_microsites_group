@@ -9,7 +9,7 @@ field_name: lgms_primary_colour
 entity_type: group
 bundle: microsite
 label: "Primary colour"
-description: "The Primary colour initally sets the background colour for the header and footer, and the accent colours on links and elements such as Call to action blocks. You can override these individually in the appropriate sections in the Site design administration."
+description: "The Primary colour sets the background colour for the header and footer, and the accent colours on links and elements such as Call to action blocks. You can override these individually in the appropriate sections in the Site design administration."
 required: false
 translatable: false
 default_value: {}
