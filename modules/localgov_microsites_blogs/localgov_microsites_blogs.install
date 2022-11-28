@@ -148,34 +148,34 @@ function localgov_microsites_blogs_install($is_syncing) {
   ];
   field_group_group_save($group_view_page_top);
 
-    // Create field_group for page_top section.
-    $group_view_page_bottom = new stdClass();
-    $group_view_page_bottom->group_name = 'group_page_bottom';
-    $group_view_page_bottom->context = 'view';
-    $group_view_page_bottom->entity_type = 'node';
-    $group_view_page_bottom->bundle = 'localgov_blog_post';
-    $group_view_page_bottom->mode = 'default';
-    $group_view_page_bottom->label = 'Page bottom';
-    $group_view_page_bottom->region = 'content';
-    $group_view_page_bottom->parent_name = '';
-    $group_view_page_bottom->weight = '-5';
-    $group_view_page_bottom->children = [
-      // Add children here
-    ];
-    $group_view_page_bottom->format_type = 'html_element';
-    $group_view_page_bottom->format_settings = [
-      'classes' => 'full__page-bottom',
-      'show_empty_fields' => FALSE,
-      'id' => '',
-      'element' => 'div',
-      'show_label' => FALSE,
-      'label_element' => 'h3',
-      'label_element_classes' => '',
-      'attributes' => '',
-      'effect' => 'none',
-      'speed' => 'fast',
-    ];
-    field_group_group_save($group_view_page_bottom);
+  // Create field_group for page_top section.
+  $group_view_page_bottom = new stdClass();
+  $group_view_page_bottom->group_name = 'group_page_bottom';
+  $group_view_page_bottom->context = 'view';
+  $group_view_page_bottom->entity_type = 'node';
+  $group_view_page_bottom->bundle = 'localgov_blog_post';
+  $group_view_page_bottom->mode = 'default';
+  $group_view_page_bottom->label = 'Page bottom';
+  $group_view_page_bottom->region = 'content';
+  $group_view_page_bottom->parent_name = '';
+  $group_view_page_bottom->weight = '-5';
+  $group_view_page_bottom->children = [
+  // Add children here.
+  ];
+  $group_view_page_bottom->format_type = 'html_element';
+  $group_view_page_bottom->format_settings = [
+    'classes' => 'full__page-bottom',
+    'show_empty_fields' => FALSE,
+    'id' => '',
+    'element' => 'div',
+    'show_label' => FALSE,
+    'label_element' => 'h3',
+    'label_element_classes' => '',
+    'attributes' => '',
+    'effect' => 'none',
+    'speed' => 'fast',
+  ];
+  field_group_group_save($group_view_page_bottom);
 
   // Use the group term reference plugin for the localgov_blog_categories field.
   /** @var \Drupal\field\Entity\FieldConfig $field */
