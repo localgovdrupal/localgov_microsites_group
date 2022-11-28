@@ -183,10 +183,8 @@ third_party_settings:
         required_fields: true
     group_global_styles:
       children:
-        - lgms_primary_colour
-        - lgms_primary_colour_contrast
-        - lgms_secondary_colour
-        - lgms_secondary_colour_contrast
+        - group_primary_colour_pair
+        - group_secondary_colour_pair
         - lgms_heading_font
         - lgms_body_font
         - lgms_text_colour
@@ -423,8 +421,36 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: '-OGX1JBGoavgaAM-QSQQr7krnVu8F3aDCkDMW6LSwqI'
+    group_primary_colour_pair:
+      children:
+        - lgms_primary_colour
+        - lgms_primary_colour_contrast
+      label: 'Primary colour'
+      region: content
+      parent_name: group_global_styles
+      weight: -1
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
+    group_secondary_colour_pair:
+      children:
+        - lgms_secondary_colour
+        - lgms_secondary_colour_contrast
+      label: 'Secondary colour'
+      region: content
+      parent_name: group_global_styles
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        description: ''
+        required_fields: true
 id: group.microsite.default
 targetEntityType: group
 bundle: microsite
