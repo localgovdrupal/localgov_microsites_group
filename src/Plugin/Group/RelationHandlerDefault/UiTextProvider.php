@@ -4,7 +4,6 @@ namespace Drupal\localgov_microsites_group\Plugin\Group\RelationHandlerDefault;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\group\Entity\GroupRelationshipInterface;
 use Drupal\group\Plugin\Group\RelationHandler\UiTextProviderInterface;
 use Drupal\group\Plugin\Group\RelationHandler\UiTextProviderTrait;
 use Drupal\group\Plugin\Group\RelationHandlerDefault\UiTextProvider as GroupDefaultUiTextProvider;
@@ -19,6 +18,8 @@ class UiTextProvider implements UiTextProviderInterface {
   /**
    * Constructs a new UiTextProvider.
    *
+   * @param \Drupal\group\Plugin\Group\RelationHandlerDefault\UiTextProvider $parent
+   *   The parent.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
@@ -51,7 +52,7 @@ class UiTextProvider implements UiTextProviderInterface {
 
     if ($bundle = $this->groupRelationType->getEntityBundle()) {
       $storage = $this->entityTypeManager()->getStorage($this->entityType->getBundleEntityType());
-      $bundle_entity = $storage->load($bundle); 
+      $bundle_entity = $storage->load($bundle);
       if (method_exists($bundle_entity, 'getDescription')) {
         return $bundle_entity->getDescription();
       }
