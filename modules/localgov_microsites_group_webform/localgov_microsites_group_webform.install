@@ -45,20 +45,48 @@ function localgov_microsites_group_webform_install() {
   $microsite_anon->set('permissions', $permissions);
   $microsite_anon->save();
 
-  // Add permission for user.role.microsites_controller to see own webform
-  // submissions.
+  // Add permission for user.role.microsites_controller to manage webforms.
   $microsites_controller = $config_factory->getEditable('user.role.microsites_controller');
   $permissions = $microsites_controller->get('permissions');
-  $permissions[] = 'view webform submissions own node';
-  $microsites_controller->set('permissions', $permissions);
+  $new_permissions = [
+    'access any webform configuration',
+    'access own webform configuration',
+    'access webform help',
+    'access webform overview',
+    'access webform submission user',
+    'administer webform',
+    'administer webform element access',
+    'administer webform submission',
+    'create webform',
+    'delete any webform',
+    'delete any webform submission',
+    'delete own webform',
+    'delete own webform submission',
+    'delete webform submissions any node',
+    'delete webform submissions own node',
+    'edit any webform',
+    'edit any webform submission',
+    'edit own webform',
+    'edit webform assets',
+    'edit webform source',
+    'edit webform submissions any node',
+    'edit webform submissions own node',
+    'edit webform twig',
+    'edit webform variants',
+    'view any webform submission',
+    'view own webform submission',
+    'view webform submissions any node',
+    'view webform submissions own node',
+  ];
+  $permissions = array_merge($permissions, $new_permissions);
+  microsites_controller->set('permissions', $permissions);
   $microsites_controller->save();
 
-  // Add permission for user.role.microsites_controller to see own webform
+  // Add permission for user.role.microsites_trusted_editor to see own webform
   // submissions.
   $microsites_trusted_editor = $config_factory->getEditable('user.role.microsites_trusted_editor');
   $permissions = $microsites_trusted_editor->get('permissions');
   $permissions[] = 'view webform submissions own node';
   $microsites_trusted_editor->set('permissions', $permissions);
   $microsites_trusted_editor->save();
-
 }
