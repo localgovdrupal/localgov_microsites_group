@@ -18,6 +18,7 @@ use Drupal\user\Entity\User;
  * @group localgov_microsites_group
  */
 class GroupPermissionsHelperTest extends GroupKernelTestBase {
+
   /**
    * {@inheritdoc}
    */
@@ -32,7 +33,6 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'media',
     'media_library',
     'gnode',
-    'group',
     'group_content_menu',
     'group_permissions',
     'group_term',
@@ -98,48 +98,55 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     ]);
 
     localgov_microsites_group_modules_installed(['localgov_microsites_events'], FALSE);
+
+    $account = $this->createUser();
+    $account->addRole('microsites_controller');
+    $account->save();
+    $this->setCurrentUser($account);
+
+    $this->group = $this->createGroup([
+      'type' => 'microsite',
+      'status' => 1,
+    ]);
+    $this->group->save();
   }
 
   /**
    * Test generating default content.
    */
   public function testGetPermissions() {
-    $group = Group::create(['type' => 'microsite']);
-    $group->save();
     $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
-    $permission_entity = $permissions_helper->getGroupPermissions($group);
+    $permission_entity = $permissions_helper->getGroupPermissions($this->group);
     assert($permission_entity instanceof GroupPermissionInterface);
     $permissions = $permission_entity->getPermissions();
     $this->assertEquals([
       'view group_node:localgov_event entity',
       'view group_node:localgov_page entity',
     ], $permissions['microsite-' . RolesHelper::GROUP_ANONYMOUS_ROLE]);
-    $this->assertTrue($group->hasPermission('view group_node:localgov_page entity', User::getAnonymousUser()));
+    $this->assertTrue($this->group->hasPermission('view group_node:localgov_page entity', User::getAnonymousUser()));
     $permissions['microsite-anonymous'] = [
       'view group_node:localgov_event entity',
     ];
     $permission_entity->setPermissions($permissions);
     $this->assertEmpty($permission_entity->validate());
     $permission_entity->save();
-    $this->assertFalse($group->hasPermission('view group_node:localgov_page entity', User::getAnonymousUser()));
+    drupal_flush_all_caches();
+    $this->assertFalse($this->group->hasPermission('view group_node:localgov_page entity', User::getAnonymousUser()));
   }
 
   /**
    * Test enable disable module permissions.
    */
   public function testToggleModulePermissions() {
-    $group = Group::create(['type' => 'microsite']);
-    $group->save();
-
     $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
-    $this->assertEquals(GroupPermissionsHelperInterface::ENABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $group));
-    $this->assertTrue($group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
-    $permissions_helper->moduleDisable('localgov_microsites_events', $group);
-    $this->assertEquals(GroupPermissionsHelperInterface::DISABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $group));
-    $this->assertFalse($group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
-    $permissions_helper->moduleEnable('localgov_microsites_events', $group);
-    $this->assertEquals(GroupPermissionsHelperInterface::ENABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $group));
-    $this->assertTrue($group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
+    $this->assertEquals(GroupPermissionsHelperInterface::ENABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $this->group));
+    $this->assertTrue($this->group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
+    $permissions_helper->moduleDisable('localgov_microsites_events', $this->group);
+    $this->assertEquals(GroupPermissionsHelperInterface::DISABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $this->group));
+    $this->assertFalse($this->group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
+    $permissions_helper->moduleEnable('localgov_microsites_events', $this->group);
+    $this->assertEquals(GroupPermissionsHelperInterface::ENABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $this->group));
+    $this->assertTrue($this->group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
   }
 
   /**
@@ -153,11 +160,8 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
    * change within a call.
    */
   public function testAlteredGroupPermissions() {
-    $group = Group::create(['type' => 'microsite']);
-    $group->save();
-
     $permission_entity = GroupPermission::create([
-      'gid' => $group->id(),
+      'gid' => $this->group->id(),
     ]);
     $permissions = $permission_entity->getPermissions();
     $permissions['microsite-anonymous'] = ['view group_node:localgov_event entity'];
@@ -165,17 +169,15 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     $permission_entity->validate();
     $permission_entity->save();
     $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
-    $this->assertEquals(GroupPermissionsHelperInterface::UNKNOWN, $permissions_helper->moduleStatus('localgov_microsites_events', $group));
+    $this->assertEquals(GroupPermissionsHelperInterface::UNKNOWN, $permissions_helper->moduleStatus('localgov_microsites_events', $this->group));
   }
 
   /**
    * Test list of all available modules.
    */
   public function testModulesList() {
-    $group = Group::create(['type' => 'microsite']);
-    $group->save();
     $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
-    $this->assertEquals(['localgov_microsites_events' => GroupPermissionsHelperInterface::ENABLED], $permissions_helper->modulesList($group));
+    $this->assertEquals(['localgov_microsites_events' => GroupPermissionsHelperInterface::ENABLED], $permissions_helper->modulesList($this->group));
   }
 
 }
