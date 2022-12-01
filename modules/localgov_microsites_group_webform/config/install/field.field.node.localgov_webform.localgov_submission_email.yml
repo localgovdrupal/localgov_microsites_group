@@ -9,8 +9,8 @@ field_name: localgov_submission_email
 entity_type: node
 bundle: localgov_webform
 label: 'Submission email'
-description: ''
-required: false
+description: 'Please specify the email address to which form submissions should be sent.'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

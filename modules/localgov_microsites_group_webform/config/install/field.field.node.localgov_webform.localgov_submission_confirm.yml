@@ -9,8 +9,8 @@ field_name: localgov_submission_confirm
 entity_type: node
 bundle: localgov_webform
 label: 'Submission confirmation'
-description: ''
-required: false
+description: 'Please provide a confirmation message to display on successful submission.'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
