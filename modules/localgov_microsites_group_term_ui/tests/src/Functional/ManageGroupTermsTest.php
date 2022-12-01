@@ -110,11 +110,7 @@ class ManageGroupTermsTest extends BrowserTestBase {
     $term->save();
     $this->group->addRelationship($term, 'group_term:localgov_topic');
 
-    // Login as a group admin.
-    /** @var \Drupal\group\Entity\GroupType $group */
-    $group_type = $this->entityTypeManager
-      ->getStorage('group_type')
-      ->load('default');
+    // Login as a group member.
     $user = $this->drupalCreateUser([]);
     $this->group->addMember($user);
     $this->drupalLogin($user);
