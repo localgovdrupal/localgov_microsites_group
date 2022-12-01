@@ -79,7 +79,7 @@ function localgov_microsites_group_webform_install() {
     'view webform submissions own node',
   ];
   $permissions = array_merge($permissions, $new_permissions);
-  microsites_controller->set('permissions', $permissions);
+  $microsites_controller->set('permissions', $permissions);
   $microsites_controller->save();
 
   // Add permission for user.role.microsites_trusted_editor to see own webform
