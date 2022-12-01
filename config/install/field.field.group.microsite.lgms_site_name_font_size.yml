@@ -9,7 +9,7 @@ field_name: lgms_site_name_font_size
 entity_type: group
 bundle: microsite
 label: 'Site name font size'
-description: ''
+description: 'Add a font size and unit here, for example: 18px, 1rem, 1.3em, etc.'
 required: false
 translatable: false
 default_value: {  }
