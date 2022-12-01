@@ -408,7 +408,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: ''
+          content: 'No terms available.'
           tokenize: false
       sorts: {  }
       arguments:

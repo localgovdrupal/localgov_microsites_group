@@ -1,0 +1,14 @@
+uuid: b8dd9650-be01-4dd3-9ab3-6d076300047d
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.default
+id: default-admin
+label: Admin
+weight: -99
+admin: true
+scope: individual
+global_role: null
+group_type: default
+permissions: {  }
