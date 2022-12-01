@@ -72,7 +72,9 @@ class MicrositeCachingTest extends BrowserTestBase {
     $this->domain->save();
 
     // Login as admin user.
-    $this->drupalLogin($this->drupalCreateUser([], NULL, TRUE));
+    $user = $this->drupalCreateUser([], NULL, TRUE);
+    $this->group->addMember($user, ['group_roles' => ['microsite-admin']]);
+    $this->drupalLogin($user);
   }
 
   /**
