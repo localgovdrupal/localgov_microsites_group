@@ -1,13 +1,11 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - group.type.microsite
   module:
     - group
     - taxonomy
 id: lgms_group_taxonomy_terms
-label: 'lgms group taxonomy terms'
+label: 'Microsite taxonomy terms'
 module: views
 description: ''
 tag: ''
@@ -449,8 +447,7 @@ display:
             type: 'entity:group'
             fail: 'not found'
           validate_options:
-            bundles:
-              microsite: microsite
+            bundles: {  }
             access: false
             operation: view
             multiple: 0

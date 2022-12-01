@@ -112,7 +112,6 @@ jobs:
         drupal-version:
           - '~9.3'
         php-version:
-          - '7.4'
           - '8.1'
 
     steps:
@@ -148,7 +147,6 @@ jobs:
         drupal-version:
           - '~9.3'
         php-version:
-          - '7.4'
           - '8.1'
 
     steps:
@@ -183,7 +181,6 @@ jobs:
         drupal-version:
           - '~9.3'
         php-version:
-          - '7.4'
           - '8.1'
 
     steps:

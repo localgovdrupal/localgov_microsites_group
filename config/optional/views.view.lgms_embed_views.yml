@@ -186,7 +186,7 @@ display:
           entity_type: node
           plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_relationship_plugins:
+          group_relation_plugins:
             'group_node:localgov_directories_page': '0'
             'group_node:localgov_directory': '0'
             'group_node:localgov_newsroom': '0'

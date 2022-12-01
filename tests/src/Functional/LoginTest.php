@@ -37,7 +37,6 @@ class LoginTest extends BrowserTestBase {
   protected static $modules = [
     'group',
     'domain',
-    'domain_site_settings',
     'domain_group',
     'localgov_microsites_group',
   ];
@@ -68,7 +67,6 @@ class LoginTest extends BrowserTestBase {
     // Setup the group types and test groups from the InitializeGroupsTrait.
     $this->initializeTestGroups(['uid' => $this->testUser->id()]);
     $this->initializeTestGroupsDomains();
-    $this->initializeTestGroupContent();
   }
 
   /**
