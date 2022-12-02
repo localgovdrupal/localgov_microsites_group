@@ -211,6 +211,7 @@ function localgov_microsites_events_install($is_syncing) {
   $group_view_page_top->parent_name = '';
   $group_view_page_top->weight = '0';
   $group_view_page_top->children = [
+    'localgov_event_image',
     'localgov_event_categories',
     'localgov_event_date',
     'localgov_event_location',

@@ -10,7 +10,7 @@ id: group.microsite.lgms_heading_5_font_weight
 field_name: lgms_heading_5_font_weight
 entity_type: group
 bundle: microsite
-label: 'Heading 5 Font Weight'
+label: 'Heading 5 font weight'
 description: ''
 required: false
 translatable: false

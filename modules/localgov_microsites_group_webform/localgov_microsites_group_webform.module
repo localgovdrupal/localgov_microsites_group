@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Microsites Group Webform module file.
+ */
+
+use Drupal\group\Entity\Group;
+use Drupal\group\Entity\Storage\GroupRelationshipTypeStorageInterface;
+
+/**
+ * Implements hook_entity_update().
+ */
+function localgov_microsites_group_webform_entity_update($entity) {
+  // We might need to do something in hook_entity_update() too.
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function localgov_microsites_group_webform_entity_insert($entity) {
+
+  // Check for entity type, we only want to act on webform / webform_submission.
+  $entity_type = $entity->getEntityTypeId();
+
+  // For the webform, every time a webform is created, we want to add it to the
+  // microsite group type, to make sure a submission can be assigned to a
+  // group.
+  if ($entity_type == 'webform') {
+
+    // The format of the plugin_id is llike group_webform:contact, the latter
+    // being the webform id.
+    $webform_id = $entity->id();
+    $plugin_id = 'group_webform:' . $webform_id;
+
+    // Now we get the group_type config entity, which we need to pass to
+    // the GroupRelationshipTypeStorageInterface -> createFromPlugin.
+    $group_type_storage = \Drupal::entityTypeManager()->getStorage('group_type');
+    $group_type = $group_type_storage->load('microsite');
+
+    // Got this from lines 145-147 of GroupRelationshipTypeForm.php
+    // https://git.drupalcode.org/project/group/-/blob/3.0.x/src/Entity/Form/GroupRelationshipTypeForm.php#L145-147
+    $storage = \Drupal::entityTypeManager()->getStorage('group_relationship_type');
+    assert($storage instanceof GroupRelationshipTypeStorageInterface);
+    $storage->createFromPlugin($group_type, $plugin_id)->save();
+
+  }
+
+  // For the webform_submission, we just need to hook into the submission and
+  // add it to the group with $group->addRelationship.
+  if ($entity_type == 'webform_submission') {
+
+    // Find the active group.
+    $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+
+    // If we can't find it with the domain_group_resolver, try with the url.
+    // @todo check if this is actually necessary.
+    if (is_null($group_id)) {
+      $group = \Drupal::request()->attributes->get('group');
+      if ($group) {
+        $group_id = $group->id();
+      }
+    }
+
+    // If we have a $group_id, let's load it and add a new group relationsship.
+    if ($group_id) {
+
+      // Load the group.
+      $group = Group::load($group_id);
+
+      // Get the webform and then webform_id to generate the expected plugin_id.
+      $webform = $entity->getWebform();
+      $webform_id = $webform->id();
+
+      // The plugin is in the form 'group_webform:contact' for the 'contact'
+      // webform.
+      $plugin_id = "group_webform:" . $webform_id;
+
+      // Add the webform submission to the group.
+      $group->addRelationship($entity, $plugin_id);
+
+    }
+  }
+}
