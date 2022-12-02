@@ -63,29 +63,25 @@ class PreviewThemeController extends ControllerBase {
       <table>
         <tr>
           <th>Name</th>
+          <th>Css variable</th>
           <th>Swatch</th>
           <th>Edit link</th>
         </tr>
         <tr>
           <td>Primary colour</td>
+          <td><code>--accent-1 </code></td>
           <td><div class="swatch accent-1"></div></td>
           <td><a href="'.$url2.'/edit#edit-lgms-primary-colour-wrapper" target="_blank"> (edit)</a></td>
         </tr>
         <tr>
           <td>Primary contrast colour</td>
+          <td><code>--accent-1-contrast </code></td>
           <td><div class="swatch accent-contrast"></div></td>
           <td><a href="'.$url2.'/edit#edit-lgms-primary-colour-wrapper" target="_blank"> (edit)</a></td>
         </tr>
       </table>
 
       <div class="swatch-wrapper"><span class="swatch-combined accent-1">Primary colour with text</span></div>
-      <details>
-        <summary>CSS variables</summary>
-        <ul>
-          <li>Primary colour: <code> --accent-1 </code></li>
-          <li>Primary colour contrast: <code> --accent-1-contrast</code></li>
-        </ul>
-      </details>
 
       <h3>Secondary colours</h3>
       <table>
@@ -129,25 +125,79 @@ class PreviewThemeController extends ControllerBase {
           <td><div class="swatch link-colour"></div></td>
           <td><a href="'.$url2.'/edit#edit-lgms-primary-colour-wrapper" target="_blank"> (edit)</a></td>
         </tr>
+        <tr>
+          <td>Heading 1 Font Colour</td>
+          <td><div class="swatch heading-1-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-heading-1-font-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Heading 2 Font Colour</td>
+          <td><div class="swatch heading-2-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-heading-2-font-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Heading 3 Font Colour</td>
+          <td><div class="swatch heading-3-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-heading-3-font-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Heading 4 Font Colour</td>
+          <td><div class="swatch heading-4-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-heading-4-font-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Heading 5 Font Colour</td>
+          <td><div class="swatch heading-5-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-heading-5-font-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Heading 6 Font Colour</td>
+          <td><div class="swatch heading-6-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-heading-6-font-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
       </table>
       <div class="combined">
-        <div class="swatch-wrapper"><span class="swatch-combined page-colour text-colour">Secondary colour with text</span></div>
-        <div class="swatch-wrapper"><span class="swatch-combined page-colour link-colour">Secondary colour with link</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour text-colour">Text on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour link-colour">Link on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour heading-1-colour">H1 on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour heading-2-colour">H2 on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour heading-3-colour">H3 on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour heading-4-colour">H4 on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour heading-5-colour">H5 on page</span></div>
+        <div class="swatch-wrapper"><span class="swatch-combined page-colour heading-6-colour">H6 on page</span></div>
       </div>
       <h3>All the colours</h3>
-      <h4>Headings</h4>
-      <div class="swatch-wrapper"><span class="swatch heading-1-colour"></span>Heading 1 Font Colour</div>
-      <div class="swatch-wrapper"><span class="swatch heading-2-colour"></span>Heading 2 Font Colour</div>
-      <div class="swatch-wrapper"><span class="swatch heading-3-colour"></span>Heading 3 Font Colour</div>
-      <div class="swatch-wrapper"><span class="swatch heading-4-colour"></span>Heading 4 Font Colour</div>
-      <div class="swatch-wrapper"><span class="swatch heading-5-colour"></span>Heading 5 Font Colour</div>
-      <div class="swatch-wrapper"><span class="swatch heading-6-colour"></span>Heading 6 Font Colour</div>
       <h4>Footer</h4>
       <p>The text, link and hover colours should all have enough contrast with the background.</p>
-        <div class="swatch-wrapper"><span class="swatch footer-background-colour"></span>Footer Background Colour</div>
-        <div class="swatch-wrapper"><span class="swatch footer-text-colour"></span>Footer Text Colour</div>
-        <div class="swatch-wrapper"><span class="swatch footer-link-colour"></span>Footer Link Colour</div>
-        <div class="swatch-wrapper"><span class="swatch footer-hover-colour"></span>Footer Link Hover Colour</div>
+
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Swatch</th>
+          <th>Edit link</th>
+          <th>Css variable</th>
+        </tr>
+        <tr>
+          <td>Footer Background Colour</td>
+          <td><div class="swatch footer-background-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-footer-background-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Footer Text Colour</td>
+          <td><div class="swatch footer-text-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-footer-text-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Footer Link Colour</td>
+          <td><div class="swatch footer-link-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-footer-link-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Footer Hover Colour</td>
+          <td><div class="swatch footer-hover-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-footer-hover-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+      </table>
         <div class="combined">
           <div class="swatch-wrapper"><span class="swatch-combined footer-background-colour footer-text-colour">Footer background colour with text</span></div>
           <div class="swatch-wrapper"><span class="swatch-combined footer-background-colour footer-link-colour">Footer background colour with link</span></div>
@@ -155,34 +205,110 @@ class PreviewThemeController extends ControllerBase {
         </div>
       <h4>Header</h4>
       <p>The text, link and hover colours should all have enough contrast with the background.</p>
-        <div class="swatch-wrapper"><span class="swatch header-background-colour"></span>Header Background Colour</div>
-        <div class="swatch-wrapper"><span class="swatch header-text-colour"></span>Header Text Colour</div>
-        <div class="swatch-wrapper"><span class="swatch header-link-colour"></span>Header Link Colour</div>
-        <div class="swatch-wrapper"><span class="swatch header-hover-colour"></span>Header Link Hover Colour</div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Swatch</th>
+          <th>Edit link</th>
+        </tr>
+        <tr>
+          <td>Header Background Colour</td>
+          <td><div class="swatch header-background-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-header-bg-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Header Text Colour</td>
+          <td><div class="swatch header-text-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-header-text-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Header Link Colour</td>
+          <td><div class="swatch header-link-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-header-link-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>Header Hover Colour</td>
+          <td><div class="swatch header-hover-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-header-hover-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+      </table>
         <div class="combined">
           <div class="swatch-wrapper"><span class="swatch-combined header-background-colour header-text-colour">header background colour with text</span></div>
           <div class="swatch-wrapper"><span class="swatch-combined header-background-colour header-link-colour">header background colour with link</span></div>
           <div class="swatch-wrapper"><span class="swatch-combined header-background-colour header-hover-colour">header background colour with link hover</span></div>
         </div>
       <h4>Off-canvas</h4>
-        <div class="swatch-wrapper"><span class="swatch off-canvas-background-colour"></span>Off-canvas Background Colour</div>
-        <div class="swatch-wrapper"><span class="swatch off-canvas-text-colour"></span>Off-canvas text colour</div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Swatch</th>
+          <th>Edit link</th>
+        </tr>
+        <tr>
+          <td>off-canvas Background Colour</td>
+          <td><div class="swatch off-canvas-background-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-off-canvas-bg-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>off-canvas Text Colour</td>
+          <td><div class="swatch off-canvas-text-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-off-canvas-text-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+      </table>
         <div class="combined">
           <div class="swatch-wrapper"><span class="swatch-combined off-canvas-background-colour off-canvas-text-colour">off-canvas background colour with text</span></div>
         </div>
       <h4>Pre-header</h4>
-        <div class="swatch-wrapper"><span class="swatch pre-header-background-colour"></span>Pre-header Background Colour</div>
-        <div class="swatch-wrapper"><span class="swatch pre-header-text-colour"></span>Pre-header Text Colour</div>
-        <div class="swatch-wrapper"><span class="swatch pre-header-link-colour"></span>Pre-header Link Colour</div>
-        <div class="swatch-wrapper"><span class="swatch pre-header-hover-colour"></span>Pre-header Link Hover Colour</div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Swatch</th>
+          <th>Edit link</th>
+        </tr>
+        <tr>
+          <td>pre-header Background Colour</td>
+          <td><div class="swatch pre-header-background-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-pre-header-bg-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>pre-header Text Colour</td>
+          <td><div class="swatch pre-header-text-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-pre-header-text-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>pre-header Link Colour</td>
+          <td><div class="swatch pre-header-link-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-pre-header-link-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>pre-header Hover Colour</td>
+          <td><div class="swatch pre-header-hover-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-pre-header-hover-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+      </table>
         <div class="combined">
           <div class="swatch-wrapper"><span class="swatch-combined pre-header-background-colour pre-header-text-colour">pre-header background colour with text</span></div>
           <div class="swatch-wrapper"><span class="swatch-combined pre-header-background-colour pre-header-link-colour">pre-header background colour with link</span></div>
           <div class="swatch-wrapper"><span class="swatch-combined pre-header-background-colour pre-header-hover-colour">pre-header background colour with link hover</span></div>
         </div>
       <h4>Submenu</h4>
-        <div class="swatch-wrapper"><span class="swatch submenu-background-colour"></span>Submenu Background Colour</div>
-        <div class="swatch-wrapper"><span class="swatch submenu-link-colour"></span>Submenu Link Colour</div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Swatch</th>
+          <th>Edit link</th>
+        </tr>
+        <tr>
+          <td>submenu Background Colour</td>
+          <td><div class="swatch submenu-background-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-submenu-bg-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+        <tr>
+          <td>submenu Text Colour</td>
+          <td><div class="swatch submenu-text-colour"></div></td>
+          <td><a href="'.$url2.'/edit#edit-lgms-submenu-text-colour-wrapper" target="_blank"> (edit)</a></td>
+        </tr>
+      </table>
         <div class="combined">
           <div class="swatch-wrapper"><span class="swatch-combined submenu-background-colour submenu-link-colour">submenu background colour with link</span></div>
       </div>
@@ -200,5 +326,4 @@ class PreviewThemeController extends ControllerBase {
 
     ];
   }
-
 }
