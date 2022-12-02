@@ -8,7 +8,7 @@ dependencies:
 id: localgov_microsites_base_sitewide_search_off_canvas_block
 theme: localgov_microsites_base
 region: off_canvas
-weight: 0
+weight: 15
 provider: null
 plugin: localgov_sitewide_search_block
 settings:

@@ -57,11 +57,6 @@ class GroupExtraFieldDisplay {
     }
     if ($display->getComponent('microsite_members')) {
       $build['microsite_members'] = [
-        'title' => [
-          '#type' => 'html_tag',
-          '#tag' => 'h2',
-          '#value' => $this->t('Users'),
-        ],
         'view' => $this->getMemberViewEmbed($group),
       ];
     }

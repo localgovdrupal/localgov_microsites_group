@@ -198,7 +198,7 @@ class MicrositeEventContentTest extends BrowserTestBase {
         'status' => NodeInterface::PUBLISHED,
       ]);
       $page->save();
-      $group->addContent($page, 'group_node:localgov_event');
+      $group->addRelationship($page, 'group_node:localgov_event');
       $pages[] = $page;
     }
 

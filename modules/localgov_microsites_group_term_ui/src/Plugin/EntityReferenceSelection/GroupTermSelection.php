@@ -10,6 +10,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\domain_group\DomainGroupResolverInterface;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -99,9 +100,8 @@ class GroupTermSelection extends TermSelection {
     // Only show group terms if there's a group.
     if ($group instanceof GroupInterface) {
       foreach ($options as $vid => $terms) {
-        $plugin_id = 'group_term:' . $vid;
         foreach ($terms as $tid => $name) {
-          if (empty($group->getContentByEntityId($plugin_id, $tid))) {
+          if (empty($tid) || empty($group->getRelationshipsByEntity(Term::load($tid)))) {
             unset($options[$vid][$tid]);
           }
         }
