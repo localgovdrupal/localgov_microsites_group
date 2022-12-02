@@ -209,14 +209,19 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
       throw new \LogicException('Module does not implement group permissions');
     }
 
-    $permissions_with = [];
+    $permissions_with = [
+      RolesHelper::GROUP_ADMIN_ROLE => [],
+      RolesHelper::GROUP_ANONYMOUS_ROLE => [],
+      RolesHelper::GROUP_MEMBER_ROLE => [],
+      RolesHelper::GROUP_OUTSIDER_ROLE => [],
+    ];
     $modules = $this->modulesList($group);
     foreach ($modules as $module => $status) {
       if ($module != $disable_module && $status == GroupPermissionsHelperInterface::ENABLED) {
         $module_permissions = RolesHelper::getModuleRoles($module);
         if (!empty($module_permissions['group'])) {
           foreach ($module_permissions['group'] as $role => $permissions) {
-            $permissions_with[$role] = array_merge($permissions_with[$role] ?? [], $permissions);
+            $permissions_with[$role] = array_merge($permissions_with[$role], $permissions);
           }
         }
       }

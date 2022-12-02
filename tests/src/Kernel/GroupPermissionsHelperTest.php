@@ -143,6 +143,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     $this->assertTrue($this->group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
     $permissions_helper->moduleDisable('localgov_microsites_events', $this->group);
     $this->assertEquals(GroupPermissionsHelperInterface::DISABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $this->group));
+    drupal_flush_all_caches();
     $this->assertFalse($this->group->hasPermission('view group_node:localgov_event entity', User::getAnonymousUser()));
     $permissions_helper->moduleEnable('localgov_microsites_events', $this->group);
     $this->assertEquals(GroupPermissionsHelperInterface::ENABLED, $permissions_helper->moduleStatus('localgov_microsites_events', $this->group));
