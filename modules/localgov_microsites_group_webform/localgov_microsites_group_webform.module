@@ -82,3 +82,73 @@ function localgov_microsites_group_webform_entity_insert($entity) {
     }
   }
 }
+
+/**
+ * Implements hook_localgov_microsites_roles_default().
+ */
+function localgov_microsites_group_webform_localgov_microsites_roles_default() {
+  return [
+    'global' => [
+      RolesHelper::MICROSITES_CONTROLLER_ROLE => [
+        'access any webform configuration',
+        'access own webform configuration',
+        'access webform help',
+        'access webform overview',
+        'access webform submission user',
+        'administer webform',
+        'administer webform element access',
+        'administer webform submission',
+        'create webform',
+        'delete any webform',
+        'delete any webform submission',
+        'delete own webform',
+        'delete own webform submission',
+        'delete webform submissions any node',
+        'delete webform submissions own node',
+        'edit any webform',
+        'edit any webform submission',
+        'edit own webform',
+        'edit webform assets',
+        'edit webform source',
+        'edit webform submissions any node',
+        'edit webform submissions own node',
+        'edit webform twig',
+        'edit webform variants',
+        'view any webform submission',
+        'view own webform submission',
+        'view webform submissions any node',
+        'view webform submissions own node',
+      ],
+      RolesHelper::MICROSITES_EDITOR_ROLE => [
+        'view webform submissions own node',
+      ],
+    ],
+    'group' => [
+      RolesHelper::GROUP_ADMIN_ROLE => [
+        'create group_node:localgov_webform entity',
+        'delete any group_node:localgov_webform entity',
+        'delete own group_node:localgov_webform entity',
+        'update any group_node:localgov_webform entity',
+        'update own group_node:localgov_webform entity',
+        'view group_node:localgov_webform entity',
+        'create group_webform:microsite_contact entity',
+        'delete any group_webform:microsite_contact entity',
+        'delete own group_webform:microsite_contact entity',
+        'update any group_webform:microsite_contact entity',
+        'update own group_webform:microsite_contact entity',
+        'view group_webform:microsite_contact entity',
+
+      ],
+      RolesHelper::GROUP_ANONYMOUS_ROLE => [
+        'view group_node:localgov_webform entity',
+        'create group_webform:microsite_contact entity',
+      ],
+      RolesHelper::GROUP_MEMBER_ROLE => [
+
+      ],
+      RolesHelper::GROUP_OUTSIDER_ROLE => [
+
+      ],
+    ],
+  ];
+}
