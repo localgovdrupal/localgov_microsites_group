@@ -101,7 +101,6 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
       }
     }
 
-
     $group_permissions_entity = $this->getGroupPermissions($group);
     $group_permissions = $group_permissions_entity->getPermissions();
     $module_group_permissions = [];
