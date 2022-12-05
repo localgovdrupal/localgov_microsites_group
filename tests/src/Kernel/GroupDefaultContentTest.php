@@ -33,6 +33,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'gnode',
     'group_content_menu',
     'group_permissions',
+    'groupmedia',
     'node',
     'paragraphs',
     'replicate',
@@ -61,6 +62,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     $this->installConfig([
       'gnode',
       'localgov_microsites_group',
+      'groupmedia',
     ]);
   }
 
