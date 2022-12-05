@@ -12,6 +12,7 @@
     "drupal/group_content_menu": "3.x-dev",
     "drupal/group_permissions": "2.0.x-dev",
     "drupal/group_term": "dev-3316529-group-3.x-compatibility",
+    "drupal/groupmedia": "^4.0@alpha",
     "drupal/override_node_options": "^2.6",
     "drupal/replicate": "^1.0",
     "drupal/role_delegation": "^1.2",
@@ -41,6 +42,9 @@
           "Error manually adding an alias when Domain Path Pathauto is enabled #3315360": "https://www.drupal.org/files/issues/2022-10-14/error-manually-adding-alias-with-domain-path-pathauto-enabled-3315360-2.patch",
           "domain_path_pathauto creates duplicate aliases #3285213": "https://www.drupal.org/files/issues/2022-06-11/domain_path_pathauto-obey-current-domain_id-querying-for-reserved-aliases-3285213.patch",
           "Warning: Undefined array key 'pathauto' #3315752": "https://www.drupal.org/files/issues/2022-10-17/undefined-array-key-pathauto-3265497-2.patch"
+      },
+      "drupal/groupmedia": {
+          "Update addPage in groupmediato work with Group 3.x and suppress errors #3325129": "https://git.drupalcode.org/issue/groupmedia-3325129/-/commit/194f7bfa1d51f9a34a00ab4323f5fdf8c82ff48b.patch"
       },
         "drupal/ginvite": {
           "View schema fix #3324625": "https://www.drupal.org/files/issues/2022-11-30/3324625-2-schema-fix-for-4.0.x.patch"

@@ -32,6 +32,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'media',
     'media_library',
     'gnode',
+    'groupmedia',
     'group_content_menu',
     'group_permissions',
     'group_term',
@@ -44,6 +45,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'taxonomy',
     'user',
     'views',
+    'localgov_media',
     'localgov_microsites_events',
     'localgov_microsites_group',
     'localgov_paragraphs_layout',
@@ -91,6 +93,7 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
 
     $this->installConfig([
       'gnode',
+      'localgov_media',
       'localgov_paragraphs_layout',
       'localgov_microsites_group',
       'localgov_microsites_events',
