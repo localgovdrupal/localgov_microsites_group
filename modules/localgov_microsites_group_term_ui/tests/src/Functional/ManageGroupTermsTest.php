@@ -104,7 +104,7 @@ class ManageGroupTermsTest extends BrowserTestBase {
 
     // Create a term.
     $term = Term::create([
-      'name' => $this->randomString(),
+      'name' => $this->randomMachineName(),
       'vid' => 'localgov_topic',
     ]);
     $term->save();
@@ -112,7 +112,7 @@ class ManageGroupTermsTest extends BrowserTestBase {
 
     // Login as a group member.
     $user = $this->drupalCreateUser([]);
-    $this->group->addMember($user);
+    $this->group->addMember($user, ['group_roles' => ['default-member']]);
     $this->drupalLogin($user);
 
     // Check access to taxonomy management page.
@@ -130,6 +130,7 @@ class ManageGroupTermsTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     // Check term management.
+    $member_role->grantPermission('view group_term:localgov_topic entity')->save();
     $term_url = Url::fromRoute('view.lgms_group_taxonomy_terms.page',
       [
         'group' => $this->group->id(),
