@@ -5,6 +5,7 @@ namespace Drupal\Tests\localgov_microsites_group\Kernel;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\group\Entity\Group;
 use Drupal\localgov_microsites_group\GroupDefaultContent;
+use Drupal\media\Entity\MediaType;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
@@ -20,7 +21,6 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
    * {@inheritdoc}
    */
   public static $modules = [
-    'localgov_microsites_group',
     'domain',
     'entity_reference_revisions',
     'field_formatter_class',
@@ -31,13 +31,15 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'media_library',
     'menu_link_reference',
     'gnode',
+    'groupmedia',
     'group_content_menu',
     'group_permissions',
-    'groupmedia',
     'node',
     'paragraphs',
     'replicate',
     'views',
+    'localgov_media',
+    'localgov_microsites_group',
   ];
 
   /**
@@ -45,6 +47,9 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
+
+    $this->installEntitySchema('group_content_menu');
+    $this->installSchema('node', 'node_access');
 
     // You really don't want to install localgov_page in a Kernel test!
     NodeType::create([
@@ -56,13 +61,11 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
       'name' => 'Example',
     ])->save();
 
-    $this->installEntitySchema('group_content_menu');
-    $this->installSchema('node', 'node_access');
-
     $this->installConfig([
       'gnode',
+      'localgov_media',
       'localgov_microsites_group',
-      'groupmedia',
+
     ]);
   }
 
