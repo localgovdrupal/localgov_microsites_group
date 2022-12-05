@@ -111,12 +111,12 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
     $themes = $this->themeHandler->rebuildThemeData();
     $admin_options = [
       '' => $this->t('No override (:site_admin)',
-        [':site_admin' => $themes[$site_admin]->info['name']]
+        [':site_admin' => $themes[$site_admin]->info['name'] ?? '']
       ),
     ];
     $default_options = [
       '' => $this->t('No override (:site_default)',
-        [':site_default' => $themes[$site_default]->info['name']]
+        [':site_default' => $themes[$site_default]->info['name'] ?? '']
       ),
     ];
     // Remove obsolete themes.
