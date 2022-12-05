@@ -188,7 +188,9 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     foreach ($enable_permissions as $role => $permissions) {
       $group_permissions[$group->bundle() . '-' . $role] = array_merge($group_permissions[$group->bundle() . '-' . $role], $permissions);
     }
+
     $group_permissions_entity->setPermissions($group_permissions);
+    $group_permissions_entity->setPublished();
     $group_permissions_entity->validate();
     $group_permissions_entity->save();
   }
@@ -237,6 +239,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     }
 
     $group_permissions_entity->setPermissions($group_permissions);
+    $group_permissions_entity->setPublished();
     $group_permissions_entity->validate();
     $group_permissions_entity->save();
   }
