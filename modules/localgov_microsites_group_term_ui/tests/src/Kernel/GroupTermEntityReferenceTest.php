@@ -50,23 +50,23 @@ class GroupTermEntityReferenceTest extends GroupKernelTestBase {
   public function testGroupTermReference() {
 
     // Create a group.
-    $group = $this->createGroup();
+    $group = $this->createGroup(['type' => 'default']);
 
     // Create two terms, one a group term.
     $term1 = Term::create([
       'name' => 'term1',
-      'vid' => 'tags',
+      'vid' => 'localgov_topic',
     ]);
     $term1->save();
-    $group->addRelationship($term1, 'group_term:tags');
+    $group->addRelationship($term1, 'group_term:localgov_topic');
     $term2 = Term::create([
       'name' => 'term2',
-      'vid' => 'tags',
+      'vid' => 'localgov_topic',
     ]);
     $term2->save();
 
     // Create an entity reference field.
-    $field_name = 'taxonomy_tags';
+    $field_name = 'taxonomy_localgov_topic';
     $field_storage = FieldStorageConfig::create([
       'field_name' => $field_name,
       'entity_type' => 'entity_test',
@@ -94,7 +94,7 @@ class GroupTermEntityReferenceTest extends GroupKernelTestBase {
     // Check results with no group context.
     $result = $handler->getReferenceableEntities();
     $expected_result = [
-      'tags' => [
+      'localgov_topic' => [
         $term1->id() => $term1->getName(),
         $term2->id() => $term2->getName(),
       ],
@@ -108,7 +108,7 @@ class GroupTermEntityReferenceTest extends GroupKernelTestBase {
     // Check results with group context.
     $result = $handler->getReferenceableEntities();
     $expected_result = [
-      'tags' => [
+      'localgov_topic' => [
         $term1->id() => $term1->getName(),
       ],
     ];

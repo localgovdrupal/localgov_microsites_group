@@ -3,15 +3,13 @@ status: true
 dependencies:
   config:
     - group.type.default
-    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.localgov_topic
   module:
     - group_term
     - taxonomy
-id: default-group_term-tags
-label: 'default: Group term (Tags)'
-description: 'Adds <em class="placeholder">Tags</em> terms to groups.'
+id: default-cdd17d4c676d26a72122c1f1
 group_type: default
-content_plugin: 'group_term:tags'
+content_plugin: 'group_term:localgov_topic'
 plugin_config:
   group_cardinality: 0
   entity_cardinality: 1
