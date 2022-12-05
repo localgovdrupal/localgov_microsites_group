@@ -157,8 +157,7 @@ function localgov_microsites_group_webform_localgov_microsites_roles_default() {
         'update own group_webform:microsite_contact entity',
         'view group_webform:microsite_contact entity',
       ],
-      RolesHelper::GROUP_OUTSIDER_ROLE => [
-      ],
+      RolesHelper::GROUP_OUTSIDER_ROLE => [],
     ],
   ];
 }
