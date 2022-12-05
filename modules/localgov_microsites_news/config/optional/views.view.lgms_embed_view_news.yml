@@ -228,7 +228,7 @@ display:
             'group_node:localgov_event': '0'
             'group_node:localgov_newsroom': '0'
             'group_node:localgov_page': '0'
-          group_relationship_plugins:
+          group_relationplugins:
             'group_node:localgov_directories_page': '0'
             'group_node:localgov_directory': '0'
             'group_node:localgov_newsroom': '0'

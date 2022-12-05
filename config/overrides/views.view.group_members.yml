@@ -690,7 +690,7 @@ display:
           entity_type: group_relationship
           plugin_id: group_relationship_to_entity
           required: true
-          group_relationship_plugins:
+          group_relation_plugins:
             group_membership: group_membership
       header: {  }
       footer: {  }
@@ -910,7 +910,22 @@ display:
           field_api_classes: false
       defaults:
         fields: false
+        header: false
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<h2>Users</h2>'
+            format: wysiwyg
+          tokenize: false
       display_extenders: {  }
     cache_metadata:
       max-age: -1

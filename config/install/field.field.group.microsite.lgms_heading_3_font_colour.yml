@@ -8,8 +8,8 @@ id: group.microsite.lgms_heading_3_font_colour
 field_name: lgms_heading_3_font_colour
 entity_type: group
 bundle: microsite
-label: 'Heading 3 Font Colour'
-description: ''
+label: 'Heading 3 font colour'
+description: 'Choose a colour with sufficient colour contrast with the Page background colour.'
 required: false
 translatable: false
 default_value: {  }
