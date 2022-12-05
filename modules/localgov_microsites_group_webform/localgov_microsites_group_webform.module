@@ -138,7 +138,6 @@ function localgov_microsites_group_webform_localgov_microsites_roles_default() {
         'update any group_webform:microsite_contact entity',
         'update own group_webform:microsite_contact entity',
         'view group_webform:microsite_contact entity',
-
       ],
       RolesHelper::GROUP_ANONYMOUS_ROLE => [
         'view group_node:localgov_webform entity',
