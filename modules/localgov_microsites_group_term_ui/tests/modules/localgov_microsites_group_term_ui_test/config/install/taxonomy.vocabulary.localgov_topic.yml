@@ -1,7 +1,7 @@
 langcode: en
 status: true
 dependencies: {  }
-name: Tags
-vid: tags
+name: Topics
+vid: localgov_topic
 description: ''
 weight: 0

@@ -476,14 +476,6 @@ display:
             'group_node:localgov_newsroom': '0'
             'group_node:localgov_news_article': '0'
             'group_node:localgov_page': '0'
-          group_relationship_plugins:
-            'group_node:localgov_directories_page': '0'
-            'group_node:localgov_directory': '0'
-            'group_node:localgov_newsroom': '0'
-            'group_node:localgov_news_article': '0'
-            'group_node:localgov_page': '0'
-            'group_node:localgov_subsites_overview': '0'
-            'group_node:localgov_subsites_page': '0'
         localgov_event_date_occurrences:
           id: localgov_event_date_occurrences
           table: node_field_data
