@@ -46,7 +46,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   protected $moduleHandler;
 
   /**
-   * Constructs a GroupPermissionsHelper oindex:.
+   * Constructs a GroupPermissionsHelper instance.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
@@ -187,7 +187,9 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
     foreach ($enable_permissions as $role => $permissions) {
       $group_permissions[$group->bundle() . '-' . $role] = array_merge($group_permissions[$group->bundle() . '-' . $role], $permissions);
     }
+
     $group_permissions_entity->setPermissions($group_permissions);
+    $group_permissions_entity->setPublished();
     $group_permissions_entity->validate();
     $group_permissions_entity->save();
   }
@@ -208,40 +210,35 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
       throw new \LogicException('Module does not implement group permissions');
     }
 
-    $permissions_with = [];
+    $permissions_with = [
+      RolesHelper::GROUP_ADMIN_ROLE => [],
+      RolesHelper::GROUP_ANONYMOUS_ROLE => [],
+      RolesHelper::GROUP_MEMBER_ROLE => [],
+      RolesHelper::GROUP_OUTSIDER_ROLE => [],
+    ];
     $modules = $this->modulesList($group);
     foreach ($modules as $module => $status) {
-      if ($status == GroupPermissionsHelperInterface::ENABLED) {
+      if ($module != $disable_module && $status == GroupPermissionsHelperInterface::ENABLED) {
         $module_permissions = RolesHelper::getModuleRoles($module);
         if (!empty($module_permissions['group'])) {
           foreach ($module_permissions['group'] as $role => $permissions) {
-            $permissions_with[$role] = array_merge($permissions_with[$role] ?? [], $permissions);
+            $permissions_with[$role] = array_merge($permissions_with[$role], $permissions);
           }
         }
       }
-    }
-    $permissions_without = [];
-    $modules = $this->modulesList($group);
-    $modules[$disable_module] = GroupPermissionsHelperInterface::DISABLED;
-    foreach ($modules as $module => $status) {
-      if ($status == GroupPermissionsHelperInterface::ENABLED) {
-        $module_permissions = RolesHelper::getModuleRoles($module);
-        if (!empty($module_permissions['group'])) {
-          foreach ($module_permissions['group'] as $role => $permissions) {
-            $permissions_without[$role] = $permissions_without[$role] ?? [] + $permissions;
-          }
-        }
-      }
-    }
-    $disable_permissions = [];
-    foreach ($permissions_with as $role => $permissions) {
-      $disable_permissions[$role] = array_diff($permissions_with[$role], $permissions_without[$role] ?? []);
     }
 
+    $module_permissions = RolesHelper::getModuleRoles($disable_module);
+    $disable_permissions = [];
+    foreach ($permissions_with as $role => $permissions) {
+      $disable_permissions[$role] = array_diff($module_permissions['group'][$role], $permissions_with[$role] ?? []);
+    }
     foreach ($disable_permissions as $role => $permissions) {
       $group_permissions[$group->bundle() . '-' . $role] = array_diff($group_permissions[$group->bundle() . '-' . $role], $permissions);
     }
+
     $group_permissions_entity->setPermissions($group_permissions);
+    $group_permissions_entity->setPublished();
     $group_permissions_entity->validate();
     $group_permissions_entity->save();
   }
@@ -252,7 +249,7 @@ class GroupPermissionsHelper implements GroupPermissionsHelperInterface {
   public function getGroupPermissions(GroupInterface $group): GroupPermissionInterface {
     // GroupPermissionsManager::getGroupRoles also caches like this. Doing so
     // here too makes it slightly more internally consistent for a call for
-    // this class. But possisibly not for changes made outside it.
+    // this class. But possibly not for changes made outside it.
     // See also note testAlteredGroupPermissions::testAlteredGroupPermissions().
     if (empty($this->groupPermissions[$group->id()])) {
       $group_permission = $this->groupPermissionsManager->getGroupPermission($group);
