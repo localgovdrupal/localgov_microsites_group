@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * LocalGov Microsites Group Webfor module install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function localgov_microsites_group_webform_install() {
+
+  // Add permissions for the group.role.microsite-admin to manage the
+  // localgov_webform content type and the microsite_contact submissions.
+  $config_factory = \Drupal::configFactory();
+  $microsite_admin = $config_factory->getEditable('group.role.microsite-admin');
+  $permissions = $microsite_admin->get('permissions');
+
+  $permissions[] = 'create group_node:localgov_webform entity';
+  $permissions[] = 'delete any group_node:localgov_webform entity';
+  $permissions[] = 'delete own group_node:localgov_webform entity';
+  $permissions[] = 'update any group_node:localgov_webform entity';
+  $permissions[] = 'update own group_node:localgov_webform entity';
+  $permissions[] = 'view group_node:localgov_webform entity';
+
+  $permissions[] = 'create group_webform:microsite_contact entity';
+  $permissions[] = 'delete any group_webform:microsite_contact entity';
+  $permissions[] = 'delete own group_webform:microsite_contact entity';
+  $permissions[] = 'update any group_webform:microsite_contact entity';
+  $permissions[] = 'update own group_webform:microsite_contact entity';
+  $permissions[] = 'view group_webform:microsite_contact entity';
+
+  $microsite_admin->set('permissions', $permissions);
+  $microsite_admin->save();
+
+  // Delete the default contact webform to avoid confusion.
+  $config_factory->getEditable('webform.webform.contact')->delete();
+
+  // Add permissions for the group.role.microsite-anonymous to see the webform
+  // content type and to make submissions.
+  $microsite_anon = $config_factory->getEditable('group.role.microsite-anonymous');
+  $permissions = $microsite_anon->get('permissions');
+  $permissions[] = 'view group_node:localgov_webform entity';
+  $permissions[] = 'create group_webform:microsite_contact entity';
+  $microsite_anon->set('permissions', $permissions);
+  $microsite_anon->save();
+
+  // Add permission for user.role.microsites_controller to manage webforms.
+  $microsites_controller = $config_factory->getEditable('user.role.microsites_controller');
+  $permissions = $microsites_controller->get('permissions');
+  $new_permissions = [
+    'access any webform configuration',
+    'access own webform configuration',
+    'access webform help',
+    'access webform overview',
+    'access webform submission user',
+    'administer webform',
+    'administer webform element access',
+    'administer webform submission',
+    'create webform',
+    'delete any webform',
+    'delete any webform submission',
+    'delete own webform',
+    'delete own webform submission',
+    'delete webform submissions any node',
+    'delete webform submissions own node',
+    'edit any webform',
+    'edit any webform submission',
+    'edit own webform',
+    'edit webform assets',
+    'edit webform source',
+    'edit webform submissions any node',
+    'edit webform submissions own node',
+    'edit webform twig',
+    'edit webform variants',
+    'view any webform submission',
+    'view own webform submission',
+    'view webform submissions any node',
+    'view webform submissions own node',
+  ];
+  $permissions = array_merge($permissions, $new_permissions);
+  $microsites_controller->set('permissions', $permissions);
+  $microsites_controller->save();
+
+  // Add permission for user.role.microsites_trusted_editor to see own webform
+  // submissions.
+  $microsites_trusted_editor = $config_factory->getEditable('user.role.microsites_trusted_editor');
+  $permissions = $microsites_trusted_editor->get('permissions');
+  $permissions[] = 'view webform submissions own node';
+  $microsites_trusted_editor->set('permissions', $permissions);
+  $microsites_trusted_editor->save();
+}

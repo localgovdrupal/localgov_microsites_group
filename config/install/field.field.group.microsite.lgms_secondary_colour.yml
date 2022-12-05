@@ -9,7 +9,7 @@ field_name: lgms_secondary_colour
 entity_type: group
 bundle: microsite
 label: 'Secondary colour'
-description: ''
+description: 'The secondary colour adds visual highlights to inactive elements such as quotations, image captions etc.'
 required: false
 translatable: false
 default_value: {  }

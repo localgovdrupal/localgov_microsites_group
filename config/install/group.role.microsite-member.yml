@@ -12,9 +12,11 @@ scope: insider
 global_role: authenticated
 group_type: microsite
 permissions:
+  - 'access group content menu overview'
   - 'access group_node overview'
   - 'create group_node:localgov_page entity'
   - 'update any group_node:localgov_page relationship'
+  - 'manage group_content_menu menu items'
   - 'update any group_node:localgov_page entity'
   - 'update own group_node:localgov_page relationship'
   - 'update own group_node:localgov_page entity'
