@@ -9,7 +9,7 @@ field_name: lgms_text_colour
 entity_type: group
 bundle: microsite
 label: 'Text colour'
-description: ''
+description: 'Choose a colour with sufficient colour contrast with the Page background colour.'
 required: false
 translatable: true
 default_value: {  }
