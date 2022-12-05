@@ -237,6 +237,13 @@ function localgov_microsites_group_form_media_library_add_form_upload_alter(&$fo
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function localgov_microsites_group_form_media_library_add_form_oembed_alter(&$form, FormStateInterface $form_state) {
+  $form['#submit'][] = 'localgov_microsites_group_media_library_add_form_submit';
+}
+
+/**
  * Redirect for user login form.
  */
 function localgov_microsites_group_user_login_form_submit($form, FormStateInterface $form_state) {
