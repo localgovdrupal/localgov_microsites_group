@@ -24,6 +24,7 @@ class UserRoleTest extends GroupKernelTestBase {
     'image',
     'media',
     'media_library',
+    'menu_link_reference',
     'node',
     'replicate',
     'views',

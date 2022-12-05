@@ -702,7 +702,7 @@ display:
           group_type: group
           admin_label: 'Member account'
           required: true
-          group_relationship_plugins:
+          group_relation_plugins:
             group_invitation: group_invitation
             group_membership: '0'
           entity_type: group_relationship

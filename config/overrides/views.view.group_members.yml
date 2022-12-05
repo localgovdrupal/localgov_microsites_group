@@ -690,7 +690,7 @@ display:
           entity_type: group_relationship
           plugin_id: group_relationship_to_entity
           required: true
-          group_relationship_plugins:
+          group_relation_plugins:
             group_membership: group_membership
       header: {  }
       footer: {  }

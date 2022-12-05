@@ -857,7 +857,7 @@ display:
           entity_type: node
           plugin_id: group_relationship_to_entity_reverse
           required: true
-          group_relationship_plugins: {  }
+          group_relation_plugins: {  }
       header: {  }
       footer: {  }
       display_extenders: {  }

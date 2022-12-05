@@ -528,7 +528,7 @@ display:
           entity_type: localgov_directories_facets
           plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_relationship_plugins:
+          group_relation_plugins:
             group_localgov_directories_facets: '0'
       header: {  }
       footer: {  }
