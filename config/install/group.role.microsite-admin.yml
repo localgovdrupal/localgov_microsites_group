@@ -34,6 +34,7 @@ permissions:
   - 'invite users to group'
   - 'manage group_content_menu menu items'
   - 'manage microsite enabled module permissions'
+  - 'set localgov microsite theme override'
   - 'update any group_media:document entity'
   - 'update any group_media:image entity'
   - 'update any group_media:remote_video entity'

@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -17,6 +16,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\domain\DomainInterface;
+use Drupal\group\Access\GroupAccessResult;
 
 /**
  * Provides options for group domain.
@@ -88,7 +88,7 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
    * {@inheritdoc}
    */
   public function access(GroupInterface $group, AccountInterface $account) {
-    return AccessResult::allowedIfHasPermission($account, 'set localgov microsite theme override');
+    return GroupAccessResult::allowedIfHasGroupPermission($group, $account, 'set localgov microsite theme override');
   }
 
   /**
@@ -111,12 +111,12 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
     $themes = $this->themeHandler->rebuildThemeData();
     $admin_options = [
       '' => $this->t('No override (:site_admin)',
-        [':site_admin' => $themes[$site_admin]->info['name']]
+        [':site_admin' => $themes[$site_admin]->info['name'] ?? '']
       ),
     ];
     $default_options = [
       '' => $this->t('No override (:site_default)',
-        [':site_default' => $themes[$site_default]->info['name']]
+        [':site_default' => $themes[$site_default]->info['name'] ?? '']
       ),
     ];
     // Remove obsolete themes.
