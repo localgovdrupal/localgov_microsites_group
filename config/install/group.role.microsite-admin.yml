@@ -24,6 +24,7 @@ permissions:
   - 'invite users to group'
   - 'manage group_content_menu menu items'
   - 'manage microsite enabled module permissions'
+  - 'set localgov microsite theme override'
   - 'update any group_node:localgov_page relationship'
   - 'update any group_node:localgov_page entity'
   - 'update own group_node:localgov_page relationship'
