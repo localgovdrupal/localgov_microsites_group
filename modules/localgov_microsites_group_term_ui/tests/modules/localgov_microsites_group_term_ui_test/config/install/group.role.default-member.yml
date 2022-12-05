@@ -10,5 +10,5 @@ weight: -100
 admin: false
 scope: insider
 global_role: authenticated
-group_type: microsite
+group_type: default
 permissions: {  }
