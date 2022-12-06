@@ -377,7 +377,7 @@ function localgov_microsites_group_preprocess_menu(&$variables) {
 /**
  * Implements hook_views_query_substitutions().
  */
-function localgov_microsites_views_query_substitutions(ViewExecutable $view) {
+function localgov_microsites_group_views_query_substitutions(ViewExecutable $view) {
   if ($view->id() == 'my_invitations') {
     return [
       '***GINVITE_USER_EMAIL***' => User::load($view->argument['entity_id']->getValue())->getEmail(),
