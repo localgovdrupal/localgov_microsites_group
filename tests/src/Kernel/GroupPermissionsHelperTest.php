@@ -122,6 +122,9 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     assert($permission_entity instanceof GroupPermissionInterface);
     $permissions = $permission_entity->getPermissions();
     $this->assertEquals([
+      'view group_media:document entity',
+      'view group_media:image entity',
+      'view group_media:remote_video entity',
       'view group_node:localgov_event entity',
       'view group_node:localgov_page entity',
       'view group_term:localgov_event_category entity',
