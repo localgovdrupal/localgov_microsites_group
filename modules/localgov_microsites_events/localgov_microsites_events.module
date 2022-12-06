@@ -74,6 +74,9 @@ function localgov_microsites_events_localgov_microsites_roles_default() {
       ],
       RolesHelper::GROUP_ANONYMOUS_ROLE => [
         'view group_node:localgov_event entity',
+        'view group_term:localgov_event_category entity',
+        'view group_term:localgov_event_locality entity',
+        'view group_term:localgov_event_price entity',
       ],
       RolesHelper::GROUP_MEMBER_ROLE => [
         'access group_term overview',
@@ -106,6 +109,9 @@ function localgov_microsites_events_localgov_microsites_roles_default() {
       ],
       RolesHelper::GROUP_OUTSIDER_ROLE => [
         'view group_node:localgov_event entity',
+        'view group_term:localgov_event_category entity',
+        'view group_term:localgov_event_locality entity',
+        'view group_term:localgov_event_price entity',
       ],
     ],
   ];
