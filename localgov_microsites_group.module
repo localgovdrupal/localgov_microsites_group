@@ -231,9 +231,9 @@ function localgov_microsites_group_form_alter(&$form, FormStateInterface $form_s
   // Set domain path pathauto as on by default.
   if (isset($form['domain_path'])) {
     $domain_ids = Element::children($form['domain_path']);
-    unset($domain_ids['domain_path_delete']);
+    $active_domain = \Drupal::service('domain.negotiator')->getActiveDomain();
     foreach ($domain_ids as $id) {
-      if (isset($form['domain_path'][$id]['pathauto'])) {
+      if (isset($form['domain_path'][$id]['pathauto']) && $id == $active_domain->id()) {
         $form['domain_path'][$id]['pathauto']['#default_value'] = TRUE;
       }
     }
