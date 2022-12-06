@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_microsites_group\EventSubscriber;
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\replicate\Events\ReplicateEntityFieldEvent;
 use Drupal\replicate\Events\ReplicatorEvents;
 use Drupal\replicate\Replicator;
@@ -31,19 +30,15 @@ class ReplicateGroupContent implements EventSubscriberInterface {
   }
 
   /**
-   * Replicate the entities in any paragraphs when replicating any entity.
-   *
-   * @todo question should we _only_ do this for our group content entities,
-   * useing a value on the entity to notifiy if it should happen or not?
+   * Replicate media attached to an entity reference field.
    *
    * @param \Drupal\replicate\Events\ReplicateEntityFieldEvent $event
    *   The event we're working on.
    */
-  public function onParagraphClone(ReplicateEntityFieldEvent $event) {
+  public function onEntityReferenceClone(ReplicateEntityFieldEvent $event) {
     $field_item_list = $event->getFieldItemList();
-
-    foreach ($field_item_list as $delta => $field_item) {
-      if ($field_item->entity instanceof EntityInterface) {
+    if ($field_item_list->getItemDefinition()->getSetting('target_type') == 'media') {
+      foreach ($field_item_list as $delta => $field_item) {
         $field_item_list->set($delta, $this->replicator->replicateEntity($field_item->entity));
       }
     }
@@ -53,7 +48,7 @@ class ReplicateGroupContent implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[ReplicatorEvents::replicateEntityField('paragraph')][] = 'onParagraphClone';
+    $events[ReplicatorEvents::replicateEntityField('entity_reference')][] = 'onEntityReferenceClone';
     return $events;
   }
 
