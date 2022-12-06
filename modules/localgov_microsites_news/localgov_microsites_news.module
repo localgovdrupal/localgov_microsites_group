@@ -96,6 +96,7 @@ function localgov_microsites_news_localgov_microsites_roles_default() {
       RolesHelper::GROUP_OUTSIDER_ROLE => [
         'view group_node:localgov_news_article entity',
         'view group_node:localgov_newsroom entity',
+        'view group_term:localgov_topic entity',
       ],
     ],
   ];

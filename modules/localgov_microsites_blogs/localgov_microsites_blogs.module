@@ -127,6 +127,8 @@ function localgov_microsites_blogs_localgov_microsites_roles_default() {
       RolesHelper::GROUP_OUTSIDER_ROLE => [
         'view group_node:localgov_blog_post entity',
         'view group_node:localgov_blog_channel entity',
+        'view group_term:localgov_blog_author entity',
+        'view group_term:localgov_topic entity',
       ],
     ],
   ];
