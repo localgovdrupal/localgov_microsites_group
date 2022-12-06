@@ -16,7 +16,7 @@
     "drupal/override_node_options": "^2.6",
     "drupal/replicate": "^1.0",
     "drupal/role_delegation": "^1.2",
-    "localgovdrupal/group_webform": "1.0.0-alpha1",
+    "localgovdrupal/group_webform": "1.0.0-alpha2",
     "localgovdrupal/localgov_core": "^2.1.0",
     "localgovdrupal/localgov_forms": "1.x-dev#5c95e441",
     "localgovdrupal/localgov_page": "^1.0@beta",
