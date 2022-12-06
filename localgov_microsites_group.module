@@ -25,6 +25,8 @@ use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\views\Entity\View;
 use Drupal\menu_link_content\MenuLinkContentInterface;
+use Drupal\user\Entity\User;
+use Drupal\views\ViewExecutable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -59,6 +61,15 @@ function localgov_microsites_group_modules_installed($modules, $is_syncing) {
       $group_member_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_members.yml'));
       $displays = $view->get('display');
       $displays['microsite_dashboard_embed'] = $group_member_view['display']['microsite_dashboard_embed'];
+      $view->set('display', $displays);
+      $view->save();
+    }
+    if ($view = View::load('my_invitations')) {
+      $my_invitations_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.my_invitations.yml'));
+      $displays = $view->get('display');
+      $displays['default']['display_options']['arguments'] = $my_invitations_view['display']['default']['display_options']['arguments'];
+      $displays['default']['display_options']['filters'] = $my_invitations_view['display']['default']['display_options']['filters'];
+      $displays['default']['display_options']['query'] = $my_invitations_view['display']['default']['display_options']['query'];
       $view->set('display', $displays);
       $view->save();
     }
@@ -387,5 +398,16 @@ function localgov_microsites_group_preprocess_menu(&$variables) {
     isset($variables['items']['localgov_microsites_group.microsite_admin'])
   ) {
     unset($variables['items']['localgov_microsites_group.microsite_admin']);
+  }
+}
+
+/**
+ * Implements hook_views_query_substitutions().
+ */
+function localgov_microsites_group_views_query_substitutions(ViewExecutable $view) {
+  if ($view->id() == 'my_invitations') {
+    return [
+      '***GINVITE_USER_EMAIL***' => User::load($view->argument['entity_id']->getValue())->getEmail(),
+    ];
   }
 }
