@@ -124,6 +124,9 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     $this->assertEquals([
       'view group_node:localgov_event entity',
       'view group_node:localgov_page entity',
+      'view group_term:localgov_event_category entity',
+      'view group_term:localgov_event_locality entity',
+      'view group_term:localgov_event_price entity',
     ], $permissions['microsite-' . RolesHelper::GROUP_ANONYMOUS_ROLE]);
     $this->assertTrue($this->group->hasPermission('view group_node:localgov_page entity', User::getAnonymousUser()));
     $permissions['microsite-anonymous'] = [
