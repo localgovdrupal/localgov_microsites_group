@@ -4,6 +4,7 @@ namespace Drupal\localgov_microsites_group;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
@@ -71,6 +72,10 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
       $plugin_id = 'group_node:' . $default->bundle();
       if ($group->getGroupType()->hasPlugin($plugin_id)) {
         $node = $this->replicator->replicateEntity($default);
+        $this->attachMediaToGroup($node, $group);
+        // NB not dispatching ReplicatorEvents::AFTER_SAVE here we don't use it,
+        // but it could be added if needed.
+        $this->entityTypeManager->getStorage('node')->save($node);
       }
     }
     elseif ($group->getGroupType()->hasPlugin('group_node:localgov_page')) {
@@ -91,6 +96,33 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
     }
 
     return NULL;
+  }
+
+  /**
+   * Iterate fields and paragraphs to find media to attach to the group.
+   */
+  private function attachMediaToGroup(FieldableEntityInterface $entity, GroupInterface $group) {
+    foreach ($entity->getFieldDefinitions() as $field_name => $field_definition) {
+      $field_instance = $entity->$field_name;
+      // Paragraph recurse into.
+      if (($field_definition->getType() == 'entity_reference_revisions') &&
+        ($field_instance->getItemDefinition()->getSetting('target_type') == 'paragraph')
+      ) {
+        foreach ($entity->$field_name->referencedEntities() as $referenced_entity) {
+          if ($referenced_entity instanceof FieldableEntityInterface) {
+            $this->attachMediaToGroup($referenced_entity, $group);
+          }
+        }
+      }
+      // Media attach to group.
+      if (($field_definition->getType() == 'entity_reference') &&
+        ($field_instance->getItemDefinition()->getSetting('target_type') == 'media')
+      ) {
+        foreach ($entity->$field_name->referencedEntities() as $referenced_entity) {
+          $group->addRelationship($referenced_entity, 'group_media:' . $referenced_entity->bundle());
+        }
+      }
+    }
   }
 
 }
