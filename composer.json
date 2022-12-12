@@ -11,7 +11,7 @@
     "drupal/group": "^3.0.0-beta4",
     "drupal/group_content_menu": "3.x-dev#9bb967ba",
     "drupal/group_permissions": "2.0.x-dev#0b0aef57",
-    "drupal/group_term": "4.0.0-alpha1",
+    "drupal/group_term": "4.0.0-alpha2",
     "drupal/groupmedia": "4.0.0-alpha1 ",
     "drupal/override_node_options": "^2.6",
     "drupal/replicate": "^1.0",
