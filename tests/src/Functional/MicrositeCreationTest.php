@@ -9,6 +9,9 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Tests the creation of microsites.
  *
+ * Note: For this test to pass, Drupal should be able to resolve the
+ * group-a1.localhost domain.  Site also needs to run on the standard HTTP port.
+ *
  * @group localgov_microsites_group
  */
 class MicrositeCreationTest extends BrowserTestBase {
