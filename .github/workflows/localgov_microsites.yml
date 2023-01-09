@@ -79,13 +79,9 @@ jobs:
           repository: localgovdrupal/drupal-container
           ref: php${{ matrix.php-version }}
 
-      - name: Authenticate with GitHub
-        run: |
-          composer --working-dir=html config repositories.1 vcs git@github.com:${LOCALGOV_DRUPAL_PROJECT}.git
-          composer global config github-oauth.github.com ${{ github.token }}
-
       - name: Create LocalGov Microsites project
         run: |
+          composer config --global github-oauth.github.com ${{ github.token }}
           composer create-project --stability dev --no-install localgovdrupal/localgov_microsites_project ./html "${{ matrix.localgov-version }}"
           composer --working-dir=./html require --no-install localgovdrupal/localgov_microsites:${{ matrix.localgov-version }}-dev
           composer --working-dir=./html require --no-install drupal/core-recommended:${{ matrix.drupal-version }} drupal/core-composer-scaffold:${{ matrix.drupal-version }} drupal/core-project-message:${{ matrix.drupal-version }} drupal/core-dev:${{ matrix.drupal-version }}
