@@ -30,7 +30,7 @@ services:
     tags:
       - { name: event_subscriber }
 
-  localgov_microsites_group.redirect_subscriver:
+  localgov_microsites_group.redirect_subscriber:
     class: Drupal\localgov_microsites_group\EventSubscriber\GroupContentRedirectSubscriber
     tags:
       - { name: event_subscriber }
