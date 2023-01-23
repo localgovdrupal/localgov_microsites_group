@@ -103,7 +103,8 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
       }
     }
 
-    $site_config = $this->configFactory->get('system.theme');
+    // By retrieving editable here we get the non-overriden version.
+    $site_config = $this->configFactory->getEditable('system.theme');
     $site_default = $site_config->get('default');
     $site_admin = $site_config->get('admin');
 
