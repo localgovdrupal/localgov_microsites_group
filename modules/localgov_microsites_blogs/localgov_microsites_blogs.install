@@ -160,7 +160,7 @@ function localgov_microsites_blogs_install($is_syncing) {
   $group_view_page_bottom->parent_name = '';
   $group_view_page_bottom->weight = '-5';
   $group_view_page_bottom->children = [
-  // Add children here.
+    'localgov_blog_related_posts',
   ];
   $group_view_page_bottom->format_type = 'html_element';
   $group_view_page_bottom->format_settings = [
