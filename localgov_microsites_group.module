@@ -255,6 +255,13 @@ function localgov_microsites_group_form_media_library_add_form_oembed_alter(&$fo
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter() for group-microsite-edit-form form.
+ */
+function localgov_microsites_group_form_group_microsite_edit_form_alter(&$form, FormStateInterface $form_state) {
+  $form['actions']['submit']['#submit'][] = 'localgov_microsites_group_form_group_microsite_edit_form_submit';
+}
+
+/**
  * Redirect for user login form.
  */
 function localgov_microsites_group_user_login_form_submit($form, FormStateInterface $form_state) {
@@ -292,6 +299,14 @@ function localgov_microsites_group_media_library_add_form_submit($form, FormStat
     $groups[] = Group::load($group_id);
     \Drupal::service('groupmedia.attach_group')->assignMediaToGroups($added_media, $groups);
   }
+}
+
+/**
+ * Add submit handler for group edit form.
+ */
+function localgov_microsites_group_form_group_microsite_edit_form_submit($form, FormStateInterface $form_state) {
+  $group = $form_state->getformObject()->getEntity();
+  $form_state->setRedirect('entity.group.edit_form', ['group' => $group->id()]);
 }
 
 /**
