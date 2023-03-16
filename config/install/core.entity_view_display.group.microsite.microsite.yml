@@ -60,6 +60,7 @@ dependencies:
     - field.field.group.microsite.lgms_heading_6_line_height
     - field.field.group.microsite.lgms_heading_font
     - field.field.group.microsite.lgms_heading_font_weight
+    - field.field.group.microsite.lgms_hide_home_breadcrumbs
     - field.field.group.microsite.lgms_hide_title
     - field.field.group.microsite.lgms_link_colour
     - field.field.group.microsite.lgms_main_logo
@@ -258,6 +259,7 @@ hidden:
   lgms_heading_6_line_height: true
   lgms_heading_font: true
   lgms_heading_font_weight: true
+  lgms_hide_home_breadcrumbs: true
   lgms_hide_title: true
   lgms_link_colour: true
   lgms_main_menu_font_size: true
