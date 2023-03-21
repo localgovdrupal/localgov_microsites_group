@@ -46,8 +46,11 @@
       "drupal/groupmedia": {
           "Update addPage in groupmediato work with Group 3.x and suppress errors #3325129": "https://git.drupalcode.org/issue/groupmedia-3325129/-/commit/194f7bfa1d51f9a34a00ab4323f5fdf8c82ff48b.patch"
       },
-        "drupal/ginvite": {
+      "drupal/ginvite": {
           "View schema fix #3324625": "https://www.drupal.org/files/issues/2022-11-30/3324625-2-schema-fix-for-4.0.x.patch"
+      },
+      "drupal/group_term": {
+          "Undefined array key gc__taxonomy_term when running PHPUnit test #3334882": "https://www.drupal.org/files/issues/2023-03-21/undefined-array-key-gc__taxonomy-term-3334882-4.patch"
       }
     }
   }
