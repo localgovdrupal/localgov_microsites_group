@@ -38,7 +38,6 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'group_term',
     'layout_discovery',
     'layout_paragraphs',
-    'menu_link_reference',
     'node',
     'paragraphs',
     'replicate',
