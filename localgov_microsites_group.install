@@ -24,3 +24,25 @@ function localgov_microsites_group_install($is_syncing) {
   $index->addProcessor($processor);
   $index->save();
 }
+
+/**
+ * Uninstall the menu_link_reference module.
+ */
+function localgov_microsites_group_update_9001(&$sandbox) {
+
+  if (\Drupal::service('module_handler')->moduleExists('menu_link_reference')) {
+
+    // Uninstall old field definition.
+    // @see https://www.drupal.org/project/group_content_menu/issues/3333968#comment-14942988
+    $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+    if ($entity_definition_update_manager->getEntityType('group_content_menu') !== NULL) {
+      $storage_definition = $entity_definition_update_manager->getFieldStorageDefinition('parent', 'group_content_menu');
+      if ($storage_definition !== NULL) {
+        $entity_definition_update_manager->uninstallFieldStorageDefinition($storage_definition);
+      }
+    }
+
+    // Uninstall the menu_link_reference module.
+    \Drupal::service('module_installer')->uninstall(['menu_link_reference']);
+  }
+}

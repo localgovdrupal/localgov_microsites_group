@@ -28,7 +28,6 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'image',
     'media',
     'media_library',
-    'menu_link_reference',
     'gnode',
     'groupmedia',
     'group_content_menu',
