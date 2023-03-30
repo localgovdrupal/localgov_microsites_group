@@ -18,7 +18,7 @@
     "drupal/role_delegation": "^1.2",
     "localgovdrupal/group_webform": "^1.0.0-beta1",
     "localgovdrupal/localgov_core": "^2.1.0",
-    "localgovdrupal/localgov_forms": "dev-1.x#5c95e441",
+    "localgovdrupal/localgov_forms": "^1.0.0-beta1",
     "localgovdrupal/localgov_page": "^1.0.0-beta1",
     "localgovdrupal/localgov_search": "^1.1"
   },
