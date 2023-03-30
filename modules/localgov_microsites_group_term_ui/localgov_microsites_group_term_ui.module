@@ -17,7 +17,7 @@ use Drupal\taxonomy\Entity\Term;
 function localgov_microsites_group_term_ui_modules_installed($modules, $is_syncing) {
 
   // Disable the Term view that comes with the group_term module.
-  if (in_array('localgov_microsites_group_term_ui', $modules) && !$is_syncing) {
+  if (in_array('group_term', $modules) && !$is_syncing) {
     $view_id = 'group_terms';
     \Drupal::entityTypeManager()->getStorage('view')
       ->load($view_id)
