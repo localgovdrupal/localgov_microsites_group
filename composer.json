@@ -5,11 +5,11 @@
   "license": "GPL-2.0-or-later",
   "require": {
     "drupal/core": "^9",
-    "drupal/domain_path": "dev-1.x#ba7b37af as 1.x-dev",
+    "drupal/domain_path": "dev-1.x#ba7b37af",
     "drupal/field_formatter_class": "^1.5",
     "drupal/ginvite": "4.0.0-alpha1",
     "drupal/group": "^3.0.0-beta4",
-    "drupal/group_content_menu": "dev-3.0.x#0c85b43d as 3.0.x-dev",
+    "drupal/group_content_menu": "dev-3.0.x#0c85b43d",
     "drupal/group_permissions": "2.0.0-alpha5",
     "drupal/group_term": "4.0.0-alpha5",
     "drupal/groupmedia": "4.0.0-alpha1 ",
