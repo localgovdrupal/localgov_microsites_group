@@ -10,7 +10,7 @@
     "drupal/ginvite": "4.0.0-alpha1",
     "drupal/group": "^3.0.0-beta4",
     "drupal/group_content_menu": "dev-3.0.x#0c85b43d as 3.0.x-dev",
-    "drupal/group_permissions": "dev-2.0.x#0b0aef57 as 2.0.x-dev",
+    "drupal/group_permissions": "2.0.0-alpha5",
     "drupal/group_term": "4.0.0-alpha5",
     "drupal/groupmedia": "4.0.0-alpha1 ",
     "drupal/override_node_options": "^2.6",
