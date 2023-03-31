@@ -5,11 +5,13 @@
  * LocalgGov Microsites Group Term UI module file.
  */
 
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\group\Entity\GroupType;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\views\Entity\View;
 
 /**
  * Implements hook_modules_installed().
@@ -17,11 +19,16 @@ use Drupal\taxonomy\Entity\Term;
 function localgov_microsites_group_term_ui_modules_installed($modules, $is_syncing) {
 
   // Disable the Term view that comes with the group_term module.
-  if (in_array('group_term', $modules) && !$is_syncing) {
-    $view_id = 'group_terms';
-    \Drupal::entityTypeManager()->getStorage('view')
-      ->load($view_id)
-      ->setStatus(FALSE)
+  if (in_array('localgov_microsites_group_term_ui', $modules) && !$is_syncing) {
+    $view = \Drupal::entityTypeManager()->getStorage('view')
+      ->load('group_terms');
+    if (is_null($view)) {
+      $module_path = \Drupal::service('extension.list.module')->getPath('localgov_microsites_group_term_ui');
+      $view_config = Yaml::decode(file_get_contents($module_path . '/config/extra/views.view.group_terms.yml'));
+      $view = View::create($view_config);
+      $view->save();
+    }
+    $view->setStatus(FALSE)
       ->save();
   }
 }
