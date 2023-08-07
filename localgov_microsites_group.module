@@ -425,3 +425,41 @@ function localgov_microsites_group_views_query_substitutions(ViewExecutable $vie
     ];
   }
 }
+
+/**
+ * Implements hook_toolbar().
+ *
+ * - Adds a Control site indicator to the toolbar.
+ */
+function localgov_microsites_group_toolbar() {
+
+  if (!Drupal::hasService('domain.negotiator')) {
+    return;
+  }
+
+  $active_domain = Drupal::service('domain.negotiator')->getActiveDomain();
+  if (empty($active_domain) || !$active_domain->get('is_default')) {
+    return;
+  }
+
+  return [
+    'localgov-microsites-group-toolbar-override' => [
+      '#attached' => [
+        'library' => 'localgov_microsites_group/control_site_toolbar_override',
+      ],
+    ],
+    'localgov-microsites-group-control-site-indicator' => [
+      '#type' => 'toolbar_item',
+      '#weight' => 101,
+      'tab'   => [
+        '#type' => 'html_tag',
+        '#tag'  => 'div',
+        '#value' => t("Control site: Don't edit content"),
+        '#attributes' => ['class' => ['toolbar-icon', 'toolbar-icon-warning']],
+        '#attached' => [
+          'library' => 'localgov_microsites_group/toolbar_icons',
+        ],
+      ],
+    ],
+  ];
+}
