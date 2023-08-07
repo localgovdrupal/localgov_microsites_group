@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\localgov_microsites_group_term_ui\Kernel;
 
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Symfony\Component\HttpFoundation\Request;
