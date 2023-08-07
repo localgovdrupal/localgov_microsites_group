@@ -23,9 +23,9 @@ use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
-use Drupal\views\Entity\View;
 use Drupal\menu_link_content\MenuLinkContentInterface;
 use Drupal\user\Entity\User;
+use Drupal\views\Entity\View;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

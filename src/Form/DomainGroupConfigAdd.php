@@ -6,10 +6,10 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\domain_group\Plugin\DomainGroupSettingsManager;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\GroupDefaultContentInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Domain Group Settings Form.
