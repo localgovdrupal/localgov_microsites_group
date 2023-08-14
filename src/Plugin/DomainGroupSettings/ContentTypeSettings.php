@@ -2,17 +2,17 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerTrait;
-use Drupal\domain_group\Plugin\DomainGroupSettingsBase;
-use Drupal\group\Entity\GroupInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\domain_group\Plugin\DomainGroupSettingsBase;
 use Drupal\group\Access\GroupAccessResult;
+use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\GroupPermissionsHelperInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides simplified permissions / content type enabling per microsite.

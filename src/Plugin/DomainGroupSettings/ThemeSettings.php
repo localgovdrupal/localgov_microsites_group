@@ -2,21 +2,21 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
-use Drupal\Core\Extension\ThemeExtensionList;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\domain\DomainStorageInterface;
-use Drupal\domain_group\Plugin\DomainGroupSettingsBase;
-use Drupal\group\Entity\GroupInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\domain\Entity\Domain;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\domain\DomainInterface;
+use Drupal\domain\DomainStorageInterface;
+use Drupal\domain\Entity\Domain;
+use Drupal\domain_group\Plugin\DomainGroupSettingsBase;
 use Drupal\group\Access\GroupAccessResult;
+use Drupal\group\Entity\GroupInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides options for group domain.

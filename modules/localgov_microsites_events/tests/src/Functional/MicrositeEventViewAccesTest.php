@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\localgov_microsites_events\Functional;
 
+use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
-use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 

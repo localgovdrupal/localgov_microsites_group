@@ -3,9 +3,9 @@
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Test\AssertMailTrait;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\user\Traits\UserCreationTrait;
-use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests the group and group content access.
