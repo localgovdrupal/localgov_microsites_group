@@ -7,7 +7,7 @@
     "drupal/domain_path": "^1.2",
     "drupal/field_formatter_class": "^1.5",
     "drupal/ginvite": "4.0.0-alpha1",
-    "drupal/group": "^3.0.0-beta4",
+    "drupal/group": "^3.2",
     "drupal/group_content_menu": "^3.0",
     "drupal/group_permissions": "2.0.0-alpha5",
     "drupal/group_term": "^4.0",
