@@ -4,7 +4,6 @@
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "require": {
-    "drupal/core": "^9",
     "drupal/domain_path": "^1.2",
     "drupal/field_formatter_class": "^1.5",
     "drupal/ginvite": "4.0.0-alpha1",
