@@ -4,6 +4,7 @@ dependencies:
   config:
     - group.type.microsite
     - system.menu.admin
+    - user.role.microsites_controller
   module:
     - group
     - user
@@ -168,9 +169,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'bypass group access'
+          role:
+            microsites_controller: microsites_controller
       cache:
         type: tag
         options: {  }
@@ -251,7 +253,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags: {  }
   collection:
     id: collection
@@ -276,5 +278,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags: {  }
