@@ -30,7 +30,6 @@ permissions:
   - 'assign microsites_controller role'
   - 'assign microsites_trusted_editor role'
   - 'bypass domain group permissions'
-  - 'bypass group access'
   - 'cancel account'
   - 'change own username'
   - 'create document media'
