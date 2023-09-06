@@ -91,6 +91,7 @@ function localgov_microsites_directories_localgov_microsites_roles_default() {
         'delete geo',
         'edit directory facets',
         'edit geo',
+        'edit layout paragraphs plugin config',
         'view directory facets',
       ],
       RolesHelper::MICROSITES_EDITOR_ROLE => [

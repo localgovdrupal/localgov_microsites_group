@@ -11,6 +11,7 @@ dependencies:
     - domain_path
     - group
     - media
+    - role_delegation
     - system
     - toolbar
     - tour
@@ -42,7 +43,6 @@ permissions:
   - 'edit any image media'
   - 'edit any remote_video media'
   - 'edit domain path entity'
-  - 'edit layout paragraphs plugin config'
   - 'edit own document media'
   - 'edit own image media'
   - 'edit own remote_video media'
