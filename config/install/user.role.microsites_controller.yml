@@ -22,6 +22,7 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access media overview'
+  - 'access microsites overview'
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'

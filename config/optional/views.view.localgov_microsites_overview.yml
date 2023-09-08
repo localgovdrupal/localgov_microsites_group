@@ -169,10 +169,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: role
+        type: perm
         options:
-          role:
-            microsites_controller: microsites_controller
+          perm: 'access microsites overview'
       cache:
         type: tag
         options: {  }
@@ -253,7 +252,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
+        - user.permissions
       tags: {  }
   collection:
     id: collection
@@ -278,5 +277,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
+        - user.permissions
       tags: {  }
