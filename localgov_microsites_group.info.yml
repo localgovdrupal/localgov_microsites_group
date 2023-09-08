@@ -23,6 +23,7 @@ dependencies:
   - groupmedia_paragraphs:groupmedia_paragraphs
   - group_permissions:group_permissions
   - group_content_menu:group_content_menu
+  - layout_paragraphs:layout_paragraphs_permissions
   - media_library:media_library
   - override_node_options:override_node_options
   - replicate:replicate

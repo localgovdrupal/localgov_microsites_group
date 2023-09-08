@@ -22,8 +22,8 @@
   },
   "require-dev": {
     "localgovdrupal/localgov_news": "^2.1",
-    "localgovdrupal/localgov_directories": "^2.2",
-    "localgovdrupal/localgov_events": "^2.0"
+    "localgovdrupal/localgov_directories": "^3.0@alpha",
+    "localgovdrupal/localgov_events": "^3.0@alpha"
   },
   "suggests": {
     "localgovdrupal/localgov_directories": "For directories content type in microsites",
