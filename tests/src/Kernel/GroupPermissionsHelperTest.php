@@ -21,9 +21,12 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'domain',
     'domain_group',
+    'domain_path',
+    'entity_browser',
+    'entity_browser_entity_form',
     'entity_reference_revisions',
     'field_formatter_class',
     'field_group',
@@ -31,6 +34,8 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'image',
     'media',
     'media_library',
+    'geo_entity',
+    'geofield',
     'gnode',
     'groupmedia',
     'group_content_menu',
@@ -38,16 +43,23 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     'group_term',
     'layout_discovery',
     'layout_paragraphs',
+    'layout_paragraphs_permissions',
     'node',
+    'override_node_options',
     'paragraphs',
+    'path_alias',
     'replicate',
     'taxonomy',
+    'toolbar',
+    'tour',
     'user',
     'views',
+    'localgov_geo',
     'localgov_media',
     'localgov_microsites_events',
     'localgov_microsites_group',
     'localgov_paragraphs_layout',
+    'localgov_sa11y',
   ];
 
   /**
@@ -91,7 +103,10 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
     $this->installSchema('file', 'file_usage');
 
     $this->installConfig([
+      'geo_entity',
       'gnode',
+      'override_node_options',
+      'user',
       'localgov_media',
       'localgov_paragraphs_layout',
       'localgov_microsites_group',
