@@ -42,6 +42,9 @@
       },
       "drupal/ginvite": {
           "View schema fix #3324625": "https://www.drupal.org/files/issues/2022-11-30/3324625-2-schema-fix-for-4.0.x.patch"
+      },
+      "drupal/group_permissions": {
+          "Access checking must be explicitly set on entity queries #3368882": "https://www.drupal.org/files/issues/2023-07-11/add_access_check_to_entity_query.patch"
       }
     }
   }

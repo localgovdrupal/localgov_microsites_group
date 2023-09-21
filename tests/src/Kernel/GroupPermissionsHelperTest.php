@@ -200,7 +200,10 @@ class GroupPermissionsHelperTest extends GroupKernelTestBase {
    */
   public function testModulesList() {
     $permissions_helper = $this->container->get('localgov_microsites_group.permissions_helper');
-    $this->assertEquals(['localgov_microsites_events' => GroupPermissionsHelperInterface::ENABLED], $permissions_helper->modulesList($this->group));
+    $this->assertEquals([
+      'localgov_microsites_events' => GroupPermissionsHelperInterface::ENABLED,
+      'localgov_microsites_group' => GroupPermissionsHelperInterface::NOT_APPLICABLE,
+    ], $permissions_helper->modulesList($this->group));
   }
 
 }
