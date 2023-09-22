@@ -3,12 +3,11 @@ status: true
 dependencies:
   config:
     - group.type.default
-    - user.role.authenticated
 id: default-member
 label: Member
 weight: -100
 admin: false
-scope: insider
-global_role: authenticated
+scope: individual
+global_role: null
 group_type: default
 permissions: {  }
