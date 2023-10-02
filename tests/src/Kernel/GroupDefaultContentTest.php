@@ -21,6 +21,8 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
    */
   public static $modules = [
     'domain',
+    'domain_group',
+    'domain_path',
     'entity_reference_revisions',
     'field_formatter_class',
     'field_group',
@@ -32,12 +34,21 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
     'groupmedia',
     'group_content_menu',
     'group_permissions',
+    'layout_discovery',
+    'layout_paragraphs',
+    'layout_paragraphs_permissions',
     'node',
+    'override_node_options',
     'paragraphs',
+    'path_alias',
     'replicate',
+    'toolbar',
+    'tour',
+    'user',
     'views',
     'localgov_media',
     'localgov_microsites_group',
+    'localgov_sa11y',
   ];
 
   /**
@@ -61,6 +72,8 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
 
     $this->installConfig([
       'gnode',
+      'override_node_options',
+      'user',
       'localgov_media',
       'localgov_microsites_group',
 

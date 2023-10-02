@@ -7,4 +7,5 @@ description: ''
 new_revision: true
 creator_membership: true
 creator_wizard: false
-creator_roles: {  }
+creator_roles:
+  - default-admin

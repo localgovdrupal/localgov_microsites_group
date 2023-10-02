@@ -463,3 +463,17 @@ function localgov_microsites_group_toolbar() {
     ],
   ];
 }
+
+/**
+ * Implements hook_localgov_microsites_roles_default().
+ */
+function localgov_microsites_group_localgov_microsites_roles_default() {
+  return [
+    'global' => [
+      RolesHelper::MICROSITES_CONTROLLER_ROLE => [
+        'assign microsites_controller role',
+        'assign microsites_trusted_editor role',
+      ],
+    ],
+  ];
+}

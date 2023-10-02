@@ -53,7 +53,7 @@ class MicrositeNewsContentTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Set base hostname.
