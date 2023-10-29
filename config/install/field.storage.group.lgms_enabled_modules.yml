@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.lgms_enabled_modules
+field_name: lgms_enabled_modules
+entity_type: group
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: '\Drupal\localgov_microsites_group\ModuleContentTypes::modules'
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
