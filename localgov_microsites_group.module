@@ -6,11 +6,14 @@
  */
 
 use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
@@ -22,6 +25,7 @@ use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
+use Drupal\localgov_microsites_group\ModuleContentTypesInterface;
 use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\menu_link_content\MenuLinkContentInterface;
 use Drupal\user\Entity\User;
@@ -37,7 +41,6 @@ function localgov_microsites_group_modules_installed($modules, $is_syncing) {
   if ($is_syncing) {
     return;
   }
-
   foreach ($modules as $module) {
     RolesHelper::assignModuleRoles($module);
   }
@@ -213,6 +216,44 @@ function localgov_microsites_group_group_relationship_delete(GroupRelationshipIn
       $member->save();
     }
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function localgov_microsites_group_group_relationship_access(GroupRelationshipInterface $relation, $op, AccountInterface $account) {
+  $active_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  if (empty($active_id)) {
+    return AccessResult::neutral();
+  }
+
+  // Calculate which content type relation.
+
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function localgov_microsites_group_entity_access(EntityInterface $entity, $op, AccountInterface $account) {
+// @todo
+/*  $active_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  if (empty($active_id)) {
+    return AccessResult::neutral();
+  }
+ */
+  $active_id = 1;
+
+  $module_types = \Drupal::service('localgov_microsites_group.module_content_types');
+  assert ($module_types instanceof ModuleContentTypesInterface);
+  if ($module_types->isModuleType($entity->getEntityTypeId(), $entity->bundle()) &&
+    ($group = Group::load($active_id)) &&
+    !$module_types->isEnabled($group, $entity->getEntityTypeId(), $entity->bundle())
+  ) {
+    return AccessResult::forbidden();
+  }
+
+  return AccessResult::neutral();
 }
 
 /**

@@ -30,6 +30,21 @@ function localgov_microsites_blogs_modules_installed($modules) {
 }
 
 /**
+ * Implements hook_localgov_microsites_content_types().
+ */
+function localgov_microsites_blogs_localgov_microsites_content_types() {
+  return [
+    'node' => [
+      'localgov_blog_post',
+      'localgov_blog_channel',
+    ],
+    'taxonomy_term' => [
+      'localgov_topic',
+    ],
+  ];
+}
+
+/**
  * Implements hook_localgov_microsites_roles_default().
  */
 function localgov_microsites_blogs_localgov_microsites_roles_default() {

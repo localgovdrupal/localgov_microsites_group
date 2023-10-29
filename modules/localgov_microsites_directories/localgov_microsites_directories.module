@@ -78,6 +78,27 @@ function localgov_microsites_directories_submit_new_directory_facet($form, FormS
 }
 
 /**
+ * Implements hook_localgov_microsites_content_types().
+ */
+function localgov_microsites_directories_localgov_microsites_content_types() {
+  return [
+    'geo' => [
+      '*',
+    ],
+    'localgov_directories_facets' => [
+      '*',
+    ],
+    'node' => [
+      'localgov_directory',
+      'localgov_directories_venue',
+      'localgov_directories_page',
+      'localgov_directory_promo_page',
+    ],
+
+  ];
+}
+
+/**
  * Implements hook_localgov_microsites_roles_default().
  */
 function localgov_microsites_directories_localgov_microsites_roles_default() {

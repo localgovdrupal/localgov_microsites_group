@@ -3,6 +3,10 @@ services:
     class: Drupal\localgov_microsites_group\GroupDefaultContent
     arguments: ['@entity_type.manager', '@config.factory', '@replicate.replicator']
 
+  localgov_microsites_group.module_content_types:
+    class: Drupal\localgov_microsites_group\ModuleContentTypes
+    arguments: ['@module_handler']
+
   localgov_microsites_group.permissions_helper:
     class: Drupal\localgov_microsites_group\GroupPermissionsHelper
     arguments: ['@entity_type.manager', '@group.permissions', '@group_permissions.group_permissions_manager', '@module_handler']
