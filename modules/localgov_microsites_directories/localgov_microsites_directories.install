@@ -18,7 +18,8 @@ function localgov_microsites_directories_install($is_syncing) {
   if ($is_syncing) {
     return;
   }
-
+/*
+ * @todo why isn't this plugin here yet?
   // Add domain access to exclude other sites results.
   $index = Index::load('localgov_directories_index_default');
   $processor = \Drupal::getContainer()
@@ -26,7 +27,7 @@ function localgov_microsites_directories_install($is_syncing) {
     ->createProcessorPlugin($index, 'domain_group_entity_access');
   $index->addProcessor($processor);
   $index->save();
-
+ */
   // Create field_group for page_top section.
   $group_view_page_bottom = new stdClass();
   $group_view_page_bottom->group_name = 'group_page_bottom';

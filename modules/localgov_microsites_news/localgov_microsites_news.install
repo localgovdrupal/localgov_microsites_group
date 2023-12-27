@@ -184,7 +184,7 @@ function localgov_microsites_news_install($is_syncing) {
     ->load('node.localgov_news_article.localgov_news_categories');
   $field->setSetting('handler', 'group:taxonomy_term');
   $field->save();
-
+/* @todo
   // Add domain access to exclude other sites results.
   $index = Index::load('localgov_news');
   $processor = \Drupal::getContainer()
@@ -192,7 +192,7 @@ function localgov_microsites_news_install($is_syncing) {
     ->createProcessorPlugin($index, 'domain_group_entity_access');
   $index->addProcessor($processor);
   $index->save();
-
+ */
   // Update the localgov_embed_views to allow the lgms_embed_view_news view.
   /** @var \Drupal\field\Entity\FieldConfig $field */
   $field = Drupal::entityTypeManager()

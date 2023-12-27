@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\domain_group\DomainGroupResolverInterface;
+use Drupal\localgov_microsites_group\DomainGroupResolverInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;

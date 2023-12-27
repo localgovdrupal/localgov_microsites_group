@@ -3,7 +3,6 @@
 namespace Drupal\localgov_microsites_events\EventSubscriber;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\domain_group\DomainGroupResolver;
 use Drupal\localgov_microsites_group\GroupPermissionsHelperInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -14,13 +13,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Event subscriber to hide events listing view if events aren't enabled.
  */
 class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
-
-  /**
-   * The domain  group resolver.
-   *
-   * @var \Drupal\domain_group\DomainGroupResolver
-   */
-  protected $domainGroupResolver;
 
   /**
    * The entity type manager.
@@ -39,15 +31,12 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
   /**
    * Returns an EventsListingCheckEventSubscriber instance.
    *
-   * @param \Drupal\domain_group\DomainGroupResolver $domain_group_resolver
-   *   The domain group resolver.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    * @param \Drupal\localgov_microsites_group\GroupPermissionsHelperInterface $permissions_helper
    *   The group permissions helper.
    */
-  public function __construct(DomainGroupResolver $domain_group_resolver, EntityTypeManagerInterface $entity_type_manager, GroupPermissionsHelperInterface $permissions_helper) {
-    $this->domainGroupResolver = $domain_group_resolver;
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, GroupPermissionsHelperInterface $permissions_helper) {
     $this->entityTypeManager = $entity_type_manager;
     $this->groupPermissionsHelper = $permissions_helper;
   }
@@ -83,7 +72,13 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
     }
 
     // Check we're in a group.
-    $group_id = $this->domainGroupResolver->getActiveDomainGroupId();
+    // @TODO
+    //
+    // Get from context (see GroupSitesAccessPolicy):
+    // $context_id = $this->configFactory->get('group_sites.settings')->get('context_provider');
+    // $contexts = $this->contextRepository->getRuntimeContexts([$context_id]);
+    $group_id = NULL;
+    \Drupal::messenger('Implementation missing EventsListingCheckEventSubscriber');
     if (!$group_id) {
       return;
     }

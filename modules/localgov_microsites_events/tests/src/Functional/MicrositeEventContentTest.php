@@ -4,6 +4,7 @@ namespace Drupal\Tests\localgov_microsites_events\Functional;
 
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Entity\Index;
 use Drupal\Tests\BrowserTestBase;
@@ -21,6 +22,7 @@ class MicrositeEventContentTest extends BrowserTestBase {
   use GroupCreationTrait;
   use InitializeGroupsTrait;
   use NodeCreationTrait;
+  use DomainFromGroupTrait;
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.
@@ -75,8 +77,8 @@ class MicrositeEventContentTest extends BrowserTestBase {
     ];
     $this->initializeTestGroupsDomains();
     $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $this->domain1 = $domain_storage->load('group_' . $this->group1->id());
-    $this->domain2 = $domain_storage->load('group_' . $this->group2->id());
+    $this->domain1 = $this->getDomainFromGroup($this->group1);
+    $this->domain2 = $this->getDomainFromGroup($this->group2);
 
     // Create some content.
     $this->pages1 = $this->createEvents($this->group1, 2);

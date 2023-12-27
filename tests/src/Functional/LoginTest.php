@@ -4,6 +4,7 @@ namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Url;
 use Drupal\domain\DomainInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
@@ -17,6 +18,7 @@ class LoginTest extends BrowserTestBase {
 
   use GroupCreationTrait;
   use InitializeGroupsTrait;
+  use DomainFromGroupTrait;
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.
@@ -83,7 +85,7 @@ class LoginTest extends BrowserTestBase {
     // domain.
     // @todo move this into a trait, probably on domain_group.
     $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $ga1_domain = $domain_storage->load('group_' . $this->groupA1->id());
+    $ga1_domain = $this->getDomainFromGroup($this->groupA1);
     assert($ga1_domain instanceof DomainInterface);
     $this->drupalGet($ga1_domain->getUrl() . Url::fromRoute('user.login')->toString());
     $this->submitForm([

@@ -4,6 +4,7 @@ namespace Drupal\Tests\localgov_microsites_group\Traits;
 
 use Drupal\group\Entity\Group;
 use Drupal\Tests\domain\Traits\DomainTestTrait;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 
 /**
  * Create microsite groups with domains.

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\localgov_microsites_events\Functional;
 
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
 use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
@@ -19,6 +20,7 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
   use GroupCreationTrait;
   use InitializeGroupsTrait;
   use NodeCreationTrait;
+  use DomainFromGroupTrait;
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.
@@ -75,7 +77,7 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
     ];
     $this->initializeTestGroupsDomains();
     $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $this->domain = $domain_storage->load('group_' . $this->group->id());
+    $this->domain = $this->getDomainFromGroup($this->group);
   }
 
   /**

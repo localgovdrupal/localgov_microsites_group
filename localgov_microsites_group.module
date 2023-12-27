@@ -21,6 +21,7 @@ use Drupal\localgov_microsites_group\Entity\MicrositeGroup;
 use Drupal\localgov_microsites_group\Entity\MicrositeGroupInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupAdd;
 use Drupal\localgov_microsites_group\Form\DomainGroupContentAdd;
+use Drupal\localgov_microsites_group\Form\MicrositeDomainAdd;
 use Drupal\localgov_microsites_group\GroupExtraFieldDisplay;
 use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\menu_link_content\MenuLinkContentInterface;
@@ -106,6 +107,7 @@ function localgov_microsites_group_entity_type_build(array &$entity_types) {
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   $entity_types['group']->setFormClass('new_domain', DomainGroupAdd::class);
   $entity_types['group_relationship']->setFormClass('new_domain', DomainGroupContentAdd::class);
+  $entity_types['domain']->setFormClass('new_microsite', MicrositeDomainAdd::class);
 }
 
 /**
