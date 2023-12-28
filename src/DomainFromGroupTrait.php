@@ -2,9 +2,9 @@
 
 namespace Drupal\localgov_microsites_group;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\domain\DomainInterface;
 use Drupal\group\Entity\GroupInterface;
-use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
 
 
 /**
@@ -15,9 +15,19 @@ use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
  */
 trait DomainFromGroupTrait {
 
-  // Reusing the getEntityTypeManager from GroupFromDomainContextTrait to
-  // avoid having to deal with method conflicts as commonly used together.
-  use GroupFromDomainContextTrait;
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  protected function getEntityTypeManager(): EntityTypeManagerInterface {
+    if (!$this->entityTypeManager) {
+      $this->entityTypeManager = \Drupal::service('entity_type.manager');
+    }
+    return $this->entityTypeManager;
+  }
 
   /**
    * Retrieves the domain config entity for a group.

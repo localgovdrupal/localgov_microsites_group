@@ -26,12 +26,20 @@ class MicrositeDomainAdd extends DomainForm {
   protected $defaultContent;
 
   /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $form = parent::create($container);
     $form->privateTempStoreFactory = $container->get('tempstore.private');
     $form->defaultContent = $container->get('localgov_microsites_group.default_content');
+    $form->configFactory = $container->get('config.factory');
     return $form;
   }
 
@@ -62,6 +70,15 @@ class MicrositeDomainAdd extends DomainForm {
     $form['is_default'] = [
       '#type' => 'value',
       '#value' => FALSE,
+    ];
+
+    // Site email, only field from site settings we don't generate.
+    $form['site_mail'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Site email address'),
+      '#default_value' => $group->getOwner()->getEmail(),
+      '#description' => $this->t("The <em>From</em> address in automated emails sent during registration and new password requests, and other notifications. (Use an address ending in your site's domain to help prevent this email being flagged as spam.)"),
+      '#required' => TRUE,
     ];
 
     return $form;
@@ -132,18 +149,21 @@ class MicrositeDomainAdd extends DomainForm {
     $this->entity->setThirdPartySetting('group_context_domain', 'group_uuid', $group->uuid());
     parent::save($form, $form_state);
 
+    // Initial site settings configuration overrides.
+    $config_override = $this->configFactory()->getEditable('domain.config.' . $this->entity->id() . '.system.site');
     if ($front_page = $this->defaultContent->generate($group)) {
-      // @todo
-      //      $form_state->setValue('site_frontpage', $front_page->toUrl()->toString());
+      $config_override->set('page.front', $front_page->toUrl()->toString());
     }
-
-    $form_state->set('group', $group);
+    $config_override->set('mail', $form_state->getValue('site_mail'));
+    $config_override->save();
 
     // We also clear the temp store so we can start fresh next time around.
     $store->delete("$store_id:step");
     $store->delete("$store_id:entity");
     $store->delete("$store_id:membership");
     $store->delete("$store_id:domain");
+
+    $form_state->setRedirect('localgov_microsites_group.microsite_admin');
   }
 
   /**

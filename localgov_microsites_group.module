@@ -343,7 +343,6 @@ function localgov_microsites_group_local_task_hidden($task_id) {
       'group.delete_form',
       'group.content',
       'group.version_history',
-      'group_permissions.link.group_permissions_parent',
       'views_view:view.group_nodes.page_1',
     ]);
 }

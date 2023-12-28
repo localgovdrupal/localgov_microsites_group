@@ -16,6 +16,12 @@ function localgov_microsites_group_install($is_syncing) {
   if ($is_syncing) {
     return;
   }
+
+  // Group sites should be installed aleady. It provides configuration, so we
+  // can't, but must update its default config.
+  $group_sites = \Drupal::configFactory()->getEditable('group_sites.settings');
+  $group_sites->set('context_provider', '@group_context_domain.group_from_domain_context:group');
+  $group_sites->save();
 return;
 # @todo
   // Add domain access to exclude other sites results.

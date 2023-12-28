@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\localgov_microsites_group;
 
 use Drupal\group\Entity\GroupInterface;
-use Drupal\group_permissions\Entity\GroupPermissionInterface;
 
 /**
  * GroupPermissionsHelper interface.
@@ -82,18 +81,5 @@ interface GroupPermissionsHelperInterface {
    *   The group to disable permissions for.
    */
   public function moduleDisable($module, GroupInterface $group);
-
-  /**
-   * Get group permissions entity for group.
-   *
-   * Will return an existing or populated new entity.
-   *
-   * @param \Drupal\group\Entity\GroupInterface $group
-   *   The group te retrieve group permissions entity for.
-   *
-   * @return \Drupal\group_permissions\Entity\GroupPermissionInterface
-   *   The existing, or new, group permissions entity, with role permissions.
-   */
-  public function getGroupPermissions(GroupInterface $group): GroupPermissionInterface;
 
 }

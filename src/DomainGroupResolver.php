@@ -20,8 +20,9 @@ use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
  */
 class DomainGroupResolver implements DomainGroupResolverInterface {
 
-  use GroupRouteContextTrait;
-  use DomainFromGroupTrait;
+  use GroupRouteContextTrait, DomainFromGroupTrait {
+    GroupRouteContextTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
+  }
   use GroupFromDomainContextTrait;
 
   /**
