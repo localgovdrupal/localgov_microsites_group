@@ -3,8 +3,8 @@
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
-use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
@@ -66,7 +66,7 @@ class MicrositeCachingTest extends BrowserTestBase {
       'name' => $this->group->label(),
       'hostname' => $this->group->label() . '.' . $this->baseHostname,
       'third_party_settings' => [
-        'domain_group' => ['group' => $this->group->id()],
+        'group_context_domain' => ['group_uuid' => $this->group->uuid()],
       ],
     ]);
     $this->domain->save();

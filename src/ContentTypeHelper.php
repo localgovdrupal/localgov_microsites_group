@@ -1,0 +1,123 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Drupal\localgov_microsites_group;
+
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_roles\RolesHelper;
+
+/**
+ * Content types provided by modules and if they are used by a microsite.
+ */
+class ContentTypeHelper implements ContentTypeHelperInterface {
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * Constructs a GroupPermissionsHelper instance.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler) {
+    $this->entityTypeManager = $entity_type_manager;
+    $this->moduleHandler = $module_handler;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function modulesList(GroupInterface $group): array {
+    static $modules = [];
+
+    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$modules, $group) {
+      $modules[$module] = self::ENABLED;
+    });
+    foreach ($group->get('lgms_modules_disabled') as $row) {
+      $modules[$row->value] = self::DISABLED;
+    }
+    unset($modules['localgov_microsites_group']);
+
+    return $modules;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function moduleStatus($check_module, GroupInterface $group): string {
+    return $this->modulesList($group)[$check_module] ?? self::NOT_APPLICABLE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function moduleEnable($enable_module, GroupInterface $group) {
+    if ($this->modulesList($group)[$enable_module] == self::DISABLED) {
+      $modules = $group->get('lgms_modules_disabled')->getValue();
+      unset($modules[array_search(['value' => $enable_module], $modules)]);
+      $group->lgms_modules_disabled = array_values($modules);
+      $group->save();
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function moduleDisable($disable_module, GroupInterface $group) {
+    if ($this->modulesList($group)[$disable_module] == self::ENABLED) {
+      $group->get('lgms_modules_disabled')->appendItem($disable_module);
+      $group->save();
+    }
+  }
+
+  /**
+   * Return array of all 'group_entity_type:entity_bundles' enabled for a
+   * microsite.
+   *
+   * This is called a lot. It could maybe be better cached. It could also maybe
+   * better not reuse the roles hook?
+   */
+  public function enabledContentTypes(GroupInterface $group): array {
+    static $all_content_types = [];
+    static $group_content_types = [];
+
+    if (empty($all_content_types)) {
+      $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_content_types, $group) {
+        $permissions = $hook()['group'][\Drupal\localgov_microsites_group\RolesHelper::GROUP_ADMIN_ROLE] ?? [];
+        foreach ($permissions as $permission) {
+          $matches = [];
+          if (preg_match('/^create (.*) entity$/', $permission, $matches)) {
+            $all_content_types[$module][] = $matches[1];
+          }
+        }
+      });
+      unset($all_content_types['localgov_microsites_group']);
+    }
+    if (empty($group_content_types[$group->id()])) {
+      $group_content_types[$group->id()] = $all_content_types;
+      foreach ($group->get('lgms_modules_disabled') as $row) {
+        unset($group_content_types[$group->id()][$row->value]);
+      }
+    }
+
+    return array_merge(...array_values($group_content_types[$group->id()]));
+  }
+
+}

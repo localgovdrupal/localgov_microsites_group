@@ -21,7 +21,6 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
    */
   public static $modules = [
     'domain',
-    'domain_group',
     'domain_path',
     'entity_reference_revisions',
     'field_formatter_class',

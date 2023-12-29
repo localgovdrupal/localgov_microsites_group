@@ -8,8 +8,8 @@ use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Entity\Index;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
-use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
 /**
@@ -19,10 +19,11 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
  */
 class MicrositeEventContentTest extends BrowserTestBase {
 
-  use GroupCreationTrait;
   use InitializeGroupsTrait;
   use NodeCreationTrait;
-  use DomainFromGroupTrait;
+  use GroupCreationTrait, DomainFromGroupTrait {
+    GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
+  }
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.

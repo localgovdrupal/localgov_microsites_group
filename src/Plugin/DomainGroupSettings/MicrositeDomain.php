@@ -139,7 +139,7 @@ class MicrositeDomain extends DomainGroupSettingsBase implements ContainerFactor
    */
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
     // Avoid group domains if default domain does not exist.
-    if (!$this->domainStorage->loadDefaultDomain()) {
+    if (!$this->entityTypeManager->getStorage('domain')->loadDefaultDomain()) {
       $form_state->setErrorByName('hostname', $this->t('In order to enable this Organization domain, a Default one should be set. Please go to the <a href="@url">Domain records</a> page and create a Default Domain for the main site <i>(@host_name)</i>.', [
         '@url' => '/admin/config/domain',
         '@host_name' => $this->domainNegotiator->getHttpHost(),
@@ -149,12 +149,12 @@ class MicrositeDomain extends DomainGroupSettingsBase implements ContainerFactor
     $hostname = $form_state->getValue('hostname');
     if ($hostname) {
       $errors = $this->validator->validate($hostname);
-      $existing = $this->domainStorage->loadByProperties(['hostname' => $hostname]);
+      $existing = $this->entityTypeManager->getStorage('domain')->loadByProperties(['hostname' => $hostname]);
       $existing = reset($existing);
       // If we have already registered a hostname,
       // make sure we don't create a duplicate.
       $group = $form_state->get('group');
-      if ($existing && $existing->getDomainId() != $hostname) {
+      if ($existing && $existing->getThirdPartySetting('group_context_domain', 'group_uuid') != $group->uuid()) {
         $form_state->setErrorByName('hostname', $this->t('The hostname is already registered.'));
       }
       if (!empty($errors)) {

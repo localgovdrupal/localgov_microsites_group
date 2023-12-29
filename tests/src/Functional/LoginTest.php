@@ -6,8 +6,8 @@ use Drupal\Core\Url;
 use Drupal\domain\DomainInterface;
 use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
-use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 
 /**
  * Tests logging into microsite and control site.
@@ -16,9 +16,10 @@ use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
  */
 class LoginTest extends BrowserTestBase {
 
-  use GroupCreationTrait;
   use InitializeGroupsTrait;
-  use DomainFromGroupTrait;
+  use GroupCreationTrait, DomainFromGroupTrait {
+    GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
+  }
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.
@@ -39,7 +40,6 @@ class LoginTest extends BrowserTestBase {
   protected static $modules = [
     'group',
     'domain',
-    'domain_group',
     'localgov_microsites_group',
   ];
 

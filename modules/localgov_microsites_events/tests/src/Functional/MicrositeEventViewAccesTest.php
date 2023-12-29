@@ -4,8 +4,8 @@ namespace Drupal\Tests\localgov_microsites_events\Functional;
 
 use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\domain_group\Traits\GroupCreationTrait;
-use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
@@ -17,10 +17,11 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
 class MicrositeEventViewAccesTest extends BrowserTestBase {
 
   use ContentTypeCreationTrait;
-  use GroupCreationTrait;
   use InitializeGroupsTrait;
   use NodeCreationTrait;
-  use DomainFromGroupTrait;
+  use GroupCreationTrait, DomainFromGroupTrait {
+    GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
+  }
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.
@@ -54,9 +55,9 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
   /**
    * The group permissions helper.
    *
-   * @var \Drupal\localgov_microsites_group\GroupPermissionsHelperInterface
+   * @var \Drupal\localgov_microsites_group\ContentTypeHelperInterface
    */
-  protected $groupPermissionsHelper;
+  protected $contentTypeHelper;
 
   /**
    * {@inheritdoc}
@@ -64,7 +65,7 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    $this->groupPermissionsHelper = $this->container->get('localgov_microsites_group.permissions_helper');
+    $this->contentTypeHelper = $this->container->get('localgov_microsites_group.content_type_helper');
 
     // Create a microsite.
     $this->setBaseHostname();
@@ -85,14 +86,14 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
    */
   public function testMicrositeEventsViewAccess() {
 
-    $this->groupPermissionsHelper->moduleEnable('localgov_microsites_events', $this->group);
+    $this->contentTypeHelper->moduleEnable('localgov_microsites_events', $this->group);
     drupal_flush_all_caches();
     $this->drupalGet($this->domain->getUrl() . 'events');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domain->getUrl() . 'events/search');
     $this->assertSession()->statusCodeEquals(200);
 
-    $this->groupPermissionsHelper->moduleDisable('localgov_microsites_events', $this->group);
+    $this->contentTypeHelper->moduleDisable('localgov_microsites_events', $this->group);
     drupal_flush_all_caches();
     $this->drupalGet($this->domain->getUrl() . 'events');
     $this->assertSession()->statusCodeEquals(404);

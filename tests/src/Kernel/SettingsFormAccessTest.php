@@ -1,16 +1,16 @@
 <?php
 
-namespace Drupal\Tests\domain_group\Kernel;
+namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
-use Drupal\domain_group\Form\DomainGroupSettingsForm;
+use Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm;
 use Drupal\group\PermissionScopeInterface;
 use Drupal\user\RoleInterface;
 
 /**
- * \Drupal\domain_group\Form\DomainGroupSettingsForm::access
+ * \Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm::access
  *
- * @group domain_group
+ * @group localgov_microsites_group
  */
 class SettingsFormAccessTest extends GroupKernelTestBase {
 
@@ -33,7 +33,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
    */
   public static $modules = [
     'domain',
-    'domain_group',
+    'localgov_microsites_group',
     'path_alias',
   ];
 
@@ -53,7 +53,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
     // Non-member.
     $this->assertFalse($form->access($this->group, $this->getCurrentUser())->isAllowed());
 
-    // Member. 
+    // Member.
     $this->group->addMember($this->getCurrentUser());
     $this->assertFalse($form->access($this->group, $this->getCurrentUser())->isAllowed());
 

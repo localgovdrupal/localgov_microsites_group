@@ -34,7 +34,6 @@ class ModuleSettingsFormTest extends BrowserTestBase {
     'block',
     'group',
     'domain',
-    'domain_group',
     'localgov_microsites_group',
   ];
 

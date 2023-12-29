@@ -4,7 +4,7 @@ namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\domain_group\Traits\InitializeGroupsTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 
 /**
  * Tests the creation of microsites.

@@ -154,6 +154,7 @@ class MicrositeDomainAdd extends DomainForm {
     if ($front_page = $this->defaultContent->generate($group)) {
       $config_override->set('page.front', $front_page->toUrl()->toString());
     }
+    $config_override->set('name', $group->label());
     $config_override->set('mail', $form_state->getValue('site_mail'));
     $config_override->save();
 

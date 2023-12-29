@@ -10,7 +10,7 @@ use Drupal\Tests\user\Traits\UserCreationTrait;
 /**
  * Tests the group and group content access.
  *
- * @group domain_group
+ * @group localgov_microsites_group
  */
 class GroupInvitationAccessTest extends BrowserTestBase {
 
@@ -38,7 +38,6 @@ class GroupInvitationAccessTest extends BrowserTestBase {
     'block',
     'group',
     'domain',
-    'domain_group',
     'localgov_microsites_group',
   ];
 

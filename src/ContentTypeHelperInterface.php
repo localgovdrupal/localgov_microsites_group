@@ -7,19 +7,14 @@ namespace Drupal\localgov_microsites_group;
 use Drupal\group\Entity\GroupInterface;
 
 /**
- * GroupPermissionsHelper interface.
+ * ContentTypeHelper interface.
  */
-interface GroupPermissionsHelperInterface {
+interface ContentTypeHelperInterface {
 
   /**
    * Module permissions status: Has no group permissions.
    */
   const NOT_APPLICABLE = 'not_applicable';
-
-  /**
-   * Module permissions status: has modifications to permissions.
-   */
-  const UNKNOWN = 'unknown';
 
   /**
    * Module permissions status: enabled, all permissions in place.
@@ -58,7 +53,7 @@ interface GroupPermissionsHelperInterface {
    *
    * @return string
    *   Class module permissions status constant. One of self::ENABLED
-   *   self::DISABLED self::UNKNOWN self::NOT_APPLICABLE.
+   *   self::DISABLED self::NOT_APPLICABLE.
    */
   public function moduleStatus($module, GroupInterface $group): string;
 

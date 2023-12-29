@@ -3,8 +3,8 @@ services:
     class: Drupal\localgov_microsites_group\GroupDefaultContent
     arguments: ['@entity_type.manager', '@config.factory', '@replicate.replicator']
 
-  localgov_microsites_group.permissions_helper:
-    class: Drupal\localgov_microsites_group\GroupPermissionsHelper
+  localgov_microsites_group.content_type_helper:
+    class: Drupal\localgov_microsites_group\ContentTypeHelper
     arguments: ['@entity_type.manager', '@module_handler']
 
   theme.negotiator.localgov_microsites_group:
@@ -63,3 +63,12 @@ services:
       - { name: 'context_provider' }
     deprecated: 'The "%service_id%" service is deprecated. You should use the group sites context directly instead.'
 
+  group.relation_handler.access_control.group_node:
+    class: 'Drupal\localgov_microsites_group\Plugin\Group\RelationHandler\ContentTypeAccessControl'
+    arguments: ['@group.relation_handler.access_control', '@localgov_microsites_group.content_type_helper']
+    shared: false
+
+  group.relation_handler.access_control.group_term:
+    class: 'Drupal\localgov_microsites_group\Plugin\Group\RelationHandler\ContentTypeAccessControl'
+    arguments: ['@group.relation_handler.access_control', '@localgov_microsites_group.content_type_helper']
+    shared: false
