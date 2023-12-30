@@ -65,10 +65,11 @@ class GroupInvitationAccessTest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->ownerUser = $this->createUser();
-    $this->adminUser = $this->createUser();
-    $this->memberUser = $this->createUser();
-    $this->otherUser = $this->createUser();
+    // Test uses groups on control domain, so disable group sites.
+    $this->ownerUser = $this->createUser(['use group_sites admin mode']);
+    $this->adminUser = $this->createUser(['use group_sites admin mode']);
+    $this->memberUser = $this->createUser(['use group_sites admin mode']);
+    $this->otherUser = $this->createUser(['use group_sites admin mode']);
     $this->createMicrositeGroups([
       'uid' => $this->ownerUser->id(),
     ]);
@@ -85,11 +86,13 @@ class GroupInvitationAccessTest extends BrowserTestBase {
 
     // Admin can check invitations.
     $this->drupalLogin($this->adminUser);
+    \Drupal::service('group_sites.admin_mode')->setAdminMode(TRUE);
     $this->drupalGet('/group/' . $group->id() . '/invitations');
     $this->assertSession()->statusCodeEquals(200);
 
     // Ordinary member can't.
     $this->drupalLogin($this->memberUser);
+    \Drupal::service('group_sites.admin_mode')->setAdminMode(TRUE);
     $this->drupalGet('/group/' . $group->id() . '/invitations');
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet('/group/' . $group->id() . '/content/add/group_invitation');
@@ -97,6 +100,7 @@ class GroupInvitationAccessTest extends BrowserTestBase {
 
     // Check admin can invite.
     $this->drupalLogin($this->adminUser);
+    \Drupal::service('group_sites.admin_mode')->setAdminMode(TRUE);
     $this->drupalGet('/group/' . $group->id() . '/content/add/group_invitation');
     $this->submitForm([
       'invitee_mail[0][value]' => $this->otherUser->getEmail(),

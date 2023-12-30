@@ -58,31 +58,15 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    // Set base hostname.
-    $this->setBaseHostname();
-
-    // Create some microsites.
-    $this->group1 = $this->createGroup([
-      'label' => 'group-a1',
-      'type' => 'microsite',
-    ]);
-    $this->group2 = $this->createGroup([
-      'label' => 'group-a2',
-      'type' => 'microsite',
-    ]);
-    $this->allTestGroups = [
-      $this->group1,
-      $this->group2,
-    ];
-    $this->initializeTestGroupsDomains();
-    $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $this->domain1 = $this->getDomainFromGroup($this->group1);
-    $this->domain2 = $this->getDomainFromGroup($this->group2);
+    $this->createMicrositeGroups([], 2);
+    $this->createMicrositeGroupsDomains($this->groups);
+    $this->domain1 = $this->getDomainFromGroup($this->groups[0]);
+    $this->domain2 = $this->getDomainFromGroup($this->groups[1]);
 
     // Create a user.
     $this->user = $this->drupalCreateUser();
-    $this->group1->addMember($this->user, ['group_roles' => ['microsite-admin']]);
-    $this->group2->addMember($this->user, ['group_roles' => ['microsite-admin']]);
+    $this->groups[0]->addMember($this->user, ['group_roles' => ['microsite-admin']]);
+    $this->groups[1]->addMember($this->user, ['group_roles' => ['microsite-admin']]);
   }
 
   /**
@@ -103,14 +87,14 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     // Create facet type.
     $type_listing_url = Url::fromRoute('entity.group_relationship.group_localgov_directories_facet_type.list',
       [
-        'group' => $this->group1->id(),
+        'group' => $this->groups[0]->id(),
       ],
     )->toString();
     $this->drupalGet($this->domain1->getUrl() . $type_listing_url);
     $this->assertSession()->pageTextNotContains($facet_type);
     $type_add_url = Url::fromRoute('entity.group_relationship.group_localgov_directories_facet_type.add',
       [
-        'group' => $this->group1->id(),
+        'group' => $this->groups[0]->id(),
       ],
     )->toString();
     $this->drupalGet($this->domain1->getUrl() . $type_add_url);
@@ -124,7 +108,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     // Create facet.
     $facet_listing_url = Url::fromRoute('view.lgms_group_directory_facets.page',
       [
-        'group' => $this->group1->id(),
+        'group' => $this->groups[0]->id(),
         'localgov_directories_facets_type' => $facet_type_id,
       ],
     )->toString();
@@ -132,7 +116,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('There are no directory facets yet.');
     $facet_add_url = Url::fromRoute('entity.group_relationship.group_localgov_directories_facets.add',
       [
-        'group' => $this->group1->id(),
+        'group' => $this->groups[0]->id(),
         'localgov_directories_facets_type' => $facet_type_id,
       ],
     )->toString();
@@ -153,7 +137,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     // Check facet type is listed.
     $type_listing_url = Url::fromRoute('entity.group_relationship.group_localgov_directories_facet_type.list',
       [
-        'group' => $this->group2->id(),
+        'group' => $this->groups[1]->id(),
       ],
     )->toString();
     $this->drupalGet($this->domain2->getUrl() . $type_listing_url);
@@ -162,7 +146,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     // Check facet isn't listed.
     $facet_listing_url = Url::fromRoute('view.lgms_group_directory_facets.page',
       [
-        'group' => $this->group2->id(),
+        'group' => $this->groups[1]->id(),
         'localgov_directories_facets_type' => $facet_type_id,
       ],
     )->toString();

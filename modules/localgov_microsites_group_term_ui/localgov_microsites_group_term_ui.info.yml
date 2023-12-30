@@ -8,3 +8,4 @@ dependencies:
   - drupal:views
   - group:group
   - group_term:group_term
+  - localgov_microsites_group:localgov_microsites_group

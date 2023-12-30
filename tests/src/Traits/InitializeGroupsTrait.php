@@ -61,18 +61,33 @@ trait InitializeGroupsTrait {
   public function createMicrositeGroupsDomains(array $groups) {
     $this->setBaseHostname();
     $domains = [''];
-    foreach ($groups as $group) {
+    foreach ($groups as $delta => $group) {
       $domains[] = [
-        'subdomain' => strtolower($group->label()),
+        'subdomain' => 'group-' . $delta,
         'id' => 'group_' . $group->id(),
         'name' => $group->label(),
         'third_party_settings' => [
-          'domain_group' => ['group' => $group->id()],
+          'group_context_domain' => ['group_uuid' => $group->uuid()],
         ],
       ];
     }
     $this->domainCreateTestDomains($domains, count($domains));
-  }
+/*
+    // Creating domain site settings.
+    foreach ($this->allTestGroups as $group) {
+      $domain_id = 'group_' . $group->id();
+      $config_id = 'domain.config.' . $domain_id . '.system.site';
+      $config = $this->getConfigFactory()->getEditable($config_id);
+      $config->set('name', $group->label());
+      $config->set('slogan', $group->label() . ' Slogan');
+      $config->set('mail', 'group-' . $group->id() . '@user.com');
+      $config->set('page.front', '/group/' . $group->id());
+      $config->set('page.403', '/denied');
+      $config->set('page.404', '/not-found');
+    }
+    $config->save();
+*/
+}
 
   /**
    * Generates a list of domains for testing.

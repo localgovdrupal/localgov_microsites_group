@@ -17,6 +17,7 @@ class UserRoleTest extends GroupKernelTestBase {
    * {@inheritdoc}
    */
   public static $modules = [
+    'domain',
     'gnode',
     'group',
     'group_content_menu',

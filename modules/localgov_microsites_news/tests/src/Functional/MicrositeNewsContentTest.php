@@ -59,32 +59,16 @@ class MicrositeNewsContentTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    // Set base hostname.
-    $this->setBaseHostname();
-
-    // Create some microsites.
-    $this->group1 = $this->createGroup([
-      'label' => 'group-a1',
-      'type' => 'microsite',
-    ]);
-    $this->group2 = $this->createGroup([
-      'label' => 'group-a2',
-      'type' => 'microsite',
-    ]);
-    $this->allTestGroups = [
-      $this->group1,
-      $this->group2,
-    ];
-    $this->initializeTestGroupsDomains();
-    $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $this->domain1 = $this->getDomainFromGroup($this->group1);
-    $this->domain2 = $this->getDomainFromGroup($this->group2);
+    $this->createMicrositeGroups([], 2);
+    $this->createMicrositeGroupsDomains($this->groups);
+    $this->domain1 = $this->getDomainFromGroup($this->groups[0]);
+    $this->domain2 = $this->getDomainFromGroup($this->groups[1]);
 
     // Create some directory content.
-    $this->newsroom1 = $this->createNewsroom($this->group1);
-    $this->article1 = $this->createNewsArticles($this->newsroom1, $this->group1, 2);
-    $this->newsroom2 = $this->createNewsroom($this->group2);
-    $this->article2 = $this->createNewsArticles($this->newsroom2, $this->group2, 2);
+    $this->newsroom1 = $this->createNewsroom($this->groups[0]);
+    $this->article1 = $this->createNewsArticles($this->newsroom1, $this->groups[0], 2);
+    $this->newsroom2 = $this->createNewsroom($this->groups[1]);
+    $this->article2 = $this->createNewsArticles($this->newsroom2, $this->groups[1], 2);
 
     // Index directory content.
     $index = Index::load('localgov_news');

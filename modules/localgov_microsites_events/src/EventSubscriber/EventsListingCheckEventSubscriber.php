@@ -2,7 +2,10 @@
 
 namespace Drupal\localgov_microsites_events\EventSubscriber;
 
+use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\domain\DomainNegotiatorInterface;
+use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
 use Drupal\localgov_microsites_group\ContentTypeHelperInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -14,12 +17,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
 
-  /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
+  use GroupFromDomainContextTrait;
 
   /**
    * The group permissions helper.
@@ -36,8 +34,9 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\localgov_microsites_group\GroupPermissionsHelperInterface $content_type_helper
    *   The group content type helper.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, ContentTypeHelperInterface $content_type_helper) {
-    $this->entityTypeManager = $entity_type_manager;
+  public function __construct(EntityRepositoryInterface $entity_repository, DomainNegotiatorInterface $domain_negotiator, ContentTypeHelperInterface $content_type_helper) {
+    $this->entityRepository = $entity_repository;
+    $this->domainNegotiator = $domain_negotiator;
     $this->contentTypeHelper = $content_type_helper;
   }
 
@@ -71,18 +70,7 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
       return;
     }
 
-    // Check we're in a group.
-    // @TODO
-    //
-    // Get from context (see GroupSitesAccessPolicy):
-    // $context_id = $this->configFactory->get('group_sites.settings')->get('context_provider');
-    // $contexts = $this->contextRepository->getRuntimeContexts([$context_id]);
-    $group_id = NULL;
-    \Drupal::messenger('Implementation missing EventsListingCheckEventSubscriber');
-    if (!$group_id) {
-      return;
-    }
-    $group = $this->entityTypeManager->getStorage('group')->load($group_id);
+    $group = $this->getGroupFromDomain();
     if (!$group) {
       return;
     }

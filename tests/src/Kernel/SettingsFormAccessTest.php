@@ -35,6 +35,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
     'domain',
     'localgov_microsites_group',
     'path_alias',
+    'replicate',
   ];
 
   /**

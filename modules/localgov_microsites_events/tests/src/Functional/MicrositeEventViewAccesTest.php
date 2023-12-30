@@ -68,7 +68,6 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
     $this->contentTypeHelper = $this->container->get('localgov_microsites_group.content_type_helper');
 
     // Create a microsite.
-    $this->setBaseHostname();
     $this->group = $this->createGroup([
       'label' => 'group-a1',
       'type' => 'microsite',
@@ -76,8 +75,7 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
     $this->allTestGroups = [
       $this->group,
     ];
-    $this->initializeTestGroupsDomains();
-    $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
+    $this->createMicrositeGroupsDomains([$this->group]);
     $this->domain = $this->getDomainFromGroup($this->group);
   }
 
@@ -94,6 +92,7 @@ class MicrositeEventViewAccesTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     $this->contentTypeHelper->moduleDisable('localgov_microsites_events', $this->group);
+    $this->entityTypeManager->getStorage('group')->resetCache();
     drupal_flush_all_caches();
     $this->drupalGet($this->domain->getUrl() . 'events');
     $this->assertSession()->statusCodeEquals(404);

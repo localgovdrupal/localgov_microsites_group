@@ -5,7 +5,7 @@ services:
 
   localgov_microsites_group.content_type_helper:
     class: Drupal\localgov_microsites_group\ContentTypeHelper
-    arguments: ['@entity_type.manager', '@module_handler']
+    arguments: ['@entity_type.manager', '@module_handler', '@group_relation_type.manager']
 
   theme.negotiator.localgov_microsites_group:
     class: Drupal\localgov_microsites_group\Theme\ThemeSwitcherNegotiator

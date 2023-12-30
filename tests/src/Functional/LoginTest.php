@@ -67,8 +67,8 @@ class LoginTest extends BrowserTestBase {
     ]);
 
     // Setup the group types and test groups from the InitializeGroupsTrait.
-    $this->initializeTestGroups(['uid' => $this->testUser->id()]);
-    $this->initializeTestGroupsDomains();
+    $this->createMicrositeGroups(['uid' => $this->testUser->id()]);
+    $this->createMicrositeGroupsDomains($this->groups);
   }
 
   /**
@@ -84,8 +84,7 @@ class LoginTest extends BrowserTestBase {
     // Can't use drupalLogin as we want to do it on the form with the microsite
     // domain.
     // @todo move this into a trait, probably on domain_group.
-    $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $ga1_domain = $this->getDomainFromGroup($this->groupA1);
+    $ga1_domain = $this->getDomainFromGroup($this->groups[0]);
     assert($ga1_domain instanceof DomainInterface);
     $this->drupalGet($ga1_domain->getUrl() . Url::fromRoute('user.login')->toString());
     $this->submitForm([

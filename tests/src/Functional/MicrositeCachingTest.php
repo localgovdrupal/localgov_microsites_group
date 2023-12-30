@@ -58,7 +58,7 @@ class MicrositeCachingTest extends BrowserTestBase {
 
     // Create some microsites.
     $this->group = $this->createGroup([
-      'label' => 'group-a1',
+      'label' => 'group-0',
       'type' => 'microsite',
     ]);
     $this->domain = \Drupal::entityTypeManager()->getStorage('domain')->create([
@@ -72,9 +72,10 @@ class MicrositeCachingTest extends BrowserTestBase {
     $this->domain->save();
 
     // Login as admin user.
-    $user = $this->drupalCreateUser([], NULL, TRUE);
+    $user = $this->drupalCreateUser(['use group_sites admin mode'], NULL, TRUE);
     $this->group->addMember($user, ['group_roles' => ['microsite-admin']]);
     $this->drupalLogin($user);
+    \Drupal::service('group_sites.admin_mode')->setAdminMode(TRUE);
   }
 
   /**
