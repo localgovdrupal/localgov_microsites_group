@@ -164,7 +164,7 @@ class MicrositeDomainAdd extends DomainForm {
     $store->delete("$store_id:membership");
     $store->delete("$store_id:domain");
 
-    $form_state->setRedirect('localgov_microsites_group.microsite_admin');
+    $form_state->setRedirect('view.localgov_microsites_overview.collection');
   }
 
   /**
