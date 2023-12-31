@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\localgov_microsites_domain\Plugin\search_api\processor;
+namespace Drupal\localgov_microsites_group\Plugin\search_api\processor;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\domain\DomainNegotiatorInterface;
@@ -156,7 +156,7 @@ class EntityAccess extends ProcessorPluginBase {
       ->filterForPropertyPath($fields, NULL, 'domain_groups');
     foreach ($fields as $field) {
       foreach ($entity_group_relationship as $group_relationship) {
-        $field->addValue($group_relationship->getGroup()->id());
+        $field->addValue($group_relationship->getGroup()->uuid());
       }
     }
  }
@@ -189,9 +189,8 @@ class EntityAccess extends ProcessorPluginBase {
     if (empty($active)) {
       return;
     }
-    // @todo this is now changed.
-    $group_id = $active->getThirdPartySetting('domain_group', 'group');
-    if (empty($group_id)) {
+    $group_uuid = $active->getThirdPartySetting('group_context_domain', 'group_uuid');
+    if (empty($group_uuid)) {
       return;
     }
 
@@ -201,7 +200,7 @@ class EntityAccess extends ProcessorPluginBase {
       return;
     }
     $domain_groups_field_id = $domain_groups_field->getFieldIdentifier();
-    $query->addCondition($domain_groups_field_id, $group_id, 'IN');
+    $query->addCondition($domain_groups_field_id, $group_uuid, 'IN');
   }
 
 }

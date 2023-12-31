@@ -5,7 +5,6 @@
  * LocalGov Microsites Group install file.
  */
 
-use Drupal\Core\Serialization\Yaml;
 use Drupal\search_api\Entity\Index;
 
 /**
@@ -22,8 +21,7 @@ function localgov_microsites_group_install($is_syncing) {
   $group_sites = \Drupal::configFactory()->getEditable('group_sites.settings');
   $group_sites->set('context_provider', '@group_context_domain.group_from_domain_context:group');
   $group_sites->save();
-return;
-# @todo
+
   // Add domain access to exclude other sites results.
   $index = Index::load('localgov_sitewide_search');
   $processor = \Drupal::getContainer()
