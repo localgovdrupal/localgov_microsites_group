@@ -37,6 +37,7 @@ class ContentTypeHelperTest extends GroupKernelTestBase {
     'groupmedia',
     'group_content_menu',
     'group_term',
+    'group_sites',
     'layout_discovery',
     'layout_paragraphs',
     'layout_paragraphs_permissions',
