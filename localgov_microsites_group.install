@@ -5,6 +5,7 @@
  * LocalGov Microsites Group install file.
  */
 
+use Drupal\group\Entity\Group;
 use Drupal\search_api\Entity\Index;
 
 /**
@@ -36,4 +37,40 @@ function localgov_microsites_group_install($is_syncing) {
  */
 function localgov_microsites_group_update_last_removed() {
   return 9003;
+}
+
+/**
+ * Enable group sites.
+ *
+ * @todo these needs to be enabled before checking out this version as the code
+ * requires them.
+ */
+function localgov_microsites_group_update_9004() {
+  \Drupal::service('module_installer')->install(['group_sites', 'group_context_domain']);
+}
+
+/**
+ * Migrate microsite domains to group_context_domain from domain_group.
+ */
+function localgov_microsites_group_update_9005() {
+  foreach (\Drupal::entityTypeManager()->getStorage('domain')->loadMultiple() as $domain) {
+    if (
+      ($group_id = $domain->getThirdPartySetting('domain_group', 'group')) &&
+      ($group = Group::load($group_id))
+    ) {
+      $domain->setThirdPartySetting('group_context_domain', 'group_uuid', $group->uuid());
+      $domain->unsetThirdPartySetting('domain_group', 'group');
+      $domain->save();
+    }
+  }
+}
+
+/**
+ * Disable domain_group and group_permissions.
+ *
+ * @todo these need to be in code to be disabled, but obviously won't be in our
+ * composer file.
+ */
+function localgov_microsites_group_update_9006() {
+  \Drupal::service('module_installer')->uninstall(['domain_group', 'group_permissions']);
 }
