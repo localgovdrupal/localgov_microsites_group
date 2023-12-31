@@ -51,6 +51,12 @@ services:
     tags:
       - { name: event_subscriber }
 
+  localgov_microsites_group.site_admin_mode:
+    class: Drupal\localgov_microsites_group\EventSubscriber\SiteAdminMode
+    arguments: ['@domain.negotiator', '@group_sites.admin_mode']
+    tags:
+      - { name: event_subscriber }
+
   domain_group_resolver:
     class: Drupal\localgov_microsites_group\DomainGroupResolver
     arguments: ['@entity_type.manager', '@domain.negotiator', '@current_route_match', '@entity.repository']
