@@ -32,6 +32,9 @@ settings:
       value: Junction
       label: Junction
     -
+      value: Lexend
+      label: Lexend
+    -
       value: 'Libre Baskerville'
       label: 'Libre Baskerville'
     -
