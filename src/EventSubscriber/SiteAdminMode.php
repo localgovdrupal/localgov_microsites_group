@@ -26,7 +26,7 @@ class SiteAdminMode implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = ['fixAdminMode'];
+    $events[KernelEvents::REQUEST][] = ['fixAdminMode', 100];
     return $events;
   }
 
