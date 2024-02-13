@@ -62,7 +62,7 @@ class GroupDefaultContent implements GroupDefaultContentInterface {
       $plugin_id = 'group_node:' . $default->bundle();
       if ($group->getGroupType()->hasPlugin($plugin_id)) {
         $node = $this->replicator->replicateEntity($default);
-        assert($node instanceof Node);
+        assert($node instanceof NodeInterface);
         $node->setPublished();
         $this->attachMediaToGroup($node, $group);
         // NB not dispatching ReplicatorEvents::AFTER_SAVE here we don't use it,
