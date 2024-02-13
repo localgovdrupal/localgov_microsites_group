@@ -74,3 +74,14 @@ function localgov_microsites_group_update_9005() {
 function localgov_microsites_group_update_9006() {
   \Drupal::service('module_installer')->uninstall(['domain_group', 'group_permissions']);
 }
+
+/**
+ * Set group sites context as would be done on install.
+ */
+function localgov_microsites_group_update_9007() {
+  // Group sites should be installed aleady. It provides configuration, so we
+  // can't, but must update its default config.
+  $group_sites = \Drupal::configFactory()->getEditable('group_sites.settings');
+  $group_sites->set('context_provider', '@group_context_domain.group_from_domain_context:group');
+  $group_sites->save();
+}
