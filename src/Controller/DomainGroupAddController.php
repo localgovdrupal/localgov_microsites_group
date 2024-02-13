@@ -130,7 +130,6 @@ class DomainGroupAddController extends ControllerBase {
       $group = $store->get("$store_id:entity");
       // Only create a new domain if we have nothing stored.
       if (!$domain = $store->get("$store_id:domain")) {
-        $values['type'] = $group_type->id();
         $domain = $this->entityTypeManager()->getStorage('domain')->create([
           'name' => $group->label(),
           'hostname' => '',
