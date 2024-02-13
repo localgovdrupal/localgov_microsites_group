@@ -134,9 +134,7 @@ class GroupTermUiController extends ControllerBase {
    *   The access result.
    */
   protected function accessCreateGroupTerm(AccountInterface $account, GroupInterface $group, string $plugin_id) {
-    $plugin_manager = \Drupal::service('group_relation_type.manager');
-    assert($plugin_manager instanceof GroupRelationTypeManagerInterface);
-    $access_handler = $plugin_manager->getAccessControlHandler($plugin_id);
+    $access_handler = $this->pluginManager->getAccessControlHandler($plugin_id);
     return $access_handler->entityCreateAccess($group, $account, TRUE);
   }
 
