@@ -74,11 +74,16 @@ class ContentTypeHelper implements ContentTypeHelperInterface {
   }
 
   /**
-   * Return array of all 'group_entity_type:entity_bundles' enabled for a
-   * microsite.
+   * All 'group_entity_type:entity_bundles' enabled for a microsite.
    *
    * This is called a lot. It could maybe be better cached. It could also maybe
    * better not reuse the roles hook?
+   *
+   * @param \Drupal\group\Entity\GroupInterface $group
+   *   The group to check.
+   *
+   * @return string[]
+   *   All 'group_entity_type:entity_bundles' enabled.
    */
   public function enabledContentTypes(GroupInterface $group): array {
     static $plugin_types = [];
