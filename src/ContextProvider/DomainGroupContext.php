@@ -8,7 +8,7 @@ use Drupal\group_context_domain\Context\GroupFromDomainContext;
 /**
  * Sets the current group as a context on domains.
  *
- * @deprecated
+ * @deprecated Use \Drupal\group_context_domain\Context\GroupFromDomainContext.
  */
 class DomainGroupContext extends GroupFromDomainContext {
 
