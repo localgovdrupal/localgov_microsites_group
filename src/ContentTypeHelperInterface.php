@@ -12,17 +12,21 @@ use Drupal\group\Entity\GroupInterface;
 interface ContentTypeHelperInterface {
 
   /**
-   * Module permissions status: Has no group permissions.
+   * Module status: Has no controlled content types.
    */
   const NOT_APPLICABLE = 'not_applicable';
 
   /**
-   * Module permissions status: enabled, all permissions in place.
+   * Module status: enabled.
+   *
+   * All controlled types can be created.
    */
   const ENABLED = 'enabled';
 
   /**
-   * Module permissions status: disabled, all permissions removed.
+   * Module status: disabled.
+   *
+   * Controlled types can't be created, unless supplied by another module.
    */
   const DISABLED = 'disabled';
 
