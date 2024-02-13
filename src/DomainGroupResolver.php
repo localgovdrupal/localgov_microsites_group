@@ -95,7 +95,7 @@ class DomainGroupResolver implements DomainGroupResolverInterface {
 
     if (!empty($groups)) {
       foreach ($groups as $group) {
-        if ($group) {
+        if ($group instanceof GroupInterface) {
           $domain = $this->getDomainFromGroup($group);
           if ($domain) {
             $domains[$domain->id()] = $domain;
