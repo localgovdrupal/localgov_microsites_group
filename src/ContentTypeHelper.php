@@ -8,7 +8,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface;
-use Drupal\localgov_roles\RolesHelper;
 
 /**
  * Content types provided by modules and if they are used by a microsite.
@@ -93,7 +92,7 @@ class ContentTypeHelper implements ContentTypeHelperInterface {
     // All types controlled by modules that can be disabled.
     if (empty($all_content_types)) {
       $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_content_types, $group) {
-        $permissions = $hook()['group'][\Drupal\localgov_microsites_group\RolesHelper::GROUP_ADMIN_ROLE] ?? [];
+        $permissions = $hook()['group'][RolesHelper::GROUP_ADMIN_ROLE] ?? [];
         foreach ($permissions as $permission) {
           $matches = [];
           if (preg_match('/^create (.*) entity$/', $permission, $matches)) {
