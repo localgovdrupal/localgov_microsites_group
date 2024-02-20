@@ -72,16 +72,26 @@ function localgov_microsites_group_update_9005() {
 }
 
 /**
- * Disable domain_group and group_permissions.
+ * Remove any group permissions entities before removing the module.
  */
 function localgov_microsites_group_update_9006() {
+  $permission_storage = \Drupal::entityTypeManager()->getStorage('group_permission');
+  if ($permissions = $permission_storage->loadMultiple()) {
+    $permission_storage->delete($permissions);
+  }
+}
+
+/**
+ * Disable domain_group and group_permissions.
+ */
+function localgov_microsites_group_update_9007() {
   \Drupal::service('module_installer')->uninstall(['domain_group', 'group_permissions']);
 }
 
 /**
  * Set group sites context as would be done on install.
  */
-function localgov_microsites_group_update_9007() {
+function localgov_microsites_group_update_9008() {
   $group_sites = \Drupal::configFactory()->getEditable('group_sites.settings');
   $group_sites->set('context_provider', '@group_context_domain.group_from_domain_context:group');
   $group_sites->save();
