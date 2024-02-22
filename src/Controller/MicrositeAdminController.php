@@ -5,7 +5,7 @@ namespace Drupal\localgov_microsites_group\Controller;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
-use Drupal\domain_group\DomainGroupResolverInterface;
+use Drupal\localgov_microsites_group\DomainGroupResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
