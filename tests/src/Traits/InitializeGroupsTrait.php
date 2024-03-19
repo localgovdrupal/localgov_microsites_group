@@ -60,13 +60,13 @@ trait InitializeGroupsTrait {
   public function createMicrositeGroupsDomains(array $groups) {
     $this->setBaseHostname();
     $domains = [''];
-    foreach ($groups as $group) {
+    foreach ($groups as $delta => $group) {
       $domains[] = [
-        'subdomain' => strtolower($group->label()),
+        'subdomain' => 'group-' . $delta,
         'id' => 'group_' . $group->id(),
         'name' => $group->label(),
         'third_party_settings' => [
-          'domain_group' => ['group' => $group->id()],
+          'group_context_domain' => ['group_uuid' => $group->uuid()],
         ],
       ];
     }
