@@ -8,6 +8,8 @@ use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\user\RoleInterface;
 
 /**
+ * Test access to settings form.
+ *
  * \Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm::access.
  *
  * @group localgov_microsites_group
@@ -49,7 +51,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
   }
 
   /**
-   *
+   * Test the access form with anonymous, member and admin.
    */
   public function testFormAccess() {
     $form = new DomainGroupSettingsForm($this->container->get('plugin.manager.domain_group_settings'));

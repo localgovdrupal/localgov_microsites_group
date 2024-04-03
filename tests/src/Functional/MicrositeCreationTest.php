@@ -10,7 +10,7 @@ use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
  * Tests the creation of microsites.
  *
  * Note: For this test to pass, Drupal should be able to resolve the
- * group-0.{base host} domain.  Site also needs to run on the standard HTTP port.
+ * group-0.{base host} domain. Site also needs to run on the standard HTTP port.
  *
  * @group localgov_microsites_group
  */

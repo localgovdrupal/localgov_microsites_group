@@ -22,7 +22,7 @@ trait DomainFromGroupTrait {
   protected $entityTypeManager;
 
   /**
-   *
+   * Gets the EntityTypeManagerInterface.
    */
   protected function getEntityTypeManager(): EntityTypeManagerInterface {
     if (!$this->entityTypeManager) {
