@@ -141,7 +141,7 @@ function localgov_microsites_group_entity_extra_field_info() {
 function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
 
   // Find active group.
-  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  $group_id = localgov_microsites_group_get_group_id();
   if (is_null($group_id)) {
     $group = \Drupal::request()->attributes->get('group');
     if ($group) {
@@ -288,7 +288,7 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
     $form_state->setRedirect('system.admin');
   }
   // Login to a domain group.
-  $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+  $group_id = localgov_microsites_group_get_group_id();
   if ($group_id) {
     $form_state->setRedirect('entity.group.canonical', ['group' => $group_id]);
   }
@@ -298,7 +298,7 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
  * Additional submit handler to associate media with group when in domain group.
  */
 function localgov_microsites_group_media_library_add_form_submit($form, FormStateInterface $form_state) {
-  if (($group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId()) &&
+  if (($group_id = localgov_microsites_group_get_group_id()) &&
     ($added_media = $form_state->get('media'))
   ) {
     $groups[] = Group::load($group_id);
@@ -481,4 +481,26 @@ function localgov_microsites_group_localgov_microsites_roles_default() {
       ],
     ],
   ];
+}
+
+/**
+ * Get the current group id from the domain context.
+ */
+function localgov_microsites_group_get_group_id() {
+
+  $context_id = \Drupal::service('config.factory')->get('group_sites.settings')->get('context_provider');
+  if ($context_id === NULL) {
+    return NULL;
+  }
+
+  $contexts = \Drupal::service('context.repository')->getRuntimeContexts([$context_id]);
+
+  $context = count($contexts) ? reset($contexts) : NULL;
+
+  if ($group = $context?->getContextValue()) {
+    if (!$group instanceof GroupInterface) {
+      throw new \InvalidArgumentException('Context value is not a Group entity.');
+    }
+    return $group->id();
+  }
 }
