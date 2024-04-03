@@ -19,7 +19,7 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'domain',
     'domain_path',
     'entity_reference_revisions',

@@ -26,7 +26,7 @@ class MicrositeAdminController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('domain_group_resolver')
+      $container->get('group_context_domain')
     );
   }
 

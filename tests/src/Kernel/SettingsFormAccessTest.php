@@ -33,7 +33,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'domain',
     'localgov_microsites_group',
     'path_alias',
