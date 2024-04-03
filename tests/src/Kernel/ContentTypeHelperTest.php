@@ -3,11 +3,9 @@
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
 use Drupal\localgov_microsites_group\ContentTypeHelperInterface;
-use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\node\Entity\NodeType;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
-use Drupal\user\Entity\User;
 
 /**
  * @covers \Drupal\localgov_microsites_group\GroupPermisisonsHelper

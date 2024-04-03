@@ -62,7 +62,6 @@ class MicrositeEventContentTest extends BrowserTestBase {
 
     $this->createMicrositeGroups([], 2);
     $this->createMicrositeGroupsDomains($this->groups);
-    $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
     $this->domain1 = $this->getDomainFromGroup($this->groups[0]);
     $this->domain2 = $this->getDomainFromGroup($this->groups[1]);
 

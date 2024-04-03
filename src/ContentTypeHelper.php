@@ -17,9 +17,11 @@ class ContentTypeHelper implements ContentTypeHelperInterface {
   /**
    * Constructs a GroupPermissionsHelper instance.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler.
+   * @param \Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface $relationPluginManager
    *   The module handler.
    */
   public function __construct(protected EntityTypeManagerInterface $entityTypeManager, protected ModuleHandlerInterface $moduleHandler, protected GroupRelationTypeManagerInterface $relationPluginManager) {
