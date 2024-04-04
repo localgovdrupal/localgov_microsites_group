@@ -79,7 +79,7 @@ class MicrositeAdminController extends ControllerBase {
       }
       return $group->id();
     }
-    return null;
+    return NULL;
   }
 
 }
