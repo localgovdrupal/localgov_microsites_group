@@ -8,7 +8,10 @@ use Drupal\group_context_domain\Context\GroupFromDomainContext;
 /**
  * Sets the current group as a context on domains.
  *
- * @deprecated Use \Drupal\group_context_domain\Context\GroupFromDomainContext.
+ * @deprecated in localgov_microsites_group:4.0.0-alpha1 and is removed from
+ * localgov_microsites_group:5.0.0.
+ * Use \Drupal\group_context_domain\Context\GroupFromDomainContext.
+ * @see https://www.drupal.org/project/group_sites/issues/3402181
  */
 class DomainGroupContext extends GroupFromDomainContext {
 

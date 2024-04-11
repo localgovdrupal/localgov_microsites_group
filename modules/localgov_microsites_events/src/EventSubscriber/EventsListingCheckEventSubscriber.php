@@ -3,7 +3,6 @@
 namespace Drupal\localgov_microsites_events\EventSubscriber;
 
 use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
 use Drupal\localgov_microsites_group\ContentTypeHelperInterface;
@@ -29,9 +28,11 @@ class EventsListingCheckEventSubscriber implements EventSubscriberInterface {
   /**
    * Returns an EventsListingCheckEventSubscriber instance.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
-   * @param \Drupal\localgov_microsites_group\GroupPermissionsHelperInterface $content_type_helper
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
+   *   The entity repository interface.
+   * @param \Drupal\domain\DomainNegotiatorInterface $domain_negotiator
+   *   The domain negotiator interface.
+   * @param \Drupal\localgov_microsites_group\ContentTypeHelperInterface $content_type_helper
    *   The group content type helper.
    */
   public function __construct(EntityRepositoryInterface $entity_repository, DomainNegotiatorInterface $domain_negotiator, ContentTypeHelperInterface $content_type_helper) {

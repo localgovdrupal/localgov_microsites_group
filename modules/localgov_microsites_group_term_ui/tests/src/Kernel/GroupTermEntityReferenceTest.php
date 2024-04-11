@@ -18,7 +18,7 @@ class GroupTermEntityReferenceTest extends GroupKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'localgov_microsites_group_term_ui',
     'localgov_microsites_group_term_ui_test',
     'domain',

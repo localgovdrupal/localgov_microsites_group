@@ -2,13 +2,15 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
-use Drupal\Tests\group\Kernel\GroupKernelTestBase;
-use Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm;
 use Drupal\group\PermissionScopeInterface;
+use Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm;
+use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\user\RoleInterface;
 
 /**
- * \Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm::access
+ * Test access to settings form.
+ *
+ * \Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm::access.
  *
  * @group localgov_microsites_group
  */
@@ -31,7 +33,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'domain',
     'group_sites',
     'localgov_microsites_group',
@@ -49,6 +51,9 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
     $this->group = $this->createGroup(['type' => 'foo']);
   }
 
+  /**
+   * Test the access form with anonymous, member and admin.
+   */
   public function testFormAccess() {
     $form = new DomainGroupSettingsForm($this->container->get('plugin.manager.domain_group_settings'));
 

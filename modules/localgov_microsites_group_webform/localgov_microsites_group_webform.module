@@ -52,7 +52,7 @@ function localgov_microsites_group_webform_entity_insert($entity) {
   if ($entity_type == 'webform_submission') {
 
     // Find the active group.
-    $group_id = \Drupal::service('domain_group_resolver')->getActiveDomainGroupId();
+    $group_id = \Drupal::service('group_context_domain')->getActiveDomainGroupId();
 
     // If we can't find it with the domain_group_resolver, try with the url.
     // @todo check if this is actually necessary.
