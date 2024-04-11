@@ -21,7 +21,7 @@ class UserRoleTest extends GroupKernelTestBase {
     'gnode',
     'group',
     'group_content_menu',
-    'group_permissions',
+    'group_sites',
     'image',
     'media',
     'media_library',

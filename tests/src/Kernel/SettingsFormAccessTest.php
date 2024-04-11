@@ -33,6 +33,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
    */
   public static $modules = [
     'domain',
+    'group_sites',
     'localgov_microsites_group',
     'path_alias',
     'replicate',
@@ -43,7 +44,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installConfig(['user']);
+    $this->installConfig(['user', 'group_sites']);
     $this->groupType = $this->createGroupType(['id' => 'foo', 'creator_membership' => FALSE]);
     $this->group = $this->createGroup(['type' => 'foo']);
   }
