@@ -37,7 +37,7 @@ class SiteAdminMode implements EventSubscriberInterface {
    *   The event.
    */
   public function fixAdminMode(RequestEvent $event) {
-    if ($this->domainNegotiator->getActiveDomain()->isDefault()) {
+    if ($this->domainNegotiator->getActiveDomain()?->isDefault()) {
       $this->adminMode->setAdminModeOverride(TRUE);
     }
   }
