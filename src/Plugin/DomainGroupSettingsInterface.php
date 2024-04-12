@@ -32,7 +32,7 @@ interface DomainGroupSettingsInterface extends PluginInspectionInterface {
    *
    * @param \Drupal\group\Entity\GroupInterface $group
    *   The group for the domain.
-   * @param \Drupal\Core\Session\AccountInterface
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   The account to check access for.
    *
    * @return Drupal\Core\Access\AccessResultInterface

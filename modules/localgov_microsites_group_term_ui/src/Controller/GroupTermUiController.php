@@ -45,7 +45,7 @@ class GroupTermUiController extends ControllerBase {
    *
    * @var \Drupal\localgov_microsites_group\ContentTypeHelperInterface
    */
- protected $contentTypeHelper;
+  protected $contentTypeHelper;
 
   /**
    * Constructs a new GroupNodeController.
@@ -121,8 +121,6 @@ class GroupTermUiController extends ControllerBase {
   /**
    * Check access to create term in group.
    *
-   * @see GroupRelationshipCreateEntityAccessCheck::access()
-   *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
    * @param \Drupal\group\Entity\GroupInterface $group
@@ -132,6 +130,8 @@ class GroupTermUiController extends ControllerBase {
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
+   *
+   * @see GroupRelationshipCreateEntityAccessCheck::access()
    */
   protected function accessCreateGroupTerm(AccountInterface $account, GroupInterface $group, string $plugin_id) {
     $access_handler = $this->pluginManager->getAccessControlHandler($plugin_id);

@@ -5,7 +5,6 @@ namespace Drupal\localgov_microsites_group\EventSubscriber;
 use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\group_sites\GroupSitesAdminModeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -16,11 +15,9 @@ class SiteAdminMode implements EventSubscriberInterface {
 
   /**
    * Constructs a new SiteAdminMode instance.
-   *
    */
   public function __construct(protected DomainNegotiatorInterface $domainNegotiator, protected GroupSitesAdminModeInterface $adminMode) {
   }
-
 
   /**
    * {@inheritdoc}
@@ -37,7 +34,7 @@ class SiteAdminMode implements EventSubscriberInterface {
    *   The event.
    */
   public function fixAdminMode(RequestEvent $event) {
-    if ($this->domainNegotiator->getActiveDomain()->isDefault()) {
+    if ($this->domainNegotiator->getActiveDomain()?->isDefault()) {
       $this->adminMode->setAdminModeOverride(TRUE);
     }
   }

@@ -159,7 +159,7 @@ class EntityAccess extends ProcessorPluginBase {
         $field->addValue($group_relationship->getGroup()->uuid());
       }
     }
- }
+  }
 
   /**
    * {@inheritdoc}

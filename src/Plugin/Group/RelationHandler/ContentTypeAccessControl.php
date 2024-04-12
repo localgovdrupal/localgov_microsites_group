@@ -9,7 +9,6 @@ use Drupal\group\Plugin\Group\RelationHandler\AccessControlInterface;
 use Drupal\group\Plugin\Group\RelationHandler\AccessControlTrait;
 use Drupal\localgov_microsites_group\ContentTypeHelperInterface;
 
-
 /**
  * Checks access for the node relations plugin.
  */
