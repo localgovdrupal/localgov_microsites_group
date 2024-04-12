@@ -49,6 +49,9 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
     $this->installConfig(['user', 'group_sites']);
     $this->groupType = $this->createGroupType(['id' => 'foo', 'creator_membership' => FALSE]);
     $this->group = $this->createGroup(['type' => 'foo']);
+    $this->config('group_sites.settings')
+      ->set('no_site_access_policy', 'group_sites.no_site_access_policy.do_nothing')
+      ->save();
   }
 
   /**
