@@ -75,7 +75,7 @@ function localgov_microsites_group_term_ui_form_alter(&$form, FormStateInterface
   if (isset($form['relations']['parent']['#options'])) {
 
     // Find group.
-    $group = localgov_microsites_get_group_by_context();
+    $group = localgov_microsites_group_get_by_context();
     if (is_null($group)) {
       /** @var \Drupal\group\Entity\Group $group */
       $group = \Drupal::routeMatch()->getParameter('group');

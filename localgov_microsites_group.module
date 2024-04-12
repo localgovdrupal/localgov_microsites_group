@@ -13,7 +13,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
-use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\group\Entity\GroupRelationshipInterface;
 use Drupal\localgov_microsites_group\DomainSettingsHelper;
@@ -141,7 +140,7 @@ function localgov_microsites_group_entity_extra_field_info() {
 function localgov_microsites_group_menu_link_content_presave(MenuLinkContentInterface $entity) {
 
   // Find active group.
-  $group = localgov_microsites_get_group_by_context();
+  $group = localgov_microsites_group_get_by_context();
   if (is_null($group)) {
     $group = \Drupal::request()->attributes->get('group');
   }
@@ -285,7 +284,7 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
     $form_state->setRedirect('system.admin');
   }
   // Login to a domain group.
-  $group = localgov_microsites_get_group_by_context();
+  $group = localgov_microsites_group_get_by_context();
   if ($group) {
     $form_state->setRedirect('entity.group.canonical', ['group' => $group->id()]);
   }
@@ -295,7 +294,7 @@ function localgov_microsites_group_user_login_form_submit($form, FormStateInterf
  * Additional submit handler to associate media with group when in domain group.
  */
 function localgov_microsites_group_media_library_add_form_submit($form, FormStateInterface $form_state) {
-  if (($group = localgov_microsites_get_group_by_context()) &&
+  if (($group = localgov_microsites_group_get_by_context()) &&
     ($added_media = $form_state->get('media'))
   ) {
     \Drupal::service('groupmedia.attach_group')->assignMediaToGroups($added_media, [$group]);
@@ -482,9 +481,12 @@ function localgov_microsites_group_localgov_microsites_roles_default() {
 /**
  * Get current group from the domain context.
  *
- * https://www.drupal.org/project/group_sites/issues/3437912
+ * @see https://www.drupal.org/project/group_sites/issues/3437912
+ *
+ * @return \Drupal\group\Entity\GroupInterface|null
+ *   The group from group_site context if there is one.
  */
-function localgov_microsites_get_group_by_context(): ?GroupInterface {
+function localgov_microsites_group_get_by_context(): ?GroupInterface {
 
   $context_id = \Drupal::service('config.factory')->get('group_sites.settings')->get('context_provider');
   if ($context_id === NULL) {
