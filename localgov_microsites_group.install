@@ -62,7 +62,7 @@ function localgov_microsites_group_update_9004() {
 function localgov_microsites_group_update_9005() {
   $config_manager = \Drupal::service('config.manager');
   assert($config_manager instanceof ConfigManagerInterface);
-  #$config_manager->loadConfigEntityByName('')
+  // $config_manager->loadConfigEntityByName('')
   $dependencies = $config_manager->findConfigEntityDependencies('module', ['domain_group']);
   foreach ($dependencies as $name => $dependency) {
     var_dump($name);

@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\domain\DomainInterface;
 use Drupal\group\Entity\GroupInterface;
 
-
 /**
  * Trait to get the domain from group.
  *
@@ -22,6 +21,9 @@ trait DomainFromGroupTrait {
    */
   protected $entityTypeManager;
 
+  /**
+   * Gets the EntityTypeManagerInterface.
+   */
   protected function getEntityTypeManager(): EntityTypeManagerInterface {
     if (!$this->entityTypeManager) {
       $this->entityTypeManager = \Drupal::service('entity_type.manager');

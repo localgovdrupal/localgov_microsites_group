@@ -6,9 +6,9 @@ use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\localgov_microsites_group\Plugin\DomainGroupSettingsManager;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\Plugin\DomainGroupSettingsManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Domain Group Settings Form.

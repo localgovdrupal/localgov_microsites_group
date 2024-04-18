@@ -50,7 +50,7 @@ class MicrositeDomainAdd extends DomainForm {
     $form = parent::form($form, $form_state);
     // Going back and returning with a stored hostname/id the field will be
     // disabled. We know on creating a new microsite it should always be
-    // enabled.    $form['id']['#disabled'] = FALSE;
+    // enabled.    $form['id']['#disabled'] = FALSE;.
     $wizard_id = $form_state->get('group_wizard_id');
     $store = $this->privateTempStoreFactory->get($wizard_id);
     $store_id = $form_state->get('store_id');
@@ -61,7 +61,7 @@ class MicrositeDomainAdd extends DomainForm {
       '#type' => 'value',
       '#value' => $form['name']['#default_value'],
     ];
-    // and the weight.
+    // And the weight.
     $form['weight'] = [
       '#type' => 'value',
       '#value' => $form['weight']['#default_value'],
@@ -196,7 +196,6 @@ class MicrositeDomainAdd extends DomainForm {
     $form_state->setRedirect('<current>', [], ['query' => $request->query->all()]);
     $request->query->remove('destination');
   }
-
 
   /**
    * Store entity and move to next step.

@@ -25,4 +25,3 @@ domain_group.domain_group_settings_form:
     _admin_route: TRUE
   requirements:
     _custom_access: '\Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm::access'
-
