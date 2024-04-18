@@ -7,8 +7,8 @@ use Drupal\Core\Url;
 use Drupal\domain\DomainInterface;
 use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
+use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\user\Traits\UserCreationTrait;
 
 /**
@@ -95,7 +95,7 @@ class GroupAdminAccessTest extends BrowserTestBase {
     $group2 = $this->groups[2];
 
     // Admin1 can access content on site 1.
-    $group1_domain = $this->getDomainFromGroup($group1 );
+    $group1_domain = $this->getDomainFromGroup($group1);
     $group2_domain = $this->getDomainFromGroup($group2);
     assert($group1_domain instanceof DomainInterface);
     $this->drupalGet($group1_domain->getUrl() . Url::fromRoute('user.login')->toString());
