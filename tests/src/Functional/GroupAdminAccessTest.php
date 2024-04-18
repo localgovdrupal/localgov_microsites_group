@@ -104,20 +104,41 @@ class GroupAdminAccessTest extends BrowserTestBase {
       'pass' => $this->adminUser1->passRaw,
     ], 'Log in');
 
-    // Confirm that adminUser1 can manage nodes on group2.
+    // Confirm that adminUser1 can manage content and entities on group2.
+    $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/edit');
+    $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/nodes');
     $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/domain-settings');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/menus');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/members');
+    $this->assertSession()->statusCodeEquals(200);
 
-    // First login to group2 domain.
+    // First login to group2 domain as adminUser1.
     $this->drupalGet($group2_domain->getUrl() . Url::fromRoute('user.login')->toString());
     $this->submitForm([
       'name' => $this->adminUser1->getAccountName(),
       'pass' => $this->adminUser1->passRaw,
     ], 'Log in');
 
-    // Now confirm that adminUser1 cannot manage nodes on group2.
+    // Now confirm that adminUser1 cannot manage content and settings on group2.
+    $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/edit');
+    $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/nodes');
     $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/domain-settings');
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/menus');
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/members');
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/nodes');
 
   }
 
