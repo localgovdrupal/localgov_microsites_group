@@ -73,8 +73,8 @@ class GroupInvitationAccessTest extends BrowserTestBase {
     $this->createMicrositeGroups([
       'uid' => $this->ownerUser->id(),
     ]);
-    $this->groups[0]->addMember($this->adminUser, ['group_roles' => 'microsite-admin']);
-    $this->groups[0]->addMember($this->memberUser);
+    $this->groups[1]->addMember($this->adminUser, ['group_roles' => 'microsite-admin']);
+    $this->groups[1]->addMember($this->memberUser);
     $this->createMicrositeGroupsDomains($this->groups);
   }
 
@@ -82,7 +82,7 @@ class GroupInvitationAccessTest extends BrowserTestBase {
    * Test content access when unique group access is enabled.
    */
   public function testInvitationPermissions() {
-    $group = $this->groups[0];
+    $group = $this->groups[1];
 
     // Admin can check invitations.
     $this->drupalLogin($this->adminUser);
