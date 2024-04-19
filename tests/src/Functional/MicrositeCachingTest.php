@@ -58,7 +58,7 @@ class MicrositeCachingTest extends BrowserTestBase {
 
     // Create some microsites.
     $this->group = $this->createGroup([
-      'label' => 'group-0',
+      'label' => 'group-1',
       'type' => 'microsite',
     ]);
     $this->domain = \Drupal::entityTypeManager()->getStorage('domain')->create([
