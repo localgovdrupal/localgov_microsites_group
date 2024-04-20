@@ -4,6 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
+        "drupal/antibot": "^2.0",
         "drupal/domain_path": "^1.2",
         "drupal/field_formatter_class": "^1.5",
         "drupal/ginvite": "4.0.0-alpha1",

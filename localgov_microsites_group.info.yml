@@ -10,6 +10,7 @@ dependencies:
   - drupal:path
   - drupal:tour
   # Contrib
+  - antibot:antibot
   - admin_toolbar:admin_toolbar
   - domain:domain
   - domain_path:domain_path
