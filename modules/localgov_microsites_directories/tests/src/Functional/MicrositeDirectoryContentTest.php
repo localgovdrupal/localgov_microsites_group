@@ -62,14 +62,14 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
 
     $this->createMicrositeGroups([], 2);
     $this->createMicrositeGroupsDomains($this->groups);
-    $this->domain1 = $this->getDomainFromGroup($this->groups[0]);
-    $this->domain2 = $this->getDomainFromGroup($this->groups[1]);
+    $this->domain1 = $this->getDomainFromGroup($this->groups[1]);
+    $this->domain2 = $this->getDomainFromGroup($this->groups[2]);
 
     // Create some directory content.
-    $this->channel1 = $this->createDirectoryChannel($this->groups[0]);
-    $this->pages1 = $this->createDirectoryPages($this->channel1, $this->groups[0], 2);
-    $this->channel2 = $this->createDirectoryChannel($this->groups[1]);
-    $this->pages2 = $this->createDirectoryPages($this->channel2, $this->groups[1], 2);
+    $this->channel1 = $this->createDirectoryChannel($this->groups[1]);
+    $this->pages1 = $this->createDirectoryPages($this->channel1, $this->groups[1], 2);
+    $this->channel2 = $this->createDirectoryChannel($this->groups[2]);
+    $this->pages2 = $this->createDirectoryPages($this->channel2, $this->groups[2], 2);
 
     // Index directory content.
     $index = Index::load('localgov_directories_index_default');
