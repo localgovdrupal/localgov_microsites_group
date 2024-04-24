@@ -60,8 +60,8 @@ class ModuleSettingsFormTest extends BrowserTestBase {
     $this->createMicrositeGroups([
       'uid' => $this->ownerUser->id(),
     ]);
-    $this->groups[0]->addMember($this->adminUser, ['group_roles' => 'microsite-admin']);
-    $this->groups[0]->addMember($this->memberUser);
+    $this->groups[1]->addMember($this->adminUser, ['group_roles' => 'microsite-admin']);
+    $this->groups[1]->addMember($this->memberUser);
     $this->createMicrositeGroupsDomains($this->groups);
   }
 
@@ -69,7 +69,7 @@ class ModuleSettingsFormTest extends BrowserTestBase {
    * Test group domain settings form.
    */
   public function testDomainGroupForm() {
-    $group = $this->groups[0];
+    $group = $this->groups[1];
     // Going to domain group settings form.
     $this->drupalLogin($this->adminUser);
     \Drupal::service('group_sites.admin_mode')->setAdminMode(TRUE);
@@ -105,7 +105,7 @@ class ModuleSettingsFormTest extends BrowserTestBase {
    * Test access to group management pages.
    */
   public function testGroupManagementAccess() {
-    $group = $this->groups[0];
+    $group = $this->groups[1];
 
     // Test admin access.
     $this->drupalLogin($this->adminUser);

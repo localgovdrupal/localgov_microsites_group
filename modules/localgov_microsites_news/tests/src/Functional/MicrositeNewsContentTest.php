@@ -61,14 +61,14 @@ class MicrositeNewsContentTest extends BrowserTestBase {
 
     $this->createMicrositeGroups([], 2);
     $this->createMicrositeGroupsDomains($this->groups);
-    $this->domain1 = $this->getDomainFromGroup($this->groups[0]);
-    $this->domain2 = $this->getDomainFromGroup($this->groups[1]);
+    $this->domain1 = $this->getDomainFromGroup($this->groups[1]);
+    $this->domain2 = $this->getDomainFromGroup($this->groups[2]);
 
     // Create some directory content.
-    $this->newsroom1 = $this->createNewsroom($this->groups[0]);
-    $this->article1 = $this->createNewsArticles($this->newsroom1, $this->groups[0], 2);
-    $this->newsroom2 = $this->createNewsroom($this->groups[1]);
-    $this->article2 = $this->createNewsArticles($this->newsroom2, $this->groups[1], 2);
+    $this->newsroom1 = $this->createNewsroom($this->groups[1]);
+    $this->article1 = $this->createNewsArticles($this->newsroom1, $this->groups[1], 2);
+    $this->newsroom2 = $this->createNewsroom($this->groups[2]);
+    $this->article2 = $this->createNewsArticles($this->newsroom2, $this->groups[2], 2);
 
     // Index directory content.
     $index = Index::load('localgov_news');
