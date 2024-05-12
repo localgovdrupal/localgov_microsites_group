@@ -5,7 +5,6 @@
  * LocalGov Microsites Group Webform module file.
  */
 
-use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\group\Entity\Storage\GroupRelationshipTypeStorageInterface;
 use Drupal\localgov_microsites_group\RolesHelper;
