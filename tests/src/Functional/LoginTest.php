@@ -17,6 +17,7 @@ use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 class LoginTest extends BrowserTestBase {
 
   use InitializeGroupsTrait;
+  use LoginOutTrait;
   use GroupCreationTrait, DomainFromGroupTrait {
     GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
   }
@@ -92,6 +93,19 @@ class LoginTest extends BrowserTestBase {
       'pass' => $this->testUser->passRaw,
     ], 'Log in');
     $this->assertSession()->addressEquals(Url::fromRoute('entity.group.canonical', ['group' => 1]));
+  }
+
+  /**
+   * Isolated test to check login / out trait.
+   */
+  public function testLoginOutTrait() {
+    $domain1 = $this->getDomainFromGroup($this->groups[1]);
+    $domain2 = $this->getDomainFromGroup($this->groups[2]);
+
+    $this->micrositeDomainLogin($domain1, $this->testUser);
+    $this->micrositeDomainLogin($domain2, $this->testUser);
+    $this->micrositeDomainLogout($domain1);
+    $this->assertTrue($this->micrositeDomainIsLoggedIn($domain2, $this->testUser));
   }
 
 }

@@ -18,11 +18,13 @@ trait LoginOutTrait {
 
   /**
    * Array of logged in sessions per Domain ID.
+   *
+   * @var array
    */
   protected $micrositeDomainLoggedIn = [];
 
   /**
-   * Log an account into a microsite domanin.
+   * Log an account into a microsite domain.
    *
    * @param \Drupal\domain\DomainInterface $domain
    *   The domain to log into.
@@ -50,18 +52,30 @@ trait LoginOutTrait {
     $this->micrositeDomainLoggedIn[$domain->id()] = $account;
   }
 
-  public function micrositeDomainLogout($domain) {
-    // @TODO FIX ME!
-    /*    $assert_session = $this->assertSession();
+  /**
+   * Log out of a microsite domain.
+   *
+   * @param \Drupal\domain\DomainInterface $domain
+   *   The domain to log out of.
+   */
+  protected function micrositeDomainLogout($domain): void {
+    $assert_session = $this->assertSession();
     $destination = Url::fromRoute('user.page')->toString();
-    $this->drupalGet($domain->getUrl() . Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]])->toString());
-    drupal_flush_all_caches();
-    $this->drupalGet($domain->getUrl() . $destination);
+    $this->drupalGet(
+      rtrim($domain->getUrl(), '/') .
+      Url::fromRoute(
+          'user.logout',
+          [],
+          ['query' => ['destination' => $destination]]
+        )->toString()
+    );
     $assert_session->fieldExists('name');
     $assert_session->fieldExists('pass');
-*/
-    // @see BrowserTestBase::drupalUserIsLoggedIn()
-    unset($this->loggedInUser[$domain->id()]->micrositeSessions[$domain->id()]);
+
+    $account = $this->micrositeDomainLoggedIn[$domain->id()] ?? NULL;
+    if ($account) {
+      unset($account->micrositeSessions[$domain->id()]);
+    }
     unset($this->micrositeDomainLoggedIn[$domain->id()]);
   }
 
