@@ -465,6 +465,16 @@ function localgov_microsites_group_toolbar() {
 }
 
 /**
+ * Implements hook_toolbar_alter().
+ */
+function localgov_microsites_group_toolbar_alter(&$items) {
+  // The control site access provider gives admin mode there.
+  // Decide to also hide from microsites, so the control site is the admin site
+  // with our custom permissions.
+  unset($items['group_sites']);
+}
+
+/**
  * Implements hook_localgov_microsites_roles_default().
  */
 function localgov_microsites_group_localgov_microsites_roles_default() {
