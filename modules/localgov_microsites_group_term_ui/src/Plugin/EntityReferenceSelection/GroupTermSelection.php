@@ -10,7 +10,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\group\Entity\GroupInterface;
-use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
+use Drupal\group_context_domain\GroupFromDomainContextTrait;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;
 use Symfony\Component\DependencyInjection\ContainerInterface;

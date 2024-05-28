@@ -4,7 +4,7 @@ namespace Drupal\localgov_microsites_events\EventSubscriber;
 
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\domain\DomainNegotiatorInterface;
-use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
+use Drupal\group_context_domain\GroupFromDomainContextTrait;
 use Drupal\localgov_microsites_group\ContentTypeHelperInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
