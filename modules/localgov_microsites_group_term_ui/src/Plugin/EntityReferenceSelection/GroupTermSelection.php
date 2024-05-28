@@ -105,7 +105,7 @@ class GroupTermSelection extends TermSelection {
    * Copied from trait as currently DefaultSelection::enityRepository isn't
    * type hinted, but GroupFromDomainContextTrait has the property hinted.
    *
-   * @see GroupFromDomainContextTrait.
+   * @see GroupFromDomainContextTrait
    *
    * @return \Drupal\group\Entity\GroupInterface|null
    *   A group entity if one could be found, NULL otherwise.
@@ -118,6 +118,5 @@ class GroupTermSelection extends TermSelection {
     }
     return NULL;
   }
-
 
 }
