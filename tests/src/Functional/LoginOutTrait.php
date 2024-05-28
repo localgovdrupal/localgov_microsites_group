@@ -68,7 +68,7 @@ trait LoginOutTrait {
     );
     // The csrf token isn't valid.
     // @todo investigate why: domain related?
-    if ($button = $this->assertSession()->buttonExists(t('Log out'))) {
+    if ($button = $this->assertSession()->buttonExists('Log out')) {
       $button->click();
     }
     // Check visiting the user page now redirects to login.
