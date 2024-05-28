@@ -60,15 +60,19 @@ trait LoginOutTrait {
    */
   protected function micrositeDomainLogout($domain): void {
     $assert_session = $this->assertSession();
-    $destination = Url::fromRoute('user.page')->toString();
     $this->drupalGet(
       rtrim($domain->getUrl(), '/') .
       Url::fromRoute(
           'user.logout',
-          [],
-          ['query' => ['destination' => $destination]]
         )->toString()
     );
+    // The csrf token isn't valid.
+    // @todo investigate why: domain related?
+    if ($button = $this->assertSession()->buttonExists(t('Log out'))) {
+      $button->click();
+    }
+    // Check visiting the user page now redirects to login.
+    $this->drupalGet(rtrim($domain->getUrl(), '/') . Url::fromRoute('user.page')->toString());
     $assert_session->fieldExists('name');
     $assert_session->fieldExists('pass');
 
