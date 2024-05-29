@@ -38,7 +38,7 @@ trait InitializeGroupsTrait {
    *   Groups generated also assigned to $this->groups.
    */
   public function createMicrositeGroups(array $settings = [], int $count = 5) {
-    for ($i = 0; $i < $count; $i++) {
+    for ($i = 1; $i <= $count; $i++) {
       $group = Group::create($settings + [
         'type' => 'microsite',
         'label' => $this->randomString(),

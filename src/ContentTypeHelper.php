@@ -17,9 +17,11 @@ class ContentTypeHelper implements ContentTypeHelperInterface {
   /**
    * Constructs a GroupPermissionsHelper instance.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler.
+   * @param \Drupal\group\Plugin\Group\Relation\GroupRelationTypeManagerInterface $relationPluginManager
    *   The module handler.
    */
   public function __construct(protected EntityTypeManagerInterface $entityTypeManager, protected ModuleHandlerInterface $moduleHandler, protected GroupRelationTypeManagerInterface $relationPluginManager) {
@@ -31,7 +33,7 @@ class ContentTypeHelper implements ContentTypeHelperInterface {
   public function modulesList(GroupInterface $group): array {
     static $modules = [];
 
-    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$modules, $group) {
+    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$modules) {
       $modules[$module] = self::ENABLED;
     });
     if ($group->hasField('lgms_modules_disabled')) {
@@ -96,7 +98,7 @@ class ContentTypeHelper implements ContentTypeHelperInterface {
     }
     // All types controlled by modules that can be disabled.
     if (empty($all_content_types)) {
-      $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_content_types, $group) {
+      $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use (&$all_content_types) {
         $permissions = $hook()['group'][RolesHelper::GROUP_ADMIN_ROLE] ?? [];
         foreach ($permissions as $permission) {
           $matches = [];

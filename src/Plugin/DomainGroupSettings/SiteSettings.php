@@ -2,27 +2,22 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\domain\DomainStorageInterface;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
-use Drupal\localgov_microsites_group\Plugin\DomainGroupSettingsBase;
-use Drupal\group\Entity\GroupInterface;
-use Drupal\domain\DomainValidatorInterface;
-use Drupal\domain\DomainNegotiatorInterface;
-use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\domain\Entity\Domain;
-use Drupal\path_alias\AliasManagerInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\domain\DomainInterface;
 use Drupal\group\Access\GroupAccessResult;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
+use Drupal\localgov_microsites_group\Plugin\DomainGroupSettingsBase;
+use Drupal\path_alias\AliasManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides options for group domain.
@@ -216,7 +211,7 @@ class SiteSettings extends DomainGroupSettingsBase implements ContainerFactoryPl
     if (!$form_state->isValueEmpty('site_404') && !$this->pathValidator->isValid($form_state->getValue('site_404'))) {
       $form_state->setErrorByName('site_404', $this->t("The path '%path' is either invalid or you do not have access to it.", ['%path' => $form_state->getValue('site_404')]));
     }
-    // Validate homepage
+    // Validate homepage.
     if (!$form_state->isValueEmpty('site_frontpage') && !$this->pathValidator->isValid($form_state->getValue('site_frontpage'))) {
       $form_state->setErrorByName('site_frontpage', $this->t("The path '%path' is either invalid or you do not have access to it.", ['%path' => $form_state->getValue('site_frontpage')]));
     }
@@ -238,7 +233,7 @@ class SiteSettings extends DomainGroupSettingsBase implements ContainerFactoryPl
       'site_mail' => 'mail',
       'site_frontpage' => 'page.front',
       'site_403' => 'page.403',
-      'site_404' => 'page.404'
+      'site_404' => 'page.404',
     ];
     foreach ($fields as $field_name => $config_key) {
       $value = $form_state->getValue($field_name);

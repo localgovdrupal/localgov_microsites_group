@@ -21,7 +21,7 @@ dependencies:
   - groupmedia:groupmedia
   - groupmedia_paragraphs:groupmedia_paragraphs
   - group_sites:group_sites
-  - group_context_domain
+  - group_context_domain:group_context_domain
   - group_content_menu:group_content_menu
   - layout_paragraphs:layout_paragraphs_permissions
   - media_library:media_library

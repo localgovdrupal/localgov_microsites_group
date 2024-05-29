@@ -9,14 +9,17 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\domain\DomainInterface;
 use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\group\Context\GroupRouteContextTrait;
-use Drupal\group\Entity\GroupRelationshipInterface;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\group\Entity\GroupRelationshipInterface;
 use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
 
 /**
  * Find Group for Domain.
  *
- * @deprecated
+ * @deprecated in localgov_microsites_group:4.0.0-alpha1 and is removed from
+ * localgov_microsites_group:5.0.0.
+ * Use \Drupal\group_context_domain\Context\GroupFromDomainContext.
+ * @see https://www.drupal.org/project/group_sites/issues/3402181
  */
 class DomainGroupResolver implements DomainGroupResolverInterface {
 
@@ -48,6 +51,8 @@ class DomainGroupResolver implements DomainGroupResolverInterface {
    *   Domain negotatior service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $current_route_match
    *   Current route match service.
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
+   *   Current entity repository interface.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, DomainNegotiatorInterface $domain_negotiator, RouteMatchInterface $current_route_match, EntityRepositoryInterface $entity_repository) {
     $this->entityTypeManager = $entity_type_manager;

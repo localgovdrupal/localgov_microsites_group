@@ -62,13 +62,12 @@ class MicrositeEventContentTest extends BrowserTestBase {
 
     $this->createMicrositeGroups([], 2);
     $this->createMicrositeGroupsDomains($this->groups);
-    $domain_storage = \Drupal::entityTypeManager()->getStorage('domain');
-    $this->domain1 = $this->getDomainFromGroup($this->groups[0]);
-    $this->domain2 = $this->getDomainFromGroup($this->groups[1]);
+    $this->domain1 = $this->getDomainFromGroup($this->groups[1]);
+    $this->domain2 = $this->getDomainFromGroup($this->groups[2]);
 
     // Create some content.
-    $this->pages1 = $this->createEvents($this->groups[0], 2);
-    $this->pages2 = $this->createEvents($this->groups[1], 2);
+    $this->pages1 = $this->createEvents($this->groups[1], 2);
+    $this->pages2 = $this->createEvents($this->groups[2], 2);
 
     // Index events.
     $index = Index::load('localgov_events');
