@@ -255,9 +255,12 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
       'localgov_microsites_events' => [
         'paths' => [
           '/content/create/group_node%3Alocalgov_event',
-          '/taxonomy/localgov_event_price',
-          '/taxonomy/localgov_event_category',
-          '/taxonomy/localgov_event_locality',
+          // The listings pages (without /add) are available even when there is
+          // no access.
+          // https://github.com/localgovdrupal/localgov_microsites_group/issues/475
+          '/taxonomy/localgov_event_price/add',
+          '/taxonomy/localgov_event_category/add',
+          '/taxonomy/localgov_event_locality/add',
         ],
         'status' => 403,
       ],
@@ -292,8 +295,8 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
       $modules[$module_name]['status'] = 403;
     }
 
-    reset($modules);
-    do {
+    $next_module = reset($modules);
+    while (TRUE) {
       // Check present permissions.
       foreach ($modules as $check) {
         foreach ($check['paths'] as $path) {
@@ -303,17 +306,19 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
       }
 
       // Enable next module.
-      $next_module = next($modules);
-      if ($next_module) {
-        $module_name = key($modules);
-        $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/domain-settings');
-        $page = $this->getSession()->getPage();
-        $events_button = $page->findButton($module_name);
-        $this->assertEquals('Enable', $events_button->getValue());
-        $events_button->click();
-        $modules[$module_name]['status'] = 403;
+      if (!$next_module) {
+        break;
       }
-    } while ($next_module);
+      $module_name = key($modules);
+      $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/domain-settings');
+      $page = $this->getSession()->getPage();
+      $events_button = $page->findButton($module_name);
+      $this->assertEquals('Enable', $events_button->getValue());
+      $events_button->click();
+      $modules[$module_name]['status'] = 200;
+
+      $next_module = next($modules);
+    }
   }
 
 }
