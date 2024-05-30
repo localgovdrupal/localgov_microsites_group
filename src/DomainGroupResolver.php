@@ -11,7 +11,7 @@ use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\group\Context\GroupRouteContextTrait;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\group\Entity\GroupRelationshipInterface;
-use Drupal\group_context_domain\Context\GroupFromDomainContextTrait;
+use Drupal\group_context_domain\GroupFromDomainContextTrait;
 
 /**
  * Find Group for Domain.
