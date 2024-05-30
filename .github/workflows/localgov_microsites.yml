@@ -24,7 +24,7 @@ jobs:
         localgov-version:
           - '4.x'
         drupal-version:
-          - '~10.0'
+          - '~10.3'
         php-version:
           - '8.1'
           - '8.2'
@@ -108,7 +108,7 @@ jobs:
         localgov-version:
           - '4.x'
         drupal-version:
-          - '~10.0'
+          - '~10.3'
         php-version:
           - '8.1'
           - '8.2'
@@ -144,7 +144,7 @@ jobs:
         localgov-version:
           - '4.x'
         drupal-version:
-          - '~10.0'
+          - '~10.3'
         php-version:
           - '8.1'
           - '8.2'
@@ -179,7 +179,7 @@ jobs:
         localgov-version:
           - '4.x'
         drupal-version:
-          - '~10.0'
+          - '~10.3'
         php-version:
           - '8.1'
           - '8.2'
