@@ -3,8 +3,10 @@
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Test\AssertMailTrait;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\domain\DomainInterface;
 use Drupal\localgov_microsites_group\DomainFromGroupTrait;
+use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
@@ -94,20 +96,23 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
       'uid' => $this->ownerUser->id(),
     ]);
     $this->groups[1]->addMember($this->adminUser1, ['group_roles' => 'microsite-admin']);
+    $this->groups[1]->addMember($this->memberUser1);
     $this->groups[2]->addMember($this->adminUser1, ['group_roles' => 'microsite-admin']);
     $this->groups[2]->addMember($this->adminUser2, ['group_roles' => 'microsite-admin']);
+    $this->groups[2]->addMember($this->memberUser2);
 
     $this->createMicrositeGroupsDomains($this->groups);
   }
 
   /**
-   * Test access to disabled module content types accross users and domains.
+   * Test access to disabled module content types across users and domains.
    *
    * Check with different users, and different domains, confirming caching
    * and checking any unintential cross domain effects.
    */
-  public function testUsersDomainsContentTypeAccess() {
+  public function testUsersDomainsAdminContentTypeAccess() {
 
+    // Setup
     $modules = [
       'localgov_microsites_events' => [
         'content_types' => ['localgov_event'],
@@ -130,7 +135,6 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         'status' => 200,
       ],
     ];
-
     $group1 = $this->groups[1];
     $group2 = $this->groups[2];
     $group1_domain = $this->getDomainFromGroup($group1);
@@ -138,9 +142,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
     assert($group1_domain instanceof DomainInterface);
     assert($group2_domain instanceof DomainInterface);
 
+    // Check admin paths.
     // Group 2: Admin user.
     $this->micrositeDomainLogin($group2_domain, $this->adminUser1);
-
     foreach ($modules as $module_name => $module_info) {
       // Group 1: Admin user.
       $this->micrositeDomainLogin($group1_domain, $this->adminUser1);
@@ -191,8 +195,7 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
           #$this->assertSession()->statusCodeEquals(200);
         }
       }
-  /*
- * @todo
+
       $this->micrositeDomainLogout($group1_domain);
       $this->micrositeDomainLogin($group1_domain, $this->memberUser1);
       // Confirm the new permissions.
@@ -207,8 +210,90 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         }
       }
       $this->micrositeDomainLogout($group1_domain);
-*/
     }
+  }
+
+  /**
+   * Test access to content in disabled content types.
+   */
+  public function testContentContentTypeAccess() {
+    $group1 = $this->groups[1];
+    $group1_domain = $this->getDomainFromGroup($group1);
+    assert($group1_domain instanceof DomainInterface);
+
+    // Check a directory and an event post.
+    $this->micrositeDomainLogin($group1_domain, $this->adminUser1);
+    $directory = $this->createNode([
+      'type' => 'localgov_directory',
+      'title' => $this->randomMachineName(12),
+      'localgov_directory_channel_types' => [
+        'target_id' => 'localgov_directories_page',
+      ],
+      'localgov_directory_facets_enable' => [],
+      'status' => NodeInterface::PUBLISHED,
+      'uid' => $this->adminUser1->id(),
+    ]);
+    $directory->save();
+    $group1->addRelationship($directory, 'group_node:localgov_directory');
+    $event = $this->createNode([
+      'type' => 'localgov_event',
+      'title' => $this->randomMachineName(12),
+      'localgov_event_date' => [
+        'value' => gmdate(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, time() + 3600),
+        'end_value' => gmdate(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, time() + 7200),
+        'rrule' => NULL,
+        'timezone' => 'Europe/London',
+      ],
+      'status' => NodeInterface::PUBLISHED,
+      'uid' => $this->adminUser1->id(),
+    ]);
+    $event->save();
+    $group1->addRelationship($event, 'group_node:localgov_event');
+
+    $this->container
+      ->get('localgov_microsites_group.content_type_helper')
+      ->moduleDisable('localgov_microsites_events', $group1);
+    $this->container
+      ->get('localgov_microsites_group.content_type_helper')
+      ->moduleDisable('localgov_microsites_directories', $group1);
+
+    // No access.
+    // Group 1: Admin user.
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl('edit-form')->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    // Anon
+    $this->micrositeDomainLogout($group1_domain);
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+
+    // Enable one for access.
+    $this->container
+      ->get('localgov_microsites_group.content_type_helper')
+      ->moduleEnable('localgov_microsites_directories', $group1);
+
+    // Access to directories not events.
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    // Group 1: Admin user.
+    $this->micrositeDomainLogin($group1_domain, $this->adminUser1);
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl('edit-form')->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->toString());
+    $this->assertSession()->statusCodeEquals(403);
   }
 
   /**
