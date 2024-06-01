@@ -17,6 +17,7 @@ use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 class LoginTest extends BrowserTestBase {
 
   use InitializeGroupsTrait;
+  use LoginOutTrait;
   use GroupCreationTrait, DomainFromGroupTrait {
     GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
   }
@@ -92,6 +93,35 @@ class LoginTest extends BrowserTestBase {
       'pass' => $this->testUser->passRaw,
     ], 'Log in');
     $this->assertSession()->addressEquals(Url::fromRoute('entity.group.canonical', ['group' => 1]));
+  }
+
+  /**
+   * Isolated test to check login / out trait.
+   */
+  public function testLoginOutTrait() {
+    // Create test user.
+    $testUser2 = $this->drupalCreateUser([
+      'access group overview',
+    ]);
+
+    $domain1 = $this->getDomainFromGroup($this->groups[1]);
+    $domain2 = $this->getDomainFromGroup($this->groups[2]);
+    $domain3 = $this->getDomainFromGroup($this->groups[3]);
+
+    $this->micrositeDomainLogin($domain1, $this->testUser);
+    $this->micrositeDomainLogin($domain2, $this->testUser);
+    $this->micrositeDomainLogin($domain3, $testUser2);
+
+    $user_page = Url::fromRoute('user.page')->toString();
+    $this->drupalGet($domain1->getUrl() . $user_page);
+    $this->assertSession()->addressEquals('/user/' . $this->testUser->id());
+    $this->drupalGet($domain2->getUrl() . $user_page);
+    $this->assertSession()->addressEquals('/user/' . $this->testUser->id());
+    $this->drupalGet($domain3->getUrl() . $user_page);
+    $this->assertSession()->addressEquals('/user/' . $testUser2->id());
+
+    $this->micrositeDomainLogout($domain1);
+    $this->assertTrue($this->micrositeDomainIsLoggedIn($domain2, $this->testUser));
   }
 
 }
