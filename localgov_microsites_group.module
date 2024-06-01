@@ -55,6 +55,7 @@ function localgov_microsites_group_view_presave(View $view) {
   if ($view->id() == 'group_nodes') {
     $group_node_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_nodes.yml'));
     $displays = $view->get('display');
+    $displays['default'] = $group_node_view['display']['default'];
     $displays['microsite_page'] = $group_node_view['display']['microsite_page'];
     $displays['microsite_dashboard_embed'] = $group_node_view['display']['microsite_dashboard_embed'];
     $view->set('display', $displays);
