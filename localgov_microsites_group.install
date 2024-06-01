@@ -98,3 +98,13 @@ function localgov_microsites_group_update_9008() {
   $group_sites->set('context_provider', '@group_context_domain.group_from_domain_context:group');
   $group_sites->save();
 }
+
+/**
+ * Switch to new custom group sites access handlers.
+ */
+function localgov_microsites_group_update_9009() {
+  $group_sites = \Drupal::configFactory()->getEditable('group_sites.settings');
+  $group_sites->set('no_site_access_policy', 'localgov_microsites_group.control_site_access_policy');
+  $group_sites->set('site_access_policy', 'localgov_microsites_group.microsite_content_types_access_policy');
+  $group_sites->save();
+}
