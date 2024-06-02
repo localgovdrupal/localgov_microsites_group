@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\localgov_microsites_group_webform\Functional;
 
+use Drupal\Core\Url;
+use Drupal\Tests\localgov_microsites_group\Functional\LoginOutTrait;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\DomainFromGroupTrait;
@@ -21,6 +23,7 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
 
   use InitializeGroupsTrait;
   use NodeCreationTrait;
+  use LoginOutTrait;
   use GroupCreationTrait, DomainFromGroupTrait {
     GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
   }
@@ -54,8 +57,9 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
     'localgov_microsites_group_webform',
   ];
 
-  protected $domains;
-  protected $webforms;
+  protected $domains = [];
+  protected $webforms = [];
+  protected $adminUser = [];
 
   /**
    * {@inheritdoc}
@@ -63,10 +67,15 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    $this->createMicrositeGroups([], 2);
+    $this->createMicrositeGroups(['uid' => 1], 2);
     $this->createMicrositeGroupsDomains($this->groups);
     $this->domains[1] = $this->getDomainFromGroup($this->groups[1]);
     $this->domains[2] = $this->getDomainFromGroup($this->groups[2]);
+
+    $this->adminUser[1] = $this->createUser();
+    $this->adminUser[2] = $this->createUser();
+    $this->groups[1]->addMember($this->adminUser[1], ['group_roles' => 'microsite-admin']);
+    $this->groups[2]->addMember($this->adminUser[2], ['group_roles' => 'microsite-admin']);
 
     $this->webforms[1] = $this->createNode([
       'type' => 'localgov_webform',
@@ -81,6 +90,7 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
         'close' => '',
       ],
       'status' => NodeInterface::PUBLISHED,
+      'uid' => $this->adminUser[1]->id(),
     ]);
     $this->webforms[1]->save();
     $this->webforms[2] = $this->createNode([
@@ -96,6 +106,7 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
         'close' => '',
       ],
       'status' => NodeInterface::PUBLISHED,
+      'uid' => $this->adminUser[2]->id(),
     ]);
     $this->webforms[2]->save();
     $this->groups[1]->addRelationship($this->webforms[1], 'group_node:localgov_webform');
@@ -107,6 +118,8 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
    */
   public function testMicrositeNodeWebform() {
     $submissions = [];
+
+    // Check form 1 only on domain 1 and make a submission.
     $this->drupalGet($this->domains[1]->getUrl() . $this->webforms[1]->toUrl()->toString());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->webforms[1]->label());
@@ -120,6 +133,7 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
     $this->drupalGet($this->domains[1]->getUrl() . $this->webforms[2]->toUrl()->toString());
     $this->assertSession()->statusCodeEquals(403);
 
+    // Check form 2 only on domain 2 and make a submission.
     $this->drupalGet($this->domains[2]->getUrl() . $this->webforms[1]->toUrl()->toString());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . $this->webforms[2]->toUrl()->toString());
@@ -131,9 +145,85 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
       'message' => $this->randomString(),
     ];
     $this->submitForm($submissions[2], 'Submit');
+    // Check anon does not have access to the submission.
     $this->assertSession()->pageTextContains($this->webforms[2]->localgov_submission_confirm->value);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.results_submissions', [
+      'node' => $this->webforms[2]->id(),
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission.edit', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.canonical', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.edit_form', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
 
+    // Check admin 1 has access to domain 1 submission.
+    $this->micrositeDomainLogin($this->domains[1], $this->adminUser[1]);
+    $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform.results_submissions', [
+      'node' => $this->webforms[1]->id(),
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform.user.submission', [
+      'node' => $this->webforms[1]->id(),
+      'webform_submission' => 1,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform.user.submission.edit', [
+      'node' => $this->webforms[1]->id(),
+      'webform_submission' => 1,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform_submission.canonical', [
+      'node' => $this->webforms[1]->id(),
+      'webform_submission' => 1,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform_submission.edit_form', [
+      'node' => $this->webforms[1]->id(),
+      'webform_submission' => 1,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(200);
 
+    // Check admin 1 does not have access to domain 2 submission.
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.results_submissions', [
+      'node' => $this->webforms[2]->id(),
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission.edit', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.canonical', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
+    $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.edit_form', [
+      'node' => $this->webforms[2]->id(),
+      'webform_submission' => 2,
+    ])->toString());
+    $this->assertSession()->statusCodeEquals(403);
   }
 
 }
