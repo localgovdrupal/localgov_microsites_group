@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         localgov-version:
-          - 'feature/4.x-drupal-10.3'
+          - '4.x'
         drupal-version:
           - '~10.3'
         php-version:
@@ -57,7 +57,7 @@ jobs:
       - name: Get the latest tagged release for branch version
         run: |
           LATEST_RELEASE=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${GITHUB_REPOSITORY}/git/matching-refs/tags/${GIT_BASE%'.x'} | grep -Po '(?<=refs/tags/)[^"]+' | tail -1)
-          if [ -z $LATEST_RELEASE ]; then LATEST_RELEASE=2.x-dev; fi
+          if [ -z $LATEST_RELEASE ]; then LATEST_RELEASE=4.x-dev; fi
           echo "LATEST_RELEASE=${LATEST_RELEASE}" >> $GITHUB_ENV
 
       - name: Cached workspace
@@ -80,8 +80,9 @@ jobs:
       - name: Create LocalGov Microsites project
         run: |
           composer create-project --stability dev --no-install localgovdrupal/localgov_microsites_project ./html "${{ matrix.localgov-version }}"
+          sed -i 's/\@stable//' ./html/composer.json
           composer --working-dir=./html require --no-install localgovdrupal/localgov_microsites:${{ matrix.localgov-version }}-dev
-          composer --working-dir=./html require --no-install drupal/core-recommended:${{ matrix.drupal-version }} drupal/core-composer-scaffold:${{ matrix.drupal-version }} drupal/core-project-message:${{ matrix.drupal-version }} drupal/core-dev:${{ matrix.drupal-version }}
+          composer --working-dir=./html update --no-install drupal/core-recommended:${{ matrix.drupal-version }} drupal/core-composer-scaffold:${{ matrix.drupal-version }} drupal/core-project-message:${{ matrix.drupal-version }} drupal/core-dev:${{ matrix.drupal-version }}
           composer --working-dir=./html install
 
       - name: Obtain the test target using Composer
@@ -106,7 +107,7 @@ jobs:
       fail-fast: false
       matrix:
         localgov-version:
-          - 'feature/4.x-drupal-10.3'
+          - '4.x'
         drupal-version:
           - '~10.3'
         php-version:
@@ -142,7 +143,7 @@ jobs:
       fail-fast: false
       matrix:
         localgov-version:
-          - 'feature/4.x-drupal-10.3'
+          - '4.x'
         drupal-version:
           - '~10.3'
         php-version:
@@ -177,7 +178,7 @@ jobs:
       fail-fast: false
       matrix:
         localgov-version:
-          - 'feature/4.x-drupal-10.3'
+          - '4.x'
         drupal-version:
           - '~10.3'
         php-version:
