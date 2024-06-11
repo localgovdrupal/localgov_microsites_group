@@ -9,6 +9,7 @@ use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -424,6 +425,39 @@ function localgov_microsites_group_views_query_substitutions(ViewExecutable $vie
     return [
       '***GINVITE_USER_EMAIL***' => User::load($view->argument['entity_id']->getValue())->getEmail(),
     ];
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function localgov_microsites_group_entity_insert(EntityInterface $entity) {
+  // We can safely skip any route that is creating a group_relationship.
+  $route = \Drupal::routeMatch();
+  if (strpos($route->getRouteName(), 'entity.group_relationship') !== FALSE) {
+    return;
+  }
+  if (in_array($route->getRouteName(), ['localgov_microsites_group_term_ui.taxononmy.add'])) {
+    return;
+  }
+
+  // Working on one plugin per content type. If there is more than one
+  // exceptions will have to be added.
+  $plugin_id = '';
+  if ($group = localgov_microsites_group_get_by_context()) {
+    foreach ($group->getGroupType()->getInstalledPlugins() as $plugin) {
+      if ($plugin->getRelationType()->getEntityTypeId() == $entity->getEntityTypeId() &&
+        $plugin->getRelationType()->getEntityBundle() == $entity->bundle()) {
+        $plugin_id = $plugin->getRelationTypeId();
+        break;
+      }
+    }
+  }
+
+  // If it's in on a domain in a group, and not on a group_relationship path
+  // add it to the group.
+  if ($plugin_id !== '') {
+    $group->addRelationship($entity, $plugin_id);
   }
 }
 
