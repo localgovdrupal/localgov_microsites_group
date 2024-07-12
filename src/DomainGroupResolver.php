@@ -29,20 +29,6 @@ class DomainGroupResolver implements DomainGroupResolverInterface {
   use GroupFromDomainContextTrait;
 
   /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
-  /**
-   * The domain negotiator service.
-   *
-   * @var \Drupal\Domain\DomainNegotiatorInterface
-   */
-  protected $domainNegotiator;
-
-  /**
    * DomainGroupHelper constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -54,7 +40,7 @@ class DomainGroupResolver implements DomainGroupResolverInterface {
    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
    *   Current entity repository interface.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, DomainNegotiatorInterface $domain_negotiator, RouteMatchInterface $current_route_match, EntityRepositoryInterface $entity_repository) {
+  public function __construct(protected EntityTypeManagerInterface $entity_type_manager, protected DomainNegotiatorInterface $domain_negotiator, protected RouteMatchInterface $current_route_match, protected EntityRepositoryInterface $entity_repository) {
     $this->entityTypeManager = $entity_type_manager;
     $this->domainNegotiator = $domain_negotiator;
     $this->currentRouteMatch = $current_route_match;
