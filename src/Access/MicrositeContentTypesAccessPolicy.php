@@ -12,6 +12,9 @@ use Drupal\group\PermissionScopeInterface;
 use Drupal\group_sites\Access\GroupSitesSiteAccessPolicyInterface;
 use Drupal\group_sites\GroupSitesAdminModeInterface;
 
+/**
+ * Access policy for content types in microsite groups.
+ */
 class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInterface {
 
   use StringTranslationTrait;
@@ -26,7 +29,7 @@ class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInt
    */
   public function __construct(
     protected GroupSitesAdminModeInterface $adminMode,
-    protected ChainPermissionCalculatorInterface $chainCalculator
+    protected ChainPermissionCalculatorInterface $chainCalculator,
   ) {}
 
   /**
@@ -108,7 +111,6 @@ class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInt
   /**
    * Move below to the content type helper service?
    */
-
   private function allModulePermissions(): array {
     $default_permissions = \Drupal::moduleHandler()->invokeAll('localgov_microsites_roles_default');
     if (isset($default_permissions['group'])) {
@@ -117,6 +119,9 @@ class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInt
     return [];
   }
 
+  /**
+   * Enable permissions in the group.
+   */
   private function enabledModulePermissions(GroupInterface $group): array {
     $disabled_modules = [];
     if ($group->hasField('lgms_modules_disabled')) {
@@ -137,4 +142,4 @@ class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInt
     return [];
   }
 
- }
+}

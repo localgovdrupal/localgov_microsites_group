@@ -9,6 +9,9 @@ use Drupal\flexible_permissions\RefinableCalculatedPermissionsInterface;
 use Drupal\group\PermissionScopeInterface;
 use Drupal\group_sites\Access\GroupSitesNoSiteAccessPolicyInterface;
 
+/**
+ * Access policy for control site.
+ */
 class ControlSiteAccessPolicy implements GroupSitesNoSiteAccessPolicyInterface {
 
   use StringTranslationTrait;
