@@ -53,14 +53,22 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
   protected $themeHandler;
 
   /**
+   * The list of available themes.
+   *
+   * @var \Drupal\Core\Extension\ThemeExtensionList
+   */
+  protected $extensionListTheme;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, ThemeHandlerInterface $theme_handler) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, ThemeHandlerInterface $theme_handler, ThemeExtensionList $extension_list_theme) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->configFactory = $config_factory;
     $this->entityTypeManager = $entity_type_manager;
     $this->languageManager = $language_manager;
     $this->themeHandler = $theme_handler;
+    $this->extensionListTheme = $extension_list_theme;
   }
 
   /**
@@ -103,7 +111,7 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
     $site_admin = $site_config->get('admin');
 
     // Get all available themes.
-    $themes = $this->themeHandler->rebuildThemeData();
+    $themes = $this->extensionListTheme->reset()->getList();
     $admin_options = [
       '' => $this->t('No override (:site_admin)',
         [':site_admin' => $themes[$site_admin]->info['name'] ?? '']
