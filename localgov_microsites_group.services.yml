@@ -53,7 +53,7 @@ services:
 
   localgov_microsites_group.microsite_content_types_access_policy:
     class: 'Drupal\localgov_microsites_group\Access\MicrositeContentTypesAccessPolicy'
-    arguments: ['@group_sites.admin_mode', '@flexible_permissions.chain_calculator']
+    arguments: ['@group_sites.admin_mode', '@flexible_permissions.chain_calculator', '@module_handler']
     tags:
       - { name: group_sites_site_access_policy, priority: 10 }
 

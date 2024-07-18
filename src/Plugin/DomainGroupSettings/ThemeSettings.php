@@ -34,8 +34,9 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected ConfigFactoryInterface $configFactory, protected EntityTypeManagerInterface $entityTypeManager, protected LanguageManagerInterface $languageManager, protected ThemeHandlerInterface $themeHandler, protected ThemeExtensionList $extensionListTheme) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected ConfigFactoryInterface $configFactory, EntityTypeManagerInterface $entity_type_manager, protected LanguageManagerInterface $languageManager, protected ThemeHandlerInterface $themeHandler, protected ThemeExtensionList $extensionListTheme) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
