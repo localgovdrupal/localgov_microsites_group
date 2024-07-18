@@ -116,7 +116,7 @@ class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInt
    * Move below to the content type helper service?
    */
   private function allModulePermissions(): array {
-    $default_permissions = $this->moduleHandler()->invokeAll('localgov_microsites_roles_default');
+    $default_permissions = $this->moduleHandler->invokeAll('localgov_microsites_roles_default');
     if (isset($default_permissions['group'])) {
       return array_merge(... array_values($default_permissions['group']));
     }
@@ -134,7 +134,7 @@ class MicrositeContentTypesAccessPolicy implements GroupSitesSiteAccessPolicyInt
     $permissions = [];
 
     // Gather all permissions from modules that are not disabled.
-    $this->moduleHandler()->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use ($disabled_modules, &$permissions) {
+    $this->moduleHandler->invokeAllWith('localgov_microsites_roles_default', function ($hook, $module) use ($disabled_modules, &$permissions) {
       if (!in_array($module, $disabled_modules, TRUE)) {
         $result = $hook();
         $permissions = array_merge_recursive($permissions, $result);
