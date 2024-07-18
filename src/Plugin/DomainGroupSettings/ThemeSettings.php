@@ -32,35 +32,10 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
   use DomainFromGroupTrait;
 
   /**
-   * The config factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The theme handler.
-   *
-   * @var \Drupal\Core\Extension\ThemeHandlerInterface
-   */
-  protected $themeHandler;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, ThemeHandlerInterface $theme_handler) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected ConfigFactoryInterface $configFactory, protected EntityTypeManagerInterface $entityTypeManager, protected LanguageManagerInterface $languageManager, protected ThemeHandlerInterface $themeHandler, protected ThemeExtensionList $extensionListTheme) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->configFactory = $config_factory;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->languageManager = $language_manager;
-    $this->themeHandler = $theme_handler;
   }
 
   /**
@@ -103,7 +78,7 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
     $site_admin = $site_config->get('admin');
 
     // Get all available themes.
-    $themes = $this->themeHandler->rebuildThemeData();
+    $themes = $this->extensionListTheme->reset()->getList();
     $admin_options = [
       '' => $this->t('No override (:site_admin)',
         [':site_admin' => $themes[$site_admin]->info['name'] ?? '']
@@ -185,10 +160,10 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
    * Load, or create, domain config override - for language.
    *
    * @param \Drupal\domain\DomainInterface $domain
-   *   The domain site configuration being overriden.
+   *   The domain site configuration being overridden.
    *
    * @return \Drupal\Core\Config\Config
-   *   Editable configuaration.
+   *   Editable configuration.
    */
   private function loadConfigOverride(DomainInterface $domain) {
     if ($this->languageManager->getConfigOverrideLanguage() == $this->languageManager->getDefaultLanguage()) {
