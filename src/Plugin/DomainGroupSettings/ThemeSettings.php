@@ -50,7 +50,8 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
       $container->get('config.factory'),
       $container->get('entity_type.manager'),
       $container->get('language_manager'),
-      $container->get('theme_handler')
+      $container->get('theme_handler'),
+      $container->get('extension.list.theme'),
     );
   }
 
