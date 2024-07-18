@@ -32,43 +32,10 @@ class ThemeSettings extends DomainGroupSettingsBase implements ContainerFactoryP
   use DomainFromGroupTrait;
 
   /**
-   * The config factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
-   * The language manager.
-   *
-   * @var \Drupal\language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The theme handler.
-   *
-   * @var \Drupal\Core\Extension\ThemeHandlerInterface
-   */
-  protected $themeHandler;
-
-  /**
-   * The list of available themes.
-   *
-   * @var \Drupal\Core\Extension\ThemeExtensionList
-   */
-  protected $extensionListTheme;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, ThemeHandlerInterface $theme_handler, ThemeExtensionList $extension_list_theme) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected ConfigFactoryInterface $config_factory, protected EntityTypeManagerInterface $entity_type_manager, protected LanguageManagerInterface $language_manager, protected ThemeHandlerInterface $theme_handler, protected ThemeExtensionList $extension_list_theme) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->configFactory = $config_factory;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->languageManager = $language_manager;
-    $this->themeHandler = $theme_handler;
-    $this->extensionListTheme = $extension_list_theme;
   }
 
   /**
