@@ -75,6 +75,12 @@ function localgov_microsites_group_view_presave(View $view) {
     $displays['default']['display_options']['query'] = $my_invitations_view['display']['default']['display_options']['query'];
     $view->set('display', $displays);
   }
+  if ($view->id() == 'group_media') {
+    $group_media_view = Yaml::decode(file_get_contents($module_path . '/config/overrides/views.view.group_media.yml'));
+    $displays = $view->get('display');
+    $displays['default'] = $group_media_view['display']['default'];
+    $view->set('display', $displays);
+  }
 }
 
 /**
