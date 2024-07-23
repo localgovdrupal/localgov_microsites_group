@@ -157,17 +157,14 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals($check_content['status']);
-<<<<<<< HEAD
           // @phpstan-ignore-next-line
           #$this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
           // @phpstan-ignore-next-line
           #$this->assertSession()->statusCodeEquals($check_content['status']);
-=======
           // phpcs:ignore
           #$this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
           // phpcs:ignore
           // this->assertSession()->statusCodeEquals($check_content['status']);
->>>>>>> 4.x
         }
       }
 
@@ -184,15 +181,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals($check_content['status']);
-<<<<<<< HEAD
-          // @phpstan-ignore-next-line
-          #$this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
-          // @phpstan-ignore-next-line
-=======
           // phpcs:ignore
           #$this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
           // phpcs:ignore
->>>>>>> 4.x
           #$this->assertSession()->statusCodeEquals($check_content['status']);
         }
       }
@@ -202,15 +193,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals(200);
-<<<<<<< HEAD
-          // @phpstan-ignore-next-line
-          #$this->drupalGet($group2_domain->getUrl() . '/node/add/' . $check_content_type);
-          // @phpstan-ignore-next-line
-=======
           // phpcs:ignore
           #$this->drupalGet($group2_domain->getUrl() . '/node/add/' . $check_content_type);
           // phpcs:ignore
->>>>>>> 4.x
           #$this->assertSession()->statusCodeEquals(200);
         }
       }
@@ -222,15 +207,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals($check_content['status']);
-<<<<<<< HEAD
-          // @phpstan-ignore-next-line
-          #$this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
-          // @phpstan-ignore-next-line
-=======
           // phpcs:ignore
           #$this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
           // phpcs:ignore
->>>>>>> 4.x
           #$this->assertSession()->statusCodeEquals($check_content['status']);
         }
       }
@@ -292,11 +271,8 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->toString());
     $this->assertSession()->statusCodeEquals(403);
-<<<<<<< HEAD
-    // Anon
-=======
+
     // Anon.
->>>>>>> 4.x
     $this->micrositeDomainLogout($group1_domain);
     $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
     $this->assertSession()->statusCodeEquals(403);
@@ -340,11 +316,8 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
       'localgov_microsites_news',
     ]);
 
-<<<<<<< HEAD
     // Create some group content.
 
-=======
->>>>>>> 4.x
     // All modules start disabled.
     // Shared paths will be enabled by the first module, so not tested against
     // the second.
