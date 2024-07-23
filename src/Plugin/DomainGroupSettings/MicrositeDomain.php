@@ -2,6 +2,7 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -157,7 +158,14 @@ class MicrositeDomain extends DomainGroupSettingsBase implements ContainerFactor
           '#theme' => 'item_list',
           '#items' => $errors,
         ];
-        $message = $this->renderer->renderPlain($message);
+        /** @var \Drupal\Core\Render\RendererInterface $renderer */
+        $renderer = $this->renderer;
+        $message = DeprecationHelper::backwardsCompatibleCall(
+          currentVersion: \Drupal::VERSION,
+          deprecatedVersion: '10.3',
+          currentCallable: fn() => $renderer->renderInIsolation($message),
+          deprecatedCallable: fn() => $renderer->renderPlain($message),
+        );
         $form_state->setErrorByName('hostname', $message);
       }
     }

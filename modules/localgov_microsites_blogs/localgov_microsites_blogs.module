@@ -34,14 +34,6 @@ function localgov_microsites_blogs_modules_installed($modules) {
  */
 function localgov_microsites_blogs_localgov_microsites_roles_default() {
   return [
-    'global' => [
-      RolesHelper::MICROSITES_CONTROLLER_ROLE => [
-        'view directory facets',
-      ],
-      RolesHelper::MICROSITES_EDITOR_ROLE => [
-        'view directory facets',
-      ],
-    ],
     'group' => [
       RolesHelper::GROUP_ADMIN_ROLE => [
         'access group_term overview',
