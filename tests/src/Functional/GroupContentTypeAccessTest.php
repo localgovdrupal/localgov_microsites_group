@@ -157,10 +157,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals($check_content['status']);
-          // @phpstan-ignore-next-line
-          // $this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
-          // @phpstan-ignore-next-line
-          // $this->assertSession()->statusCodeEquals($check_content['status']);
+          // Currently, the microsite admin is not allowed to add content via /node/add.
+          $this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
+          $this->assertSession()->statusCodeEquals('403');
         }
       }
 
@@ -177,10 +176,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals($check_content['status']);
-          // @phpstan-ignore-next-line
-          // $this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
-          // @phpstan-ignore-next-line
-          // $this->assertSession()->statusCodeEquals($check_content['status']);
+          // Currently, the microsite admin is not allowed to add content via /node/add.
+          $this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
+          $this->assertSession()->statusCodeEquals('403');
         }
       }
 
@@ -189,10 +187,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals(200);
-          // phpcs:ignore
-          #$this->drupalGet($group2_domain->getUrl() . '/node/add/' . $check_content_type);
-          // phpcs:ignore
-          #$this->assertSession()->statusCodeEquals(200);
+          // Currently, the microsite admin is not allowed to add content via /node/add.
+          $this->drupalGet($group2_domain->getUrl() . '/node/add/' . $check_content_type);
+          $this->assertSession()->statusCodeEquals('403');
         }
       }
 
@@ -203,10 +200,9 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group1_domain->getUrl() . '/group/' . $group1->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals($check_content['status']);
-          // @phpstan-ignore-next-line
-          // $this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
-          // @phpstan-ignore-next-line
-          // $this->assertSession()->statusCodeEquals($check_content['status']);
+          // Currently, the microsite admin is not allowed to add content via /node/add.
+          $this->drupalGet($group1_domain->getUrl() . '/node/add/' . $check_content_type);
+          $this->assertSession()->statusCodeEquals('403');
         }
       }
       $this->micrositeDomainLogout($group1_domain);

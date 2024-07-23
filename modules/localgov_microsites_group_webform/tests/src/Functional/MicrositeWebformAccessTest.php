@@ -3,13 +3,10 @@
 namespace Drupal\Tests\localgov_microsites_group_webform\Functional;
 
 use Drupal\Core\Url;
-use Drupal\Tests\localgov_microsites_group\Functional\LoginOutTrait;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\group\Entity\GroupInterface;
 use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\node\NodeInterface;
-use Drupal\search_api\Entity\Index;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\localgov_microsites_group\Functional\LoginOutTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
@@ -57,8 +54,19 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
     'localgov_microsites_group_webform',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
   protected $domains = [];
+
+  /**
+   * {@inheritdoc}
+   */
   protected $webforms = [];
+
+  /**
+   * {@inheritdoc}
+   */
   protected $adminUser = [];
 
   /**
