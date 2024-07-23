@@ -51,11 +51,16 @@ services:
     tags:
       - { name: event_subscriber }
 
-  localgov_microsites_group.site_admin_mode:
-    class: Drupal\localgov_microsites_group\EventSubscriber\SiteAdminMode
-    arguments: ['@domain.negotiator', '@group_sites.admin_mode']
+  localgov_microsites_group.microsite_content_types_access_policy:
+    class: 'Drupal\localgov_microsites_group\Access\MicrositeContentTypesAccessPolicy'
+    arguments: ['@group_sites.admin_mode', '@flexible_permissions.chain_calculator', '@module_handler']
     tags:
-      - { name: event_subscriber }
+      - { name: group_sites_site_access_policy, priority: 10 }
+
+  localgov_microsites_group.control_site_access_policy:
+    class: 'Drupal\localgov_microsites_group\Access\ControlSiteAccessPolicy'
+    tags:
+      - { name: group_sites_no_site_access_policy, priority: 10 }
 
   domain_group_resolver:
     class: Drupal\localgov_microsites_group\DomainGroupResolver
@@ -68,13 +73,3 @@ services:
     tags:
       - { name: 'context_provider' }
     deprecated: 'The "%service_id%" service is deprecated. You should use the group sites context directly instead.'
-
-  group.relation_handler.access_control.group_node:
-    class: 'Drupal\localgov_microsites_group\Plugin\Group\RelationHandler\ContentTypeAccessControl'
-    arguments: ['@group.relation_handler.access_control', '@localgov_microsites_group.content_type_helper']
-    shared: false
-
-  group.relation_handler.access_control.group_term:
-    class: 'Drupal\localgov_microsites_group\Plugin\Group\RelationHandler\ContentTypeAccessControl'
-    arguments: ['@group.relation_handler.access_control', '@localgov_microsites_group.content_type_helper']
-    shared: false
