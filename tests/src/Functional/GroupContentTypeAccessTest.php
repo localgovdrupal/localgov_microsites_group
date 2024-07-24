@@ -189,7 +189,8 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
         foreach ($check_content['content_types'] as $check_content_type) {
           $this->drupalGet($group2_domain->getUrl() . '/group/' . $group2->id() . '/content/create/group_node%3A' . $check_content_type);
           $this->assertSession()->statusCodeEquals(200);
-          // Currently, the microsite admin is not allowed to add content via /node/add.
+          // Currently, the microsite admin is not allowed to add content via
+          // /node/add.
           $this->drupalGet($group2_domain->getUrl() . '/node/add/' . $check_content_type);
           $this->assertSession()->statusCodeEquals('403');
         }
