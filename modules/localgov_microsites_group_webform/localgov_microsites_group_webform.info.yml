@@ -15,3 +15,4 @@ dependencies:
     # LocalGov Drupal
   - group_webform:group_webform
   - localgov_forms:localgov_forms
+  - localgov_microsites_group:localgov_microsites_group
