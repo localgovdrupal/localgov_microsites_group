@@ -67,7 +67,6 @@ function localgov_microsites_group_update_9005() {
   // $config_manager->loadConfigEntityByName('')
   $dependencies = $config_manager->findConfigEntityDependencies('module', ['domain_group']);
   foreach ($dependencies as $name => $dependency) {
-    var_dump($name);
     $config = $config_manager->loadConfigEntityByName($name);
     $config->save();
   }
