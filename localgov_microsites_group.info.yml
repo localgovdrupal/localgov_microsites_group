@@ -29,7 +29,6 @@ dependencies:
   - replicate:replicate
   - role_delegation:role_delegation
   # LocalGov Drupal
-  - localgov_base:localgov_base_helper
   - localgov_core:localgov_media
   - localgov_page:localgov_page
   - localgov_search:localgov_search
