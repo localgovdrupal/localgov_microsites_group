@@ -40,9 +40,6 @@
             "drupal/domain_path": {
                 "domain_path_pathauto creates duplicate aliases #3285213": "https://www.drupal.org/files/issues/2022-06-11/domain_path_pathauto-obey-current-domain_id-querying-for-reserved-aliases-3285213.patch",
                 "Warning: Undefined array key 'pathauto' #3315752": "https://www.drupal.org/files/issues/2022-10-17/undefined-array-key-pathauto-3265497-2.patch"
-            },
-            "drupal/ginvite": {
-                "View schema fix #3324625": "https://www.drupal.org/files/issues/2022-11-30/3324625-2-schema-fix-for-4.0.x.patch"
             }
         }
     }
