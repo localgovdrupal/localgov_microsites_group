@@ -2,14 +2,14 @@
 
 namespace Drupal\Tests\localgov_microsites_directories\Functional;
 
-use Drupal\group\Entity\GroupInterface;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
-use Drupal\node\NodeInterface;
-use Drupal\search_api\Entity\Index;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
+use Drupal\node\NodeInterface;
+use Drupal\search_api\Entity\Index;
 
 /**
  * Tests directory content in a group.

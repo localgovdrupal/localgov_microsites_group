@@ -76,7 +76,7 @@ class DomainGroupConfigAdd extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, GroupInterface $group = NULL, $extras = []) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?GroupInterface $group = NULL, $extras = []) {
     $form_state->set('group', $group);
     $form['tabs'] = [
       '#type' => 'vertical_tabs',
