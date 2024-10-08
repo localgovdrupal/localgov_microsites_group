@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Traits;
 
-use Drupal\group\Entity\Group;
 use Drupal\Tests\domain\Traits\DomainTestTrait;
+use Drupal\group\Entity\Group;
 
 /**
  * Create microsite groups with domains.
