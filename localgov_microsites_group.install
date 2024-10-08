@@ -107,3 +107,12 @@ function localgov_microsites_group_update_9009() {
   $group_sites->set('site_access_policy', 'localgov_microsites_group.microsite_content_types_access_policy');
   $group_sites->save();
 }
+
+/**
+ * Enable localgov_base_helper module.
+ */
+function localgov_microsites_group_update_10001() {
+  if (!\Drupal::service('module_handler')->moduleExists('localgov_base_helper')) {
+    \Drupal::service('module_installer')->install(['localgov_base_helper']);
+  }
+}
