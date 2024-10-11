@@ -23,6 +23,11 @@ class LoginTest extends BrowserTestBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  protected bool $useOneTimeLoginLinks = FALSE;
+
+  /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.
    *
    * See https://www.drupal.org/project/domain_site_settings/issues/3204455.
