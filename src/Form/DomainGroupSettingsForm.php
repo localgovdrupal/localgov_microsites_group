@@ -92,7 +92,7 @@ class DomainGroupSettingsForm extends FormBase {
     ];
 
     // Hide configuration options that site controllers don't have access to.
-    if (in_array('microsites_controller', $this->currentUser->getRoles())) {
+    if (!$group->hasPermission('access group_node overview', $this->currentUser)) {
       $form['domain_group_site_settings']['error_page']['#access'] = FALSE;
       $form['domain_group_site_settings']['site_frontpage']['#access'] = FALSE;
     }
