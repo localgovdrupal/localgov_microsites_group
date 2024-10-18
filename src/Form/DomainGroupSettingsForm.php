@@ -72,7 +72,7 @@ class DomainGroupSettingsForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, GroupInterface $group = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?GroupInterface $group = NULL) {
     $form_state->set('group', $group);
 
     $form['tabs'] = [
