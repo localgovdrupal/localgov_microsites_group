@@ -16,6 +16,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class DomainGroupSettingsForm extends FormBase {
 
   /**
+  * Current user account.
+  *
+  * @var \Drupal\Core\Session\AccountInterface
+  */
+  protected AccountInterface $currentUser;
+
+  /**
    * The DomainGroupSettingsManager service.
    *
    * @var \Drupal\localgov_microsites_group\Plugin\DomainGroupSettingsManager
@@ -25,7 +32,8 @@ class DomainGroupSettingsForm extends FormBase {
   /**
    * Constructs a new DomainGroupSettingsForm object.
    */
-  public function __construct(DomainGroupSettingsManager $plugin_manager_domain_group_settings) {
+  public function __construct(AccountInterface $current_user, DomainGroupSettingsManager $plugin_manager_domain_group_settings) {
+    $this->currentUser = $current_user;
     $this->pluginManagerDomainGroupSettings = $plugin_manager_domain_group_settings;
   }
 
@@ -34,6 +42,7 @@ class DomainGroupSettingsForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('current_user'),
       $container->get('plugin.manager.domain_group_settings')
     );
   }
@@ -81,6 +90,12 @@ class DomainGroupSettingsForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
+
+    // Hide configuration options that site controllers don't have access to.
+    if (!$group->hasPermission('access group_node overview', $this->currentUser)) {
+      $form['domain_group_site_settings']['error_page']['#access'] = FALSE;
+      $form['domain_group_site_settings']['site_frontpage']['#access'] = FALSE;
+    }
 
     return $form;
   }
