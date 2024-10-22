@@ -4,12 +4,12 @@ namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Test\AssertMailTrait;
 use Drupal\Core\Url;
-use Drupal\domain\DomainInterface;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\user\Traits\UserCreationTrait;
+use Drupal\domain\DomainInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 
 /**
  * Tests the group and group content access.
