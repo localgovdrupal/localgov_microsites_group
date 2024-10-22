@@ -3,14 +3,14 @@
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Test\AssertMailTrait;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\domain\DomainInterface;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
-use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\user\Traits\UserCreationTrait;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\domain\DomainInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
+use Drupal\node\NodeInterface;
 
 /**
  * Tests the group and group content access.
