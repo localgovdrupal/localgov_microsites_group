@@ -44,14 +44,14 @@ class GroupTermSelection extends TermSelection {
    *   The current user.
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
    *   The entity field manager.
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
-   *   The entity type bundle info service.
    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
    *   The entity repository.
    * @param \Drupal\domain\DomainNegotiatorInterface $domainNegotiator
    *   The domain negotiator service.
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   *   The entity type bundle info service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, AccountInterface $current_user, EntityFieldManagerInterface $entity_field_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, EntityRepositoryInterface $entity_repository, protected DomainNegotiatorInterface $domainNegotiator) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, AccountInterface $current_user, EntityFieldManagerInterface $entity_field_manager, EntityRepositoryInterface $entity_repository, protected DomainNegotiatorInterface $domainNegotiator, ?EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $module_handler, $current_user, $entity_field_manager, $entity_type_bundle_info, $entity_repository);
   }
 
@@ -67,9 +67,9 @@ class GroupTermSelection extends TermSelection {
       $container->get('module_handler'),
       $container->get('current_user'),
       $container->get('entity_field.manager'),
-      $container->get('entity_type.bundle.info'),
       $container->get('entity.repository'),
-      $container->get('domain.negotiator')
+      $container->get('domain.negotiator'),
+      $container->get('entity_type.bundle.info')
     );
   }
 

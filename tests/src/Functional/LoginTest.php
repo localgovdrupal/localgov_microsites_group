@@ -3,11 +3,11 @@
 namespace Drupal\Tests\localgov_microsites_group\Functional;
 
 use Drupal\Core\Url;
-use Drupal\domain\DomainInterface;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
+use Drupal\domain\DomainInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 
 /**
  * Tests logging into microsite and control site.
@@ -21,6 +21,11 @@ class LoginTest extends BrowserTestBase {
   use GroupCreationTrait, DomainFromGroupTrait {
     GroupCreationTrait::getEntityTypeManager insteadof DomainFromGroupTrait;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected bool $useOneTimeLoginLinks = FALSE;
 
   /**
    * Will be removed when issue #3204455 on Domain Site Settings gets merged.

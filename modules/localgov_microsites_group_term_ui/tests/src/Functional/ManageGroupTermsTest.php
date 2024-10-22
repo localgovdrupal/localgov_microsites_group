@@ -3,8 +3,8 @@
 namespace Drupal\Tests\localgov_microsites_group_term_ui\Functional;
 
 use Drupal\Core\Url;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Tests managing group terms.

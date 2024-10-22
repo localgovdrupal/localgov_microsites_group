@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
-use Drupal\group\Entity\GroupRole;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\group\Entity\GroupRole;
 use Drupal\localgov_microsites_group\RolesHelper;
 use Drupal\user\Entity\Role;
 
