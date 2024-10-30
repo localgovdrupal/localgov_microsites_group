@@ -3,13 +3,13 @@
 namespace Drupal\Tests\localgov_microsites_group_webform\Functional;
 
 use Drupal\Core\Url;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
-use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Functional\LoginOutTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
+use Drupal\node\NodeInterface;
 
 /**
  * Tests webforms attached to a node in a group.

@@ -2,13 +2,13 @@
 
 namespace Drupal\Tests\localgov_microsites_blogs\Functional;
 
-use Drupal\group\Entity\GroupInterface;
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
-use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
+use Drupal\node\NodeInterface;
 
 /**
  * Tests channel content in a group.

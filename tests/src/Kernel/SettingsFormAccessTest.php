@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
+use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\group\PermissionScopeInterface;
 use Drupal\localgov_microsites_group\Form\DomainGroupSettingsForm;
-use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\user\RoleInterface;
 
 /**

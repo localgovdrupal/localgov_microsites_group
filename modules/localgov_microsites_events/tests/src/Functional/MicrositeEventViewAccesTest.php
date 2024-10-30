@@ -2,12 +2,12 @@
 
 namespace Drupal\Tests\localgov_microsites_events\Functional;
 
-use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\localgov_microsites_group\Traits\GroupCreationTrait;
 use Drupal\Tests\localgov_microsites_group\Traits\InitializeGroupsTrait;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
+use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 
 /**
  * Tests access to event view and search.

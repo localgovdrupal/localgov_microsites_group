@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
+use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\localgov_microsites_group\ContentTypeHelperInterface;
 use Drupal\node\Entity\NodeType;
 use Drupal\taxonomy\Entity\Vocabulary;
-use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 
 /**
  * @covers \Drupal\localgov_microsites_group\GroupPermisisonsHelper

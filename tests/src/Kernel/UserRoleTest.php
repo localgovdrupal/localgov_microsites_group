@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
-use Drupal\group\Entity\Group;
 use Drupal\Tests\group\Kernel\GroupKernelTestBase;
+use Drupal\group\Entity\Group;
 use Drupal\user\Entity\User;
 
 /**

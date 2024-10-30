@@ -3,11 +3,11 @@
 namespace Drupal\Tests\localgov_microsites_group\Kernel;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 use Drupal\group\Entity\Group;
 use Drupal\localgov_microsites_group\GroupDefaultContent;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
-use Drupal\Tests\group\Kernel\GroupKernelTestBase;
 
 /**
  * @covers \Drupal\localgov_microsites_group\GroupDefaultContent
