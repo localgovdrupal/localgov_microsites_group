@@ -16,10 +16,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class DomainGroupSettingsForm extends FormBase {
 
   /**
-  * Current user account.
-  *
-  * @var \Drupal\Core\Session\AccountInterface
-  */
+   * Current user account.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
   protected AccountInterface $currentUser;
 
   /**
