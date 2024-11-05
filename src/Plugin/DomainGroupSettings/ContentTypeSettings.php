@@ -105,7 +105,7 @@ class ContentTypeSettings extends DomainGroupSettingsBase implements ContainerFa
       ],
       '#id' => 'modules',
       '#attributes' => ['class' => ['modules']],
-      '#sticky' => TRUE,
+      '#sticky' => FALSE,
     ];
     foreach ($module_permissions as $module_name => $status) {
       $module = $this->moduleExtensionList->getExtensionInfo($module_name);

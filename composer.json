@@ -6,7 +6,7 @@
     "require": {
         "drupal/domain_path": "^1.2",
         "drupal/field_formatter_class": "^1.5",
-        "drupal/ginvite": "4.0.0-alpha1",
+        "drupal/ginvite": "^4.0@RC",
         "drupal/group": "^3.2",
         "drupal/group_content_menu": "^3.0",
         "drupal/group_context_domain": "^1.0",
@@ -16,6 +16,7 @@
         "drupal/override_node_options": "^2.6",
         "drupal/replicate": "^1.0",
         "drupal/role_delegation": "^1.2",
+        "drupal/variationcache": "^1.5",
         "localgovdrupal/group_webform": "^1.0.0-beta2",
         "localgovdrupal/localgov_core": "^2.12",
         "localgovdrupal/localgov_forms": "^1.0.0-beta2",
@@ -40,9 +41,6 @@
             "drupal/domain_path": {
                 "domain_path_pathauto creates duplicate aliases #3285213": "https://www.drupal.org/files/issues/2022-06-11/domain_path_pathauto-obey-current-domain_id-querying-for-reserved-aliases-3285213.patch",
                 "Warning: Undefined array key 'pathauto' #3315752": "https://www.drupal.org/files/issues/2022-10-17/undefined-array-key-pathauto-3265497-2.patch"
-            },
-            "drupal/ginvite": {
-                "View schema fix #3324625": "https://www.drupal.org/files/issues/2022-11-30/3324625-2-schema-fix-for-4.0.x.patch"
             },
             "drupal/group": {
                 "Fix Warning: Undefined array key 'preview' in formAlter(). https://www.drupal.org/project/group/issues/2853001": "https://www.drupal.org/files/issues/2023-09-25/group2-2853001-26.patch"

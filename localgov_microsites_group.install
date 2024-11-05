@@ -107,3 +107,10 @@ function localgov_microsites_group_update_9009() {
   $group_sites->set('site_access_policy', 'localgov_microsites_group.microsite_content_types_access_policy');
   $group_sites->save();
 }
+
+/**
+ * Uninstall variationcache module.
+ */
+function localgov_microsites_group_update_10001(&$sandbox) {
+  \Drupal::service('module_installer')->uninstall(['variationcache']);
+}
