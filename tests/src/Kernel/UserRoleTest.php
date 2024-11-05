@@ -22,6 +22,7 @@ class UserRoleTest extends GroupKernelTestBase {
     'group',
     'group_content_menu',
     'group_sites',
+    'group_sites_test',
     'image',
     'media',
     'media_library',
@@ -60,6 +61,12 @@ class UserRoleTest extends GroupKernelTestBase {
    * Test the addition and removal of Trusted Editor role to group members.
    */
   public function testTrustedEditor() {
+    // Set config that group_sites needs to run tests.
+    $this->config('group_sites.settings')
+      ->set('context_provider', '@group_sites_test.hardcoded_group_context:group')
+      ->set('no_site_access_policy', 'group_sites.no_site_access_policy.do_nothing')
+      ->set('site_access_policy', 'group_sites.site_access_policy.single')
+      ->save();
 
     // Create some groups.
     $group1 = Group::create([
