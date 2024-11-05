@@ -41,6 +41,9 @@
             "drupal/domain_path": {
                 "domain_path_pathauto creates duplicate aliases #3285213": "https://www.drupal.org/files/issues/2022-06-11/domain_path_pathauto-obey-current-domain_id-querying-for-reserved-aliases-3285213.patch",
                 "Warning: Undefined array key 'pathauto' #3315752": "https://www.drupal.org/files/issues/2022-10-17/undefined-array-key-pathauto-3265497-2.patch"
+            },
+            "drupal/group": {
+                "Fix Warning: Undefined array key 'preview' in formAlter(). https://www.drupal.org/project/group/issues/2853001": "https://www.drupal.org/files/issues/2023-09-25/group2-2853001-26.patch"
             }
         }
     }
