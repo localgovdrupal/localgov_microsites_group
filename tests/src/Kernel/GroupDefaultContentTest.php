@@ -56,6 +56,12 @@ class GroupDefaultContentTest extends GroupKernelTestBase {
   protected function setUp(): void {
     parent::setUp();
 
+    // Set config that group_sites needs to run tests.
+    $this->config('group_sites.settings')
+      ->set('no_site_access_policy', 'group_sites.no_site_access_policy.do_nothing')
+      ->set('site_access_policy', 'group_sites.site_access_policy.single')
+      ->save();
+
     $this->installEntitySchema('group_content_menu');
     $this->installSchema('node', 'node_access');
 
