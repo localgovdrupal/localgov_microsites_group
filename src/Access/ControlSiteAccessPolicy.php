@@ -34,43 +34,35 @@ class ControlSiteAccessPolicy implements GroupSitesNoSiteAccessPolicyInterface {
    * {@inheritdoc}
    */
   public function alterPermissions(AccountInterface $account, string $scope, RefinableCalculatedPermissionsInterface $calculated_permissions) {
-    // User will probably have permissions for groups.
-    // Eg. as Outsider with Controller role.
-    // We might even want to switch off admin and replace with specific
-    // permissions to prevent doing group content on control.
-    if ($scope === PermissionScopeInterface::INDIVIDUAL_ID) {
-      $items = $calculated_permissions->getItemsByScope($scope);
-      foreach ($items as $item) {
-        $permissions = $item->getPermissions();
-        // Permissions to maintain on the control site.
-        // @todo add control site specific permissions.
-        $keep = [
-          'administer group domain site settings',
-          'administer members',
-          'edit group',
-          'invite users to group',
-          'manage microsite enabled module permissions',
-          'set localgov microsite theme override',
-          'view any unpublished group',
-          'view group',
-          'view group invitations',
-          'view latest group version',
-          'view own unpublished group',
-        ];
-        $permissions = array_intersect($permissions, $keep);
+    // Remove all permissions other than those we want on the control site from
+    // user no matter if they come from insider, outsider or individual.
+    $items = $calculated_permissions->getItemsByScope($scope);
+    foreach ($items as $item) {
+      $permissions = $item->getPermissions();
+      // Permissions to maintain on the control site.
+      // @todo add control site specific permissions.
+      $keep = [
+        'administer group domain site settings',
+        'administer members',
+        'edit group',
+        'invite users to group',
+        'manage microsite enabled module permissions',
+        'set localgov microsite theme override',
+        'view any unpublished group',
+        'view group',
+        'view group invitations',
+        'view latest group version',
+        'view own unpublished group',
+      ];
+      $permissions = array_intersect($permissions, $keep);
 
-        $control_site_item = new CalculatedPermissionsItem(
-          $scope,
-          $item->getIdentifier(),
-          $permissions,
-          $item->isAdmin()
-        );
-        $calculated_permissions->addItem($control_site_item, TRUE);
-      }
-    }
-    else {
-      // Neither standard insider nor outside permissions should be required.
-      $calculated_permissions->removeItemsByScope($scope);
+      $control_site_item = new CalculatedPermissionsItem(
+        $scope,
+        $item->getIdentifier(),
+        $permissions,
+        $item->isAdmin()
+      );
+      $calculated_permissions->addItem($control_site_item, TRUE);
     }
   }
 
