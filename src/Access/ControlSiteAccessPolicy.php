@@ -6,7 +6,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\flexible_permissions\CalculatedPermissionsItem;
 use Drupal\flexible_permissions\RefinableCalculatedPermissionsInterface;
-use Drupal\group\PermissionScopeInterface;
 use Drupal\group_sites\Access\GroupSitesNoSiteAccessPolicyInterface;
 
 /**
