@@ -243,9 +243,25 @@ function localgov_microsites_group_form_alter(&$form, FormStateInterface $form_s
       if ($id !== $active_domain->id()) {
         $form['domain_path'][$id]['#access'] = FALSE;
       }
+      else {
+
+        // The Domain Path module does a lot of checks for domain access
+        // configuration, but we use the Group module for access checks. Adding
+        // the domain access field to the form ensures the Domain Path checks
+        // pass, but is a bit of a hack as it would be better to fix whatever
+        // is going wrong in the Domain Path module.
+        if (!isset($form['field_domain_access'])) {
+          $form['field_domain_access'] = [
+            '#type' => 'value',
+            '#value' => [
+              [ 'target_id' => $id ],
+            ],
+          ];
+        }
+      }
 
       // Set domain path pathauto as on by default for new nodes.
-      elseif (
+      if (
         $form_state->getFormObject() instanceof EntityFormInterface &&
         $form_state->getFormObject()->getEntity()->isNew()
       ) {
