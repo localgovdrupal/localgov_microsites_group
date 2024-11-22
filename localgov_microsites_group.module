@@ -245,7 +245,7 @@ function localgov_microsites_group_form_alter(&$form, FormStateInterface $form_s
         $form['domain_path'][$id]['#access'] = FALSE;
       }
       else {
-        $domain_access[] = [ 'target_id' => $id ];
+        $domain_access[] = ['target_id' => $id];
       }
 
       // Set domain path pathauto as on by default for new nodes.
