@@ -58,7 +58,7 @@ class SettingsFormAccessTest extends GroupKernelTestBase {
    * Test the access form with anonymous, member and admin.
    */
   public function testFormAccess() {
-    $form = new DomainGroupSettingsForm($this->container->get('plugin.manager.domain_group_settings'));
+    $form = new DomainGroupSettingsForm($this->getCurrentUser(), $this->container->get('plugin.manager.domain_group_settings'));
 
     // Non-member.
     $this->assertFalse($form->access($this->group, $this->getCurrentUser())->isAllowed());
