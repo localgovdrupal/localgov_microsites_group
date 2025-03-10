@@ -160,12 +160,7 @@ class MicrositeDomain extends DomainGroupSettingsBase implements ContainerFactor
         ];
         /** @var \Drupal\Core\Render\RendererInterface $renderer */
         $renderer = $this->renderer;
-        $message = DeprecationHelper::backwardsCompatibleCall(
-          currentVersion: \Drupal::VERSION,
-          deprecatedVersion: '10.3',
-          currentCallable: fn() => $renderer->renderInIsolation($message),
-          deprecatedCallable: fn() => $renderer->renderPlain($message),
-        );
+        $message = $renderer->renderInIsolation($message);
         $form_state->setErrorByName('hostname', $message);
       }
     }
