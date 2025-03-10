@@ -2,7 +2,6 @@
 
 namespace Drupal\localgov_microsites_group\Plugin\DomainGroupSettings;
 
-use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
