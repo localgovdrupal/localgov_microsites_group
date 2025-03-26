@@ -30,6 +30,7 @@ dependencies:
   - role_delegation:role_delegation
   # LocalGov Drupal
   - localgov_core:localgov_media
+  - localgov_live_preview:localgov_live_preview
   - localgov_page:localgov_page
   - localgov_search:localgov_search
   - localgov_search:localgov_search_db
