@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "drupal/domain_path": "^1.2",
+        "drupal/domain_path": "1.x-dev#a7e2f7e3fa683ed307e9cda7a03d49508f838247",
         "drupal/field_formatter_class": "^1.5",
         "drupal/ginvite": "^4.0@RC",
         "drupal/group": "^3.3",
