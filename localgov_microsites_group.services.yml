@@ -73,3 +73,9 @@ services:
     tags:
       - { name: 'context_provider' }
     deprecated: 'The "%service_id%" service is deprecated. You should use the group sites context directly instead.'
+
+  localgov_microsites_group.event_subscriber:
+    class: Drupal\localgov_microsites_group\EventSubscriber\SearchApiSubscriber
+    arguments: ['@group_sites.admin_mode']
+    tags:
+      - { name: event_subscriber }
