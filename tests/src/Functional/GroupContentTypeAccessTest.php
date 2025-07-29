@@ -56,7 +56,7 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'localgov_base';
+  protected $defaultTheme = 'olivero';
 
   /**
    * Regular authenticated User for tests.
