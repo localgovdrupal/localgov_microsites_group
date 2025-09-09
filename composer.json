@@ -30,6 +30,7 @@
     "suggests": {
         "localgovdrupal/localgov_directories": "For directories content type in microsites",
         "localgovdrupal/localgov_events": "For events content type in microsites",
+        "localgovdrupal/localgov_guides": "For guides content types in microsites",
         "localgovdrupal/localgov_news": "For news content type in microsites",
         "localgovdrupal/localgov_step_by_step": "For step by step content types in microsites"
     },
@@ -41,6 +42,9 @@
         "patches": {
             "drupal/domain_path": {
                 "domain_path_pathauto creates duplicate aliases #3285213": "https://www.drupal.org/files/issues/2022-06-11/domain_path_pathauto-obey-current-domain_id-querying-for-reserved-aliases-3285213.patch"
+            },
+            "drupal/group": {
+                "Node previews don't work when adding group node https://www.drupal.org/project/group/issues/2853001#comment-16252793": "https://git.drupalcode.org/project/group/-/commit/3b7f6203884b934750f1a6d2e09caba98dac7be5.patch"
             }
         }
     }
