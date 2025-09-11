@@ -1,5 +1,5 @@
 {
-    "name": "localgovdrupal/localgov_microsites_group",
+    "name": "drupal/localgov_microsites_group",
     "description": "Group integration required for LocalGov Microsites.",
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
@@ -18,20 +18,20 @@
         "drupal/role_delegation": "^1.2",
         "drupal/variationcache": "^1.5",
         "localgovdrupal/group_webform": "^1.0.0-beta2",
-        "localgovdrupal/localgov_core": "^2.12",
-        "localgovdrupal/localgov_forms": "^1.0.0-beta2",
-        "localgovdrupal/localgov_search": "^1.2"
+        "drupal/localgov_core": "^2.12",
+        "drupal/localgov_forms": "^1.0.0-beta2",
+        "drupal/localgov_search": "^1.2"
     },
     "require-dev": {
-        "localgovdrupal/localgov_news": "^2.1",
-        "localgovdrupal/localgov_directories": "^3.0",
-        "localgovdrupal/localgov_events": "^3.0"
+        "drupal/localgov_news": "^2.1",
+        "drupal/localgov_directories": "^3.0",
+        "drupal/localgov_events": "^3.0"
     },
     "suggests": {
-        "localgovdrupal/localgov_directories": "For directories content types in microsites",
-        "localgovdrupal/localgov_events": "For events content type in microsites",
-        "localgovdrupal/localgov_guides": "For guides content types in microsites",
-        "localgovdrupal/localgov_news": "For news content types in microsites"
+        "drupal/localgov_directories": "For directories content types in microsites",
+        "drupal/localgov_events": "For events content type in microsites",
+        "drupal/localgov_guides": "For guides content types in microsites",
+        "drupal/localgov_news": "For news content types in microsites"
     },
     "extra": {
         "enable-patching": true,
