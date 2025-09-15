@@ -10,7 +10,7 @@ use Drupal\localgov_microsites_group\RolesHelper;
 /**
  * Implements hook_localgov_microsites_roles_default().
  */
-function localgov_microsites_step_by_step_localgov_microsites_roles_default() {
+function localgov_microsites_publications_localgov_microsites_roles_default() {
   return [
     'group' => [
       RolesHelper::GROUP_ADMIN_ROLE => [
