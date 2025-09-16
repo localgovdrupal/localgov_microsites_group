@@ -31,8 +31,9 @@
         "localgovdrupal/localgov_directories": "For directories content type in microsites",
         "localgovdrupal/localgov_events": "For events content type in microsites",
         "localgovdrupal/localgov_guides": "For guides content types in microsites",
+        "localgovdrupal/localgov_news": "For news content type in microsites",
         "localgovdrupal/localgov_publications": "For publications content types in microsites",
-        "localgovdrupal/localgov_news": "For news content type in microsites"
+        "localgovdrupal/localgov_step_by_step": "For step by step content types in microsites"
     },
     "extra": {
         "enable-patching": true,
