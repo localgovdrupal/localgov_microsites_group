@@ -28,10 +28,11 @@
         "localgovdrupal/localgov_events": "^3.0"
     },
     "suggests": {
-        "localgovdrupal/localgov_directories": "For directories content types in microsites",
+        "localgovdrupal/localgov_directories": "For directories content type in microsites",
         "localgovdrupal/localgov_events": "For events content type in microsites",
         "localgovdrupal/localgov_guides": "For guides content types in microsites",
-        "localgovdrupal/localgov_news": "For news content types in microsites"
+        "localgovdrupal/localgov_news": "For news content type in microsites",
+        "localgovdrupal/localgov_step_by_step": "For step by step content types in microsites"
     },
     "extra": {
         "enable-patching": true,
