@@ -12,6 +12,18 @@ use Drupal\localgov_microsites_group\RolesHelper;
  */
 function localgov_microsites_publications_localgov_microsites_roles_default() {
   return [
+    'global' => [
+      RolesHelper::MICROSITES_CONTROLLER_ROLE => [
+        'administer book outlines',
+        'create new books',
+        'add content to books',
+      ],
+      RolesHelper::MICROSITES_EDITOR_ROLE => [
+        'administer book outlines',
+        'create new books',
+        'add content to books',
+      ],
+    ],
     'group' => [
       RolesHelper::GROUP_ADMIN_ROLE => [
         'access group_term overview',
