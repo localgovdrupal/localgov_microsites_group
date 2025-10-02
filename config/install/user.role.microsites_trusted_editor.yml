@@ -10,7 +10,6 @@ dependencies:
     - system
     - domain_path
     - layout_paragraphs_permissions
-    - localgov_sa11y
     - override_node_options
 id: microsites_trusted_editor
 label: 'Microsites trusted editor'
@@ -35,7 +34,6 @@ permissions:
   - 'override all published option'
   - 'update any media'
   - 'update media'
-  - 'use_localgov_sa11y'
   - 'view all media revisions'
   - 'view media'
   - 'view own unpublished media'
