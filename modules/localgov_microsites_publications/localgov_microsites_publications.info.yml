@@ -1,0 +1,9 @@
+name: Localgov Microsites Publications
+description: LocalGov Publications integration with Microsites.
+type: module
+package: LocalGov Drupal
+core_version_requirement: ^10 || ^11
+dependencies:
+  - group:gnode
+  - localgov_publications:localgov_publications
+  - localgov_microsites_group:localgov_microsites_group
