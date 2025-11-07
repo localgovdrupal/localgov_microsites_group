@@ -19,7 +19,7 @@ dependencies:
   - group:group
   - group:gnode
   - groupmedia:groupmedia
-  - groupmedia_paragraphs:groupmedia_paragraphs
+  - groupmedia:groupmedia_paragraphs
   - group_sites:group_sites
   - group_context_domain:group_context_domain
   - group_content_menu:group_content_menu
