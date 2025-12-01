@@ -1,0 +1,9 @@
+name: Localgov Microsites Step-by-Step
+description: LocalGov Step-by-Step integration with Microsites.
+type: module
+package: LocalGov Drupal
+core_version_requirement: ^10 || ^11
+dependencies:
+  - group:gnode
+  - localgov_step_by_step:localgov_step_by_step
+  - localgov_microsites_group:localgov_microsites_group
