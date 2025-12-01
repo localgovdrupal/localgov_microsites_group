@@ -23,9 +23,12 @@
         "drupal/localgov_search": "^1.2"
     },
     "require-dev": {
-        "drupal/localgov_news": "^2.1",
+        "drupal/localgov_blogs": "^1.0",
         "drupal/localgov_directories": "^3.0",
-        "drupal/localgov_events": "^3.0"
+        "drupal/localgov_events": "^3.0",
+        "drupal/localgov_guides": "^2.0",
+        "drupal/localgov_news": "^2.1",
+        "drupal/localgov_paragraphs": "^2.5"
     },
     "suggests": {
         "drupal/localgov_directories": "For directories content types in microsites",
