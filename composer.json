@@ -23,6 +23,7 @@
         "drupal/localgov_search": "^1.2"
     },
     "require-dev": {
+        "localgov_microsites": "^4.2",
         "drupal/admin_toolbar": "^3.6",
         "drupal/localgov_base": "^2.2",
         "drupal/localgov_blogs": "^1.0",
@@ -30,6 +31,7 @@
         "drupal/localgov_events": "^3.0",
         "drupal/localgov_guides": "^2.0",
         "drupal/localgov_news": "^2.1",
+        "drupal/localgov_page": "^1.0",
         "drupal/localgov_paragraphs": "^2.5"
     },
     "extra": {
