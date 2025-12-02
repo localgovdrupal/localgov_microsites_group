@@ -24,6 +24,9 @@ variables:
 ################
 # Variable overrides for domain testing.
 ################
+.test-variables:
+  variables:
+    SIMPLETEST_BASE_URL: "http://localhost/$_WEB_ROOT"
 .phpunit-base:
   before_script:
     - echo "127.0.0.1 localhost" >> /etc/hosts
