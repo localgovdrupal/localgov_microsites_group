@@ -30,6 +30,7 @@ variables:
 .phpunit-base:
   before_script:
     - echo "127.0.0.1 example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-0.example.local" >> /etc/hosts
     - echo "127.0.0.1 group-1.example.local" >> /etc/hosts
     - echo "127.0.0.1 group-2.example.local" >> /etc/hosts
     - echo "127.0.0.1 group-3.example.local" >> /etc/hosts
