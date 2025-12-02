@@ -14,7 +14,7 @@ use Drupal\node\NodeInterface;
 /**
  * Tests webforms attached to a node in a group.
  *
- * @group localgov_microsites_group
+ * @group localgov_microsites_group_webform
  */
 class MicrositeWebformAccessTest extends BrowserTestBase {
 

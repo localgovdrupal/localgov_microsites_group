@@ -12,6 +12,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Returns responses for directory facets routes.
+ *
+ * @group localgov_microsites_directories
  */
 class GroupDirectoryFacetTypeController extends ControllerBase {
 

@@ -14,7 +14,7 @@ use Drupal\search_api\Entity\Index;
 /**
  * Tests directory content in a group.
  *
- * @group localgov_microsites_group
+ * @group localgov_microsites_news
  */
 class MicrositeNewsContentTest extends BrowserTestBase {
 

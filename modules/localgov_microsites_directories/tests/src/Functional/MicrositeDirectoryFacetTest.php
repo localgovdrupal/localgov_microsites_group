@@ -12,7 +12,7 @@ use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 /**
  * Tests directory facets in a group.
  *
- * @group localgov_microsites_group
+ * @group localgov_microsites_directories
  */
 class MicrositeDirectoryFacetTest extends BrowserTestBase {
 

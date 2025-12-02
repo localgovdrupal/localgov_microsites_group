@@ -11,9 +11,9 @@ use Drupal\localgov_microsites_group\DomainFromGroupTrait;
 use Drupal\node\NodeInterface;
 
 /**
- * Tests channel content in a group.
+ * Tests blog content in a group.
  *
- * @group localgov_microsites_group
+ * @group localgov_microsites_blogs
  */
 class MicrositeBlogsContentTest extends BrowserTestBase {
 
