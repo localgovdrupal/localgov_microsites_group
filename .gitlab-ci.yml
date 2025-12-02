@@ -21,6 +21,22 @@ variables:
   OPT_IN_TEST_NEXT_MAJOR: 0
   OPT_IN_TEST_CURRENT: 0
 
+################
+# Variable overrides for domain testing.
+################
+.test-variables:
+  variables:
+    SIMPLETEST_BASE_URL: "http://example.local/$_WEB_ROOT"
+.phpunit-base:
+  before_script:
+    - echo "127.0.0.1 example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-1.example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-2.example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-3.example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-4.example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-5.example.local" >> /etc/hosts
+    - echo "127.0.0.1 group-6.example.local" >> /etc/hosts
+
 phpunit:
   parallel:
     matrix:
