@@ -77,13 +77,17 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
    */
   public function testMicrositeblogContent() {
     // Check content appears on the correct sites.
-    $this->drupalGet($this->domain1->getUrl() . $this->blog_channel1->toUrl()->getInternalPath());
+    $base1 = rtrim($this->domain1->getUrl(), '/');
+    $path1 = 'node/' . $this->blog_channel1->id();
+    $this->drupalGet($base1 . '/' . $path1);
     $this->assertSession()->pageTextContains($this->post1[0]->label());
     $this->assertSession()->pageTextContains($this->post1[1]->label());
     $this->assertSession()->pageTextNotContains($this->post2[0]->label());
     $this->assertSession()->pageTextNotContains($this->post2[1]->label());
 
-    $this->drupalGet($this->domain2->getUrl() . $this->blog_channel2->toUrl()->getInternalPath());
+    $base2 = rtrim($this->domain2->getUrl(), '/');
+    $path2 = 'node/' . $this->blog_channel2->id();
+    $this->drupalGet($base2 . '/' . $path2);
     $this->assertSession()->pageTextContains($this->post2[0]->label());
     $this->assertSession()->pageTextContains($this->post2[1]->label());
     $this->assertSession()->pageTextNotContains($this->post1[0]->label());
