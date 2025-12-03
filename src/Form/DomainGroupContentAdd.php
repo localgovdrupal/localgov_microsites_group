@@ -3,12 +3,12 @@
 namespace Drupal\localgov_microsites_group\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\group\Entity\Form\GroupContentForm;
+use Drupal\group\Entity\Form\GroupRelationshipForm;
 
 /**
  * Add content to domain group.
  */
-class DomainGroupContentAdd extends GroupContentForm {
+class DomainGroupContentAdd extends GroupRelationshipForm {
 
   /**
    * {@inheritdoc}
