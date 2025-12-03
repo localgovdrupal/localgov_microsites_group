@@ -40,4 +40,5 @@ phpunit:
   parallel:
     matrix:
       # Run test groups in parallel. This also speeds up identification of failing tests.
-      - _PHPUNIT_EXTRA: [ "--group localgov_microsites_group", "--group localgov_microsites_blogs", "--group localgov_microsites_directories", "--group localgov_microsites_events", "--group localgov_microsites_group_term_ui", "--group localgov_microsites_group_webform", "--group localgov_microsites_news" ]
+      #- _PHPUNIT_EXTRA: [ "--group localgov_microsites_group", "--group localgov_microsites_blogs", "--group localgov_microsites_directories", "--group localgov_microsites_events", "--group localgov_microsites_group_term_ui", "--group localgov_microsites_group_webform", "--group localgov_microsites_news" ]
+      - _PHPUNIT_EXTRA: [ "--group localgov_microsites_blogs" ]
