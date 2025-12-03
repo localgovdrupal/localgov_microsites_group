@@ -76,15 +76,13 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
   public function testMicrositeblogContent() {
 
     // Check content appears on the correct sites.
-    $alias_manager = \Drupal::service('path_alias.manager');
-    $channel_1_alias = $alias_manager->getAliasByPath('/node/' . $this->blog_channel1->id());
-    $this->drupalGet($this->domain1->getRawPath() . $channel_1_alias);
+    $this->drupalGet($this->domain1->getUrl()->toString() . $this->blog_channel1->toUrl()->getInternalPath());
     $this->assertSession()->pageTextContains($this->post1[0]->label());
     $this->assertSession()->pageTextContains($this->post1[1]->label());
     $this->assertSession()->pageTextNotContains($this->post2[0]->label());
     $this->assertSession()->pageTextNotContains($this->post2[1]->label());
 
-    $this->drupalGet($this->domain2->getRawPath() . $this->blog_channel2->toUrl()->toString());
+    $this->drupalGet($this->domain2->getUrl()->toString() . $this->blog_channel2->toUrl()->getInternalPath());
     $this->assertSession()->pageTextContains($this->post2[0]->label());
     $this->assertSession()->pageTextContains($this->post2[1]->label());
     $this->assertSession()->pageTextNotContains($this->post1[0]->label());
