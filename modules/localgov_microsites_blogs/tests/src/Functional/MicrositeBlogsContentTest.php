@@ -76,15 +76,16 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
    * Test content appears on the correct site.
    */
   public function testMicrositeblogContent() {
-
     // Check content appears on the correct sites.
-    $this->drupalGet($this->domain1->getUrl()->toString() . $this->blog_channel1->toUrl()->getInternalPath());
+    $domain1_url = $this->buildDomainUrl($this->domain1, $this->blog_channel1);
+    $this->drupalGet($domain1_url);
     $this->assertSession()->pageTextContains($this->post1[0]->label());
     $this->assertSession()->pageTextContains($this->post1[1]->label());
     $this->assertSession()->pageTextNotContains($this->post2[0]->label());
     $this->assertSession()->pageTextNotContains($this->post2[1]->label());
 
-    $this->drupalGet($this->domain2->getUrl()->toString() . $this->blog_channel2->toUrl()->getInternalPath());
+    $domain2_url = $this->buildDomainUrl($this->domain1, $this->blog_channel2);
+    $this->drupalGet($domain2_url);
     $this->assertSession()->pageTextContains($this->post2[0]->label());
     $this->assertSession()->pageTextContains($this->post2[1]->label());
     $this->assertSession()->pageTextNotContains($this->post1[0]->label());
@@ -144,6 +145,16 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
     }
 
     return $posts;
+  }
+
+  protected function buildDomainUrl($domain, $entity) {
+    // Full domain base URL, e.g. http://group-1.web
+    $base = rtrim($domain->getUrl(), '/');
+
+    // Safe canonical path: ALWAYS just node/ID.
+    $path = 'node/' . $entity->id();
+
+    return $base . '/' . $path;
   }
 
 }
