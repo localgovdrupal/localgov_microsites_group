@@ -68,6 +68,8 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
     $this->post1 = $this->createBlogPosts($this->blog_channel1, $this->groups[1], 2);
     $this->blog_channel2 = $this->createBlogChannel($this->groups[2]);
     $this->post2 = $this->createBlogPosts($this->blog_channel2, $this->groups[2], 2);
+
+    drupal_flush_all_caches();
   }
 
   /**
