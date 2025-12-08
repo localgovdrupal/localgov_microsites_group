@@ -75,13 +75,13 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
    */
   public function testMicrositeblogContent() {
     // Check content appears on the correct sites.
-    $this->drupalGet($this->blog_channel1->toUrl(), ['base_url' => trim($this->domain1->getPath(), '/')]);
+    $this->drupalGet($this->getGroupUrlFromDomain($this->domain1) . $this->blog_channel1->toUrl()->toString());
     $this->assertSession()->pageTextContains($this->post1[0]->label());
     $this->assertSession()->pageTextContains($this->post1[1]->label());
     $this->assertSession()->pageTextNotContains($this->post2[0]->label());
     $this->assertSession()->pageTextNotContains($this->post2[1]->label());
 
-    $this->drupalGet($this->blog_channel2->toUrl(), ['base_url' => trim($this->domain2->getPath(), '/')]);
+    $this->drupalGet($this->getGroupUrlFromDomain($this->domain2) . $this->blog_channel2->toUrl()->toString());
     $this->assertSession()->pageTextContains($this->post2[0]->label());
     $this->assertSession()->pageTextContains($this->post2[1]->label());
     $this->assertSession()->pageTextNotContains($this->post1[0]->label());
@@ -141,6 +141,14 @@ class MicrositeBlogsContentTest extends BrowserTestBase {
     }
 
     return $posts;
+  }
+
+  /**
+   * Get group URL from Domain config entity.
+   */
+  public function getGroupUrlFromDomain($domain): string {
+    $url_parts = parse_url($domain->getUrl());
+    return $url_parts['scheme'] . "://" .  $url_parts['host'] . "/";
   }
 
 }
