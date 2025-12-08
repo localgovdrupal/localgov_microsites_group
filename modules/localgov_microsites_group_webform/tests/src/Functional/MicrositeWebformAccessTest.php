@@ -128,7 +128,7 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
     $submissions = [];
 
     // Check form 1 only on domain 1 and make a submission.
-    $this->drupalGet($this->domains[1]->getUrl() . $this->webforms[1]->toUrl()->toString());
+    $this->drupalGet($this->domains[1]->getUrl() . $this->webforms[1]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->webforms[1]->label());
     $submissions[1] = [
@@ -138,13 +138,13 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
     ];
     $this->submitForm($submissions[1], 'Submit');
     $this->assertSession()->pageTextContains($this->webforms[1]->localgov_submission_confirm->value);
-    $this->drupalGet($this->domains[1]->getUrl() . $this->webforms[2]->toUrl()->toString());
+    $this->drupalGet($this->domains[1]->getUrl() . $this->webforms[2]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
 
     // Check form 2 only on domain 2 and make a submission.
-    $this->drupalGet($this->domains[2]->getUrl() . $this->webforms[1]->toUrl()->toString());
+    $this->drupalGet($this->domains[2]->getUrl() . $this->webforms[1]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($this->domains[2]->getUrl() . $this->webforms[2]->toUrl()->toString());
+    $this->drupalGet($this->domains[2]->getUrl() . $this->webforms[2]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->webforms[2]->label());
     $submissions[2] = [

@@ -81,13 +81,13 @@ class MicrositeNewsContentTest extends BrowserTestBase {
   public function testMicrositeNewsContent() {
 
     // Check content appears on the correct sites.
-    $this->drupalGet($this->domain1->getUrl() . $this->newsroom1->toUrl()->toString());
+    $this->drupalGet($this->domain1->getUrl() . $this->newsroom1->toUrl()->getInternalPath());
     $this->assertSession()->pageTextContains($this->article1[0]->label());
     $this->assertSession()->pageTextContains($this->article1[1]->label());
     $this->assertSession()->pageTextNotContains($this->article2[0]->label());
     $this->assertSession()->pageTextNotContains($this->article2[1]->label());
 
-    $this->drupalGet($this->domain2->getUrl() . $this->newsroom2->toUrl()->toString());
+    $this->drupalGet($this->domain2->getUrl() . $this->newsroom2->toUrl()->getInternalPath());
     $this->assertSession()->pageTextContains($this->article2[0]->label());
     $this->assertSession()->pageTextContains($this->article2[1]->label());
     $this->assertSession()->pageTextNotContains($this->article1[0]->label());

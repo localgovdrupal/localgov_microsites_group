@@ -79,31 +79,31 @@ class MicrositeEventContentTest extends BrowserTestBase {
    */
   public function testMicrositeEventsContent() {
 
-    $this->drupalGet($this->domain1->getPath() . $this->pages1[0]->toUrl()->toString());
+    $this->drupalGet($this->domain1->getPath() . $this->pages1[0]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->pages1[0]->label());
-    $this->drupalGet($this->domain1->getPath() . $this->pages1[1]->toUrl()->toString());
+    $this->drupalGet($this->domain1->getPath() . $this->pages1[1]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->pages1[1]->label());
 
-    $this->drupalGet($this->domain1->getPath() . $this->pages2[0]->toUrl()->toString());
+    $this->drupalGet($this->domain1->getPath() . $this->pages2[0]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->assertSession()->pageTextNotContains($this->pages2[0]->label());
-    $this->drupalGet($this->domain1->getPath() . $this->pages2[1]->toUrl()->toString());
+    $this->drupalGet($this->domain1->getPath() . $this->pages2[1]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
 
-    $this->drupalGet($this->domain2->getPath() . $this->pages2[0]->toUrl()->toString());
+    $this->drupalGet($this->domain2->getPath() . $this->pages2[0]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->pages2[0]->label());
-    $this->drupalGet($this->domain2->getPath() . $this->pages2[1]->toUrl()->toString());
+    $this->drupalGet($this->domain2->getPath() . $this->pages2[1]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->pageTextContains($this->pages2[1]->label());
 
-    $this->drupalGet($this->domain2->getPath() . $this->pages1[0]->toUrl()->toString());
+    $this->drupalGet($this->domain2->getPath() . $this->pages1[0]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
-    $this->drupalGet($this->domain2->getPath() . $this->pages1[1]->toUrl()->toString());
+    $this->drupalGet($this->domain2->getPath() . $this->pages1[1]->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->assertSession()->pageTextNotContains($this->pages1[1]->label());
   }

@@ -82,13 +82,13 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
   public function testMicrositeDirectoryContent() {
 
     // Check content appears on the correct sites.
-    $this->drupalGet($this->domain1->getUrl() . $this->channel1->toUrl()->toString());
+    $this->drupalGet($this->domain1->getUrl() . $this->channel1->toUrl()->getInternalPath());
     $this->assertSession()->pageTextContains($this->pages1[0]->label());
     $this->assertSession()->pageTextContains($this->pages1[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
 
-    $this->drupalGet($this->domain2->getUrl() . $this->channel2->toUrl()->toString());
+    $this->drupalGet($this->domain2->getUrl() . $this->channel2->toUrl()->getInternalPath());
     $this->assertSession()->pageTextContains($this->pages2[0]->label());
     $this->assertSession()->pageTextContains($this->pages2[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());
@@ -106,7 +106,7 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
         'search_api_fulltext' => $this->pages1[0]->label(),
       ],
     ];
-    $this->drupalGet($this->domain1->getUrl() . $this->channel1->toUrl()->toString(), $options);
+    $this->drupalGet($this->domain1->getUrl() . $this->channel1->toUrl()->getInternalPath(), $options);
     $this->assertSession()->pageTextContains($this->pages1[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[0]->label());
@@ -118,7 +118,7 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
         'search_api_fulltext' => $this->pages2[0]->label(),
       ],
     ];
-    $this->drupalGet($this->domain2->getUrl() . $this->channel2->toUrl()->toString(), $options);
+    $this->drupalGet($this->domain2->getUrl() . $this->channel2->toUrl()->getInternalPath(), $options);
     $this->assertSession()->pageTextContains($this->pages2[0]->label());
     $this->assertSession()->pageTextNotContains($this->pages2[1]->label());
     $this->assertSession()->pageTextNotContains($this->pages1[0]->label());

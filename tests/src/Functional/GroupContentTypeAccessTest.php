@@ -259,20 +259,20 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
 
     // No access.
     // Group 1: Admin user.
-    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl('edit-form')->toString());
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl('edit-form')->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->toString());
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
 
     // Anon.
     $this->micrositeDomainLogout($group1_domain);
-    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
 
     // Enable one for access.
@@ -281,19 +281,19 @@ class GroupContentTypeAccessTest extends BrowserTestBase {
       ->moduleEnable('localgov_microsites_directories', $group1);
 
     // Access to directories not events.
-    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
-    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     // Group 1: Admin user.
     $this->micrositeDomainLogin($group1_domain, $this->adminUser1);
-    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
-    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl('edit-form')->toString());
+    $this->drupalGet($group1_domain->getUrl() . $directory->toUrl('edit-form')->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
-    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->toString());
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl()->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
-    $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->toString());
+    $this->drupalGet($group1_domain->getUrl() . $event->toUrl('edit-form')->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
   }
 
