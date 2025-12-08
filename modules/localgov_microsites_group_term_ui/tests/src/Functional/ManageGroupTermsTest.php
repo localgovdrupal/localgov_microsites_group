@@ -75,7 +75,7 @@ class ManageGroupTermsTest extends BrowserTestBase {
     // Disable group_sites enforcement.
     \Drupal::service('group_sites.admin_mode')->setAdminMode(TRUE);
 
-    $this->drupalGet($this->group->toUrl()->toString() . '/edit');
+    $this->drupalGet($this->group->toUrl()->getInternalPath() . '/edit');
     $this->assertSession()->pageTextContains('Taxonomies');
     $this->clickLink('Taxonomies');
     $this->assertSession()->pageTextContains('Topic');

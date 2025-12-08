@@ -78,7 +78,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     $facet_name = $this->randomMachineName(12);
 
     // Login to site 1.
-    $this->drupalGet($this->domain1->getUrl() . Url::fromRoute('user.login')->toString());
+    $this->drupalGet($this->domain1->getUrl() . Url::fromRoute('user.login')->getInternalPath());
     $this->submitForm([
       'name' => $this->user->getAccountName(),
       'pass' => $this->user->passRaw,
@@ -89,14 +89,14 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
       [
         'group' => $this->groups[1]->id(),
       ],
-    )->toString();
+    )->getInternalPath();
     $this->drupalGet($this->domain1->getUrl() . $type_listing_url);
     $this->assertSession()->pageTextNotContains($facet_type);
     $type_add_url = Url::fromRoute('entity.group_relationship.group_localgov_directories_facet_type.add',
       [
         'group' => $this->groups[1]->id(),
       ],
-    )->toString();
+    )->getInternalPath();
     $this->drupalGet($this->domain1->getUrl() . $type_add_url);
     $this->submitForm([
       'edit-label' => $facet_type,
@@ -111,7 +111,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
         'group' => $this->groups[1]->id(),
         'localgov_directories_facets_type' => $facet_type_id,
       ],
-    )->toString();
+    )->getInternalPath();
     $this->drupalGet($this->domain1->getUrl() . $facet_listing_url);
     $this->assertSession()->pageTextContains('There are no directory facets yet.');
     $facet_add_url = Url::fromRoute('entity.group_relationship.group_localgov_directories_facets.add',
@@ -119,7 +119,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
         'group' => $this->groups[1]->id(),
         'localgov_directories_facets_type' => $facet_type_id,
       ],
-    )->toString();
+    )->getInternalPath();
     $this->drupalGet($this->domain1->getUrl() . $facet_add_url);
     $this->submitForm([
       'edit-title-0-value' => $facet_name ,
@@ -128,7 +128,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains($facet_name);
 
     // Login to site 2.
-    $this->drupalGet($this->domain2->getUrl() . Url::fromRoute('user.login')->toString());
+    $this->drupalGet($this->domain2->getUrl() . Url::fromRoute('user.login')->getInternalPath());
     $this->submitForm([
       'name' => $this->user->getAccountName(),
       'pass' => $this->user->passRaw,
@@ -139,7 +139,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
       [
         'group' => $this->groups[2]->id(),
       ],
-    )->toString();
+    )->getInternalPath();
     $this->drupalGet($this->domain2->getUrl() . $type_listing_url);
     $this->assertSession()->pageTextContains($facet_type);
 
@@ -149,7 +149,7 @@ class MicrositeDirectoryFacetTest extends BrowserTestBase {
         'group' => $this->groups[2]->id(),
         'localgov_directories_facets_type' => $facet_type_id,
       ],
-    )->toString();
+    )->getInternalPath();
     $this->drupalGet($this->domain2->getUrl() . $facet_listing_url);
     $this->assertSession()->pageTextContains('There are no directory facets yet.');
     $this->assertSession()->pageTextNotContains($facet_name);

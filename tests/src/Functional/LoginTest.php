@@ -92,7 +92,7 @@ class LoginTest extends BrowserTestBase {
     // @todo move this into a trait, probably on domain_group.
     $ga1_domain = $this->getDomainFromGroup($this->groups[1]);
     assert($ga1_domain instanceof DomainInterface);
-    $this->drupalGet($ga1_domain->getUrl() . Url::fromRoute('user.login')->toString());
+    $this->drupalGet($ga1_domain->getUrl() . Url::fromRoute('user.login')->getInternalPath());
     $this->submitForm([
       'name' => $this->testUser->getAccountName(),
       'pass' => $this->testUser->passRaw,
@@ -117,7 +117,7 @@ class LoginTest extends BrowserTestBase {
     $this->micrositeDomainLogin($domain2, $this->testUser);
     $this->micrositeDomainLogin($domain3, $testUser2);
 
-    $user_page = Url::fromRoute('user.page')->toString();
+    $user_page = Url::fromRoute('user.page')->getInternalPath();
     $this->drupalGet($domain1->getUrl() . $user_page);
     $this->assertSession()->addressEquals('/user/' . $this->testUser->id());
     $this->drupalGet($domain2->getUrl() . $user_page);

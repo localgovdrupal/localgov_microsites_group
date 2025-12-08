@@ -157,80 +157,80 @@ class MicrositeWebformAccessTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains($this->webforms[2]->localgov_submission_confirm->value);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.results_submissions', [
       'node' => $this->webforms[2]->id(),
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission.edit', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.canonical', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.edit_form', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
 
     // Check admin 1 has access to domain 1 submission.
     $this->micrositeDomainLogin($this->domains[1], $this->adminUser[1]);
     $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform.results_submissions', [
       'node' => $this->webforms[1]->id(),
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform.user.submission', [
       'node' => $this->webforms[1]->id(),
       'webform_submission' => 1,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform.user.submission.edit', [
       'node' => $this->webforms[1]->id(),
       'webform_submission' => 1,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform_submission.canonical', [
       'node' => $this->webforms[1]->id(),
       'webform_submission' => 1,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet($this->domains[1]->getUrl() . Url::fromRoute('entity.node.webform_submission.edit_form', [
       'node' => $this->webforms[1]->id(),
       'webform_submission' => 1,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(200);
 
     // Check admin 1 does not have access to domain 2 submission.
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.results_submissions', [
       'node' => $this->webforms[2]->id(),
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform.user.submission.edit', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.canonical', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
     $this->drupalGet($this->domains[2]->getUrl() . Url::fromRoute('entity.node.webform_submission.edit_form', [
       'node' => $this->webforms[2]->id(),
       'webform_submission' => 2,
-    ])->toString());
+    ])->getInternalPath());
     $this->assertSession()->statusCodeEquals(403);
   }
 

@@ -36,7 +36,7 @@ trait LoginOutTrait {
       $this->micrositeDomainLogout($domain);
     }
 
-    $this->drupalGet($domain->getUrl() . Url::fromRoute('user.login')->toString());
+    $this->drupalGet($domain->getUrl() . Url::fromRoute('user.login')->getInternalPath());
     $this->submitForm([
       'name' => $account->getAccountName(),
       'pass' => $account->passRaw,
@@ -64,7 +64,7 @@ trait LoginOutTrait {
       rtrim($domain->getUrl(), '/') .
       Url::fromRoute(
           'user.logout',
-        )->toString()
+        )->getInternalPath()
     );
     // The csrf token isn't valid.
     // @todo investigate why: domain related?
@@ -72,7 +72,7 @@ trait LoginOutTrait {
       $button->click();
     }
     // Check visiting the user page now redirects to login.
-    $this->drupalGet(rtrim($domain->getUrl(), '/') . Url::fromRoute('user.page')->toString());
+    $this->drupalGet(rtrim($domain->getUrl(), '/') . Url::fromRoute('user.page')->getInternalPath());
     $assert_session->fieldExists('name');
     $assert_session->fieldExists('pass');
 
