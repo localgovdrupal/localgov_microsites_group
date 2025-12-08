@@ -39,4 +39,12 @@ trait DomainFromGroupTrait {
     return reset($result) ?: NULL;
   }
 
+  /**
+   * Get group URL from Domain config entity.
+   */
+  public function getGroupUrlFromDomain(DomainInterface $domain): string {
+    $url_parts = parse_url($domain->getUrl());
+    return $url_parts['scheme'] . "://" .  $url_parts['host'] . "/";
+  }
+
 }
