@@ -36,7 +36,7 @@ trait LoginOutTrait {
       $this->micrositeDomainLogout($domain);
     }
 
-    $this->drupalGet($domain->getUrl() . Url::fromRoute('user.login')->getInternalPath());
+    $this->drupalGet($domain->getUrl() . 'user/login');
     $this->submitForm([
       'name' => $account->getAccountName(),
       'pass' => $account->passRaw,

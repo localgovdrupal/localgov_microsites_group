@@ -110,7 +110,7 @@ class DomainPathAliasTest extends BrowserTestBase {
   public function testDomainPathAlias() {
     $group = $this->groups[1];
     $domain = $this->getDomainFromGroup($group);
-    $this->drupalGet($domain->getUrl() . Url::fromRoute('user.login')->getInternalPath());
+    $this->drupalGet($domain->getUrl() . 'user/login');
     $this->submitForm([
       'name' => $this->adminUser->getAccountName(),
       'pass' => $this->adminUser->passRaw,

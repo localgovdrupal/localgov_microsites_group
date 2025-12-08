@@ -98,7 +98,7 @@ class GroupAdminAccessTest extends BrowserTestBase {
     $group1_domain = $this->getDomainFromGroup($group1);
     $group2_domain = $this->getDomainFromGroup($group2);
     assert($group1_domain instanceof DomainInterface);
-    $this->drupalGet($group1_domain->getUrl() . Url::fromRoute('user.login')->getInternalPath());
+    $this->drupalGet($group1_domain->getUrl() . 'user/login');
     $this->submitForm([
       'name' => $this->adminUser1->getAccountName(),
       'pass' => $this->adminUser1->passRaw,

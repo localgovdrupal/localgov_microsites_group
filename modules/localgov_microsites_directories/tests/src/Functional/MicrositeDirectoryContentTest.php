@@ -50,7 +50,6 @@ class MicrositeDirectoryContentTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
-    'localgov_directories_db',
     'localgov_microsites_directories',
   ];
 
