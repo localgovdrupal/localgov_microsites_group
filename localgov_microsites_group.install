@@ -114,3 +114,34 @@ function localgov_microsites_group_update_9009() {
 function localgov_microsites_group_update_10001(&$sandbox) {
   \Drupal::service('module_installer')->uninstall(['variationcache']);
 }
+
+/**
+ * Ensure 'lgms_modules_disabled' field is installed on microsite groups.
+ */
+function localgov_microsites_group_update_10002() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $storage_config = $entity_type_manager->getStorage('field_storage_config');
+  $field_config = $entity_type_manager->getStorage('field_config');
+
+  // Ensure field storage exists.
+  if (!$storage_config->load('group.lgms_modules_disabled')) {
+    $storage_config->create([
+      'field_name' => 'lgms_modules_disabled',
+      'entity_type' => 'group',
+      'type' => 'string',
+      'cardinality' => -1,
+      'settings' => ['max_length' => 64],
+    ])->save();
+  }
+
+  // Ensure field instance exists for the microsite bundle.
+  if (!$field_config->load('group.microsite.lgms_modules_disabled')) {
+    $field_config->create([
+      'field_name' => 'lgms_modules_disabled',
+      'entity_type' => 'group',
+      'bundle' => 'microsite',
+      'label' => 'Disabled modules',
+    ])->save();
+  }
+}
+
