@@ -114,3 +114,29 @@ function localgov_microsites_group_update_9009() {
 function localgov_microsites_group_update_10001(&$sandbox) {
   \Drupal::service('module_installer')->uninstall(['variationcache']);
 }
+
+/**
+ * Set microsite front pages to internal node path to prevent alias redirects.
+ */
+function localgov_microsites_group_update_10002() {
+  $config_factory = \Drupal::configFactory();
+  $alias_manager = \Drupal::service('path_alias.manager');
+
+  foreach ($config_factory->listAll('domain.config.') as $config_name) {
+    if (!str_ends_with($config_name, '.system.site')) {
+      continue;
+    }
+
+    $config = $config_factory->getEditable($config_name);
+    $front = $config->get('page.front');
+
+    if (empty($front) || str_starts_with($front, '/node/')) {
+      continue;
+    }
+
+    $internal = $alias_manager->getPathByAlias($front);
+    if (str_starts_with($internal, '/node/')) {
+      $config->set('page.front', $internal)->save();
+    }
+  }
+}
